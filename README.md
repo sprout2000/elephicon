@@ -48,6 +48,8 @@ $ npm run package
 
 And you'll find the intaller in `release` directory.
 
+*Note that you will need to have [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/) installed.*
+
 ## Download
 
 You can download binary packages for macOS (signed & notarized) at [releases](https://github.com/sprout2000/gen-icns/releases).
