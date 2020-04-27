@@ -106,15 +106,15 @@ app.once('ready', () => {
         });
       })
       .then(async () => {
-        console.log('Successfully completed!');
+        console.log('Successfully Completed!');
 
         if (win) {
           await dialog.showMessageBox(win, {
             type: 'info',
             buttons: ['OK'],
-            title: 'Successfully completed!',
-            message: 'Successfully completed!',
-            detail: `created: ${dest}`,
+            title: 'Successfully Completed!',
+            message: 'Successfully Completed!',
+            detail: `Created: ${dest}`,
           });
         }
       })
