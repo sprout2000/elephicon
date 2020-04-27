@@ -22,12 +22,10 @@ const getResourceDirectory = (): string => {
     : path.join(process.resourcesPath, 'app.asar.unpacked', 'dist');
 };
 
-let win: BrowserWindow | null = null;
-
-app.once('ready', () => {
+const createWindow = (): void => {
   const windowState = stateKeeper({});
 
-  win = new BrowserWindow({
+  const win = new BrowserWindow({
     x: windowState.x,
     y: windowState.y,
     width: 400,
@@ -55,29 +53,25 @@ app.once('ready', () => {
     if (!mimetype || !mimetype.match(/png/)) {
       const message = mimetype ? mimetype : 'Unknown';
 
-      if (win) {
-        await dialog.showMessageBox(win, {
-          type: 'error',
-          buttons: ['OK'],
-          title: 'ERROR',
-          message: 'Error!',
-          detail: `Invalid Format: ${message}.`,
-        });
-      }
+      await dialog.showMessageBox(win, {
+        type: 'error',
+        buttons: ['OK'],
+        title: 'ERROR',
+        message: 'Error!',
+        detail: `Invalid Format: ${message}.`,
+      });
 
       return true;
     }
 
     const dirname = path.dirname(filepath);
     if (!dirname) {
-      if (win) {
-        await dialog.showMessageBox(win, {
-          type: 'error',
-          buttons: ['OK'],
-          title: 'ERROR',
-          message: `Something went wrong...`,
-        });
-      }
+      await dialog.showMessageBox(win, {
+        type: 'error',
+        buttons: ['OK'],
+        title: 'ERROR',
+        message: `Something went wrong...`,
+      });
 
       return true;
     }
@@ -108,36 +102,30 @@ app.once('ready', () => {
       .then(async () => {
         console.log('Successfully Completed!');
 
-        if (win) {
-          await dialog.showMessageBox(win, {
-            type: 'info',
-            buttons: ['OK'],
-            title: 'Successfully Completed!',
-            message: 'Successfully Completed!',
-            detail: `Created: ${dest}`,
-          });
-        }
+        await dialog.showMessageBox(win, {
+          type: 'info',
+          buttons: ['OK'],
+          title: 'Successfully Completed!',
+          message: 'Successfully Completed!',
+          detail: `Created: ${dest}`,
+        });
       })
       .catch(async (err) => {
         console.log(`Something went wrong: ${err}`);
 
-        if (win) {
-          await dialog.showMessageBox(win, {
-            type: 'error',
-            buttons: ['OK'],
-            title: 'ERROR',
-            message: 'Error!',
-            detail: `Something went wrong: ${err}`,
-          });
-        }
+        await dialog.showMessageBox(win, {
+          type: 'error',
+          buttons: ['OK'],
+          title: 'ERROR',
+          message: 'Error!',
+          detail: `Something went wrong: ${err}`,
+        });
       });
 
     return true;
   });
 
-  win.once('ready-to-show', () => {
-    if (win) win.show();
-  });
+  win.once('ready-to-show', () => win.show());
 
   win.loadFile('dist/index.html');
   if (process.env.NODE_ENV === 'development') {
@@ -148,28 +136,14 @@ app.once('ready', () => {
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
-  win.once('closed', () => {
-    win = null;
+  autoUpdater.checkForUpdatesAndNotify();
+  autoUpdater.once('error', (_e, err) => {
+    log.info(`Error in auto-updater: ${err}`);
   });
 
-  autoUpdater.checkForUpdatesAndNotify();
-  windowState.manage(win);
-});
+  autoUpdater.once('update-downloaded', async () => {
+    log.info(`Update downloaded...`);
 
-app.setAboutPanelOptions({
-  applicationName: app.name,
-  applicationVersion: app.getVersion(),
-  copyright: 'Copyright (C) 2020 Office Nishigami.',
-});
-
-autoUpdater.once('error', (_e, err) => {
-  log.info(`Error in auto-updater: ${err}`);
-});
-
-autoUpdater.once('update-downloaded', async () => {
-  log.info(`Update downloaded...`);
-
-  if (win) {
     await dialog
       .showMessageBox(win, {
         type: 'info',
@@ -179,7 +153,7 @@ autoUpdater.once('update-downloaded', async () => {
         title: 'Update Downloaded',
         message: 'Update downloaded',
         detail: `We have finished downloading the latest updates.
-          Do you want to install the updates now?`,
+            Do you want to install the updates now?`,
       })
       .then((result) => {
         if (result.response === 0) {
@@ -187,8 +161,21 @@ autoUpdater.once('update-downloaded', async () => {
         }
       })
       .catch((err) => log.info(`Error in showMessageBox: ${err}`));
-  }
+  });
+
+  windowState.manage(win);
+};
+
+app.once('ready', createWindow);
+
+app.setAboutPanelOptions({
+  applicationName: app.name,
+  applicationVersion: app.getVersion(),
+  copyright: 'Copyright (C) 2020 Office Nishigami.',
 });
+
+app.allowRendererProcessReuse = true;
+app.once('window-all-closed', () => app.quit());
 
 process.once('uncaughtException', (err) => {
   log.error('electron:uncaughtException');
@@ -197,6 +184,3 @@ process.once('uncaughtException', (err) => {
   log.error(err.stack);
   app.exit();
 });
-
-app.allowRendererProcessReuse = true;
-app.once('window-all-closed', () => app.quit());
