@@ -1,0 +1,5 @@
+node_modules
+release
+dist
+.env
+.DS_Store

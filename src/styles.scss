@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  font-family: Roboto;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  height: 100%;
+  overflow: hidden;
+
+  .initial {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    fill: #a0eaf9;
+    color: #a0eaf9;
+
+    span {
+      color: #ffffff;
+    }
+
+    &.drag {
+      fill: #205a79;
+      color: #205a79;
+
+      span {
+        color: #205a79;
+      }
+    }
+
+    .message {
+      margin-top: 1em;
+    }
+  }
+
+  .loading {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #a0eaf9;
+
+    @media (prefers-reduced-motion: no-preference) {
+      .spinner {
+        animation: App-logo-spin infinite 5s linear;
+      }
+    }
+  }
+}
