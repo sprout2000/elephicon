@@ -55,4 +55,10 @@ You can download binary packages for macOS (signed & notarized) at [releases](ht
 
 ## License
 
-[MIT](https://github.com/sprout2000/lessview/blob/master/LICENSE.md)
+### [png2icons](https://github.com/idesis-gmbh/png2icons)
+
+MIT © [idesis GmbH](https://www.idesis.de), Rellinghauser Straße 334F, D-45136 Essen
+
+### GenICNS
+
+[MIT](https://github.com/sprout2000/lessview/blob/master/LICENSE.md) © Office Nishigami
