@@ -11,7 +11,7 @@ body,
   height: 100%;
 }
 
-@keyframes App-logo-spin {
+@keyframes Spinner {
   from {
     transform: rotate(0deg);
   }
@@ -60,7 +60,7 @@ body,
 
     @media (prefers-reduced-motion: no-preference) {
       .spinner {
-        animation: App-logo-spin infinite 5s linear;
+        animation: Spinner infinite 5s linear;
       }
     }
   }
