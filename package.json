@@ -14,9 +14,9 @@
   },
   "keywords": [
     "electron",
+    "ico",
     "icns",
-    "png",
-    "converter"
+    "png2icons"
   ],
   "engines": {
     "node": "12.x"
