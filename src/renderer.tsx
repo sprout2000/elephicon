@@ -63,7 +63,7 @@ const App = (): JSX.Element => {
             </svg>
           </div>
           <div className="message">
-            Drop a <span>1024x1024 PNG</span> file here...
+            Drop a <span>PNG</span> file here...
           </div>
         </div>
       )}
