@@ -60,7 +60,8 @@ app.once('ready', () => {
           type: 'error',
           buttons: ['OK'],
           title: 'ERROR',
-          message: `Invalid Format: ${message}.`,
+          message: 'Error!',
+          detail: `Invalid Format: ${message}.`,
         });
       }
 
@@ -112,7 +113,8 @@ app.once('ready', () => {
             type: 'info',
             buttons: ['OK'],
             title: 'Successfully completed!',
-            message: `created: ${dest}`,
+            message: 'Successfully completed!',
+            detail: `created: ${dest}`,
           });
         }
       })
@@ -124,7 +126,8 @@ app.once('ready', () => {
             type: 'error',
             buttons: ['OK'],
             title: 'ERROR',
-            message: `Something went wrong: ${err}`,
+            message: 'Error!',
+            detail: `Something went wrong: ${err}`,
           });
         }
       });
