@@ -31,9 +31,9 @@ const createWindow = (): void => {
     title: 'GenICNS',
     show: false,
     resizable: false,
-    minimizable: false,
     maximizable: false,
     fullscreenable: false,
+    titleBarStyle: 'hidden',
     webPreferences: {
       enableRemoteModule: false,
       nodeIntegration: false,
