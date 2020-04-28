@@ -15,6 +15,11 @@ Drop a PNG file to the window.
 
 The ideal input is a 24 bit PNG with an alpha channel (RGBA) with 1024×1024 pixels but any other dimensions and most other PNG formats do also work. 
 
+Outputs | Sizes | Platform
+:--- | :---: | :---:
+icon.icns | 1024x1024 | macOS
+icon.ico | 256x256 | Windows
+
 ## Security
 
 API | Boolean
