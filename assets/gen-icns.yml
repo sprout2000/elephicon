@@ -1,5 +1,5 @@
 name: GenICNS
-description: 'ICNS Generator (GUI Wrapper for png2icons).'
+description: 'ICNS Generator (GUI Wrapper for png2icons) to generate desktop app icons (icns and ico) from a PNG.'
 website: 'https://github.com/sprout2000/gen-icns'
 repository: 'https://github.com/sprout2000/gen-icns'
 license: MIT
