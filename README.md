@@ -17,8 +17,8 @@ The ideal input is a 24 bit PNG with an alpha channel (RGBA) with 1024×1024 pix
 
 Outputs | Dimensions | Platform | Multiple sizes
 :--- | :---: | :---: | :---
-icon.icns | 1024x1024 | macOS | [16, 16@2x, 32, 32@2x, 128, 128@2x, 256, 256@2x, 512, 512@2x]
-icon.ico | 256x256 | Windows | [16, 24, 32, 48, 64, 72, 96, 128, 256]
+icon.icns | 1024x1024 | macOS | 16, 16@2x, 32, 32@2x, 128, 128@2x, 256, 256@2x, 512, 512@2x
+icon.ico | 256x256 | Windows | 16, 24, 32, 48, 64, 72, 96, 128, 256
 
 ## Security
 
