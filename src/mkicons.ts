@@ -46,20 +46,25 @@ const mkicons = async (
     .then(async () => {
       console.log(`create: ${dest}`);
 
-      await fs.promises.readFile(filepath).then(async (buffer) => {
-        setLogger(console.log);
+      await fs.promises
+        .readFile(filepath)
+        .then(async (buffer) => {
+          setLogger(console.log);
 
-        const icns = createICNS(buffer, BICUBIC, 0);
-        const ico = createICO(buffer, BICUBIC, 0, false);
+          const icns = createICNS(buffer, BICUBIC, 0);
+          const ico = createICO(buffer, BICUBIC, 0, false);
 
-        await fs.promises
-          .writeFile(path.join(dest, 'icon.icns'), icns)
-          .then(() => console.log(`create: ${dest}${path.sep}icon.icns`));
+          await fs.promises
+            .writeFile(path.join(dest, 'icon.icns'), icns)
+            .then(() => console.log(`create: ${dest}${path.sep}icon.icns`))
+            .catch((err) => console.log(`icns failed: ${err}`));
 
-        await fs.promises
-          .writeFile(path.join(dest, 'icon.ico'), ico)
-          .then(() => console.log(`create: ${dest}${path.sep}icon.ico`));
-      });
+          await fs.promises
+            .writeFile(path.join(dest, 'icon.ico'), ico)
+            .then(() => console.log(`create: ${dest}${path.sep}icon.ico`))
+            .catch((err) => console.log(`ico failed: ${err}`));
+        })
+        .catch((err) => console.log(`readFile ${filepath} failed: ${err}`));
     })
     .then(async () => {
       console.log('Successfully Completed!');
