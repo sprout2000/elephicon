@@ -32,7 +32,8 @@ const mkicons = async (
       type: 'error',
       buttons: ['OK'],
       title: 'ERROR',
-      message: `Something went wrong...`,
+      message: 'Error!',
+      detail: `Something went wrong...`,
     });
 
     return true;
