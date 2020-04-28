@@ -57,6 +57,9 @@ $ npm run package
 
 You can also download binary packages for macOS (signed & notarized) at [releases](https://github.com/sprout2000/gen-icns/releases).
 
+## Auto Update (*macOS*)
+
+<img width="512" alt="2020-04-29 8.39.24" src="https://user-images.githubusercontent.com/52094761/80548139-1f19d180-89f5-11ea-85e9-4104a3b8eb9c.png" />
 
 ## License
 
