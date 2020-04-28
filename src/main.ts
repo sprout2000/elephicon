@@ -71,8 +71,8 @@ const createWindow = (): void => {
         buttons: ['Restart', 'Cancel'],
         defaultId: 0,
         cancelId: 1,
-        title: 'Update Downloaded',
-        message: 'Update downloaded',
+        title: 'Update',
+        message: 'Updates are available!',
         detail:
           'We have finished downloading the latest updates.\nDo you want to install the updates now?',
       })
