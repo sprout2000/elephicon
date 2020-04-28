@@ -73,8 +73,8 @@ const createWindow = (): void => {
         cancelId: 1,
         title: 'Update Downloaded',
         message: 'Update downloaded',
-        detail: `We have finished downloading the latest updates.
-            Do you want to install the updates now?`,
+        detail:
+          'We have finished downloading the latest updates.\nDo you want to install the updates now?',
       })
       .then((result) => {
         if (result.response === 0) {
