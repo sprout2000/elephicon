@@ -33,7 +33,7 @@ const createWindow = (): void => {
     resizable: false,
     maximizable: false,
     fullscreenable: false,
-    titleBarStyle: process.platform === 'darwin' ? 'hidden' : 'default',
+    titleBarStyle: 'hidden',
     webPreferences: {
       enableRemoteModule: false,
       nodeIntegration: false,
