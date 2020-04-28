@@ -12,11 +12,11 @@ locales:
 category: "Developer Tools"
 screenshots:
   - {
-      imageUrl: "https://user-images.githubusercontent.com/52094761/80323428-51e18f80-8866-11ea-9f93-aedd454bbc18.png",
+      imageUrl: "https://user-images.githubusercontent.com/52094761/80545494-6b154800-89ee-11ea-98a0-7983496f240a.png",
     }
   - {
-      imageUrl: "https://user-images.githubusercontent.com/52094761/80455280-6ad16a00-8966-11ea-9622-7b848e1faef6.png",
+      imageUrl: "https://user-images.githubusercontent.com/52094761/80545606-c5160d80-89ee-11ea-8e8f-eadd013af692.png",
     }
   - {
-      imageUrl: "https://user-images.githubusercontent.com/52094761/80454531-2abdb780-8965-11ea-9fcb-8011114baf58.png",
+      imageUrl: "https://user-images.githubusercontent.com/52094761/80545653-dc54fb00-89ee-11ea-8a9a-337ac6c39da8.png",
     }
