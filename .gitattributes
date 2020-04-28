@@ -1,2 +1,1 @@
-scripts/*.js -linguist-detectable
-webpack.config.js -linguist-detectable
+*.js linguist-language=TypeScript
