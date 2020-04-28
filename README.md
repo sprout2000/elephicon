@@ -50,7 +50,7 @@ $ npm run package
 
 ## Download
 
-You can download binary packages for macOS (signed & notarized) at [releases](https://github.com/sprout2000/gen-icns/releases).
+You can also download binary packages for macOS (signed & notarized) at [releases](https://github.com/sprout2000/gen-icns/releases).
 
 
 ## License
