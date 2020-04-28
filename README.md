@@ -25,28 +25,26 @@ contextIsolation | `true`
 safeDialogs | `true`
 sandbox | `true`
 
-## Build and Install
+## How to build and install
 
-Clone this repo
+1. Clone this repo
 
 ```
 $ git clone git@github.com:sprout2000/gen-icns.git
 ```
 
-Install the dependencies...
+2. Install the dependencies...
 
 ```
 $ cd gen-icns
 $ npm install
 ```
 
-...then start to build the installer
+3. ...then start to build the installer, and you'll find the intaller in `release` directory.
 
 ```
 $ npm run package
 ```
-
-And you'll find the intaller in `release` directory.
 
 *Note that you will need to have [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/) installed.*
 
