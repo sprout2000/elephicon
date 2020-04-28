@@ -1,7 +1,7 @@
 {
   "name": "gen-icns",
   "productName": "GenICNS",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ICNS Generator (GUI Wrapper for png2icons).",
   "author": "sprout2000",
   "license": "MIT",
