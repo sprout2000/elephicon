@@ -1,0 +1,2 @@
+scripts/*.js -linguist-detectable
+webpack.config.js -linguist-detectable
