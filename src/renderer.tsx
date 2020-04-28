@@ -11,6 +11,10 @@ const App = (): JSX.Element => {
   const [onDrag, setOnDrag] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const isDarwin = async (): Promise<boolean> => {
+    return ipcRenderer.invoke('platform');
+  };
+
   const preventDefault = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
     e.stopPropagation();
@@ -47,6 +51,7 @@ const App = (): JSX.Element => {
       onDragEnter={onDragOver}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}>
+      {isDarwin && <div className="drag-zone"></div>}
       {loading ? (
         <div className="loading">
           <BsArrowRepeat size={64} className="spinner" />

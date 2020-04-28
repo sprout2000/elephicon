@@ -45,6 +45,9 @@ const createWindow = (): void => {
   });
 
   ipcMain.handle('dropped-file', (_e, filepath) => mkicons(filepath, win));
+  ipcMain.handle('platform', () => {
+    return process.platform === 'darwin';
+  });
 
   win.once('ready-to-show', () => win.show());
 

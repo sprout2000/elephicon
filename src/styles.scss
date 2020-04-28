@@ -24,6 +24,16 @@ body,
   height: 100%;
   overflow: hidden;
 
+  .drag-zone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 24px;
+    -webkit-app-region: drag;
+    z-index: 1000;
+  }
+
   .initial {
     height: 100%;
     display: flex;
