@@ -1,6 +1,5 @@
 node_modules
 release
 dist
-memo.md
 .env
 .DS_Store
