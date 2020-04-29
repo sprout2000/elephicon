@@ -15,10 +15,41 @@ Drop a PNG file to the window, and you will see `icon-xxxxxxxxx` created in the 
 
 The ideal input is a 24 bit PNG with an alpha channel (RGBA) with 1024×1024 pixels but any other dimensions and most other PNG formats do also work. 
 
-Outputs | Dimensions | Platform | Multiple sizes
-:--- | :---: | :---: | :---
-icon.icns | 1024x1024 | macOS | 16, 16@2x, 32, 32@2x, 128, 128@2x, 256, 256@2x, 512, 512@2x
-icon.ico | 256x256 | Windows | 16, 24, 32, 48, 64, 72, 96, 128, 256
+## Output Formats
+
+Output | Dimension | Platform | Algorithm | Multiple
+:--- | :--- | :--- | :---: | :---:
+icon.icns | 1024x1024 | macOS | Bicubic | true
+icon.ico | 256x256 | Windows | Bicubic | true
+
+### ICNS
+
+Dimension | OSType | Size | DPI
+:--- | :--- | :--- | ---:
+16 | icp4 | 16x16 | 72
+16@2x | ic11 | 32x32 | 144
+32 | icp5 | 32x32 | 72
+32@2x | ic12 | 64x64 | 144
+128 | ic07 | 128x128 | 72
+128@2x | ic13 | 256x256 | 144
+256 | ic08 | 256x256 | 72
+256@2x | ic14 | 512x512 | 144
+512 | ic09 | 512x512 | 72
+512@2x | ic10 | 1024x1024 | 144
+
+### ICO
+
+Dimension | Format
+:---: | :---:
+16 | BMP
+24 | BMP
+32 | BMP
+48 | BMP
+64 | PNG
+72 | PNG
+96 | PNG
+128 | PNG
+256 | PNG
 
 ## Security
 
