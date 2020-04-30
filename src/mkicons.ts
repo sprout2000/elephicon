@@ -33,7 +33,7 @@ const mkicons = async (
   await fs.promises
     .mkdir(dest)
     .then(async () => {
-      console.log(`create: ${dest}`);
+      console.log(`created: ${dest}`);
 
       await fs.promises
         .readFile(filepath)
@@ -44,7 +44,7 @@ const mkicons = async (
           return await fs.promises
             .writeFile(path.join(dest, 'icon.icns'), icns)
             .then(() => {
-              console.log(`create: ${dest}${path.sep}icon.icns`);
+              console.log(`created: ${dest}${path.sep}icon.icns`);
               return buffer;
             });
         })
@@ -54,7 +54,7 @@ const mkicons = async (
 
           await fs.promises
             .writeFile(path.join(dest, 'icon.ico'), ico)
-            .then(() => console.log(`create: ${dest}${path.sep}icon.ico`));
+            .then(() => console.log(`created: ${dest}${path.sep}icon.ico`));
         })
         .then(async () => {
           console.log('Successfully Completed!');
