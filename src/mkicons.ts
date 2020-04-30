@@ -62,7 +62,7 @@ const mkicons = async (
           await dialog.showMessageBox(win, {
             type: 'info',
             buttons: ['OK'],
-            title: 'Successfully Completed!',
+            title: 'Completed',
             message: 'Successfully Completed!',
             detail: `Created: ${dest}`,
           });
