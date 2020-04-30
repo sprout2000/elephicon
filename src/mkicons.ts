@@ -27,20 +27,11 @@ const mkicons = async (
   }
 
   const dirname = path.dirname(filepath);
-  if (!dirname) {
-    await dialog.showMessageBox(win, {
-      type: 'error',
-      buttons: ['OK'],
-      title: 'ERROR',
-      message: 'Error!',
-      detail: `Something went wrong...`,
-    });
-
-    return true;
-  }
+  console.log(`dirname: ${dirname}`);
 
   const hash = new Date().getTime().toString();
   const dest = path.join(dirname, `icons-${hash}`);
+  console.log(`dest: ${dest}`);
 
   await fs.promises
     .mkdir(dest)
@@ -51,39 +42,40 @@ const mkicons = async (
         .readFile(filepath)
         .then(async (buffer) => {
           setLogger(console.log);
-
           const icns = createICNS(buffer, BICUBIC, 0);
+
+          return await fs.promises
+            .writeFile(path.join(dest, 'icon.icns'), icns)
+            .then(() => {
+              console.log(`create: ${dest}${path.sep}icon.icns`);
+              return buffer;
+            });
+        })
+        .then(async (buffer) => {
+          setLogger(console.log);
           const ico = createICO(buffer, BICUBIC, 0, false);
 
           await fs.promises
-            .writeFile(path.join(dest, 'icon.icns'), icns)
-            .then(() => console.log(`create: ${dest}${path.sep}icon.icns`))
-            .catch((err) => console.log(`icns failed: ${err}`));
-
-          await fs.promises
             .writeFile(path.join(dest, 'icon.ico'), ico)
-            .then(() => console.log(`create: ${dest}${path.sep}icon.ico`))
-            .catch((err) => console.log(`ico failed: ${err}`));
+            .then(() => console.log(`create: ${dest}${path.sep}icon.ico`));
         })
-        .catch((err) => console.log(`readFile ${filepath} failed: ${err}`));
-    })
-    .then(async () => {
-      console.log('Successfully Completed!');
+        .then(async () => {
+          console.log('Successfully Completed!');
 
-      await dialog.showMessageBox(win, {
-        type: 'info',
-        buttons: ['OK'],
-        title: 'Successfully Completed!',
-        message: 'Successfully Completed!',
-        detail: `Created: ${dest}`,
-      });
+          await dialog.showMessageBox(win, {
+            type: 'info',
+            buttons: ['OK'],
+            title: 'Successfully Completed!',
+            message: 'Successfully Completed!',
+            detail: `Created: ${dest}`,
+          });
+        });
     })
     .catch(async (err) => {
       console.log(`Something went wrong: ${err}`);
 
-      await dialog.showMessageBox(win, {
+      dialog.showMessageBox(win, {
         type: 'error',
-        buttons: ['OK'],
         title: 'ERROR',
         message: 'Error!',
         detail: `Something went wrong: ${err}`,
