@@ -6,7 +6,7 @@ Please include this app in your Electron Apps repository.
 
 Althouh your repository already has some icon makers, I think they are not so easy to use.
 This app looks so simple but it's powerful, secure and easy to use.
-I guess this util would be helpful for begginers to get started in Electron's world.
+I guess this utility would be helpful for begginers to get started in Electron's world.
 
 Best regards.
 
