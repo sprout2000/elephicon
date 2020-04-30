@@ -27,11 +27,8 @@ const mkicons = async (
   }
 
   const dirname = path.dirname(filepath);
-  console.log(`dirname: ${dirname}`);
-
   const hash = new Date().getTime().toString();
   const dest = path.join(dirname, `icons-${hash}`);
-  console.log(`dest: ${dest}`);
 
   await fs.promises
     .mkdir(dest)
