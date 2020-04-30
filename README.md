@@ -26,10 +26,8 @@ icon.ico | 256x256 | Windows | Bicubic | true
 
 Dimension | OSType | Size | DPI
 :--- | :--- | :--- | ---:
-16 | s8mk | 16x16 | 72
-16 | is32 | 16x16 | 72
-32 | l8mk | 32x32 | 72
-32 | il32 | 32x32 | 72
+16 | s8mk, is32 | 16x16 | 72
+32 | l8mk, il32 | 32x32 | 72
 128 | ic07 | 128x128 | 72
 256 | ic08 | 256x256 | 72
 512 | ic09 | 512x512 | 72
