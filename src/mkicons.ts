@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 
 import mime from 'mime-types';
-import { setLogger, createICNS, createICO, BICUBIC } from 'png2icons';
+import { setLogger, createICNS, createICO, BEZIER } from 'png2icons';
 
 const mkicons = async (
   filepath: string,
@@ -42,7 +42,7 @@ const mkicons = async (
         .readFile(filepath)
         .then(async (buffer) => {
           setLogger(console.log);
-          const icns = createICNS(buffer, BICUBIC, 0);
+          const icns = createICNS(buffer, BEZIER, 0);
 
           return await fs.promises
             .writeFile(path.join(dest, 'icon.icns'), icns)
@@ -53,7 +53,7 @@ const mkicons = async (
         })
         .then(async (buffer) => {
           setLogger(console.log);
-          const ico = createICO(buffer, BICUBIC, 0, false);
+          const ico = createICO(buffer, BEZIER, 0, false, true);
 
           await fs.promises
             .writeFile(path.join(dest, 'icon.ico'), ico)
