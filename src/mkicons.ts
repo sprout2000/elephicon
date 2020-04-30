@@ -64,7 +64,7 @@ const mkicons = async (
             buttons: ['OK'],
             title: 'Completed',
             message: 'Successfully Completed!',
-            detail: `Created: ${dest}`,
+            detail: `Created:\n${dest}${path.sep}icon.icns\n${dest}${path.sep}icon.ico`,
           });
         });
     })
