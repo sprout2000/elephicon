@@ -54,7 +54,7 @@ const App = (): JSX.Element => {
         setLoading(false);
 
         const message = mime ? mime : 'Unknown';
-        ipcRenderer.invoke('mime-error', message);
+        await ipcRenderer.invoke('mime-error', message);
 
         return;
       }
