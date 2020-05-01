@@ -28,6 +28,7 @@ const mkicons = async (filepath: string): Promise<Result> => {
             .writeFile(path.join(dest, 'icon.icns'), icns)
             .then(() => {
               console.log(`created: ${dest}${path.sep}icon.icns`);
+
               return buffer;
             });
         })
