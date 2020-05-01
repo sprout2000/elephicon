@@ -1,41 +1,24 @@
-import { BrowserWindow, dialog } from 'electron';
-
 import fs from 'fs';
 import path from 'path';
 
-import mime from 'mime-types';
 import { setLogger, createICNS, createICO, BEZIER } from 'png2icons';
 
-const mkicons = async (
-  filepath: string,
-  win: BrowserWindow
-): Promise<boolean> => {
-  const mimetype = mime.lookup(filepath);
+interface Result {
+  type: string;
+  msg: string;
+}
 
-  if (!mimetype || !mimetype.match(/png/)) {
-    const message = mimetype ? mimetype : 'Unknown';
-
-    await dialog.showMessageBox(win, {
-      type: 'error',
-      buttons: ['OK'],
-      title: 'ERROR',
-      message: 'Error!',
-      detail: `Invalid Format: ${message}.`,
-    });
-
-    return true;
-  }
-
+const mkicons = async (filepath: string): Promise<Result> => {
   const dirname = path.dirname(filepath);
   const hash = new Date().getTime().toString();
   const dest = path.join(dirname, `icons-${hash}`);
 
-  await fs.promises
+  const result: Result = await fs.promises
     .mkdir(dest)
     .then(async () => {
       console.log(`created: ${dest}`);
 
-      await fs.promises
+      const success = await fs.promises
         .readFile(filepath)
         .then(async (buffer) => {
           setLogger(console.log);
@@ -58,28 +41,18 @@ const mkicons = async (
         })
         .then(async () => {
           console.log('Successfully Completed!');
-
-          await dialog.showMessageBox(win, {
-            type: 'info',
-            buttons: ['OK'],
-            title: 'Completed',
-            message: 'Successfully Completed!',
-            detail: `Created:\n${dest}${path.sep}icon.icns\n${dest}${path.sep}icon.ico`,
-          });
+          return { type: 'success', msg: dest };
         });
+
+      return success;
     })
-    .catch(async (err) => {
+    .catch(async (err: string) => {
       console.log(`Something went wrong: ${err}`);
 
-      dialog.showMessageBox(win, {
-        type: 'error',
-        title: 'ERROR',
-        message: 'Error!',
-        detail: `Something went wrong: ${err}`,
-      });
+      return { type: 'failed', msg: err };
     });
 
-  return true;
+  return result;
 };
 
 export default mkicons;

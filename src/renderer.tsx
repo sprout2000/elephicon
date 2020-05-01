@@ -6,6 +6,11 @@ import Logo from './logo';
 import 'typeface-roboto';
 import './styles.scss';
 
+interface Result {
+  type: string;
+  msg: string;
+}
+
 const { ipcRenderer } = window;
 
 const App = (): JSX.Element => {
@@ -39,9 +44,33 @@ const App = (): JSX.Element => {
       setLoading(true);
 
       const file = e.dataTransfer.files[0];
-      const result = await ipcRenderer.invoke('dropped-file', file.path);
 
-      if (result) setLoading(false);
+      const mime: string | false = await ipcRenderer.invoke(
+        'mime-check',
+        file.path
+      );
+
+      if (!mime || !mime.match(/png/)) {
+        setLoading(false);
+
+        const message = mime ? mime : 'Unknown';
+        ipcRenderer.invoke('mime-error', message);
+
+        return;
+      }
+
+      const result: Result = await ipcRenderer.invoke(
+        'dropped-file',
+        file.path
+      );
+
+      if (result.type === 'failed') {
+        setLoading(false);
+        await ipcRenderer.invoke('error', result.msg);
+      } else {
+        setLoading(false);
+        await ipcRenderer.invoke('success', result.msg);
+      }
     }
   };
 

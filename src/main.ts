@@ -5,6 +5,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
 import path from 'path';
+import mime from 'mime-types';
 
 import mkicons from './mkicons';
 import template from './menu';
@@ -45,7 +46,40 @@ const createWindow = (): void => {
     },
   });
 
-  ipcMain.handle('dropped-file', (_e, filepath) => mkicons(filepath, win));
+  ipcMain.handle('mime-check', (_e, filepath): string | false => {
+    const mimetype = mime.lookup(filepath);
+    return mimetype;
+  });
+
+  ipcMain.handle('mime-error', async (_e, arg) => {
+    await dialog.showMessageBox(win, {
+      type: 'error',
+      title: 'ERROR',
+      message: 'Error!',
+      detail: `Invalid format: ${arg}`,
+    });
+  });
+
+  ipcMain.handle('dropped-file', (_e, filepath) => mkicons(filepath));
+
+  ipcMain.handle('error', async (_e, arg) => {
+    await dialog.showMessageBox(win, {
+      type: 'error',
+      title: 'ERROR',
+      message: 'Error!',
+      detail: `Something went wrong: ${arg}`,
+    });
+  });
+
+  ipcMain.handle('success', async (_e, arg) => {
+    await dialog.showMessageBox(win, {
+      type: 'info',
+      title: 'Completed',
+      message: 'Successfully Completed!',
+      detail: `created: ${arg}`,
+    });
+  });
+
   ipcMain.handle('platform', () => {
     return process.platform === 'darwin';
   });
