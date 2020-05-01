@@ -18,7 +18,7 @@ const mkicons = async (filepath: string): Promise<Result> => {
     .then(async () => {
       console.log(`created: ${dest}`);
 
-      const success = await fs.promises
+      const success: Result = await fs.promises
         .readFile(filepath)
         .then(async (buffer) => {
           setLogger(console.log);
