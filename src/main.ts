@@ -76,7 +76,7 @@ const createWindow = (): void => {
       type: 'info',
       title: 'Completed',
       message: 'Successfully Completed!',
-      detail: `created: ${arg}`,
+      detail: `created: \n${arg}`,
     });
   });
 
