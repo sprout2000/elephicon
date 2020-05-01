@@ -41,6 +41,7 @@ const mkicons = async (filepath: string): Promise<Result> => {
         })
         .then(async () => {
           console.log('Successfully Completed!');
+
           return { type: 'success', msg: dest };
         });
 
