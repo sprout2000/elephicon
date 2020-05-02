@@ -17,10 +17,10 @@ The ideal input is a 24 bit PNG with an alpha channel (RGBA) with 1024×1024 pix
 
 ## Output Formats
 
-Output | Dimension | Platform | Algorithm | Multiple
+Output | Dimension | Platform | Algorithm | Multiple Sizes
 :--- | :--- | :--- | :---: | :---:
-icon.icns | 1024x1024 | macOS | Bicubic | true
-icon.ico | 256x256 | Windows | Bicubic | true
+icon.icns | 1024x1024 | macOS | Bezier | true
+icon.ico | 256x256 | Windows | Bezier | true
 
 ### ICNS
 
