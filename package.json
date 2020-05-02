@@ -5,6 +5,7 @@
   "description": "GenICNS generates Apple ICNS and Microsoft ICO files from PNG files.",
   "author": "sprout2000",
   "license": "MIT",
+  "homepage": "https://sprout2000.github.io/gen-icns",
   "repository": {
     "type": "git",
     "url": "git@github.com:sprout2000/gen-icns.git"
