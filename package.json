@@ -2,7 +2,7 @@
   "name": "gen-icns",
   "productName": "GenICNS",
   "version": "0.0.7",
-  "description": "ICNS Generator (GUI Wrapper for png2icons) to generate desktop app icons (icns and ico) from a PNG.",
+  "description": "GenICNS generates Apple ICNS and Microsoft ICO files from PNG files.",
   "author": "sprout2000",
   "license": "MIT",
   "repository": {
