@@ -76,9 +76,13 @@ const App = (): JSX.Element => {
         if (result.type === 'failed') {
           setLoading(false);
           await ipcRenderer.invoke('error', result.msg);
+
+          return;
         } else {
           setLoading(false);
           await ipcRenderer.invoke('success', result.msg);
+
+          return;
         }
       } else {
         const result: Result = await ipcRenderer.invoke('make-ico', file.path);
@@ -86,9 +90,13 @@ const App = (): JSX.Element => {
         if (result.type === 'failed') {
           setLoading(false);
           await ipcRenderer.invoke('error', result.msg);
+
+          return;
         } else {
           setLoading(false);
           await ipcRenderer.invoke('success', result.msg);
+
+          return;
         }
       }
     }
