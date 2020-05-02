@@ -1,2 +1,2 @@
 *.js linguist-language=TypeScript
-web/* linguist-documentation
+public/* linguist-documentation
