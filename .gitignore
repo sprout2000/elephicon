@@ -2,5 +2,6 @@ node_modules
 release
 dist
 apps
+gh-pages
 .env
 .DS_Store
