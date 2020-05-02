@@ -70,17 +70,26 @@ const App = (): JSX.Element => {
         return;
       }
 
-      const result: Result = await ipcRenderer.invoke(
-        'dropped-file',
-        file.path
-      );
+      if (checked) {
+        const result: Result = await ipcRenderer.invoke('make-icns', file.path);
 
-      if (result.type === 'failed') {
-        setLoading(false);
-        await ipcRenderer.invoke('error', result.msg);
+        if (result.type === 'failed') {
+          setLoading(false);
+          await ipcRenderer.invoke('error', result.msg);
+        } else {
+          setLoading(false);
+          await ipcRenderer.invoke('success', result.msg);
+        }
       } else {
-        setLoading(false);
-        await ipcRenderer.invoke('success', result.msg);
+        const result: Result = await ipcRenderer.invoke('make-ico', file.path);
+
+        if (result.type === 'failed') {
+          setLoading(false);
+          await ipcRenderer.invoke('error', result.msg);
+        } else {
+          setLoading(false);
+          await ipcRenderer.invoke('success', result.msg);
+        }
       }
     }
   };
