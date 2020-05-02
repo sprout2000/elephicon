@@ -63,10 +63,11 @@ body,
 
     .mode {
       position: absolute;
-      bottom: 16px;
+      bottom: 20px;
       display: flex;
       flex-direction: row;
       justify-content: center;
+      align-items: center;
 
       .switch {
         margin: 0 10px;
@@ -74,7 +75,7 @@ body,
 
       span {
         color: #ffffff;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 700;
 
         &:hover {
