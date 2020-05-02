@@ -7,6 +7,7 @@ import log from 'electron-log';
 import path from 'path';
 import mime from 'mime-types';
 
+import mkico from './mkico';
 import mkicons from './mkicons';
 import template from './menu';
 
@@ -60,7 +61,8 @@ const createWindow = (): void => {
     });
   });
 
-  ipcMain.handle('dropped-file', (_e, filepath) => mkicons(filepath));
+  ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath));
+  ipcMain.handle('make-icns', (_e, filepath) => mkicons(filepath));
 
   ipcMain.handle('error', async (_e, arg) => {
     await dialog.showMessageBox(win, {
