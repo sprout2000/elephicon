@@ -24,6 +24,20 @@ const App = (): JSX.Element => {
     return ipcRenderer.invoke('platform');
   };
 
+  const afterDrop = async (result: Result): Promise<void> => {
+    if (result.type === 'failed') {
+      setLoading(false);
+      await ipcRenderer.invoke('error', result.msg);
+
+      return;
+    } else {
+      setLoading(false);
+      await ipcRenderer.invoke('success', result.msg);
+
+      return;
+    }
+  };
+
   const onClick = (): void => {
     setChecked(!checked);
   };
@@ -72,32 +86,10 @@ const App = (): JSX.Element => {
 
       if (checked) {
         const result: Result = await ipcRenderer.invoke('make-icns', file.path);
-
-        if (result.type === 'failed') {
-          setLoading(false);
-          await ipcRenderer.invoke('error', result.msg);
-
-          return;
-        } else {
-          setLoading(false);
-          await ipcRenderer.invoke('success', result.msg);
-
-          return;
-        }
+        await afterDrop(result);
       } else {
         const result: Result = await ipcRenderer.invoke('make-ico', file.path);
-
-        if (result.type === 'failed') {
-          setLoading(false);
-          await ipcRenderer.invoke('error', result.msg);
-
-          return;
-        } else {
-          setLoading(false);
-          await ipcRenderer.invoke('success', result.msg);
-
-          return;
-        }
+        await afterDrop(result);
       }
     }
   };
