@@ -110,7 +110,7 @@ const App = (): JSX.Element => {
         <div className={onDrag ? 'initial drag' : 'initial'}>
           <Logo />
           <div className="message">
-            Drop a <span>PNG</span> file here...
+            Drop your <span>PNG</span> files here...
           </div>
           <div className="mode">
             <span onClick={onClick} className={checked ? '' : 'checked'}>
