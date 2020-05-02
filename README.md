@@ -90,7 +90,7 @@ You can also download binary packages for macOS (signed & notarized) at [release
 
 ## Auto Update (*macOS*)
 
-<img width="512" alt="2020-04-29 8.39.24" src="https://user-images.githubusercontent.com/52094761/80548139-1f19d180-89f5-11ea-85e9-4104a3b8eb9c.png" />
+<img width="512" alt="2020-05-02 10 30 43" src="https://user-images.githubusercontent.com/52094761/80852018-1aa52100-8c60-11ea-8894-ab20b28745f7.png">
 
 ## License
 
