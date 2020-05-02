@@ -11,8 +11,6 @@ GenICNS (GUI Wrapper for [idesis-gmbh/png2icons](https://github.com/idesis-gmbh/
 
 ## Usage
 
-Drop a PNG file to the window, and you will see `icon-xxxxxxxxx` created in the directory.
-
 The ideal input is a 24 bit PNG with an alpha channel (RGBA) with 1024×1024 pixels but any other dimensions and most other PNG formats do also work. 
 
 If you only need to create ICO files 256×256 pixels are sufficient. 
