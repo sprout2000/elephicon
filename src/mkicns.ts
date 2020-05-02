@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { setLogger, createICNS, createICO, BEZIER } from 'png2icons';
+import { setLogger, createICNS, BEZIER } from 'png2icons';
 
 interface Result {
   type: string;
@@ -32,23 +32,15 @@ const mkicons = async (filepath: string): Promise<Result> => {
               return buffer;
             });
         })
-        .then(async (buffer) => {
-          setLogger(console.log);
-          const ico = createICO(buffer, BEZIER, 0, false, true);
-
-          await fs.promises
-            .writeFile(path.join(dest, 'icon.ico'), ico)
-            .then(() => console.log(`created: ${dest}${path.sep}icon.ico`));
-        })
-        .then(async () => {
+        .then(() => {
           console.log('Successfully Completed!');
 
-          return { type: 'success', msg: dest };
+          return { type: 'success', msg: `${dest}${path.sep}icon.icns` };
         });
 
       return success;
     })
-    .catch(async (err: string) => {
+    .catch((err: string) => {
       console.log(`Something went wrong: ${err}`);
 
       return { type: 'failed', msg: err };

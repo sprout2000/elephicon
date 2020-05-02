@@ -8,7 +8,7 @@ import path from 'path';
 import mime from 'mime-types';
 
 import mkico from './mkico';
-import mkicons from './mkicons';
+import mkicns from './mkicns';
 import template from './menu';
 
 console.log = log.log;
@@ -62,7 +62,7 @@ const createWindow = (): void => {
   });
 
   ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath));
-  ipcMain.handle('make-icns', (_e, filepath) => mkicons(filepath));
+  ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath));
 
   ipcMain.handle('error', async (_e, arg) => {
     await dialog.showMessageBox(win, {
