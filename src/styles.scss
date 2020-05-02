@@ -42,6 +42,7 @@ body,
     align-items: center;
     fill: #a0eaf9;
     color: #a0eaf9;
+    position: relative;
 
     span {
       color: #ffffff;
@@ -58,6 +59,32 @@ body,
 
     .message {
       margin-top: 1em;
+    }
+
+    .mode {
+      position: absolute;
+      bottom: 16px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      .switch {
+        margin: 0 10px;
+      }
+
+      span {
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 700;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &.checked {
+          color: #ec407a;
+        }
+      }
     }
   }
 

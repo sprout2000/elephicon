@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+
+import Switch from 'react-switch';
 import { BsArrowRepeat } from 'react-icons/bs';
 
 import Logo from './logo';
@@ -16,9 +18,18 @@ const { ipcRenderer } = window;
 const App = (): JSX.Element => {
   const [onDrag, setOnDrag] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const isDarwin = async (): Promise<boolean> => {
     return ipcRenderer.invoke('platform');
+  };
+
+  const onClick = (): void => {
+    setChecked(!checked);
+  };
+
+  const onChange = (check: boolean): void => {
+    setChecked(check);
   };
 
   const preventDefault = (e: React.DragEvent<HTMLDivElement>): void => {
@@ -91,6 +102,25 @@ const App = (): JSX.Element => {
           <Logo />
           <div className="message">
             Drop a <span>PNG</span> file here...
+          </div>
+          <div className="mode">
+            <span onClick={onClick} className={checked ? '' : 'checked'}>
+              ICO
+            </span>
+            <Switch
+              onChange={onChange}
+              checked={checked}
+              checkedIcon={false}
+              uncheckedIcon={false}
+              height={14}
+              width={28}
+              onColor="#6b6e7b"
+              offColor="#6b6e7b"
+              className="switch"
+            />
+            <span onClick={onClick} className={checked ? 'checked' : ''}>
+              ICNS
+            </span>
           </div>
         </div>
       )}
