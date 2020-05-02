@@ -1,6 +1,6 @@
 # ![icon64](https://user-images.githubusercontent.com/52094761/80297794-80f1f580-87c1-11ea-9726-39fa0efe9581.png) GenICNS
 
-ICNS Generator (GUI Wrapper for [idesis-gmbh/png2icons](https://github.com/idesis-gmbh/png2icons)) to generate desktop app icons (icns and ico) from a PNG.
+GenICNS (GUI Wrapper for [idesis-gmbh/png2icons](https://github.com/idesis-gmbh/png2icons)) generates Apple ICNS and Microsoft ICO files from PNG files.
 
 [![GitHub CI](https://github.com/sprout2000/gen-icns/workflows/GitHub%20CI/badge.svg)](https://github.com/sprout2000/gen-icns/actions?query=workflow%3A%22GitHub+CI%22)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/gen-icns)](https://github.com/sprout2000/gen-icns/blob/master/LICENSE.md)
