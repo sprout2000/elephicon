@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/sprout2000/gen-icns/compare/v0.0.5...v0.0.6) (2020-05-02)
+
+
+### Features
+
+* add react-switch ([50c0713](https://github.com/sprout2000/gen-icns/commit/50c071330b116510948bcd0ee383f61a27f73e69))
+* create mkicns.ts ([d1721cc](https://github.com/sprout2000/gen-icns/commit/d1721cc5c69146eb97ccae75017c49dffc430e4e))
+* create mkico.ts ([c416c51](https://github.com/sprout2000/gen-icns/commit/c416c51ed2a00f85141edaf170a1b3fee1740f82))
+* invoke 'make-ico' and 'make-icns' ([743ab53](https://github.com/sprout2000/gen-icns/commit/743ab53179ae1dde380f1ecd8e5221cdf8592ebd))
+
 ### [0.0.5](https://github.com/sprout2000/gen-icns/compare/v0.0.4...v0.0.5) (2020-04-30)
 
 
