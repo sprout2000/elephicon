@@ -6,7 +6,7 @@ ICNS Generator (GUI Wrapper for [idesis-gmbh/png2icons](https://github.com/idesi
 [![GitHub license](https://img.shields.io/github/license/sprout2000/gen-icns)](https://github.com/sprout2000/gen-icns/blob/master/LICENSE.md)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/gen-icns)
 
-<img width="512" alt="2020-04-29 7 38 10" src="https://user-images.githubusercontent.com/52094761/80545494-6b154800-89ee-11ea-98a0-7983496f240a.png">
+<img width="512" alt="2020-05-02 10 24 26" src="https://user-images.githubusercontent.com/52094761/80851880-4d9ae500-8c5f-11ea-8794-d2ad95e8a34d.png">
 
 
 ## Usage
