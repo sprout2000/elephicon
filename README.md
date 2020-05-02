@@ -22,35 +22,6 @@ Output | Dimension | Platform | Algorithm | Multiple Sizes
 icon.icns | 1024x1024 | macOS | Bezier | true
 icon.ico | 256x256 | Windows | Bezier | true
 
-### ICNS
-
-Dimension | OSType | Size | DPI
-:--- | :--- | :--- | ---:
-16 | s8mk, is32 | 16x16 | 72
-32 | l8mk, il32 | 32x32 | 72
-128 | ic07 | 128x128 | 72
-256 | ic08 | 256x256 | 72
-512 | ic09 | 512x512 | 72
-16@2x | ic11 | 32x32 | 144
-32@2x | ic12 | 64x64 | 144
-128@2x | ic13 | 256x256 | 144
-256@2x | ic14 | 512x512 | 144
-512@2x | ic10 | 1024x1024 | 144
-
-### ICO
-
-Dimension | Format
-:---: | :---:
-16 | BMP
-24 | BMP
-32 | BMP
-48 | BMP
-64 | PNG
-72 | PNG
-96 | PNG
-128 | PNG
-256 | PNG
-
 ## Security
 
 API | Boolean
