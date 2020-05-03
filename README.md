@@ -15,7 +15,7 @@ The ideal input is a 24 bit PNG with an alpha channel (RGBA) with 1024×1024 pix
 
 If you only need to create ICO files 256×256 pixels are sufficient. 
 
-*Note: Both of the outputs (ICO, ICNS) will be embedded with multiple sizes.*
+*Note: Both of the outputs (ICO, ICNS) will be created with multiple sizes embedded.*
 
 ## Security
 
