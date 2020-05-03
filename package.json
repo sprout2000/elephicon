@@ -35,7 +35,7 @@
     "serve": "electron .",
     "release": "node scripts/build.js",
     "prepackage": "run-s clean build:prod",
-    "package": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false node scripts/build-unsign.js",
+    "package": "node scripts/build-appx.js",
     "upgrade-interactive": "npm-check --update",
     "release:patch": "standard-version --release-as patch",
     "release:minor": "standard-version --release-as minor",
