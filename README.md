@@ -32,32 +32,9 @@ contextIsolation | `true`
 safeDialogs | `true`
 sandbox | `true`
 
-<!-- ## How to build and install
-
-1. Clone this repo
-
-```
-$ git clone git@github.com:sprout2000/gen-icns.git
-```
-
-2. Install the dependencies...
-
-```
-$ cd gen-icns
-$ npm install
-```
-
-3. ...then start to build the installer, and you'll find the intaller in `release` directory.
-
-```
-$ npm run package
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/) installed.* -->
-
 ## Download
 
-You can also download binary packages for macOS (signed & notarized) at the [releases](https://github.com/sprout2000/gen-icns/releases) section.
+You can download the latest version of GenICNS for macOS (signed & notarized) from the [releases](https://github.com/sprout2000/gen-icns/releases) page.
 
 ## License
 
