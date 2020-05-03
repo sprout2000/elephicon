@@ -15,12 +15,7 @@ The ideal input is a 24 bit PNG with an alpha channel (RGBA) with 1024×1024 pix
 
 If you only need to create ICO files 256×256 pixels are sufficient. 
 
-## Output Formats
-
-Output | Dimension | Platform | Algorithm | Multiple Sizes
-:--- | :--- | :--- | :---: | :---:
-icon.icns | 1024x1024 | macOS | Bezier | true
-icon.ico | 256x256 | Windows | Bezier | true
+*Note: Both of the outputs (ICO, ICNS) will be embedded with multiple sizes.*
 
 ## Security
 
@@ -34,7 +29,8 @@ sandbox | `true`
 
 ## Download
 
-You can download the latest version of GenICNS for macOS (signed & notarized) from the [releases](https://github.com/sprout2000/gen-icns/releases) page.
+**You can download the latest version of GenICNS from the releases page here:**  
+[https://github.com/sprout2000/gen-icns/releases](https://github.com/sprout2000/gen-icns/releases)
 
 ## License
 
