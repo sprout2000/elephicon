@@ -32,7 +32,7 @@ contextIsolation | `true`
 safeDialogs | `true`
 sandbox | `true`
 
-## How to build and install
+<!-- ## How to build and install
 
 1. Clone this repo
 
@@ -53,7 +53,7 @@ $ npm install
 $ npm run package
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/) installed.*
+*Note that you will need to have [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/) installed.* -->
 
 ## Download
 
