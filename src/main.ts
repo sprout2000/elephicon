@@ -7,8 +7,7 @@ import log from 'electron-log';
 import path from 'path';
 import mime from 'mime-types';
 
-import mkico from './mkico';
-import mkicns from './mkicns';
+import { mkico, mkicns } from './mkicons';
 import template from './menu';
 
 console.log = log.log;
