@@ -10,31 +10,21 @@ interface Result {
 
 const mkico = async (filepath: string): Promise<Result> => {
   const dirname = path.dirname(filepath);
-  const hash = new Date().getTime().toString();
-  const dest = path.join(dirname, `icons-${hash}`);
 
   const result: Result = await fs.promises
-    .mkdir(dest)
-    .then(async () => {
-      console.log(`created: ${dest}`);
+    .readFile(filepath)
+    .then(async (buffer) => {
+      setLogger(console.log);
+      const ico = createICO(buffer, BEZIER, 0, false, true);
 
-      const success: Result = await fs.promises
-        .readFile(filepath)
-        .then(async (buffer) => {
-          setLogger(console.log);
-          const ico = createICO(buffer, BEZIER, 0, false, true);
+      await fs.promises
+        .writeFile(path.join(dirname, 'icon.ico'), ico)
+        .then(() => console.log(`created: ${dirname}${path.sep}icon.ico`));
+    })
+    .then(() => {
+      console.log('Successfully Completed!');
 
-          await fs.promises
-            .writeFile(path.join(dest, 'icon.ico'), ico)
-            .then(() => console.log(`created: ${dest}${path.sep}icon.ico`));
-        })
-        .then(() => {
-          console.log('Successfully Completed!');
-
-          return { type: 'success', msg: `${dest}${path.sep}icon.ico` };
-        });
-
-      return success;
+      return { type: 'success', msg: `${dirname}${path.sep}icon.ico` };
     })
     .catch((err: string) => {
       console.log(`Something went wrong: ${err}`);
