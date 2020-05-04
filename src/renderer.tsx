@@ -18,7 +18,7 @@ const { ipcRenderer } = window;
 const App = (): JSX.Element => {
   const [onDrag, setOnDrag] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const isDarwin = async (): Promise<boolean> => {
     return ipcRenderer.invoke('platform');
