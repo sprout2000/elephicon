@@ -127,7 +127,7 @@ const createWindow = (): void => {
   windowState.manage(win);
 };
 
-app.once('ready', createWindow);
+app.whenReady().then(createWindow);
 
 app.setAboutPanelOptions({
   applicationName: app.name,
