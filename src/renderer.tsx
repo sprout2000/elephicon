@@ -27,12 +27,20 @@ const App = (): JSX.Element => {
   const afterDrop = async (result: Result): Promise<void> => {
     if (result.type === 'failed') {
       setLoading(false);
-      await ipcRenderer.invoke('error', result.msg);
+      await ipcRenderer.invoke(
+        'open-dialog',
+        `Something went wrong: ${result.msg}`,
+        'error'
+      );
 
       return;
     } else {
       setLoading(false);
-      await ipcRenderer.invoke('success', result.msg);
+      await ipcRenderer.invoke(
+        'open-dialog',
+        `created:\n${result.msg}`,
+        'info'
+      );
 
       return;
     }
@@ -79,7 +87,11 @@ const App = (): JSX.Element => {
         setLoading(false);
 
         const message = mime ? mime : 'Unknown';
-        await ipcRenderer.invoke('mime-error', message);
+        await ipcRenderer.invoke(
+          'open-dialog',
+          `Invalid Format: ${message}`,
+          'error'
+        );
 
         return;
       }

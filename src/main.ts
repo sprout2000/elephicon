@@ -47,43 +47,24 @@ const createWindow = (): void => {
     },
   });
 
-  ipcMain.handle('mime-check', (_e, filepath): string | false => {
-    const mimetype = mime.lookup(filepath);
-    return mimetype;
+  ipcMain.handle('platform', () => {
+    return process.platform === 'darwin';
   });
 
-  ipcMain.handle('mime-error', async (_e, arg) => {
-    await dialog.showMessageBox(win, {
-      type: 'error',
-      title: 'ERROR',
-      message: 'Error!',
-      detail: `Invalid format: ${arg}`,
-    });
+  ipcMain.handle('mime-check', (_e, filepath): string | false => {
+    return mime.lookup(filepath);
   });
 
   ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath));
   ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath));
 
-  ipcMain.handle('error', async (_e, arg) => {
+  ipcMain.handle('open-dialog', async (_e, arg, type) => {
     await dialog.showMessageBox(win, {
-      type: 'error',
-      title: 'ERROR',
-      message: 'Error!',
-      detail: `Something went wrong: ${arg}`,
+      type: type,
+      title: type === 'error' ? 'ERROR' : 'Completed',
+      message: type === 'error' ? 'Error!' : 'Successfully Completed!',
+      detail: arg,
     });
-  });
-
-  ipcMain.handle('success', async (_e, arg) => {
-    await dialog.showMessageBox(win, {
-      type: 'info',
-      title: 'Completed',
-      message: 'Successfully Completed!',
-      detail: `created: \n${arg}`,
-    });
-  });
-
-  ipcMain.handle('platform', () => {
-    return process.platform === 'darwin';
   });
 
   win.once('ready-to-show', () => win.show());
