@@ -29,7 +29,7 @@
   "main": "dist/main.js",
   "scripts": {
     "start": "run-s clean build serve",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist release",
     "build": "cross-env NODE_ENV=\"development\" webpack --progress",
     "build:prod": "cross-env NODE_ENV=\"production\" webpack --progress",
     "serve": "electron .",
