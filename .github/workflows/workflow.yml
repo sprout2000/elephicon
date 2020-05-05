@@ -5,6 +5,7 @@ on:
       - 'v*'
 jobs:
   build:
+    name: Release
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@master
