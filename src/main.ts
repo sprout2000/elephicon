@@ -14,6 +14,14 @@ console.log = log.log;
 autoUpdater.logger = log;
 log.info('App starting...');
 
+process.once('uncaughtException', (err) => {
+  log.error('electron:uncaughtException');
+  log.error(err.name);
+  log.error(err.message);
+  log.error(err.stack);
+  app.exit();
+});
+
 const getResourceDirectory = (): string => {
   return process.env.NODE_ENV === 'development'
     ? path.join(process.cwd(), 'dist')
@@ -111,11 +119,3 @@ app.setAboutPanelOptions({
 
 app.allowRendererProcessReuse = true;
 app.once('window-all-closed', () => app.quit());
-
-process.once('uncaughtException', (err) => {
-  log.error('electron:uncaughtException');
-  log.error(err.name);
-  log.error(err.message);
-  log.error(err.stack);
-  app.exit();
-});
