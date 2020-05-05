@@ -46,14 +46,8 @@ const createWindow = (): void => {
     },
   });
 
-  ipcMain.handle('platform', () => {
-    return process.platform === 'darwin';
-  });
-
-  ipcMain.handle('mime-check', (_e, filepath): string | false => {
-    return mime.lookup(filepath);
-  });
-
+  ipcMain.handle('platform', () => process.platform === 'darwin');
+  ipcMain.handle('mime-check', (_e, filepath) => mime.lookup(filepath));
   ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath));
   ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath));
 
