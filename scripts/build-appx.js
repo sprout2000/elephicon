@@ -19,7 +19,7 @@ builder
       },
       appx: {
         applicationId: process.env.APPLICATION_ID,
-        backgroundColor: '#323232',
+        backgroundColor: '#6c757d',
         displayName: 'GenICNS',
         identityName: process.env.IDENTITY_NAME,
         publisher: process.env.PUBLISHER,
