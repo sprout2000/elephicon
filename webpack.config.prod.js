@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebapckPlugin = require('copy-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -105,6 +106,14 @@ const renderer = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    new CopyWebapckPlugin([
+      {
+        from: 'assets/appx',
+        to: './appx',
+        toType: 'dir',
+        ignore: ['.DS_Store'],
+      },
+    ]),
   ],
   performance: {
     hints: false,
