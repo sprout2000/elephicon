@@ -32,7 +32,8 @@ builder
           CFBundleDocumentTypes: [
             {
               CFBundleTypeName: 'ImageFile',
-              CFBundleTypeRole: 'None',
+              CFBundleTypeRole: 'Viewer',
+              LSItemContentTypes: ['public.png'],
               LSHandlerRank: 'Default',
             },
           ],

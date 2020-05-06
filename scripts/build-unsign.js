@@ -16,6 +16,12 @@ builder
         icon: 'assets/icon.ico',
         target: ['nsis'],
         publisherName: 'sprout2000',
+        fileAssociations: [
+          {
+            ext: ['png'],
+            description: 'Image files',
+          },
+        ],
       },
       nsis: {
         oneClick: false,
@@ -37,7 +43,8 @@ builder
           CFBundleDocumentTypes: [
             {
               CFBundleTypeName: 'ImageFile',
-              CFBundleTypeRole: 'None',
+              CFBundleTypeRole: 'Viewer',
+              LSItemContentTypes: ['public.png'],
               LSHandlerRank: 'Default',
             },
           ],

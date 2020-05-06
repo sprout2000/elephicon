@@ -16,6 +16,12 @@ builder
       win: {
         icon: 'assets/icon.ico',
         target: ['appx'],
+        fileAssociations: [
+          {
+            ext: ['png'],
+            description: 'Image files',
+          },
+        ],
       },
       appx: {
         applicationId: 'sprout2000.GenICNS',
