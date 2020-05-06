@@ -6,7 +6,7 @@ GenICNS (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) 
 [![GitHub license](https://img.shields.io/github/license/sprout2000/gen-icns)](https://github.com/sprout2000/gen-icns/blob/master/LICENSE.md)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/gen-icns)
 
-<img width="512" alt="2020-05-02 14 56 28" src="https://user-images.githubusercontent.com/52094761/80856508-92397700-8c85-11ea-9536-63387c6c9ab6.png">
+<!-- <img width="512" alt="2020-05-02 14 56 28" src="https://user-images.githubusercontent.com/52094761/80856508-92397700-8c85-11ea-9536-63387c6c9ab6.png"> -->
 
 
 ## Usage
