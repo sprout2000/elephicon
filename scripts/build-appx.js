@@ -18,7 +18,7 @@ builder
         target: ['appx'],
       },
       appx: {
-        applicationId: process.env.APPLICATION_ID,
+        applicationId: 'sprout2000.GenICNS',
         backgroundColor: '#6c757d',
         displayName: 'GenICNS',
         identityName: process.env.IDENTITY_NAME,
