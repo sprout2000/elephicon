@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 
 import Switch from 'react-switch';
@@ -46,33 +46,36 @@ const App = (): JSX.Element => {
     }
   };
 
-  const convert = async (filepath: string): Promise<void> => {
-    const mime: string | false = await ipcRenderer.invoke(
-      'mime-check',
-      filepath
-    );
-
-    if (!mime || !mime.match(/png/)) {
-      setLoading(false);
-
-      const message = mime ? mime : 'Unknown';
-      await ipcRenderer.invoke(
-        'open-dialog',
-        `Invalid Format: ${message}`,
-        'error'
+  const convert = useCallback(
+    async (filepath: string): Promise<void> => {
+      const mime: string | false = await ipcRenderer.invoke(
+        'mime-check',
+        filepath
       );
 
-      return;
-    }
+      if (!mime || !mime.match(/png/)) {
+        setLoading(false);
 
-    if (checked) {
-      const result: Result = await ipcRenderer.invoke('make-icns', filepath);
-      await afterConvert(result);
-    } else {
-      const result: Result = await ipcRenderer.invoke('make-ico', filepath);
-      await afterConvert(result);
-    }
-  };
+        const message = mime ? mime : 'Unknown';
+        await ipcRenderer.invoke(
+          'open-dialog',
+          `Invalid Format: ${message}`,
+          'error'
+        );
+
+        return;
+      }
+
+      if (checked) {
+        const result: Result = await ipcRenderer.invoke('make-icns', filepath);
+        await afterConvert(result);
+      } else {
+        const result: Result = await ipcRenderer.invoke('make-ico', filepath);
+        await afterConvert(result);
+      }
+    },
+    [checked]
+  );
 
   const onClick = (): void => {
     setChecked(!checked);
@@ -108,6 +111,22 @@ const App = (): JSX.Element => {
       convert(file.path);
     }
   };
+
+  const onStart = useCallback(
+    (_e: Event, filepath: string): void => {
+      setLoading(true);
+      convert(filepath);
+    },
+    [convert]
+  );
+
+  useEffect(() => {
+    ipcRenderer.on('dropped', onStart);
+
+    return (): void => {
+      ipcRenderer.removeAllListeners('dropped');
+    };
+  }, [onStart]);
 
   return (
     <div
