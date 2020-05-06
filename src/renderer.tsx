@@ -24,7 +24,7 @@ const App = (): JSX.Element => {
     return ipcRenderer.invoke('platform');
   };
 
-  const afterDrop = async (result: Result): Promise<void> => {
+  const afterConvert = async (result: Result): Promise<void> => {
     if (result.type === 'failed') {
       setLoading(false);
       await ipcRenderer.invoke(
@@ -43,6 +43,34 @@ const App = (): JSX.Element => {
       );
 
       return;
+    }
+  };
+
+  const convert = async (filepath: string): Promise<void> => {
+    const mime: string | false = await ipcRenderer.invoke(
+      'mime-check',
+      filepath
+    );
+
+    if (!mime || !mime.match(/png/)) {
+      setLoading(false);
+
+      const message = mime ? mime : 'Unknown';
+      await ipcRenderer.invoke(
+        'open-dialog',
+        `Invalid Format: ${message}`,
+        'error'
+      );
+
+      return;
+    }
+
+    if (checked) {
+      const result: Result = await ipcRenderer.invoke('make-icns', filepath);
+      await afterConvert(result);
+    } else {
+      const result: Result = await ipcRenderer.invoke('make-ico', filepath);
+      await afterConvert(result);
     }
   };
 
@@ -69,40 +97,15 @@ const App = (): JSX.Element => {
     setOnDrag(false);
   };
 
-  const onDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
+  const onDrop = (e: React.DragEvent<HTMLDivElement>): void => {
     preventDefault(e);
     setOnDrag(false);
 
     if (e.dataTransfer) {
       setLoading(true);
-
       const file = e.dataTransfer.files[0];
 
-      const mime: string | false = await ipcRenderer.invoke(
-        'mime-check',
-        file.path
-      );
-
-      if (!mime || !mime.match(/png/)) {
-        setLoading(false);
-
-        const message = mime ? mime : 'Unknown';
-        await ipcRenderer.invoke(
-          'open-dialog',
-          `Invalid Format: ${message}`,
-          'error'
-        );
-
-        return;
-      }
-
-      if (checked) {
-        const result: Result = await ipcRenderer.invoke('make-icns', file.path);
-        await afterDrop(result);
-      } else {
-        const result: Result = await ipcRenderer.invoke('make-ico', file.path);
-        await afterDrop(result);
-      }
+      convert(file.path);
     }
   };
 
