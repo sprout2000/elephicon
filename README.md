@@ -10,9 +10,9 @@ GenICNS (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) 
 
 ## Usage
 
-The ideal input is a 24 bit PNG with an alpha channel (RGBA) with 1024×1024 pixels but any other dimensions and most other PNG formats do also work. 
+The ideal input is a 24 bit *PNG* with an alpha channel (RGBA) with *1024×1024* pixels but any other dimensions and most other PNG formats do also work. 
 
-If you only need to create ICO files 256×256 pixels are sufficient. 
+If you only need to create ICO files *256×256* pixels are sufficient. 
 
 ![result4](https://user-images.githubusercontent.com/52094761/81348809-c5528f00-90f9-11ea-88e5-751139d32ea9.gif)
 
