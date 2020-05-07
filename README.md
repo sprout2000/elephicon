@@ -6,8 +6,7 @@ GenICNS (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) 
 [![GitHub license](https://img.shields.io/github/license/sprout2000/gen-icns)](https://github.com/sprout2000/gen-icns/blob/master/LICENSE.md)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/gen-icns)
 
-<!-- <img width="512" alt="2020-05-02 14 56 28" src="https://user-images.githubusercontent.com/52094761/80856508-92397700-8c85-11ea-9536-63387c6c9ab6.png"> -->
-<img width="512" alt="2020-05-06 161535" src="https://user-images.githubusercontent.com/52094761/81147308-fbd2c180-8fb4-11ea-8ac0-76620e6ce2fb.png">
+<img width="512" alt="2020-05-02 14 56 28" src="https://user-images.githubusercontent.com/52094761/80856508-92397700-8c85-11ea-9536-63387c6c9ab6.png">
 
 ## Usage
 
@@ -16,6 +15,35 @@ The ideal input is a 24 bit PNG with an alpha channel (RGBA) with 1024×1024 pix
 If you only need to create ICO files 256×256 pixels are sufficient. 
 
 *Note: Both of the outputs (ICO, ICNS) will be created with multiple sizes embedded.*
+
+## Build & Install
+
+1. Clone this repo:
+
+```
+$ git clone git@github.com:sprout2000/gen-icns.git
+```
+
+2. Install dependencies...
+
+```
+$ cd gen-icns
+$ yarn install
+```
+
+3. Build installers, and you will find the installer in `release` directory.
+
+```
+$ yarn package
+```
+
+*Note that you will need to have [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [Yarn](https://yarnpkg.com/) installed.*
+
+
+## Download
+
+You can download the latest version of GenICNS from the releases page here:  
+[https://github.com/sprout2000/gen-icns/releases](https://github.com/sprout2000/gen-icns/releases)
 
 ## Security
 
@@ -26,11 +54,6 @@ enableRemoteModule | `false`
 contextIsolation | `true`
 safeDialogs | `true`
 sandbox | `true`
-
-## Download
-
-**You can download the latest version of GenICNS from the releases page here:**  
-[https://github.com/sprout2000/gen-icns/releases](https://github.com/sprout2000/gen-icns/releases)
 
 ## License
 
