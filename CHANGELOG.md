@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://github.com/sprout2000/gen-icns/compare/v0.0.11...v0.0.12) (2020-05-07)
+
+
+### Features
+
+* create onStart() and useEffect() ([a6ac57a](https://github.com/sprout2000/gen-icns/commit/a6ac57a4c3408cfd883e1a26c88743e372fe343a))
+* extended preload ([5c356be](https://github.com/sprout2000/gen-icns/commit/5c356be0cb26d98c4b8a73e02a7d92dfc8f7ac24))
+* use singleInstanceLock on win32 ([c19ef9d](https://github.com/sprout2000/gen-icns/commit/c19ef9db7885f77a08887aa776737f8defb7a5bb))
+
 ### [0.0.11](https://github.com/sprout2000/gen-icns/compare/v0.0.10...v0.0.11) (2020-05-05)
 
 
