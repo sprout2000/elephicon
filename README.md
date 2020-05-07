@@ -33,14 +33,13 @@ $ cd gen-icns
 $ yarn install
 ```
 
-3. Build installers, and you will find the installer in `release` directory.
+3. Build installers and you will find the installer in `release` directory.
 
 ```
 $ yarn package
 ```
 
 *Note that you will need to have [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [Yarn](https://yarnpkg.com/) installed.*
-
 
 ## Download
 
