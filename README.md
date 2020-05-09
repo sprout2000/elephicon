@@ -16,7 +16,25 @@ If you only need to create ICO files *256×256* pixels are sufficient.
 
 ![result4](https://user-images.githubusercontent.com/52094761/81348809-c5528f00-90f9-11ea-88e5-751139d32ea9.gif)
 
-*Note: Both of the outputs (ICO, ICNS) will be created with multiple sizes embedded.*
+## Embedded Sizes
+
+| Dimension | ICO | ICNS |
+| :--- | :---: | :---: |
+| 16x16 | ✅ | ✅ |
+| 16x16@2x | | ✅ |
+| 24x24 | ✅ | |
+| 32x32 | ✅ | ✅ |
+| 32x32@2x | | ✅ |
+| 48x48 | ✅ | |
+| 64x64 | ✅ | |
+| 72x72 | ✅ | |
+| 96x96 | ✅ | |
+| 128x128 | ✅ | ✅ |
+| 128x128@2x | | ✅ |
+| 256x256 | ✅ | ✅ |
+| 256x256@2x | | ✅ |
+| 512x512 | | ✅ |
+| 512x512@2x | | ✅ |
 
 ## Build & Install
 
