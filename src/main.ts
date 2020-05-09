@@ -1,7 +1,6 @@
 import { BrowserWindow, app, ipcMain, dialog, Menu } from 'electron';
 import loadDevtool from 'electron-load-devtool';
 import Store from 'electron-store';
-import stateKeeper from 'electron-window-state';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
@@ -10,6 +9,12 @@ import mime from 'mime-types';
 
 import { mkico, mkicns } from './mkicons';
 import template from './menu';
+
+interface TypedStore {
+  state: boolean;
+  x: number | undefined;
+  y: number | undefined;
+}
 
 console.log = log.log;
 autoUpdater.logger = log;
@@ -23,9 +28,11 @@ process.once('uncaughtException', (err) => {
   app.exit();
 });
 
-const store = new Store({
+const store = new Store<TypedStore>({
   defaults: {
     state: true,
+    x: undefined,
+    y: undefined,
   },
 });
 
@@ -65,11 +72,9 @@ if (!gotTheLock && win32) {
   });
 
   app.once('ready', () => {
-    const windowState = stateKeeper({});
-
     win = new BrowserWindow({
-      x: windowState.x,
-      y: windowState.y,
+      x: store.get('x'),
+      y: store.get('y'),
       width: 400,
       height: 300,
       backgroundColor: '#2B2E3B',
@@ -170,13 +175,17 @@ if (!gotTheLock && win32) {
 
     win.once('close', () => {
       store.set('state', config);
+
+      if (win) {
+        const pos = win.getPosition();
+        store.set('x', pos[0]);
+        store.set('y', pos[1]);
+      }
     });
 
     win.once('closed', () => {
       win = null;
     });
-
-    windowState.manage(win);
   });
 }
 
