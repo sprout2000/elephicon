@@ -23,8 +23,7 @@ If you only need to create ICO files *256×256* pixels are sufficient.
 ```
 $ git clone git@github.com:sprout2000/gen-icns.git
 $ cd gen-icns
-$ yarn install
-$ yarn package
+$ yarn install && yarn package
 ```
 
 You will find the installer in `release` directory.
