@@ -20,24 +20,14 @@ If you only need to create ICO files *256×256* pixels are sufficient.
 
 ## Build & Install
 
-1. Clone this repo:
-
 ```
 $ git clone git@github.com:sprout2000/gen-icns.git
-```
-
-2. Install dependencies...
-
-```
 $ cd gen-icns
 $ yarn install
-```
-
-3. Build installers and you will find the installer in `release` directory.
-
-```
 $ yarn package
 ```
+
+You will find the installer in `release` directory.
 
 *Note that you will need to have [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [Yarn](https://yarnpkg.com/) installed.*
 
