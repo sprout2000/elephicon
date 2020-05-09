@@ -116,15 +116,15 @@ if (!gotTheLock && win32) {
     });
 
     win.once('ready-to-show', () => {
-      if (win) {
-        const state = store.get('state');
-        win.webContents.send('set-state', store.get('state', state));
-
-        win.show();
-      }
+      if (win) win.show();
     });
 
     win.webContents.once('did-finish-load', () => {
+      if (win) {
+        const state = store.get('state');
+        win.webContents.send('set-state', store.get('state', state));
+      }
+
       if (win && win32 && process.argv.length >= 2) {
         win.webContents.send('dropped', process.argv[process.argv.length - 1]);
       }
