@@ -26,7 +26,7 @@ const gotTheLock = app.requestSingleInstanceLock();
 const win32 = process.platform === 'win32';
 const darwin = process.platform === 'darwin';
 
-let win: BrowserWindow | null;
+let win: BrowserWindow | null = null;
 let filepath: string | null = null;
 
 const getResourceDirectory = (): string => {
@@ -102,6 +102,17 @@ if (!gotTheLock && win32) {
       if (win) win.show();
     });
 
+    win.webContents.once('did-finish-load', () => {
+      if (win && win32 && process.argv.length >= 2) {
+        win.webContents.send('dropped', process.argv[process.argv.length - 1]);
+      }
+
+      if (win && darwin && filepath) {
+        win.webContents.send('dropped', filepath);
+        filepath = null;
+      }
+    });
+
     win.loadFile('dist/index.html');
     if (process.env.NODE_ENV === 'development') {
       win.webContents.openDevTools({ mode: 'detach' });
@@ -114,17 +125,6 @@ if (!gotTheLock && win32) {
     autoUpdater.checkForUpdatesAndNotify();
     autoUpdater.once('error', (_e, err) => {
       log.info(`Error in auto-updater: ${err}`);
-    });
-
-    win.webContents.once('did-finish-load', () => {
-      if (win && win32 && process.argv.length >= 2) {
-        win.webContents.send('dropped', process.argv[process.argv.length - 1]);
-      }
-
-      if (win && darwin && filepath) {
-        win.webContents.send('dropped', filepath);
-        filepath = null;
-      }
     });
 
     autoUpdater.once('update-downloaded', async () => {
@@ -149,6 +149,10 @@ if (!gotTheLock && win32) {
           })
           .catch((err) => log.info(`Error in showMessageBox: ${err}`));
       }
+    });
+
+    win.once('closed', () => {
+      win = null;
     });
 
     windowState.manage(win);
