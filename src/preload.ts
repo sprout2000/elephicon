@@ -5,11 +5,20 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   invoke: (channel: string, ...args: any[]): Promise<any> => {
     return ipcRenderer.invoke(channel, ...args);
   },
+  send: (channel: string, ...args: any[]): void => {
+    ipcRenderer.send(channel, ...args);
+  },
   on: (
     channel: string,
     listener: (event: Electron.IpcRendererEvent, ...args: any[]) => void
   ) => {
     ipcRenderer.on(channel, listener);
+  },
+  once: (
+    channel: string,
+    listener: (event: Electron.IpcRendererEvent, ...args: any[]) => void
+  ) => {
+    ipcRenderer.once(channel, listener);
   },
   removeAllListeners: (channel: string) => {
     ipcRenderer.removeAllListeners(channel);

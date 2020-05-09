@@ -28,10 +28,10 @@
   "main": "dist/main.js",
   "scripts": {
     "start": "run-s clean build serve",
+    "serve": "electron .",
     "clean": "rimraf dist release",
     "build": "cross-env NODE_ENV=\"development\" webpack --progress",
     "build:prod": "cross-env NODE_ENV=\"production\" webpack --progress",
-    "serve": "electron .",
     "release": "node scripts/build.js",
     "prepackage": "run-s clean build:prod",
     "package": "node scripts/build-unsign.js",
@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "electron-log": "^4.1.2",
+    "electron-store": "^5.1.1",
     "electron-updater": "^4.3.1",
     "electron-window-state": "^5.0.3",
     "mime-types": "^2.1.27",

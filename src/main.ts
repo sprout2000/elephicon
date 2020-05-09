@@ -1,5 +1,6 @@
 import { BrowserWindow, app, ipcMain, dialog, Menu } from 'electron';
 import loadDevtool from 'electron-load-devtool';
+import Store from 'electron-store';
 import stateKeeper from 'electron-window-state';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
@@ -22,12 +23,19 @@ process.once('uncaughtException', (err) => {
   app.exit();
 });
 
+const store = new Store({
+  defaults: {
+    state: true,
+  },
+});
+
 const gotTheLock = app.requestSingleInstanceLock();
 const win32 = process.platform === 'win32';
 const darwin = process.platform === 'darwin';
 
 let win: BrowserWindow | null = null;
 let filepath: string | null = null;
+let config = false;
 
 const getResourceDirectory = (): string => {
   return process.env.NODE_ENV === 'development'
@@ -98,8 +106,17 @@ if (!gotTheLock && win32) {
       }
     });
 
+    ipcMain.on('change-state', (_e, arg) => {
+      config = arg;
+    });
+
     win.once('ready-to-show', () => {
-      if (win) win.show();
+      if (win) {
+        const state = store.get('state');
+        win.webContents.send('set-state', store.get('state', state));
+
+        win.show();
+      }
     });
 
     win.webContents.once('did-finish-load', () => {
@@ -149,6 +166,10 @@ if (!gotTheLock && win32) {
           })
           .catch((err) => log.info(`Error in showMessageBox: ${err}`));
       }
+    });
+
+    win.once('close', () => {
+      store.set('state', config);
     });
 
     win.once('closed', () => {

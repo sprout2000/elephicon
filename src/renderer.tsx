@@ -128,6 +128,21 @@ const App = (): JSX.Element => {
     };
   }, [onStart]);
 
+  useEffect(() => {
+    ipcRenderer.send('change-state', checked);
+  }, [checked]);
+
+  useEffect(() => {
+    ipcRenderer.once('set-state', (_e, arg) => {
+      console.log(`Message received: ${arg}`);
+      setChecked(arg);
+    });
+
+    return (): void => {
+      ipcRenderer.removeAllListeners('set-state');
+    };
+  }, []);
+
   return (
     <div
       className="container"
