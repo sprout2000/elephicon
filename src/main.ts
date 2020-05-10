@@ -80,7 +80,7 @@ if (!gotTheLock && win32) {
       x: store.get('x'),
       y: store.get('y'),
       width: 400,
-      height: 300,
+      height: darwin ? 300 : 320,
       backgroundColor: '#2B2E3B',
       title: 'GenICNS',
       show: false,
