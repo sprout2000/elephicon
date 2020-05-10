@@ -27,7 +27,7 @@ export const mkico = async (
   const basename = path.basename(filepath, path.extname(filepath));
 
   const num = store.get('quality', 1);
-  const bmp = store.get('bmp');
+  const bmp = store.get('bmp', true);
 
   const result: Result = await fs.promises
     .readFile(filepath)
