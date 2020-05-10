@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/sprout2000/gen-icns/compare/v0.0.13...v0.1.0) (2020-05-10)
+
+
+### Features
+
+* create Preferences menu ([6804d94](https://github.com/sprout2000/gen-icns/commit/6804d94caed88a00a4f4421113fb0a31355326eb))
+* reserve previous state ([3fc85b8](https://github.com/sprout2000/gen-icns/commit/3fc85b8fa0e218f9e3cc774b29aa93abcf87a943))
+* use store instead of window-state ([dea475f](https://github.com/sprout2000/gen-icns/commit/dea475fcae45bfe86c886a92f1ecb334bf96c95c))
+
 ### [0.0.13](https://github.com/sprout2000/gen-icns/compare/v0.0.12...v0.0.13) (2020-05-09)
 
 ### [0.0.12](https://github.com/sprout2000/gen-icns/compare/v0.0.11...v0.0.12) (2020-05-07)
