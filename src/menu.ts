@@ -31,7 +31,7 @@ const createMenu = (store: Store): Menu => {
             checked: store.get('quality') === 0,
           },
           {
-            label: 'Mid',
+            label: 'Medium',
             type: 'radio',
             id: 'mid',
             click: (): void => store.set('quality', 1),
