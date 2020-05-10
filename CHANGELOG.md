@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/sprout2000/gen-icns/compare/v0.1.0...v0.1.1) (2020-05-10)
+
+
+### Bug Fixes
+
+* error on development mode of win32 ([b922a38](https://github.com/sprout2000/gen-icns/commit/b922a38b992fb9bbfdd51afad43b749c61d5aba3))
+
 ## [0.1.0](https://github.com/sprout2000/gen-icns/compare/v0.0.13...v0.1.0) (2020-05-10)
 
 
