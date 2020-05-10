@@ -8,12 +8,14 @@ import path from 'path';
 import mime from 'mime-types';
 
 import { mkico, mkicns } from './mkicons';
-import template from './menu';
+import createMenu from './menu';
 
 interface TypedStore {
   state: boolean;
   x: number | undefined;
   y: number | undefined;
+  quality: number;
+  bmp: boolean;
 }
 
 console.log = log.log;
@@ -33,6 +35,8 @@ const store = new Store<TypedStore>({
     state: true,
     x: undefined,
     y: undefined,
+    quality: 1,
+    bmp: true,
   },
 });
 
@@ -97,8 +101,9 @@ if (!gotTheLock && win32) {
 
     ipcMain.handle('platform', () => process.platform === 'darwin');
     ipcMain.handle('mime-check', (_e, filepath) => mime.lookup(filepath));
-    ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath));
-    ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath));
+
+    ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath, store));
+    ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
 
     ipcMain.handle('open-dialog', async (_e, arg, type) => {
       if (win) {
@@ -141,7 +146,7 @@ if (!gotTheLock && win32) {
       loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS);
     }
 
-    const menu = Menu.buildFromTemplate(template);
+    const menu = createMenu(store);
     Menu.setApplicationMenu(menu);
 
     autoUpdater.checkForUpdatesAndNotify();

@@ -1,46 +1,118 @@
-import { app, MenuItemConstructorOptions, shell } from 'electron';
+import { app, MenuItemConstructorOptions, shell, Menu } from 'electron';
+import Store from 'electron-store';
 
-const darwin = process.platform === 'darwin';
+const createMenu = (store: Store): Menu => {
+  const darwin = process.platform === 'darwin';
 
-const template: MenuItemConstructorOptions[] = [{ role: 'fileMenu' }];
+  const template: MenuItemConstructorOptions[] = [{ role: 'fileMenu' }];
 
-if (!darwin) {
-  template.push({
-    label: 'Help',
-    role: 'help',
+  const preferences: MenuItemConstructorOptions = {
+    label: 'Preferences(&P)',
     submenu: [
       {
-        label: 'Support URL...',
-        click: async (): Promise<void> =>
-          await shell.openExternal(
-            'https://github.com/sprout2000/gen-icns#readme'
-          ),
+        label: 'Quality',
+        submenu: [
+          {
+            label: 'Low',
+            type: 'radio',
+            id: 'low',
+            click: (): void => store.set('quality', 0),
+            checked: store.get('quality') === 0,
+          },
+          {
+            label: 'Mid',
+            type: 'radio',
+            id: 'mid',
+            click: (): void => store.set('quality', 1),
+            checked: store.get('quality') === 1,
+          },
+          {
+            label: 'High',
+            type: 'radio',
+            id: 'high',
+            click: (): void => store.set('quality', 2),
+            checked: store.get('quality') === 2,
+          },
+        ],
       },
-      { type: 'separator' },
       {
-        label: 'About',
-        accelerator: 'Ctrl+I',
-        click: (): void => app.showAboutPanel(),
+        label: 'ICO',
+        submenu: [
+          {
+            label: 'Use BMP format for the smaller icon sizes',
+            type: 'radio',
+            id: 'bmp',
+            click: (): void => store.set('bmp', true),
+            checked: store.get('bmp'),
+          },
+          {
+            label: 'Use PNG for each icon in the created ICO file',
+            type: 'radio',
+            id: 'png',
+            click: (): void => store.set('bmp', false),
+            checked: !store.get('bmp'),
+          },
+        ],
       },
     ],
-  });
-}
+  };
 
-if (darwin) {
-  template.unshift({ role: 'appMenu' });
-  template.push({
-    label: 'Help',
-    role: 'help',
-    submenu: [
-      {
-        label: 'Support URL...',
-        click: async (): Promise<void> =>
-          await shell.openExternal(
-            'https://github.com/sprout2000/gen-icns#readme'
-          ),
-      },
-    ],
-  });
-}
+  if (!darwin) {
+    template.push(preferences, {
+      label: 'Help',
+      role: 'help',
+      submenu: [
+        {
+          label: 'Support URL...',
+          click: async (): Promise<void> =>
+            await shell.openExternal(
+              'https://github.com/sprout2000/gen-icns#readme'
+            ),
+        },
+        { type: 'separator' },
+        {
+          label: 'About',
+          accelerator: 'Ctrl+I',
+          click: (): void => app.showAboutPanel(),
+        },
+      ],
+    });
+  }
 
-export default template;
+  if (darwin) {
+    template.unshift({
+      label: app.name,
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        preferences,
+        { type: 'separator' },
+        { role: 'services' },
+        { role: 'hide' },
+        { role: 'hideOthers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { role: 'quit' },
+      ],
+    });
+    template.push({
+      label: 'Help',
+      role: 'help',
+      submenu: [
+        {
+          label: 'Support URL...',
+          click: async (): Promise<void> =>
+            await shell.openExternal(
+              'https://github.com/sprout2000/gen-icns#readme'
+            ),
+        },
+      ],
+    });
+  }
+
+  const menu = Menu.buildFromTemplate(template);
+
+  return menu;
+};
+
+export default createMenu;

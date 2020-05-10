@@ -1,22 +1,42 @@
 import fs from 'fs';
 import path from 'path';
 
-import { setLogger, createICO, createICNS, BEZIER } from 'png2icons';
+import Store from 'electron-store';
+
+import {
+  setLogger,
+  createICO,
+  createICNS,
+  NEAREST_NEIGHBOR,
+  BICUBIC,
+  BEZIER,
+} from 'png2icons';
 
 interface Result {
   type: string;
   msg: string;
 }
 
-export const mkico = async (filepath: string): Promise<Result> => {
+const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
+
+export const mkico = async (
+  filepath: string,
+  store: Store
+): Promise<Result> => {
   const dirname = path.dirname(filepath);
   const basename = path.basename(filepath, path.extname(filepath));
+
+  const num = store.get('quality', 1);
+  const bmp = store.get('bmp');
 
   const result: Result = await fs.promises
     .readFile(filepath)
     .then(async (buffer) => {
       setLogger(console.log);
-      const ico = createICO(buffer, BEZIER, 0, false, true);
+      console.log(`Quality: ${num}`);
+      console.log(`BMP: ${bmp}`);
+
+      const ico = createICO(buffer, qualities[num], 0, !bmp, bmp);
 
       await fs.promises
         .writeFile(path.join(dirname, `${basename}.ico`), ico)
@@ -38,15 +58,22 @@ export const mkico = async (filepath: string): Promise<Result> => {
   return result;
 };
 
-export const mkicns = async (filepath: string): Promise<Result> => {
+export const mkicns = async (
+  filepath: string,
+  store: Store
+): Promise<Result> => {
   const dirname = path.dirname(filepath);
   const basename = path.basename(filepath, path.extname(filepath));
+
+  const num = store.get('quality', 1);
 
   const result: Result = await fs.promises
     .readFile(filepath)
     .then(async (buffer) => {
       setLogger(console.log);
-      const icns = createICNS(buffer, BEZIER, 0);
+      console.log(`Quality: ${num}`);
+
+      const icns = createICNS(buffer, qualities[num], 0);
 
       await fs.promises
         .writeFile(path.join(dirname, `${basename}.icns`), icns)
