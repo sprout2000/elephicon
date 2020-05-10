@@ -100,7 +100,6 @@ if (!gotTheLock && win32) {
 
     ipcMain.handle('platform', () => process.platform === 'darwin');
     ipcMain.handle('mime-check', (_e, filepath) => mime.lookup(filepath));
-
     ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath, store));
     ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
 
