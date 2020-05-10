@@ -7,6 +7,7 @@ import {
   setLogger,
   createICO,
   createICNS,
+  clearCache,
   NEAREST_NEIGHBOR,
   BICUBIC,
   BEZIER,
@@ -53,6 +54,7 @@ export const mkico = async (
         });
     })
     .then(() => {
+      clearCache();
       console.log('Successfully Completed!');
 
       return { type: 'success', msg: `${dirname}${path.sep}${basename}.ico` };
@@ -90,6 +92,7 @@ export const mkicns = async (
         });
     })
     .then(() => {
+      clearCache();
       console.log('Successfully Completed!');
 
       return { type: 'success', msg: `${dirname}${path.sep}${basename}.icns` };
