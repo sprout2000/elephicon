@@ -32,7 +32,7 @@ process.once('uncaughtException', (err) => {
 
 const store = new Store<TypedStore>({
   defaults: {
-    state: true,
+    state: false,
     x: undefined,
     y: undefined,
     quality: 1,
@@ -124,8 +124,8 @@ if (!gotTheLock && win32) {
 
     win.webContents.once('did-finish-load', () => {
       if (win) {
-        const state = store.get('state');
-        win.webContents.send('set-state', store.get('state', state));
+        const state = store.get('state', false);
+        win.webContents.send('set-state', state);
       }
 
       if (
