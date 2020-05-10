@@ -12,6 +12,14 @@ import {
   BEZIER,
 } from 'png2icons';
 
+interface TypedStore {
+  state: boolean;
+  x: number | undefined;
+  y: number | undefined;
+  quality: number;
+  bmp: boolean;
+}
+
 interface Result {
   type: string;
   msg: string;
@@ -21,7 +29,7 @@ const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 
 export const mkico = async (
   filepath: string,
-  store: Store
+  store: Store<TypedStore>
 ): Promise<Result> => {
   const dirname = path.dirname(filepath);
   const basename = path.basename(filepath, path.extname(filepath));
@@ -60,7 +68,7 @@ export const mkico = async (
 
 export const mkicns = async (
   filepath: string,
-  store: Store
+  store: Store<TypedStore>
 ): Promise<Result> => {
   const dirname = path.dirname(filepath);
   const basename = path.basename(filepath, path.extname(filepath));
