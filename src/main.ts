@@ -128,7 +128,12 @@ if (!gotTheLock && win32) {
         win.webContents.send('set-state', store.get('state', state));
       }
 
-      if (win && win32 && process.argv.length >= 2) {
+      if (
+        win &&
+        win32 &&
+        process.argv.length >= 2 &&
+        process.env.NODE_ENV !== 'development'
+      ) {
         win.webContents.send('dropped', process.argv[process.argv.length - 1]);
       }
 
@@ -147,7 +152,7 @@ if (!gotTheLock && win32) {
     const menu = createMenu(store);
     Menu.setApplicationMenu(menu);
 
-    autoUpdater.checkForUpdatesAndNotify();
+    if (darwin) autoUpdater.checkForUpdatesAndNotify();
     autoUpdater.once('error', (_e, err) => {
       log.info(`Error in auto-updater: ${err}`);
     });
