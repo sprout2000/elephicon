@@ -19,7 +19,7 @@
     "png2icons"
   ],
   "engines": {
-    "node": ">=12"
+    "node": ">=10"
   },
   "os": [
     "darwin",
