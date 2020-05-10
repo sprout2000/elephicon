@@ -133,10 +133,7 @@ const App = (): JSX.Element => {
   }, [checked]);
 
   useEffect(() => {
-    ipcRenderer.once('set-state', (_e, arg) => {
-      console.log(`Message received: ${arg}`);
-      setChecked(arg);
-    });
+    ipcRenderer.once('set-state', (_e, arg) => setChecked(arg));
 
     return (): void => {
       ipcRenderer.removeAllListeners('set-state');
