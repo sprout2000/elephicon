@@ -4,10 +4,21 @@ import Store from 'electron-store';
 const createMenu = (store: Store): Menu => {
   const darwin = process.platform === 'darwin';
 
-  const template: MenuItemConstructorOptions[] = [{ role: 'fileMenu' }];
+  const template: MenuItemConstructorOptions[] = [
+    {
+      label: '&File',
+      submenu: [
+        {
+          label: darwin ? 'Close' : 'Quit',
+          accelerator: darwin ? 'Cmd+W' : 'Ctrl+Q',
+          role: darwin ? 'close' : 'quit',
+        },
+      ],
+    },
+  ];
 
   const preferences: MenuItemConstructorOptions = {
-    label: 'Preferences(&P)',
+    label: '&Preferences',
     submenu: [
       {
         label: 'Quality',
@@ -59,7 +70,7 @@ const createMenu = (store: Store): Menu => {
 
   if (!darwin) {
     template.push(preferences, {
-      label: 'Help',
+      label: '&Help',
       role: 'help',
       submenu: [
         {
