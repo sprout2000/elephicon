@@ -88,7 +88,6 @@ if (!gotTheLock && win32) {
       maximizable: false,
       fullscreenable: false,
       titleBarStyle: 'hidden',
-      autoHideMenuBar: true,
       webPreferences: {
         enableRemoteModule: false,
         nodeIntegration: false,
