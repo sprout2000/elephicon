@@ -41,7 +41,6 @@ const store = new Store<TypedStore>({
 });
 
 const gotTheLock = app.requestSingleInstanceLock();
-const win32 = process.platform === 'win32';
 const darwin = process.platform === 'darwin';
 
 let win: BrowserWindow | null = null;
@@ -54,7 +53,7 @@ const getResourceDirectory = (): string => {
     : path.join(process.resourcesPath, 'app.asar.unpacked', 'dist');
 };
 
-if (!gotTheLock && win32) {
+if (!gotTheLock && !darwin) {
   app.exit();
 } else {
   app.on('second-instance', (_e, argv) => {
@@ -63,7 +62,7 @@ if (!gotTheLock && win32) {
       win.focus();
     }
 
-    if (win32 && argv.length >= 4) {
+    if (!darwin && argv.length >= 4) {
       if (win) win.webContents.send('dropped', argv[argv.length - 1]);
     }
   });
@@ -130,7 +129,7 @@ if (!gotTheLock && win32) {
 
       if (
         win &&
-        win32 &&
+        !darwin &&
         process.argv.length >= 2 &&
         process.env.NODE_ENV !== 'development'
       ) {
