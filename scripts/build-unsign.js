@@ -31,6 +31,11 @@ builder
         installerIcon: 'assets/installerIcon.ico',
         artifactName: '${productName}-${version}-installer.${ext}',
       },
+      linux: {
+        target: ['dir', 'zip'],
+        category: 'Development',
+        mimeTypes: ['png'],
+      },
       mac: {
         category: 'public.app-category.developer-tools',
         target: ['dmg'],
