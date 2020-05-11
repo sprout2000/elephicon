@@ -21,10 +21,6 @@
   "engines": {
     "node": ">=10"
   },
-  "os": [
-    "darwin",
-    "win32"
-  ],
   "main": "dist/main.js",
   "scripts": {
     "start": "run-s clean build serve",
