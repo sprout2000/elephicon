@@ -19,7 +19,7 @@
     "png2icons"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=10.14"
   },
   "main": "dist/main.js",
   "scripts": {
