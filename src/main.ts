@@ -42,6 +42,7 @@ const store = new Store<TypedStore>({
 
 const gotTheLock = app.requestSingleInstanceLock();
 const darwin = process.platform === 'darwin';
+const isDev = process.env.NODE_ENV === 'development';
 
 let win: BrowserWindow | null = null;
 let filepath: string | null = null;
@@ -57,13 +58,11 @@ if (!gotTheLock && !darwin) {
   app.exit();
 } else {
   app.on('second-instance', (_e, argv) => {
-    if (win) {
-      if (win.isMinimized()) win.restore();
-      win.focus();
-    }
+    if (win?.isMinimized()) win.restore();
+    win?.focus();
 
     if (!darwin && argv.length >= 4) {
-      if (win) win.webContents.send('dropped', argv[argv.length - 1]);
+      win?.webContents.send('dropped', argv[argv.length - 1]);
     }
   });
 
@@ -117,33 +116,25 @@ if (!gotTheLock && !darwin) {
       config = arg;
     });
 
-    win.once('ready-to-show', () => {
-      if (win) win.show();
-    });
+    win.once('ready-to-show', () => win?.show());
 
     win.webContents.once('did-finish-load', () => {
-      if (win) {
-        const state = store.get('state', false);
-        win.webContents.send('set-state', state);
+      const state = store.get('state', false);
+      win?.webContents.send('set-state', state);
+
+      if (!darwin && !isDev && process.argv.length >= 2) {
+        win?.webContents.send('dropped', process.argv[process.argv.length - 1]);
       }
 
-      if (
-        win &&
-        !darwin &&
-        process.argv.length >= 2 &&
-        process.env.NODE_ENV !== 'development'
-      ) {
-        win.webContents.send('dropped', process.argv[process.argv.length - 1]);
-      }
-
-      if (win && darwin && filepath) {
-        win.webContents.send('dropped', filepath);
+      if (darwin && filepath) {
+        win?.webContents.send('dropped', filepath);
         filepath = null;
       }
     });
 
     win.loadFile('dist/index.html');
-    if (process.env.NODE_ENV === 'development') {
+
+    if (isDev) {
       win.webContents.openDevTools({ mode: 'detach' });
       loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS);
     }
@@ -152,6 +143,7 @@ if (!gotTheLock && !darwin) {
     Menu.setApplicationMenu(menu);
 
     if (darwin) autoUpdater.checkForUpdatesAndNotify();
+
     autoUpdater.once('error', (_e, err) => {
       log.info(`Error in auto-updater: ${err}`);
     });
