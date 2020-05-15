@@ -41,7 +41,7 @@ const store = new Store<TypedStore>({
 });
 
 const gotTheLock = app.requestSingleInstanceLock();
-const darwin = process.platform === 'darwin';
+const isDarwin = process.platform === 'darwin';
 const isDev = process.env.NODE_ENV === 'development';
 
 let win: BrowserWindow | null = null;
@@ -49,19 +49,19 @@ let filepath: string | null = null;
 let config = false;
 
 const getResourceDirectory = (): string => {
-  return process.env.NODE_ENV === 'development'
+  return isDev
     ? path.join(process.cwd(), 'dist')
     : path.join(process.resourcesPath, 'app.asar.unpacked', 'dist');
 };
 
-if (!gotTheLock && !darwin) {
+if (!gotTheLock && !isDarwin) {
   app.exit();
 } else {
   app.on('second-instance', (_e, argv) => {
     if (win?.isMinimized()) win.restore();
     win?.focus();
 
-    if (!darwin && argv.length >= 4) {
+    if (!isDarwin && argv.length >= 4) {
       win?.webContents.send('dropped', argv[argv.length - 1]);
     }
   });
@@ -78,7 +78,7 @@ if (!gotTheLock && !darwin) {
       x: store.get('x'),
       y: store.get('y'),
       width: 400,
-      height: darwin ? 300 : 320,
+      height: isDarwin ? 300 : 320,
       backgroundColor: '#2B2E3B',
       title: 'GenICNS',
       show: false,
@@ -122,11 +122,11 @@ if (!gotTheLock && !darwin) {
       const state = store.get('state', false);
       win?.webContents.send('set-state', state);
 
-      if (!darwin && !isDev && process.argv.length >= 2) {
+      if (!isDarwin && !isDev && process.argv.length >= 2) {
         win?.webContents.send('dropped', process.argv[process.argv.length - 1]);
       }
 
-      if (darwin && filepath) {
+      if (isDarwin && filepath) {
         win?.webContents.send('dropped', filepath);
         filepath = null;
       }
@@ -142,7 +142,7 @@ if (!gotTheLock && !darwin) {
     const menu = createMenu(store);
     Menu.setApplicationMenu(menu);
 
-    if (darwin) autoUpdater.checkForUpdatesAndNotify();
+    if (isDarwin) autoUpdater.checkForUpdatesAndNotify();
 
     autoUpdater.once('error', (_e, err) => {
       log.info(`Error in auto-updater: ${err}`);
@@ -164,9 +164,7 @@ if (!gotTheLock && !darwin) {
               'We have finished downloading the latest updates.\nDo you want to install the updates now?',
           })
           .then((result) => {
-            if (result.response === 0) {
-              autoUpdater.quitAndInstall();
-            }
+            result.response === 0 && autoUpdater.quitAndInstall();
           })
           .catch((err) => log.info(`Error in showMessageBox: ${err}`));
       }
@@ -190,7 +188,7 @@ if (!gotTheLock && !darwin) {
 
 app.on('open-file', (e, path) => {
   e.preventDefault();
-  if (win) win.webContents.send('dropped', path);
+  win?.webContents.send('dropped', path);
 });
 
 app.setAboutPanelOptions({
