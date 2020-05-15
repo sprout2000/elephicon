@@ -5,7 +5,7 @@ on:
       - 'v1.*'
 jobs:
   build_on_mac:
-    name: Release
+    name: macOS
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@master
@@ -29,7 +29,7 @@ jobs:
       run: yarn release
 
 build_on_windows:
-    name: Release
+    name: Windows
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@master
