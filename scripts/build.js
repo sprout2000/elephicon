@@ -48,6 +48,25 @@ builder
         icon: 'assets/dmg.icns',
         sign: false,
       },
+      win: {
+        icon: 'assets/icon.ico',
+        target: ['nsis'],
+        publisherName: 'sprout2000',
+        fileAssociations: [
+          {
+            ext: ['png'],
+            description: 'Image files',
+          },
+        ],
+      },
+      nsis: {
+        oneClick: false,
+        perMachine: false,
+        createDesktopShortcut: false,
+        createStartMenuShortcut: true,
+        installerIcon: 'assets/installerIcon.ico',
+        artifactName: '${productName}-${version}-installer.${ext}',
+      },
     },
   })
   .catch((err) => console.log(err));
