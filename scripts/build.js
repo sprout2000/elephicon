@@ -50,7 +50,7 @@ builder
       },
       win: {
         icon: 'assets/icon.ico',
-        target: ['nsis'],
+        target: ['nsis', 'zip'],
         publisherName: 'sprout2000',
         fileAssociations: [
           {
