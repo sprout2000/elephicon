@@ -41,9 +41,19 @@ body,
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    fill: #a0eaf9;
     color: #00acc1;
     position: relative;
+
+    .logo {
+      fill: #a0eaf9;
+
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        fill: #00acc1;
+      }
+    }
 
     span {
       color: #ffffff;
