@@ -1,4 +1,4 @@
-# ![icon64](https://user-images.githubusercontent.com/52094761/81348668-7573c800-90f9-11ea-9fe9-7fd3c92d14a1.png) GenICNS
+# ![icon64](https://user-images.githubusercontent.com/52094761/82112752-0b0ef780-978b-11ea-8101-b4116f96e2fd.png) GenICNS
 
 GenICNS (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](https://en.wikipedia.org/wiki/ICO_(file_format)) files from PNG files.
 
