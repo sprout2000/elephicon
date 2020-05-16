@@ -13,13 +13,7 @@ import {
   BEZIER,
 } from 'png2icons';
 
-interface TypedStore {
-  state: boolean;
-  x: number | undefined;
-  y: number | undefined;
-  quality: number;
-  bmp: boolean;
-}
+import { TypedStore } from './store';
 
 interface Result {
   type: string;

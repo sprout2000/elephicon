@@ -8,15 +8,8 @@ import path from 'path';
 import mime from 'mime-types';
 
 import { mkico, mkicns } from './mkicons';
+import { TypedStore } from './store';
 import createMenu from './menu';
-
-interface TypedStore {
-  state: boolean;
-  x: number | undefined;
-  y: number | undefined;
-  quality: number;
-  bmp: boolean;
-}
 
 console.log = log.log;
 autoUpdater.logger = log;

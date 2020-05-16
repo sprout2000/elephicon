@@ -1,13 +1,7 @@
 import { app, MenuItemConstructorOptions, shell, Menu } from 'electron';
 import Store from 'electron-store';
 
-interface TypedStore {
-  state: boolean;
-  x: number | undefined;
-  y: number | undefined;
-  quality: number;
-  bmp: boolean;
-}
+import { TypedStore } from './store';
 
 const createMenu = (store: Store<TypedStore>): Menu => {
   const darwin = process.platform === 'darwin';
