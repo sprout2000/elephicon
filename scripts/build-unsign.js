@@ -12,30 +12,6 @@ builder
       },
       asar: true,
       asarUnpack: ['dist/preload.js'],
-      win: {
-        icon: 'assets/icon.ico',
-        target: ['nsis'],
-        publisherName: 'sprout2000',
-        fileAssociations: [
-          {
-            ext: ['png'],
-            description: 'Image files',
-          },
-        ],
-      },
-      nsis: {
-        oneClick: false,
-        perMachine: false,
-        createDesktopShortcut: false,
-        createStartMenuShortcut: true,
-        installerIcon: 'assets/installerIcon.ico',
-        artifactName: '${productName}-${version}-installer.${ext}',
-      },
-      linux: {
-        target: ['dir', 'zip'],
-        category: 'Development',
-        mimeTypes: ['png'],
-      },
       mac: {
         category: 'public.app-category.developer-tools',
         target: ['dmg'],
@@ -58,6 +34,25 @@ builder
       },
       dmg: {
         icon: 'assets/dmg.icns',
+      },
+      win: {
+        icon: 'assets/icon.ico',
+        target: ['nsis'],
+        publisherName: 'sprout2000',
+        fileAssociations: [
+          {
+            ext: ['png'],
+            description: 'Image files',
+          },
+        ],
+      },
+      nsis: {
+        oneClick: false,
+        perMachine: false,
+        createDesktopShortcut: false,
+        createStartMenuShortcut: true,
+        installerIcon: 'assets/installerIcon.ico',
+        artifactName: '${productName}-${version}-installer.${ext}',
       },
     },
   })
