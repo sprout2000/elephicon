@@ -128,6 +128,16 @@ const App = (): JSX.Element => {
     convert(filepath);
   };
 
+  const onMenuOpen = useCallback(
+    async (_e: Event, filepath: string) => {
+      if (!filepath) return;
+
+      setLoading(true);
+      convert(filepath);
+    },
+    [convert]
+  );
+
   useEffect(() => {
     ipcRenderer.on('dropped', onStart);
 
@@ -135,6 +145,14 @@ const App = (): JSX.Element => {
       ipcRenderer.removeAllListeners('dropped');
     };
   }, [onStart]);
+
+  useEffect(() => {
+    ipcRenderer.on('menu-open', onMenuOpen);
+
+    return (): void => {
+      ipcRenderer.removeAllListeners('menu-open');
+    };
+  }, [onMenuOpen]);
 
   useEffect(() => {
     ipcRenderer.send('change-state', checked);

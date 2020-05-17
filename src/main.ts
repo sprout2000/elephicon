@@ -155,7 +155,7 @@ if (!gotTheLock && !isDarwin) {
       loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS);
     }
 
-    const menu = createMenu(store);
+    const menu = createMenu(win, store);
     Menu.setApplicationMenu(menu);
 
     if (isDarwin) autoUpdater.checkForUpdatesAndNotify();
