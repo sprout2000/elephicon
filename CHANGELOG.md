@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/sprout2000/gen-icns/compare/v0.1.4...v0.2.0) (2020-05-17)
+
+
+### Features
+
+* create 'menu-open' channel ([0c4dc3d](https://github.com/sprout2000/gen-icns/commit/0c4dc3d6102815532510b10fabf6edb36f1b2b94))
+* create onClickOpen() ([95886ad](https://github.com/sprout2000/gen-icns/commit/95886ad57e55264e45a4810788f2f9a2569a8e0e))
+* create open-file channel ([45fe4ac](https://github.com/sprout2000/gen-icns/commit/45fe4aca4a2c3ca38cb69a4ac998904653dc1373))
+
+
+### Bug Fixes
+
+* set fill color on drag ([58a4a58](https://github.com/sprout2000/gen-icns/commit/58a4a589490fab81a7d272d01e336476b76c8a1c))
+
 ### [0.1.4](https://github.com/sprout2000/gen-icns/compare/v0.1.3...v0.1.4) (2020-05-16)
 
 ### [0.1.3](https://github.com/sprout2000/gen-icns/compare/v0.1.2...v0.1.3) (2020-05-15)
