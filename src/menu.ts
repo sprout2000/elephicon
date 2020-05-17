@@ -1,15 +1,45 @@
-import { app, MenuItemConstructorOptions, shell, Menu } from 'electron';
+import {
+  app,
+  MenuItemConstructorOptions,
+  shell,
+  Menu,
+  dialog,
+  BrowserWindow,
+} from 'electron';
 import Store from 'electron-store';
 
 import { TypedStore } from './store';
 
-const createMenu = (store: Store<TypedStore>): Menu => {
+const createMenu = (win: BrowserWindow, store: Store<TypedStore>): Menu => {
   const darwin = process.platform === 'darwin';
 
   const template: MenuItemConstructorOptions[] = [
     {
       label: '&File',
       submenu: [
+        {
+          label: 'Open',
+          accelerator: 'CmdOrCtrl+O',
+          click: async (): Promise<void> => {
+            await dialog
+              .showOpenDialog(win, {
+                properties: ['openFile'],
+                title: 'Select',
+                filters: [
+                  {
+                    name: 'PNG File',
+                    extensions: ['png'],
+                  },
+                ],
+              })
+              .then((result): void => {
+                if (result.canceled) return;
+                win.webContents.send('menu-open', result.filePaths[0]);
+              })
+              .catch((err): void => console.log(err));
+          },
+        },
+        { type: 'separator' },
         {
           label: darwin ? 'Close' : 'Quit',
           accelerator: darwin ? 'Cmd+W' : 'Ctrl+Q',

@@ -138,6 +138,19 @@ const App: React.FC = () => {
   }, [onStart]);
 
   useEffect(() => {
+    ipcRenderer.on('menu-open', (_e, filepath) => {
+      if (!filepath) return;
+
+      setLoading(true);
+      convert(filepath);
+    });
+
+    return (): void => {
+      ipcRenderer.removeAllListeners('menu-open');
+    };
+  }, [convert]);
+
+  useEffect(() => {
     ipcRenderer.send('change-state', checked);
   }, [checked]);
 
