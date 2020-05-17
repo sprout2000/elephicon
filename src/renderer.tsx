@@ -120,6 +120,14 @@ const App = (): JSX.Element => {
     [convert]
   );
 
+  const onClickOpen = async (): Promise<void> => {
+    const filepath = await ipcRenderer.invoke('open-dialog');
+    if (!filepath) return;
+
+    setLoading(true);
+    convert(filepath);
+  };
+
   useEffect(() => {
     ipcRenderer.on('dropped', onStart);
 
@@ -154,7 +162,7 @@ const App = (): JSX.Element => {
         </div>
       ) : (
         <div className={onDrag ? 'initial drag' : 'initial'}>
-          <Logo />
+          <Logo onClickOpen={onClickOpen} />
           <div className="message">
             Drop your <span>PNG</span> files here...
           </div>
