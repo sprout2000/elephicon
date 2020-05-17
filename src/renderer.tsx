@@ -120,24 +120,6 @@ const App: React.FC = () => {
     [convert]
   );
 
-  const onClickOpen = async (): Promise<void> => {
-    const filepath = await ipcRenderer.invoke('open-file');
-    if (!filepath) return;
-
-    setLoading(true);
-    convert(filepath);
-  };
-
-  const onMenuOpen = useCallback(
-    (_e: Event, filepath: string) => {
-      if (!filepath) return;
-
-      setLoading(true);
-      convert(filepath);
-    },
-    [convert]
-  );
-
   useEffect(() => {
     ipcRenderer.on('dropped', onStart);
 
@@ -145,14 +127,6 @@ const App: React.FC = () => {
       ipcRenderer.removeAllListeners('dropped');
     };
   }, [onStart]);
-
-  useEffect(() => {
-    ipcRenderer.on('menu-open', onMenuOpen);
-
-    return (): void => {
-      ipcRenderer.removeAllListeners('menu-open');
-    };
-  }, [onMenuOpen]);
 
   useEffect(() => {
     ipcRenderer.send('change-state', checked);
@@ -180,7 +154,7 @@ const App: React.FC = () => {
         </div>
       ) : (
         <div className={onDrag ? 'initial drag' : 'initial'}>
-          <Logo onClickOpen={onClickOpen} />
+          <Logo />
           <div className="message">
             Drop your <span>PNG</span> files here...
           </div>
