@@ -105,6 +105,29 @@ if (!gotTheLock && !isDarwin) {
       }
     });
 
+    ipcMain.handle('open-file-dialog', async () => {
+      if (win) {
+        const filepath = await dialog
+          .showOpenDialog(win, {
+            properties: ['openFile'],
+            title: 'Select',
+            filters: [
+              {
+                name: 'PNG file',
+                extensions: ['png'],
+              },
+            ],
+          })
+          .then((result) => {
+            if (result.canceled) return;
+            return result.filePaths[0];
+          })
+          .catch((err): void => console.log(err));
+
+        return filepath;
+      }
+    });
+
     ipcMain.on('change-state', (_e, arg) => {
       config = arg;
     });

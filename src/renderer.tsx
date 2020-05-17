@@ -112,6 +112,15 @@ const App: React.FC = () => {
     }
   };
 
+  const onClickOpen = async (): Promise<void> => {
+    const filepath = await ipcRenderer.invoke('open-file-dialog');
+
+    if (!filepath) return;
+
+    setLoading(true);
+    convert(filepath);
+  };
+
   const onStart = useCallback(
     (_e: Event, filepath: string): void => {
       setLoading(true);
@@ -154,7 +163,7 @@ const App: React.FC = () => {
         </div>
       ) : (
         <div className={onDrag ? 'initial drag' : 'initial'}>
-          <Logo />
+          <Logo onClickOpen={onClickOpen} />
           <div className="message">
             Drop your <span>PNG</span> files here...
           </div>

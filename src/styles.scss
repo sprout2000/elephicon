@@ -45,6 +45,15 @@ body,
     fill: #a0eaf9;
     position: relative;
 
+    .logo {
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        fill: #00acc1;
+      }
+    }
+
     span {
       color: #ffffff;
     }
