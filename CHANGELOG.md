@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/sprout2000/gen-icns/compare/v0.2.0...v0.2.1) (2020-05-17)
+
+
+### Bug Fixes
+
+* drop menu support ([072d25f](https://github.com/sprout2000/gen-icns/commit/072d25f4e1c8be69fbb315569b86a7174fcc3282))
+
 ## [0.2.0](https://github.com/sprout2000/gen-icns/compare/v0.1.4...v0.2.0) (2020-05-17)
 
 
