@@ -129,7 +129,7 @@ const App: React.FC = () => {
   };
 
   const onMenuOpen = useCallback(
-    async (_e: Event, filepath: string) => {
+    (_e: Event, filepath: string) => {
       if (!filepath) return;
 
       setLoading(true);
