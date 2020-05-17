@@ -15,7 +15,7 @@ interface Result {
 
 const { ipcRenderer } = window;
 
-const App = (): JSX.Element => {
+const App: React.FC = () => {
   const [onDrag, setOnDrag] = useState(false);
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
