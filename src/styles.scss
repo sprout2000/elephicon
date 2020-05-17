@@ -42,11 +42,10 @@ body,
     justify-content: center;
     align-items: center;
     color: #00acc1;
+    fill: #a0eaf9;
     position: relative;
 
     .logo {
-      fill: #a0eaf9;
-
       &:hover {
         cursor: pointer;
       }
