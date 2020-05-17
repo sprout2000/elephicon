@@ -121,7 +121,7 @@ const App = (): JSX.Element => {
   );
 
   const onClickOpen = async (): Promise<void> => {
-    const filepath = await ipcRenderer.invoke('open-dialog');
+    const filepath = await ipcRenderer.invoke('open-file');
     if (!filepath) return;
 
     setLoading(true);
