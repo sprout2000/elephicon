@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://github.com/sprout2000/gen-icns/compare/v0.2.2...v0.2.3) (2020-05-19)
+
+
+### Features
+
+* add process.versions['electron'] for macOS ([3eea774](https://github.com/sprout2000/gen-icns/commit/3eea774c7d3bb2464a4256e39be5bc8e1c81e532))
+
 ### [0.2.2](https://github.com/sprout2000/gen-icns/compare/v0.2.1...v0.2.2) (2020-05-17)
 
 
