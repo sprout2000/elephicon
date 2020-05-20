@@ -27,20 +27,12 @@ const App: React.FC = () => {
   const afterConvert = async (result: Result): Promise<void> => {
     if (result.type === 'failed') {
       setLoading(false);
-      await ipcRenderer.invoke(
-        'open-dialog',
-        `Something went wrong: ${result.msg}`,
-        'error'
-      );
+      await ipcRenderer.invoke('error-dialog', `Something went wrong...`);
 
       return;
     } else {
       setLoading(false);
-      await ipcRenderer.invoke(
-        'open-dialog',
-        `created:\n${result.msg}`,
-        'info'
-      );
+      await ipcRenderer.invoke('success-dialog', result.msg);
 
       return;
     }
@@ -57,11 +49,7 @@ const App: React.FC = () => {
         setLoading(false);
 
         const message = mime ? mime : 'Unknown';
-        await ipcRenderer.invoke(
-          'open-dialog',
-          `Invalid Format: ${message}`,
-          'error'
-        );
+        await ipcRenderer.invoke('error-dialog', `Invalid Format: ${message}`);
 
         return;
       }

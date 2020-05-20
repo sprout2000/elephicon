@@ -1,9 +1,10 @@
-import { BrowserWindow, app, ipcMain, dialog, Menu } from 'electron';
+import { BrowserWindow, app, ipcMain, dialog, Menu, shell } from 'electron';
 import loadDevtool from 'electron-load-devtool';
 import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
+import os from 'os';
 import path from 'path';
 import mime from 'mime-types';
 
@@ -94,14 +95,54 @@ if (!gotTheLock && !isDarwin) {
     ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath, store));
     ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
 
-    ipcMain.handle('open-dialog', async (_e, arg, type) => {
+    ipcMain.handle('success-dialog', async (_e, arg) => {
       if (win) {
-        await dialog.showMessageBox(win, {
-          type: type,
-          title: type === 'error' ? 'ERROR' : 'Completed',
-          message: type === 'error' ? 'Error!' : 'Successfully Completed!',
-          detail: arg,
-        });
+        await dialog
+          .showMessageBox(win, {
+            type: 'info',
+            title: 'Completed',
+            message: 'Successfully Completed!',
+            detail: `created:\n${arg}`,
+            buttons: ['OK', isDarwin ? 'Open in Finder' : 'Open in Explorer'],
+            defaultId: 0,
+            cancelId: 1,
+          })
+          .then((result) => {
+            if (result.response === 1) {
+              shell.showItemInFolder(arg);
+            }
+          })
+          .catch((err) => {
+            console.log(`Something went wrong: ${err}`);
+          });
+      }
+    });
+
+    ipcMain.handle('error-dialog', async (_e, arg) => {
+      const logpath = path.join(
+        os.homedir(),
+        isDarwin
+          ? '/Library/Logs/GenICNS/main.log'
+          : '\\AppData\\Roaming\\GenICNS\\logs\\main.log'
+      );
+
+      if (win) {
+        await dialog
+          .showMessageBox(win, {
+            type: 'error',
+            title: 'ERROR',
+            message: 'Error!',
+            detail: arg,
+            buttons: ['OK', 'View log'],
+            defaultId: 0,
+            cancelId: 1,
+          })
+          .then((result) => {
+            if (result.response === 1) {
+              shell.showItemInFolder(logpath);
+            }
+          })
+          .catch((err) => console.log(err));
       }
     });
 
