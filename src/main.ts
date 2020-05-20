@@ -112,9 +112,7 @@ if (!gotTheLock && !isDarwin) {
               shell.showItemInFolder(arg);
             }
           })
-          .catch((err) => {
-            console.log(`Something went wrong: ${err}`);
-          });
+          .catch((err) => console.log(`Something went wrong: ${err}`));
       }
     });
 
@@ -142,7 +140,7 @@ if (!gotTheLock && !isDarwin) {
               shell.showItemInFolder(logpath);
             }
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(`Something went wrong: ${err}`));
       }
     });
 
