@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/sprout2000/gen-icns/compare/v0.2.4...v0.2.5) (2020-05-21)
+
+
+### Features
+
+* use noLink for win32 ([eeecd0c](https://github.com/sprout2000/gen-icns/commit/eeecd0ca27481ef41257f322c476a109ebb2f189))
+
 ### [0.2.4](https://github.com/sprout2000/gen-icns/compare/v0.2.3...v0.2.4) (2020-05-20)
 
 
