@@ -105,7 +105,7 @@ if (!gotTheLock && !isDarwin) {
             detail: `created:\n${arg}`,
             buttons: isDarwin
               ? ['OK', 'Open in Finder']
-              : ['Open in &Explorer', '&OK'],
+              : ['Open in Explorer', 'OK'],
             defaultId: isDarwin ? 0 : 1,
             cancelId: isDarwin ? 0 : 1,
             noLink: true,
