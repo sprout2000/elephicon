@@ -103,12 +103,18 @@ if (!gotTheLock && !isDarwin) {
             title: 'Completed',
             message: 'Successfully Completed!',
             detail: `created:\n${arg}`,
-            buttons: ['OK', isDarwin ? 'Open in Finder' : 'Open in Explorer'],
-            defaultId: 0,
-            cancelId: 1,
+            buttons: isDarwin
+              ? ['OK', 'Open in Finder']
+              : ['Open in &Explorer', '&OK'],
+            defaultId: isDarwin ? 0 : 1,
+            cancelId: isDarwin ? 0 : 1,
+            noLink: true,
           })
           .then((result) => {
-            if (result.response === 1) {
+            if (
+              (isDarwin && result.response === 1) ||
+              (!isDarwin && result.response === 0)
+            ) {
               shell.showItemInFolder(arg);
             }
           })
@@ -131,12 +137,16 @@ if (!gotTheLock && !isDarwin) {
             title: 'ERROR',
             message: 'Error!',
             detail: arg,
-            buttons: ['OK', 'View log'],
-            defaultId: 0,
-            cancelId: 1,
+            buttons: isDarwin ? ['OK', 'View log'] : ['View log', 'OK'],
+            defaultId: isDarwin ? 0 : 1,
+            cancelId: isDarwin ? 0 : 1,
+            noLink: true,
           })
           .then((result) => {
-            if (result.response === 1) {
+            if (
+              (isDarwin && result.response === 1) ||
+              (!isDarwin && result.response === 0)
+            ) {
               shell.showItemInFolder(logpath);
             }
           })
