@@ -24,6 +24,10 @@ const main = {
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
+      {
+        test: /\.(bmp|ico|gif|jpe?g|png|svg|ttf|eot|woff?2?)$/,
+        loader: 'url-loader',
+      },
     ],
   },
   devtool: isDev ? 'inline-source-map' : false,

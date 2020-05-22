@@ -11,6 +11,7 @@ import mime from 'mime-types';
 import { mkico, mkicns } from './mkicons';
 import { TypedStore } from './store';
 import createMenu from './menu';
+import Icon from './icon.ico';
 
 console.log = log.log;
 autoUpdater.logger = log;
@@ -96,33 +97,6 @@ if (!gotTheLock && !isDarwin) {
     ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
 
     ipcMain.handle('success-dialog', async (_e, arg) => {
-      if (win) {
-        await dialog
-          .showMessageBox(win, {
-            type: 'info',
-            title: 'Completed',
-            message: 'Successfully Completed!',
-            detail: `created:\n${arg}`,
-            buttons: isDarwin
-              ? ['OK', 'Open in Finder']
-              : ['Open in Explorer', 'OK'],
-            defaultId: isDarwin ? 0 : 1,
-            cancelId: isDarwin ? 0 : 1,
-            noLink: true,
-          })
-          .then((result) => {
-            if (
-              (isDarwin && result.response === 1) ||
-              (!isDarwin && result.response === 0)
-            ) {
-              shell.showItemInFolder(arg);
-            }
-          })
-          .catch((err) => console.log(`Something went wrong: ${err}`));
-      }
-    });
-
-    ipcMain.handle('error-dialog', async (_e, arg) => {
       const logpath = path.join(
         os.homedir(),
         isDarwin
@@ -133,22 +107,42 @@ if (!gotTheLock && !isDarwin) {
       if (win) {
         await dialog
           .showMessageBox(win, {
+            type: 'info',
+            title: 'Completed',
+            message: 'Successfully Completed!',
+            detail: `created:\n${arg}`,
+            buttons: [
+              'View log',
+              isDarwin ? 'Open in Finder' : 'Open in Explorer',
+              'OK',
+            ],
+            defaultId: 2,
+            cancelId: 2,
+            noLink: true,
+            icon: Icon,
+          })
+          .then((result) => {
+            if (result.response === 1) {
+              shell.showItemInFolder(arg);
+            } else if (result.response === 0) {
+              shell.showItemInFolder(logpath);
+            }
+          })
+          .catch((err) => console.log(`Something went wrong: ${err}`));
+      }
+    });
+
+    ipcMain.handle('error-dialog', async (_e, arg) => {
+      if (win) {
+        await dialog
+          .showMessageBox(win, {
             type: 'error',
             title: 'ERROR',
             message: 'Error!',
             detail: arg,
-            buttons: isDarwin ? ['OK', 'View log'] : ['View log', 'OK'],
-            defaultId: isDarwin ? 0 : 1,
-            cancelId: isDarwin ? 0 : 1,
-            noLink: true,
-          })
-          .then((result) => {
-            if (
-              (isDarwin && result.response === 1) ||
-              (!isDarwin && result.response === 0)
-            ) {
-              shell.showItemInFolder(logpath);
-            }
+            buttons: ['OK'],
+            defaultId: 0,
+            icon: Icon,
           })
           .catch((err) => console.log(`Something went wrong: ${err}`));
       }
