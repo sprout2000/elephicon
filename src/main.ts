@@ -1,14 +1,14 @@
-import { BrowserWindow, app, ipcMain, dialog, Menu, shell } from 'electron';
+import { BrowserWindow, app, ipcMain, dialog, Menu } from 'electron';
 import loadDevtool from 'electron-load-devtool';
 import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
-import os from 'os';
 import path from 'path';
 import mime from 'mime-types';
 
 import { mkico, mkicns } from './mkicons';
+import { successDarwin, successWin32 } from './dialog';
 import { TypedStore } from './store';
 import createMenu from './menu';
 
@@ -96,50 +96,11 @@ if (!gotTheLock && !isDarwin) {
     ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath, store));
     ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
 
-    ipcMain.handle('success-dialog', async (_e, arg) => {
+    ipcMain.handle('success-dialog', (_e, arg) => {
       if (win && isDarwin) {
-        await dialog
-          .showMessageBox(win, {
-            type: 'info',
-            message: 'Successfully Completed!',
-            detail: `created:\n${arg}`,
-            checkboxLabel: 'Open in Finder',
-            checkboxChecked: store.get('open', false),
-          })
-          .then((result) => {
-            if (result.checkboxChecked) {
-              shell.showItemInFolder(arg);
-              store.set('open', true);
-            } else {
-              store.set('open', false);
-            }
-          })
-          .catch((err) => console.log(`Something went wrong: ${err}`));
+        successDarwin(win, arg, store);
       } else if (win && !isDarwin) {
-        await dialog
-          .showMessageBox(win, {
-            type: 'info',
-            title: 'Completed',
-            message: 'Successfully Completed!',
-            detail: `created:\n${arg}`,
-            buttons: ['View log', 'Open in Explorer', 'OK'],
-            defaultId: 2,
-            cancelId: 2,
-            noLink: true,
-          })
-          .then((result) => {
-            if (result.response === 0) {
-              shell.showItemInFolder(
-                path.join(
-                  os.homedir(),
-                  '\\AppData\\Roaming\\GenICNS\\logs\\main.log'
-                )
-              );
-            } else if (result.response === 1) {
-              shell.showItemInFolder(arg);
-            }
-          })
-          .catch((err) => console.log(`Something went wrong: ${err}`));
+        successWin32(win, arg);
       }
     });
 
