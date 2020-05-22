@@ -18,7 +18,7 @@ builder
         output: 'release',
       },
       asar: true,
-      asarUnpack: ['dist/preload.js', 'dist/icon.ico'],
+      asarUnpack: ['dist/preload.js'],
       afterSign: 'scripts/notarize.js',
       mac: {
         category: 'public.app-category.developer-tools',
