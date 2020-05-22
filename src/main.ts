@@ -1,4 +1,12 @@
-import { BrowserWindow, app, ipcMain, dialog, Menu, shell } from 'electron';
+import {
+  BrowserWindow,
+  app,
+  ipcMain,
+  dialog,
+  Menu,
+  shell,
+  nativeImage,
+} from 'electron';
 import loadDevtool from 'electron-load-devtool';
 import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
@@ -11,7 +19,6 @@ import mime from 'mime-types';
 import { mkico, mkicns } from './mkicons';
 import { TypedStore } from './store';
 import createMenu from './menu';
-import Icon from './icon.ico';
 
 console.log = log.log;
 autoUpdater.logger = log;
@@ -48,6 +55,10 @@ const getResourceDirectory = (): string => {
     ? path.join(process.cwd(), 'dist')
     : path.join(process.resourcesPath, 'app.asar.unpacked', 'dist');
 };
+
+const appIcon = nativeImage.createFromPath(
+  path.resolve(getResourceDirectory(), 'icon.ico')
+);
 
 if (!gotTheLock && !isDarwin) {
   app.exit();
@@ -119,7 +130,7 @@ if (!gotTheLock && !isDarwin) {
             defaultId: 2,
             cancelId: 2,
             noLink: true,
-            icon: Icon,
+            icon: appIcon,
           })
           .then((result) => {
             if (result.response === 1) {
@@ -142,7 +153,7 @@ if (!gotTheLock && !isDarwin) {
             detail: arg,
             buttons: ['OK'],
             defaultId: 0,
-            icon: Icon,
+            icon: appIcon,
           })
           .catch((err) => console.log(`Something went wrong: ${err}`));
       }
