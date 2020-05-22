@@ -4,4 +4,5 @@ export interface TypedStore {
   y: number | undefined;
   quality: number;
   bmp: boolean;
+  open: boolean;
 }

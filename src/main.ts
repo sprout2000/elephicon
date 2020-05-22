@@ -12,7 +12,6 @@ import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
-import os from 'os';
 import path from 'path';
 import mime from 'mime-types';
 
@@ -39,6 +38,7 @@ const store = new Store<TypedStore>({
     y: undefined,
     quality: 1,
     bmp: true,
+    open: false,
   },
 });
 
@@ -58,13 +58,6 @@ const getResourceDirectory = (): string => {
 
 const appIcon = nativeImage.createFromPath(
   path.resolve(getResourceDirectory(), 'icon.ico')
-);
-
-const logpath = path.join(
-  os.homedir(),
-  isDarwin
-    ? '/Library/Logs/GenICNS/main.log'
-    : '\\AppData\\Roaming\\GenICNS\\logs\\main.log'
 );
 
 if (!gotTheLock && !isDarwin) {
@@ -122,21 +115,17 @@ if (!gotTheLock && !isDarwin) {
             title: 'Completed',
             message: 'Successfully Completed!',
             detail: `created:\n${arg}`,
-            buttons: [
-              'View log',
-              isDarwin ? 'Open in Finder' : 'Open in Explorer',
-              'OK',
-            ],
-            defaultId: 2,
-            cancelId: 2,
+            checkboxLabel: isDarwin ? 'Open in Finder' : 'Open in Explorer',
+            checkboxChecked: store.get('open', false),
             noLink: true,
             icon: appIcon,
           })
           .then((result) => {
-            if (result.response === 1) {
+            if (result.checkboxChecked) {
               shell.showItemInFolder(arg);
-            } else if (result.response === 0) {
-              shell.showItemInFolder(logpath);
+              store.set('open', true);
+            } else {
+              store.set('open', false);
             }
           })
           .catch((err) => console.log(`Something went wrong: ${err}`));
@@ -151,8 +140,6 @@ if (!gotTheLock && !isDarwin) {
             title: 'ERROR',
             message: 'Error!',
             detail: arg,
-            buttons: ['OK'],
-            defaultId: 0,
             icon: appIcon,
           })
           .catch((err) => console.log(`Something went wrong: ${err}`));
