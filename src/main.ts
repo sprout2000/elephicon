@@ -49,13 +49,6 @@ const getResourceDirectory = (): string => {
     : path.join(process.resourcesPath, 'app.asar.unpacked', 'dist');
 };
 
-const logpath = path.join(
-  os.homedir(),
-  isDarwin
-    ? '/Library/Logs/GenICNS/main.log'
-    : '\\AppData\\Roaming\\GenICNS\\logs\\main.log'
-);
-
 if (!gotTheLock && !isDarwin) {
   app.exit();
 } else {
@@ -136,7 +129,12 @@ if (!gotTheLock && !isDarwin) {
           })
           .then((result) => {
             if (result.response === 0) {
-              shell.showItemInFolder(logpath);
+              shell.showItemInFolder(
+                path.join(
+                  os.homedir(),
+                  '\\AppData\\Roaming\\GenICNS\\logs\\main.log'
+                )
+              );
             } else if (result.response === 1) {
               shell.showItemInFolder(arg);
             }
