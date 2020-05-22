@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -27,11 +26,6 @@ const main = {
       },
     ],
   },
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [{ from: './assets/icon.ico', to: '.' }],
-    }),
-  ],
   devtool: isDev ? 'inline-source-map' : false,
 };
 
