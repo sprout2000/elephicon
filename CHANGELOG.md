@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.6](https://github.com/sprout2000/gen-icns/compare/v0.2.5...v0.2.6) (2020-05-22)
+
+
+### Features
+
+* create dialogs for each platform ([192f693](https://github.com/sprout2000/gen-icns/commit/192f6934c79e310f213955c61ef6f96f11dc4145))
+* improve success dialog ([31cc283](https://github.com/sprout2000/gen-icns/commit/31cc2837bdab1d41357cabb07cab2111dfaab964))
+* use checkbox and store it ([47ff1dc](https://github.com/sprout2000/gen-icns/commit/47ff1dc268169f62b4e4515d1c1cdfcd91344a97))
+* use nativeImage for dialogs on win32 ([16a56ed](https://github.com/sprout2000/gen-icns/commit/16a56ed7d212d0dbcb5eb8526fbfeabc924b98b5))
+
 ### [0.2.5](https://github.com/sprout2000/gen-icns/compare/v0.2.4...v0.2.5) (2020-05-21)
 
 
