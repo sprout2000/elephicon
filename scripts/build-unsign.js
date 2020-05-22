@@ -11,7 +11,7 @@ builder
         output: 'release',
       },
       asar: true,
-      asarUnpack: ['dist/preload.js'],
+      asarUnpack: ['dist/preload.js', 'dist/icon.ico'],
       mac: {
         category: 'public.app-category.developer-tools',
         target: ['dmg'],
