@@ -60,6 +60,13 @@ const appIcon = nativeImage.createFromPath(
   path.resolve(getResourceDirectory(), 'icon.ico')
 );
 
+const logpath = path.join(
+  os.homedir(),
+  isDarwin
+    ? '/Library/Logs/GenICNS/main.log'
+    : '\\AppData\\Roaming\\GenICNS\\logs\\main.log'
+);
+
 if (!gotTheLock && !isDarwin) {
   app.exit();
 } else {
@@ -108,13 +115,6 @@ if (!gotTheLock && !isDarwin) {
     ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
 
     ipcMain.handle('success-dialog', async (_e, arg) => {
-      const logpath = path.join(
-        os.homedir(),
-        isDarwin
-          ? '/Library/Logs/GenICNS/main.log'
-          : '\\AppData\\Roaming\\GenICNS\\logs\\main.log'
-      );
-
       if (win) {
         await dialog
           .showMessageBox(win, {
