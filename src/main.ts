@@ -1,17 +1,10 @@
-import {
-  BrowserWindow,
-  app,
-  ipcMain,
-  dialog,
-  Menu,
-  shell,
-  nativeImage,
-} from 'electron';
+import { BrowserWindow, app, ipcMain, dialog, Menu, shell } from 'electron';
 import loadDevtool from 'electron-load-devtool';
 import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
+import os from 'os';
 import path from 'path';
 import mime from 'mime-types';
 
@@ -56,8 +49,11 @@ const getResourceDirectory = (): string => {
     : path.join(process.resourcesPath, 'app.asar.unpacked', 'dist');
 };
 
-const appIcon = nativeImage.createFromPath(
-  path.resolve(getResourceDirectory(), 'icon.ico')
+const logpath = path.join(
+  os.homedir(),
+  isDarwin
+    ? '/Library/Logs/GenICNS/main.log'
+    : '\\AppData\\Roaming\\GenICNS\\logs\\main.log'
 );
 
 if (!gotTheLock && !isDarwin) {
@@ -108,17 +104,14 @@ if (!gotTheLock && !isDarwin) {
     ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
 
     ipcMain.handle('success-dialog', async (_e, arg) => {
-      if (win) {
+      if (win && isDarwin) {
         await dialog
           .showMessageBox(win, {
             type: 'info',
-            title: 'Completed',
             message: 'Successfully Completed!',
             detail: `created:\n${arg}`,
-            checkboxLabel: isDarwin ? 'Open in Finder' : 'Open in Explorer',
+            checkboxLabel: 'Open in Finder',
             checkboxChecked: store.get('open', false),
-            noLink: true,
-            icon: appIcon,
           })
           .then((result) => {
             if (result.checkboxChecked) {
@@ -126,6 +119,26 @@ if (!gotTheLock && !isDarwin) {
               store.set('open', true);
             } else {
               store.set('open', false);
+            }
+          })
+          .catch((err) => console.log(`Something went wrong: ${err}`));
+      } else if (win && !isDarwin) {
+        await dialog
+          .showMessageBox(win, {
+            type: 'info',
+            title: 'Completed',
+            message: 'Successfully Completed!',
+            detail: `created:\n${arg}`,
+            buttons: ['View log', 'Open in Explorer', 'OK'],
+            defaultId: 2,
+            cancelId: 2,
+            noLink: true,
+          })
+          .then((result) => {
+            if (result.response === 0) {
+              shell.showItemInFolder(logpath);
+            } else if (result.response === 1) {
+              shell.showItemInFolder(arg);
             }
           })
           .catch((err) => console.log(`Something went wrong: ${err}`));
@@ -140,7 +153,6 @@ if (!gotTheLock && !isDarwin) {
             title: 'ERROR',
             message: 'Error!',
             detail: arg,
-            icon: appIcon,
           })
           .catch((err) => console.log(`Something went wrong: ${err}`));
       }
