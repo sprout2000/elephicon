@@ -1,7 +1,7 @@
 {
   "name": "gen-icons",
   "productName": "gen-icons",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "gen-icons generates Apple ICNS and Microsoft ICO files from PNG files.",
   "author": "sprout2000",
   "license": "MIT",
