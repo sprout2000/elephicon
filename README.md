@@ -69,4 +69,4 @@ MIT © [idesis GmbH](https://www.idesis.de), Rellinghauser Straße 334F, D-45136
 
 ### gen-icons
 
-[MIT](https://github.com/sprout2000/lessview/blob/master/LICENSE.md) © Office Nishigami
+[MIT](https://github.com/sprout2000/lessview/blob/master/LICENSE.md) © sprout2000

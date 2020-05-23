@@ -5,7 +5,7 @@ builder
     config: {
       appId: process.env.APP_BUNDLE_ID,
       productName: 'gen-icons',
-      copyright: 'Copyright (C) 2020 Office Nishigami.',
+      copyright: 'Copyright (C) 2020 sprout2000.',
       artifactName: '${productName}-${version}-${platform}.${ext}',
       files: ['dist/**/*'],
       publish: [
