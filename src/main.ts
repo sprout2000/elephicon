@@ -74,7 +74,7 @@ if (!gotTheLock && !isDarwin) {
       y: store.get('y'),
       width: 400,
       height: isDarwin ? 300 : 320,
-      backgroundColor: '#1B2A41',
+      backgroundColor: '#1b2a41',
       title: 'GenIcons',
       show: false,
       resizable: false,
