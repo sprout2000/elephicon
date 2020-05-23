@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7](https://github.com/sprout2000/gen-icons/compare/v0.2.6...v0.2.7) (2020-05-23)
+
+
+### Features
+
+* rename to GenIcons ([46bcdfa](https://github.com/sprout2000/gen-icons/commit/46bcdfa541e81941f313ee41595c4c9423874621))
+* update icons ([3f457d0](https://github.com/sprout2000/gen-icons/commit/3f457d09aa9eb9a5a5db4964c08ee5d6ba04651b))
+
 ### [0.2.6](https://github.com/sprout2000/gen-icons/compare/v0.2.5...v0.2.6) (2020-05-22)
 
 
