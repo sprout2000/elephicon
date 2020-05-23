@@ -3,7 +3,7 @@ const builder = require('electron-builder');
 builder
   .build({
     config: {
-      productName: 'GenIcons',
+      productName: 'gen-icons',
       copyright: 'Copyright (C) 2020 Office Nishigami.',
       artifactName: '${productName}-${version}-${platform}.${ext}',
       files: ['dist/**/*'],
@@ -17,9 +17,9 @@ builder
         target: ['dmg'],
         icon: 'assets/icon.icns',
         extendInfo: {
-          CFBundleName: 'GenIcons',
-          CFBundleDisplayName: 'GenIcons',
-          CFBundleExecutable: 'GenIcons',
+          CFBundleName: 'gen-icons',
+          CFBundleDisplayName: 'gen-icons',
+          CFBundleExecutable: 'gen-icons',
           CFBundlePackageType: 'APPL',
           CFBundleDocumentTypes: [
             {
