@@ -4,7 +4,7 @@ builder
   .build({
     config: {
       appId: process.env.APP_BUNDLE_ID,
-      productName: 'GenICNS',
+      productName: 'GenIcons',
       copyright: 'Copyright (C) 2020 Office Nishigami.',
       artifactName: '${productName}-${version}-${platform}.${ext}',
       files: ['dist/**/*'],
@@ -25,9 +25,9 @@ builder
         target: ['dmg', 'zip'],
         icon: 'assets/icon.icns',
         extendInfo: {
-          CFBundleName: 'GenICNS',
-          CFBundleDisplayName: 'GenICNS',
-          CFBundleExecutable: 'GenICNS',
+          CFBundleName: 'GenIcons',
+          CFBundleDisplayName: 'GenIcons',
+          CFBundleExecutable: 'GenIcons',
           CFBundlePackageType: 'APPL',
           CFBundleDocumentTypes: [
             {

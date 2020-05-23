@@ -48,7 +48,10 @@ export const successWin32 = async (
     .then((result) => {
       if (result.response === 0) {
         shell.showItemInFolder(
-          path.join(os.homedir(), '\\AppData\\Roaming\\GenICNS\\logs\\main.log')
+          path.join(
+            os.homedir(),
+            '\\AppData\\Roaming\\GenIcons\\logs\\main.log'
+          )
         );
       } else if (result.response === 1) {
         shell.showItemInFolder(arg);
