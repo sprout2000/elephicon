@@ -1,5 +1,5 @@
 {
-  "name": "gen-icns",
+  "name": "gen-icons",
   "productName": "GenIcons",
   "version": "0.2.6",
   "description": "GenIcons generates Apple ICNS and Microsoft ICO files from PNG files.",
@@ -7,10 +7,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:sprout2000/gen-icns.git"
+    "url": "git@github.com:sprout2000/gen-icons.git"
   },
   "bugs": {
-    "url": "https://github.com/sprout2000/gen-icns/issues"
+    "url": "https://github.com/sprout2000/gen-icons/issues"
   },
   "keywords": [
     "electron",

@@ -1,8 +1,8 @@
 # GenIcons
 
-[![GitHub CI](https://github.com/sprout2000/gen-icns/workflows/GitHub%20CI/badge.svg)](https://github.com/sprout2000/gen-icns/actions?query=workflow%3A%22GitHub+CI%22)
-[![GitHub license](https://img.shields.io/github/license/sprout2000/gen-icns)](https://github.com/sprout2000/gen-icns/blob/master/LICENSE.md)
-![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/gen-icns)
+[![GitHub CI](https://github.com/sprout2000/gen-icons/workflows/GitHub%20CI/badge.svg)](https://github.com/sprout2000/gen-icons/actions?query=workflow%3A%22GitHub+CI%22)
+[![GitHub license](https://img.shields.io/github/license/sprout2000/gen-icons)](https://github.com/sprout2000/gen-icons/blob/master/LICENSE.md)
+![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/gen-icons)
 
 **GenIcons** (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](https://en.wikipedia.org/wiki/ICO_(file_format)) files from PNG files.**
 
@@ -37,8 +37,8 @@ If you only need to create ICO files *256×256* pixels are sufficient.
 ## Build & Install
 
 ```
-$ git clone git@github.com:sprout2000/gen-icns.git
-$ cd gen-icns
+$ git clone git@github.com:sprout2000/gen-icons.git
+$ cd gen-icons
 $ yarn install && yarn package
 ```
 
@@ -49,7 +49,7 @@ You will find the installer in `release` directory.
 ## Download
 
 You can download the latest version of GenIcons from the releases page here:  
-[https://github.com/sprout2000/gen-icns/releases](https://github.com/sprout2000/gen-icns/releases)
+[https://github.com/sprout2000/gen-icons/releases](https://github.com/sprout2000/gen-icons/releases)
 
 ## Security
 
