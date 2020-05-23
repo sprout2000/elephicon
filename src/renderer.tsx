@@ -177,8 +177,8 @@ const App: React.FC = () => {
               checked={checked}
               checkedIcon={false}
               uncheckedIcon={false}
-              height={14}
-              width={28}
+              height={21}
+              width={42}
               onColor="#6b6e7b"
               offColor="#6b6e7b"
               className="switch"
