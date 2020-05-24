@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/sprout2000/genicons/compare/v0.3.0...v0.3.1) (2020-05-24)
+
+
+### Features
+
+* rename to genicons ([76f426c](https://github.com/sprout2000/genicons/commit/76f426c8f476d3f638c292660da6467c80dc6710))
+
 ## [0.3.0](https://github.com/sprout2000/genicons/compare/v0.2.7...v0.3.0) (2020-05-23)
 
 ### [0.2.7](https://github.com/sprout2000/genicons/compare/v0.2.6...v0.2.7) (2020-05-23)
