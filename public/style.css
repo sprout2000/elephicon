@@ -15,6 +15,7 @@ body {
   width: 80vw;
   border-radius: 10px;
   font-family: "Roboto", sans-serif;
+  filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.6));
 }
 
 .header {
@@ -82,6 +83,8 @@ h3 {
   font-weight: 100;
   text-align: center;
   padding: 4em;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .size {
