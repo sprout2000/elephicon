@@ -1,16 +1,16 @@
 {
-  "name": "gen-icons",
-  "productName": "gen-icons",
+  "name": "genicons",
+  "productName": "genicons",
   "version": "0.3.0",
-  "description": "gen-icons generates Apple ICNS and Microsoft ICO files from PNG files.",
+  "description": "genicons generates Apple ICNS and Microsoft ICO files from PNG files.",
   "author": "sprout2000",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:sprout2000/gen-icons.git"
+    "url": "git@github.com:sprout2000/genicons.git"
   },
   "bugs": {
-    "url": "https://github.com/sprout2000/gen-icons/issues"
+    "url": "https://github.com/sprout2000/genicons/issues"
   },
   "keywords": [
     "electron",
@@ -32,9 +32,11 @@
     "clean": "rimraf dist release",
     "build": "cross-env NODE_ENV=\"development\" webpack --progress",
     "build:prod": "cross-env NODE_ENV=\"production\" webpack --progress",
+    "build:appx": "cross-env NODE_ENV=\"production\" webpack --progress --config webpack.config.prod.js",
     "release": "node scripts/build.js",
     "prepackage": "run-s clean build:prod",
     "package": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false node scripts/build-unsign.js",
+    "package:appx": "node scripts/build-appx.js",
     "release:patch": "standard-version --release-as patch",
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major",

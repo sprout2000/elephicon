@@ -4,9 +4,9 @@ const builder = require('electron-builder');
 builder
   .build({
     config: {
-      productName: 'gen-icons',
+      productName: 'genicons',
       copyright: 'Copyright (C) 2020 sprout2000.',
-      artifactName: '${productName}-${version}-${platform}.${ext}',
+      artifactName: '${productName}-${version}.${ext}',
       files: ['dist/**/*'],
       directories: {
         output: 'release',
@@ -16,16 +16,11 @@ builder
       win: {
         icon: 'assets/icon.ico',
         target: ['appx'],
-        fileAssociations: [
-          {
-            ext: ['png'],
-            description: 'PNG files',
-          },
-        ],
       },
       appx: {
-        applicationId: 'sprout2000.gen-icons',
+        applicationId: process.env.APPLICATION_ID,
         backgroundColor: '#3a86ff',
+        displayName: 'genicons',
         identityName: process.env.IDENTITY_NAME,
         publisher: process.env.PUBLISHER,
         publisherDisplayName: 'sprout2000',

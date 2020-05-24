@@ -3,7 +3,7 @@ const builder = require('electron-builder');
 builder
   .build({
     config: {
-      productName: 'gen-icons',
+      productName: 'genicons',
       copyright: 'Copyright (C) 2020 sprout2000.',
       artifactName: '${productName}-${version}-${platform}.${ext}',
       files: ['dist/**/*'],
@@ -17,9 +17,9 @@ builder
         target: ['dmg'],
         icon: 'assets/icon.icns',
         extendInfo: {
-          CFBundleName: 'gen-icons',
-          CFBundleDisplayName: 'gen-icons',
-          CFBundleExecutable: 'gen-icons',
+          CFBundleName: 'genicons',
+          CFBundleDisplayName: 'genicons',
+          CFBundleExecutable: 'genicons',
           CFBundlePackageType: 'APPL',
           CFBundleDocumentTypes: [
             {

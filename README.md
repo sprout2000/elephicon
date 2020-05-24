@@ -1,10 +1,10 @@
-# gen-icons
+# genicons
 
-[![GitHub CI](https://github.com/sprout2000/gen-icons/workflows/GitHub%20CI/badge.svg)](https://github.com/sprout2000/gen-icons/actions?query=workflow%3A%22GitHub+CI%22)
-[![GitHub license](https://img.shields.io/github/license/sprout2000/gen-icons)](https://github.com/sprout2000/gen-icons/blob/master/LICENSE.md)
-![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/gen-icons)
+[![GitHub CI](https://github.com/sprout2000/genicons/workflows/GitHub%20CI/badge.svg)](https://github.com/sprout2000/genicons/actions?query=workflow%3A%22GitHub+CI%22)
+[![GitHub license](https://img.shields.io/github/license/sprout2000/genicons)](https://github.com/sprout2000/genicons/blob/master/LICENSE.md)
+![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/genicons)
 
-**gen-icons** (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](https://en.wikipedia.org/wiki/ICO_(file_format)) files from PNG files.**
+**genicons** (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](https://en.wikipedia.org/wiki/ICO_(file_format)) files from PNG files.**
 
 ## Usage
 
@@ -37,8 +37,8 @@ If you only need to create ICO files *256×256* pixels are sufficient.
 ## Build & Install
 
 ```
-$ git clone git@github.com:sprout2000/gen-icons.git
-$ cd gen-icons
+$ git clone git@github.com:sprout2000/genicons.git
+$ cd genicons
 $ yarn install && yarn package
 ```
 
@@ -48,8 +48,8 @@ You will find the installer in `release` directory.
 
 ## Download
 
-You can download the latest version of gen-icons from the releases page here:  
-[https://github.com/sprout2000/gen-icons/releases](https://github.com/sprout2000/gen-icons/releases)
+You can download the latest version of genicons from the releases page here:  
+[https://github.com/sprout2000/genicons/releases](https://github.com/sprout2000/genicons/releases)
 
 ## Security
 
@@ -67,6 +67,6 @@ sandbox | `true`
 
 MIT © [idesis GmbH](https://www.idesis.de), Rellinghauser Straße 334F, D-45136 Essen
 
-### gen-icons
+### genicons
 
 [MIT](https://github.com/sprout2000/lessview/blob/master/LICENSE.md) © sprout2000

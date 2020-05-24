@@ -107,7 +107,7 @@ const renderer = {
       template: './src/index.html',
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: './assets/appx', to: '.' }],
+      patterns: [{ from: './assets/appx', to: './appx' }],
     }),
   ],
   performance: {
