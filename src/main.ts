@@ -75,7 +75,7 @@ if (!gotTheLock && !isDarwin) {
       width: 400,
       height: isDarwin ? 300 : 320,
       backgroundColor: '#1b2a41',
-      title: 'genicons',
+      title: 'GenIcons',
       show: false,
       resizable: false,
       maximizable: false,
