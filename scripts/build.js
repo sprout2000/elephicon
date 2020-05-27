@@ -4,7 +4,7 @@ builder
   .build({
     config: {
       appId: process.env.APP_BUNDLE_ID,
-      productName: 'genicons',
+      productName: 'GenICONS',
       copyright: 'Copyright (C) 2020 sprout2000.',
       artifactName: '${productName}-${version}-${platform}.${ext}',
       files: ['dist/**/*'],
@@ -25,9 +25,9 @@ builder
         target: ['dmg', 'zip'],
         icon: 'assets/icon.icns',
         extendInfo: {
-          CFBundleName: 'genicons',
-          CFBundleDisplayName: 'genicons',
-          CFBundleExecutable: 'genicons',
+          CFBundleName: 'GenICONS',
+          CFBundleDisplayName: 'GenICONS',
+          CFBundleExecutable: 'GenICONS',
           CFBundlePackageType: 'APPL',
           CFBundleDocumentTypes: [
             {
@@ -47,25 +47,6 @@ builder
       dmg: {
         icon: 'assets/dmg.icns',
         sign: false,
-      },
-      win: {
-        icon: 'assets/icon.ico',
-        target: ['nsis', 'zip'],
-        publisherName: 'sprout2000',
-        fileAssociations: [
-          {
-            ext: ['png'],
-            description: 'Image files',
-          },
-        ],
-      },
-      nsis: {
-        oneClick: false,
-        perMachine: false,
-        createDesktopShortcut: false,
-        createStartMenuShortcut: true,
-        installerIcon: 'assets/installerIcon.ico',
-        artifactName: '${productName}-${version}-installer.${ext}',
       },
     },
   })
