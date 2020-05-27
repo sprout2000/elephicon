@@ -4,7 +4,7 @@
 [![GitHub license](https://img.shields.io/github/license/sprout2000/genicons)](https://github.com/sprout2000/genicons/blob/master/LICENSE.md)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/genicons)
 
-**genicons** (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](https://en.wikipedia.org/wiki/ICO_(file_format)) files from PNG files.**
+**GenICONS** (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](https://en.wikipedia.org/wiki/ICO_(file_format)) files from PNG files.**
 
 ## Usage
 
@@ -48,7 +48,7 @@ You will find the installer in `release` directory.
 
 ## Download
 
-You can download the latest version of genicons from the releases page here:  
+You can download the latest version of *GenICONS* from the releases page here:  
 [https://github.com/sprout2000/genicons/releases](https://github.com/sprout2000/genicons/releases)
 
 ## Security
@@ -67,6 +67,6 @@ sandbox | `true`
 
 MIT © [idesis GmbH](https://www.idesis.de), Rellinghauser Straße 334F, D-45136 Essen
 
-### genicons
+### GenICONS
 
 [MIT](https://github.com/sprout2000/lessview/blob/master/LICENSE.md) © sprout2000
