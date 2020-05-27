@@ -1,4 +1,4 @@
-# genicons
+# GenICONS
 
 [![GitHub CI](https://github.com/sprout2000/genicons/workflows/GitHub%20CI/badge.svg)](https://github.com/sprout2000/genicons/actions?query=workflow%3A%22GitHub+CI%22)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/genicons)](https://github.com/sprout2000/genicons/blob/master/LICENSE.md)
