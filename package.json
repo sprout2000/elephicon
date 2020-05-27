@@ -1,7 +1,7 @@
 {
   "name": "genicons",
   "productName": "GenICONS",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": " generates Apple ICNS and Microsoft ICO files from PNG files.",
   "author": "sprout2000",
   "license": "MIT",
