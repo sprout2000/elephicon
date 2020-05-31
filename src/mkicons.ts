@@ -56,7 +56,7 @@ export const mkico = async (
       clearCache();
       console.log('Successfully Completed!');
 
-      return { type: 'success', msg: `${dirname}${path.sep}${basename}.ico` };
+      return { type: 'success', msg: `${basename}.ico` };
     })
     .catch((err: string) => {
       console.log(`Something went wrong: ${err}`);
@@ -97,7 +97,7 @@ export const mkicns = async (
       clearCache();
       console.log('Successfully Completed!');
 
-      return { type: 'success', msg: `${dirname}${path.sep}${basename}.icns` };
+      return { type: 'success', msg: `${basename}.icns` };
     })
     .catch((err: string) => {
       console.log(`Something went wrong: ${err}`);

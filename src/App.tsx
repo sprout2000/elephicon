@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Elephant } from './Elephant';
 import {
   IoIosCloseCircleOutline,
   IoLogoApple,
@@ -10,6 +9,9 @@ import {
 
 import 'typeface-roboto';
 import './styles.scss';
+
+import { Success } from './Success';
+import { Elephant } from './Elephant';
 
 interface Result {
   type: string;
@@ -22,16 +24,21 @@ const App: React.FC = () => {
   const [onDrag, setOnDrag] = useState(false);
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [onError, setOnError] = useState(false);
+  const [message, setMessage] = useState('');
 
-  const afterConvert = async (result: Result): Promise<void> => {
+  const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
       setLoading(false);
-      await ipcRenderer.invoke('error-dialog', `Something went wrong...`);
+      setOnError(true);
+      setMessage(result.msg);
 
       return;
     } else {
       setLoading(false);
-      await ipcRenderer.invoke('success-dialog', result.msg);
+      setSuccess(true);
+      setMessage(result.msg);
 
       return;
     }
@@ -110,6 +117,11 @@ const App: React.FC = () => {
     ipcRenderer.send('close-window');
   };
 
+  const onClickBack = () => {
+    setSuccess(false);
+    setOnError(false);
+  };
+
   const onStart = useCallback(
     (_e: Event, filepath: string): void => {
       setLoading(true);
@@ -163,43 +175,51 @@ const App: React.FC = () => {
           <IoIosCloseCircleOutline size="2em" />
         </div>
       </div>
-      <div className="icon">
-        <Elephant onDrag={onDrag} loading={loading} onClick={onClickOpen} />
-      </div>
-      <div
-        className={onDrag ? 'text ondrag' : loading ? 'text loading' : 'text'}>
-        Drop your PNGs here...
-      </div>
-      <div className="switch">
-        <div
-          className={
-            loading
-              ? 'icon-container loading'
-              : checked
-              ? 'icon-container checked'
-              : 'icon-container'
-          }
-          onClick={onClickOS}>
-          <div className="os">
-            <IoLogoWindows />
+      {!success ? (
+        <React.Fragment>
+          <div className="icon">
+            <Elephant onDrag={onDrag} loading={loading} onClick={onClickOpen} />
           </div>
-          <div>ICO</div>
-        </div>
-        <div
-          className={
-            loading
-              ? 'icon-container loading'
-              : checked
-              ? 'icon-container'
-              : 'icon-container checked'
-          }
-          onClick={onClickOS}>
-          <div className="os">
-            <IoLogoApple />
+          <div
+            className={
+              onDrag ? 'text ondrag' : loading ? 'text loading' : 'text'
+            }>
+            Drop your PNGs here...
           </div>
-          <div>ICNS</div>
-        </div>
-      </div>
+          <div className="switch">
+            <div
+              className={
+                loading
+                  ? 'icon-container loading'
+                  : checked
+                  ? 'icon-container checked'
+                  : 'icon-container'
+              }
+              onClick={onClickOS}>
+              <div className="os">
+                <IoLogoWindows />
+              </div>
+              <div>ICO</div>
+            </div>
+            <div
+              className={
+                loading
+                  ? 'icon-container loading'
+                  : checked
+                  ? 'icon-container'
+                  : 'icon-container checked'
+              }
+              onClick={onClickOS}>
+              <div className="os">
+                <IoLogoApple />
+              </div>
+              <div>ICNS</div>
+            </div>
+          </div>
+        </React.Fragment>
+      ) : (
+        success && <Success onClick={onClickBack} message={message} />
+      )}
     </div>
   );
 };
