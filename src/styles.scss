@@ -161,5 +161,17 @@ body,
         opacity: 0.6;
       }
     }
+
+    .back-container {
+      @include ICON_CONTAINER();
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+      }
+      &:active {
+        opacity: 0.2;
+      }
+    }
   }
 }
