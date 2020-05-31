@@ -118,6 +118,22 @@ body,
     }
   }
 
+  .result {
+    margin-top: 1em;
+    color: #ffffff;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+  }
+
+  .filename {
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+  }
+
   .switch {
     margin: 20px;
     display: flex;
