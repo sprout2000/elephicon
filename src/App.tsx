@@ -7,11 +7,12 @@ import {
   IoLogoWindows,
 } from 'react-icons/io';
 
-import 'typeface-roboto';
-import './styles.scss';
-
 import { Success } from './Success';
 import { Elephant } from './Elephant';
+import { Error } from './Error';
+
+import 'typeface-roboto';
+import './styles.scss';
 
 interface Result {
   type: string;
@@ -55,17 +56,18 @@ const App: React.FC = () => {
         setLoading(false);
 
         const message = mime ? mime : 'Unknown';
-        await ipcRenderer.invoke('error-dialog', `Invalid Format: ${message}`);
+        setMessage(`Invalid Format: ${message}`);
+        setOnError(true);
 
         return;
       }
 
       if (checked) {
         const result: Result = await ipcRenderer.invoke('make-icns', filepath);
-        await afterConvert(result);
+        afterConvert(result);
       } else {
         const result: Result = await ipcRenderer.invoke('make-ico', filepath);
-        await afterConvert(result);
+        afterConvert(result);
       }
     },
     [checked]
@@ -175,7 +177,7 @@ const App: React.FC = () => {
           <IoIosCloseCircleOutline size="2em" />
         </div>
       </div>
-      {!success ? (
+      {!success && !onError ? (
         <React.Fragment>
           <div className="icon">
             <Elephant onDrag={onDrag} loading={loading} onClick={onClickOpen} />
@@ -217,8 +219,10 @@ const App: React.FC = () => {
             </div>
           </div>
         </React.Fragment>
+      ) : success ? (
+        <Success onClick={onClickBack} message={message} />
       ) : (
-        success && <Success onClick={onClickBack} message={message} />
+        <Error onClick={onClickBack} message={message} />
       )}
     </div>
   );
