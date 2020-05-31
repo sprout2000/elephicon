@@ -1,3 +1,15 @@
+@keyframes Rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,18 +22,6 @@ body,
 #root {
   height: 100%;
   background: linear-gradient(to top, #005bea 0%, #00c6fb 100%);
-}
-
-@keyframes Rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(30deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
 }
 
 #root {
