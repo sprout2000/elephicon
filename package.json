@@ -1,16 +1,16 @@
 {
-  "name": "genicons",
-  "productName": "GenICONS",
+  "name": "elephicon",
+  "productName": "Elephicon",
   "version": "0.3.3",
   "description": " generates Apple ICNS and Microsoft ICO files from PNG files.",
   "author": "sprout2000",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:sprout2000/genicons.git"
+    "url": "git@github.com:sprout2000/elephicon.git"
   },
   "bugs": {
-    "url": "https://github.com/sprout2000/genicons/issues"
+    "url": "https://github.com/sprout2000/elephicon/issues"
   },
   "keywords": [
     "electron",

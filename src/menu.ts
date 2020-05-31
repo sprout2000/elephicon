@@ -109,7 +109,7 @@ const createMenu = (win: BrowserWindow, store: Store<TypedStore>): Menu => {
           label: 'Support URL...',
           click: async (): Promise<void> =>
             await shell.openExternal(
-              'https://github.com/sprout2000/genicons#readme'
+              'https://github.com/sprout2000/elephicon#readme'
             ),
         },
         { type: 'separator' },
@@ -146,7 +146,7 @@ const createMenu = (win: BrowserWindow, store: Store<TypedStore>): Menu => {
           label: 'Support URL...',
           click: async (): Promise<void> =>
             await shell.openExternal(
-              'https://github.com/sprout2000/genicons#readme'
+              'https://github.com/sprout2000/elephicon#readme'
             ),
         },
       ],
