@@ -8,7 +8,6 @@ import path from 'path';
 import mime from 'mime-types';
 
 import { mkico, mkicns } from './mkicons';
-import { successDarwin, successWin32 } from './dialog';
 import { TypedStore } from './store';
 import createMenu from './menu';
 
@@ -91,27 +90,6 @@ if (!gotTheLock && !isDarwin) {
     ipcMain.handle('mime-check', (_e, filepath) => mime.lookup(filepath));
     ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath, store));
     ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
-
-    ipcMain.handle('success-dialog', (_e, arg) => {
-      if (win && isDarwin) {
-        successDarwin(win, arg, store);
-      } else if (win && !isDarwin) {
-        successWin32(win, arg);
-      }
-    });
-
-    ipcMain.handle('error-dialog', async (_e, arg) => {
-      if (win) {
-        await dialog
-          .showMessageBox(win, {
-            type: 'error',
-            title: 'ERROR',
-            message: 'Error!',
-            detail: arg,
-          })
-          .catch((err) => console.log(`Something went wrong: ${err}`));
-      }
-    });
 
     ipcMain.handle('open-file-dialog', async () => {
       if (win) {
