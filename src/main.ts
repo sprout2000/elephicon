@@ -140,6 +140,10 @@ if (!gotTheLock && !isDarwin) {
       config = arg;
     });
 
+    ipcMain.once('close-window', () => {
+      if (win) win.close();
+    });
+
     win.once('ready-to-show', () => win?.show());
 
     win.webContents.once('did-finish-load', () => {

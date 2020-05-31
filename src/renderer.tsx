@@ -23,12 +23,6 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
 
-  const onClickOS = () => {
-    if (loading) return;
-
-    setChecked(!checked);
-  };
-
   const afterConvert = async (result: Result): Promise<void> => {
     if (result.type === 'failed') {
       setLoading(false);
@@ -106,6 +100,16 @@ const App: React.FC = () => {
     convert(filepath);
   };
 
+  const onClickOS = () => {
+    if (loading) return;
+
+    setChecked(!checked);
+  };
+
+  const onClickClose = () => {
+    ipcRenderer.send('close-window');
+  };
+
   const onStart = useCallback(
     (_e: Event, filepath: string): void => {
       setLoading(true);
@@ -155,7 +159,7 @@ const App: React.FC = () => {
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}>
       <div className="dragzone">
-        <div className="close-button" title="Close">
+        <div className="close-button" title="Close" onClick={onClickClose}>
           <IoIosCloseCircleOutline size="2em" />
         </div>
       </div>
