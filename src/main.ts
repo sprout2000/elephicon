@@ -9,7 +9,7 @@ import mime from 'mime-types';
 
 import { mkico, mkicns } from './mkicons';
 import { TypedStore } from './store';
-import createMenu from './menu';
+import { createMenu } from './menu';
 
 console.log = log.log;
 autoUpdater.logger = log;
@@ -30,7 +30,6 @@ const store = new Store<TypedStore>({
     y: undefined,
     quality: 1,
     bmp: true,
-    open: false,
   },
 });
 
@@ -145,36 +144,38 @@ if (!gotTheLock && !isDarwin) {
       loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS);
     }
 
-    const menu = createMenu(win, store);
-    Menu.setApplicationMenu(menu);
+    if (isDarwin) {
+      const menu = createMenu(win, store);
+      Menu.setApplicationMenu(menu);
 
-    if (isDarwin) autoUpdater.checkForUpdatesAndNotify();
+      autoUpdater.checkForUpdatesAndNotify();
 
-    autoUpdater.once('error', (_e, err) => {
-      log.info(`Error in auto-updater: ${err}`);
-    });
+      autoUpdater.once('error', (_e, err) => {
+        log.info(`Error in auto-updater: ${err}`);
+      });
 
-    autoUpdater.once('update-downloaded', async () => {
-      log.info(`Update downloaded...`);
+      autoUpdater.once('update-downloaded', async () => {
+        log.info(`Update downloaded...`);
 
-      if (win) {
-        await dialog
-          .showMessageBox(win, {
-            type: 'info',
-            buttons: ['Restart', 'Cancel'],
-            defaultId: 0,
-            cancelId: 1,
-            title: 'Update',
-            message: 'Updates are available!',
-            detail:
-              'We have finished downloading the latest updates.\nDo you want to install the updates now?',
-          })
-          .then((result) => {
-            result.response === 0 && autoUpdater.quitAndInstall();
-          })
-          .catch((err) => log.info(`Error in showMessageBox: ${err}`));
-      }
-    });
+        if (win) {
+          await dialog
+            .showMessageBox(win, {
+              type: 'info',
+              buttons: ['Restart', 'Cancel'],
+              defaultId: 0,
+              cancelId: 1,
+              title: 'Update',
+              message: 'Updates are available!',
+              detail:
+                'We have finished downloading the latest updates.\nDo you want to install the updates now?',
+            })
+            .then((result) => {
+              result.response === 0 && autoUpdater.quitAndInstall();
+            })
+            .catch((err) => log.info(`Error in showMessageBox: ${err}`));
+        }
+      });
+    }
 
     win.once('close', () => {
       store.set('state', config);

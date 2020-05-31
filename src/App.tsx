@@ -88,7 +88,7 @@ const App: React.FC = () => {
     setOnDrag(false);
   };
 
-  const onDrop = (e: React.DragEvent<HTMLDivElement>): void => {
+  const onDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
     preventDefault(e);
     setOnDrag(false);
 
@@ -96,7 +96,7 @@ const App: React.FC = () => {
       setLoading(true);
       const file = e.dataTransfer.files[0];
 
-      convert(file.path);
+      await convert(file.path);
     }
   };
 
@@ -106,7 +106,7 @@ const App: React.FC = () => {
     if (!filepath) return;
 
     setLoading(true);
-    convert(filepath);
+    await convert(filepath);
   };
 
   const onClickOS = () => {
@@ -125,9 +125,9 @@ const App: React.FC = () => {
   };
 
   const onStart = useCallback(
-    (_e: Event, filepath: string): void => {
+    async (_e: Event, filepath: string): Promise<void> => {
       setLoading(true);
-      convert(filepath);
+      await convert(filepath);
     },
     [convert]
   );
@@ -141,11 +141,11 @@ const App: React.FC = () => {
   }, [onStart]);
 
   useEffect(() => {
-    ipcRenderer.on('menu-open', (_e, filepath) => {
+    ipcRenderer.on('menu-open', async (_e, filepath) => {
       if (!filepath) return;
 
       setLoading(true);
-      convert(filepath);
+      await convert(filepath);
     });
 
     return (): void => {
