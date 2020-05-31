@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/sprout2000/elephicon/compare/v0.4.0...v0.4.1) (2020-05-31)
+
+
+### Bug Fixes
+
+* case failure of Elephant component ([e11c6ac](https://github.com/sprout2000/elephicon/commit/e11c6acfd7518d1536146bfe9ca5fccf2a35b8fa))
+
 ## [0.4.0](https://github.com/sprout2000/elephicon/compare/v0.3.3...v0.4.0) (2020-05-31)
 
 
