@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/sprout2000/elephicon/compare/v0.3.3...v0.4.0) (2020-05-31)
+
+
+### Features
+
+* apply new blue theme ([1c32e68](https://github.com/sprout2000/elephicon/commit/1c32e68af528151c1d06ea0373e769b1775961e2))
+* create Error.tsx ([d395b8e](https://github.com/sprout2000/elephicon/commit/d395b8e6229721cf8ef1147799cbe0a272d1c654))
+* create Success.tsx ([1e5dd20](https://github.com/sprout2000/elephicon/commit/1e5dd202dee5ee81a69503b4fd4966bc5da1f2ce))
+* fix windows menu ([11797ca](https://github.com/sprout2000/elephicon/commit/11797caae0fcb98e0ed0153551690806c1ee3a0b))
+* implement onClickClose() ([f5f524b](https://github.com/sprout2000/elephicon/commit/f5f524b21e72800b3a5178fd9c75b0e5bbf10d41))
+* rename to 'Elephicon' ([334139f](https://github.com/sprout2000/elephicon/commit/334139f731232e42402ebac3f7d67a25c1c9e532))
+* update icons ([e9985b3](https://github.com/sprout2000/elephicon/commit/e9985b30072e6da9fe9a94d73c9b00c2c8a1a367))
+* use Error component ([17b5b78](https://github.com/sprout2000/elephicon/commit/17b5b7862d93c75201f8486dbb46e6e541030148))
+* use Success component ([9f4f5cd](https://github.com/sprout2000/elephicon/commit/9f4f5cd8d9f9f86af65a453af5b8ccc08ec83a26))
+
+
+### Bug Fixes
+
+* case for Elephant.tsx ([362dcfb](https://github.com/sprout2000/elephicon/commit/362dcfbb1a8ce29bc21c2591cbc77056acf44156))
+
 ### [0.3.3](https://github.com/sprout2000/genicons/compare/v0.3.2...v0.3.3) (2020-05-27)
 
 ### [0.3.2](https://github.com/sprout2000/genicons/compare/v0.3.1...v0.3.2) (2020-05-27)
