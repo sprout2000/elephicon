@@ -4,7 +4,7 @@ builder
   .build({
     config: {
       appId: process.env.APP_BUNDLE_ID,
-      productName: 'GenICONS',
+      productName: 'Elephicon',
       copyright: 'Copyright (C) 2020 sprout2000.',
       artifactName: '${productName}-${version}-${platform}.${ext}',
       files: ['dist/**/*'],
@@ -25,9 +25,9 @@ builder
         target: ['dmg', 'zip'],
         icon: 'assets/icon.icns',
         extendInfo: {
-          CFBundleName: 'GenICONS',
-          CFBundleDisplayName: 'GenICONS',
-          CFBundleExecutable: 'GenICONS',
+          CFBundleName: 'Elephicon',
+          CFBundleDisplayName: 'Elephicon',
+          CFBundleExecutable: 'Elephicon',
           CFBundlePackageType: 'APPL',
           CFBundleDocumentTypes: [
             {
