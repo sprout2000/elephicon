@@ -1,3 +1,38 @@
+@keyframes Rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@mixin ICON_CONTAINER {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .os {
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin: 10px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,106 +44,147 @@ html,
 body,
 #root {
   height: 100%;
+  background: linear-gradient(to top, #005bea 0%, #00c6fb 100%);
 }
 
-@keyframes Spinner {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .container {
-  height: 100%;
+  width: 100%;
+  height: 320px;
   overflow: hidden;
-  background-color: #1b2a41;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  user-select: none;
+  position: relative;
 
-  .drag-zone {
-    position: fixed;
+  .dragzone {
+    position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 24px;
+    height: 32px;
     -webkit-app-region: drag;
     z-index: 1000;
-  }
 
-  .initial {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #00acc1;
-    fill: #a0eaf9;
-    position: relative;
+    .close-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 6px;
+      color: #ffffff;
+      -webkit-app-region: no-drag;
 
-    .logo {
       &:hover {
+        opacity: 0.6;
         cursor: pointer;
       }
       &:active {
-        fill: #00acc1;
-      }
-    }
-
-    span {
-      color: #ffffff;
-    }
-
-    &.drag {
-      fill: #205a79;
-      color: #205a79;
-
-      span {
-        color: #205a79;
-      }
-    }
-
-    .message {
-      margin-top: 1em;
-    }
-
-    .mode {
-      position: absolute;
-      bottom: 20px;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-
-      .switch {
-        margin: 0 10px;
-      }
-
-      span {
-        color: #ffffff;
-        font-size: 14px;
-        font-weight: 700;
-
-        &:hover {
-          cursor: pointer;
-        }
-
-        &.checked {
-          color: #ec407a;
-        }
+        opacity: 0.3;
       }
     }
   }
 
-  .loading {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #00acc1;
+  .icon {
+    margin: 0;
+    padding: 0;
 
-    @media (prefers-reduced-motion: no-preference) {
-      .spinner {
-        animation: Spinner infinite 5s linear;
+    .elephant {
+      fill: #ffffff;
+
+      &:hover {
+        opacity: 0.9;
+        cursor: pointer;
+      }
+      &:active {
+        opacity: 0.6;
+      }
+
+      &.loading {
+        transform-origin: 80% 90%;
+        animation: Rotate 3s infinite;
+      }
+      &.ondrag {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .text {
+    font-size: 24px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    color: #ffffff;
+
+    &.loading {
+      opacity: 0.4;
+    }
+    &.ondrag {
+      opacity: 0.4;
+    }
+  }
+
+  .result {
+    margin-top: 1em;
+    color: #ffffff;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+  }
+
+  .error {
+    margin-top: 1em;
+    color: #ffffff;
+    width: 300px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .filename {
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+  }
+
+  .switch {
+    margin: 20px;
+    display: flex;
+
+    .icon-container {
+      @include ICON_CONTAINER();
+      transition: opacity 0.3s linear;
+
+      &.loading {
+        opacity: 0.4;
+      }
+
+      &.checked {
+        opacity: 0.6;
+      }
+    }
+
+    .back-container {
+      @include ICON_CONTAINER();
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+      }
+      &:active {
+        opacity: 0.2;
       }
     }
   }

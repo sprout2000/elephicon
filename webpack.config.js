@@ -63,7 +63,7 @@ const renderer = {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
   },
   entry: {
-    renderer: './src/renderer.tsx',
+    renderer: './src/App.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
