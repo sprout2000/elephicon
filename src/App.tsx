@@ -8,7 +8,7 @@ import {
 } from 'react-icons/io';
 
 import { Success } from './Success';
-import { Elephant } from './AnotherName';
+import { Elephant } from './Elephant';
 import { Error } from './Error';
 
 import 'typeface-roboto';
