@@ -11,43 +11,7 @@ import Store from 'electron-store';
 import { TypedStore } from './store';
 
 const createMenu = (win: BrowserWindow, store: Store<TypedStore>): Menu => {
-  const darwin = process.platform === 'darwin';
-
-  const template: MenuItemConstructorOptions[] = [
-    {
-      label: '&File',
-      submenu: [
-        {
-          label: 'Open',
-          accelerator: 'CmdOrCtrl+O',
-          click: async (): Promise<void> => {
-            await dialog
-              .showOpenDialog(win, {
-                properties: ['openFile'],
-                title: 'Select',
-                filters: [
-                  {
-                    name: 'PNG File',
-                    extensions: ['png'],
-                  },
-                ],
-              })
-              .then((result): void => {
-                if (result.canceled) return;
-                win.webContents.send('menu-open', result.filePaths[0]);
-              })
-              .catch((err): void => console.log(err));
-          },
-        },
-        { type: 'separator' },
-        {
-          label: darwin ? 'Close' : 'Quit',
-          accelerator: darwin ? 'Cmd+W' : 'Ctrl+Q',
-          role: darwin ? 'close' : 'quit',
-        },
-      ],
-    },
-  ];
+  const isDarwin = process.platform === 'darwin';
 
   const preferences: MenuItemConstructorOptions = {
     label: '&Preferences',
@@ -100,8 +64,43 @@ const createMenu = (win: BrowserWindow, store: Store<TypedStore>): Menu => {
     ],
   };
 
-  if (!darwin) {
-    template.push(preferences, {
+  const template_win: MenuItemConstructorOptions[] = [
+    {
+      label: '&File',
+      submenu: [
+        {
+          label: 'Open',
+          accelerator: 'Ctrl+O',
+          click: async (): Promise<void> => {
+            await dialog
+              .showOpenDialog(win, {
+                properties: ['openFile'],
+                title: 'Select',
+                filters: [
+                  {
+                    name: 'PNG File',
+                    extensions: ['png'],
+                  },
+                ],
+              })
+              .then((result): void => {
+                if (result.canceled) return;
+                win.webContents.send('menu-open', result.filePaths[0]);
+              })
+              .catch((err): void => console.log(err));
+          },
+        },
+        { type: 'separator' },
+        preferences,
+        { type: 'separator' },
+        {
+          label: 'Quit',
+          accelerator: 'Ctrl+Q',
+          role: 'quit',
+        },
+      ],
+    },
+    {
       label: '&Help',
       role: 'help',
       submenu: [
@@ -119,11 +118,11 @@ const createMenu = (win: BrowserWindow, store: Store<TypedStore>): Menu => {
           click: (): void => app.showAboutPanel(),
         },
       ],
-    });
-  }
+    },
+  ];
 
-  if (darwin) {
-    template.unshift({
+  const template_mac: MenuItemConstructorOptions[] = [
+    {
       label: app.name,
       submenu: [
         { role: 'about' },
@@ -137,8 +136,43 @@ const createMenu = (win: BrowserWindow, store: Store<TypedStore>): Menu => {
         { type: 'separator' },
         { role: 'quit' },
       ],
-    });
-    template.push({
+    },
+    {
+      label: 'File',
+      submenu: [
+        {
+          label: 'Open',
+          accelerator: 'Cmd+O',
+          click: async (): Promise<void> => {
+            await dialog
+              .showOpenDialog(win, {
+                properties: ['openFile'],
+                title: 'Select',
+                filters: [
+                  {
+                    name: 'PNG File',
+                    extensions: ['png'],
+                  },
+                ],
+              })
+              .then((result): void => {
+                if (result.canceled) return;
+                win.webContents.send('menu-open', result.filePaths[0]);
+              })
+              .catch((err): void => console.log(err));
+          },
+        },
+        { type: 'separator' },
+        preferences,
+        { type: 'separator' },
+        {
+          label: 'Close',
+          accelerator: 'Cmd+W',
+          role: 'close',
+        },
+      ],
+    },
+    {
       label: 'Help',
       role: 'help',
       submenu: [
@@ -150,9 +184,10 @@ const createMenu = (win: BrowserWindow, store: Store<TypedStore>): Menu => {
             ),
         },
       ],
-    });
-  }
+    },
+  ];
 
+  const template = isDarwin ? template_mac : template_win;
   const menu = Menu.buildFromTemplate(template);
 
   return menu;
