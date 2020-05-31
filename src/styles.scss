@@ -10,6 +10,18 @@
   }
 }
 
+@mixin OS {
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin: 10px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 * {
   margin: 0;
   padding: 0;
