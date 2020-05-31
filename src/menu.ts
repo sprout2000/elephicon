@@ -10,7 +10,10 @@ import Store from 'electron-store';
 
 import { TypedStore } from './store';
 
-const createMenu = (win: BrowserWindow, store: Store<TypedStore>): Menu => {
+export const createMenu = (
+  win: BrowserWindow,
+  store: Store<TypedStore>
+): Menu => {
   const template: MenuItemConstructorOptions[] = [
     {
       label: app.name,
@@ -128,5 +131,3 @@ const createMenu = (win: BrowserWindow, store: Store<TypedStore>): Menu => {
 
   return menu;
 };
-
-export default createMenu;

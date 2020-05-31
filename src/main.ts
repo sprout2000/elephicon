@@ -9,7 +9,7 @@ import mime from 'mime-types';
 
 import { mkico, mkicns } from './mkicons';
 import { TypedStore } from './store';
-import createMenu from './menu';
+import { createMenu } from './menu';
 
 console.log = log.log;
 autoUpdater.logger = log;
