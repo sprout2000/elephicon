@@ -76,7 +76,7 @@ if (!gotTheLock && !isDarwin) {
       height: 320,
       frame: false,
       show: false,
-      backgroundColor: 'transparent',
+      backgroundColor: '#00c6fb',
       webPreferences: {
         enableRemoteModule: false,
         nodeIntegration: false,
