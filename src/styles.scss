@@ -137,6 +137,20 @@ body,
     font-weight: 100;
   }
 
+  .error {
+    margin-top: 1em;
+    color: #ffffff;
+    width: 300px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
   .filename {
     width: 300px;
     overflow: hidden;
