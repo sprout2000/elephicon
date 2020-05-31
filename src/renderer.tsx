@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 
-import Switch from 'react-switch';
-import { BsArrowRepeat } from 'react-icons/bs';
+import { Elephant } from './elephant';
+import {
+  IoIosCloseCircleOutline,
+  IoLogoApple,
+  IoLogoWindows,
+} from 'react-icons/io';
 
-import Logo from './logo';
 import 'typeface-roboto';
 import './styles.scss';
 
@@ -20,8 +23,10 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
 
-  const isDarwin = async (): Promise<boolean> => {
-    return ipcRenderer.invoke('platform');
+  const onClickOS = () => {
+    if (loading) return;
+
+    setChecked(!checked);
   };
 
   const afterConvert = async (result: Result): Promise<void> => {
@@ -64,14 +69,6 @@ const App: React.FC = () => {
     },
     [checked]
   );
-
-  const onClick = (): void => {
-    setChecked(!checked);
-  };
-
-  const onChange = (check: boolean): void => {
-    setChecked(check);
-  };
 
   const preventDefault = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
@@ -157,38 +154,48 @@ const App: React.FC = () => {
       onDragEnter={onDragOver}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}>
-      {isDarwin && <div className="drag-zone"></div>}
-      {loading ? (
-        <div className="loading">
-          <BsArrowRepeat size={64} className="spinner" />
+      <div className="dragzone">
+        <div className="close-button" title="Close">
+          <IoIosCloseCircleOutline size="2em" />
         </div>
-      ) : (
-        <div className={onDrag ? 'initial drag' : 'initial'}>
-          <Logo onClickOpen={onClickOpen} />
-          <div className="message">
-            Drop your <span>PNG</span> files here...
+      </div>
+      <div className="icon">
+        <Elephant onDrag={onDrag} loading={loading} onClick={onClickOpen} />
+      </div>
+      <div
+        className={onDrag ? 'text ondrag' : loading ? 'text loading' : 'text'}>
+        Drop your PNGs here...
+      </div>
+      <div className="switch">
+        <div
+          className={
+            loading
+              ? 'icon-container loading'
+              : checked
+              ? 'icon-container checked'
+              : 'icon-container'
+          }
+          onClick={onClickOS}>
+          <div className="os">
+            <IoLogoWindows />
           </div>
-          <div className="mode">
-            <span onClick={onClick} className={checked ? '' : 'checked'}>
-              ICO
-            </span>
-            <Switch
-              onChange={onChange}
-              checked={checked}
-              checkedIcon={false}
-              uncheckedIcon={false}
-              height={21}
-              width={42}
-              onColor="#6b6e7b"
-              offColor="#6b6e7b"
-              className="switch"
-            />
-            <span onClick={onClick} className={checked ? 'checked' : ''}>
-              ICNS
-            </span>
-          </div>
+          <div>ICO</div>
         </div>
-      )}
+        <div
+          className={
+            loading
+              ? 'icon-container loading'
+              : checked
+              ? 'icon-container'
+              : 'icon-container checked'
+          }
+          onClick={onClickOS}>
+          <div className="os">
+            <IoLogoApple />
+          </div>
+          <div>ICNS</div>
+        </div>
+      </div>
     </div>
   );
 };
