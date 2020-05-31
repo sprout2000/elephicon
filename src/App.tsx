@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Elephant } from './elephant';
+import { Elephant } from './Elephant';
 import {
   IoIosCloseCircleOutline,
   IoLogoApple,
