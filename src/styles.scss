@@ -31,6 +31,7 @@ body,
 }
 
 .container {
+  width: 100%;
   height: 320px;
   overflow: hidden;
   display: flex;
@@ -38,9 +39,10 @@ body,
   justify-content: flex-end;
   align-items: center;
   user-select: none;
+  position: relative;
 
   .dragzone {
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100%;
     height: 32px;
@@ -48,11 +50,12 @@ body,
     z-index: 1000;
 
     .close-button {
-      position: fixed;
+      position: absolute;
       top: 0;
       right: 0;
       padding: 6px;
       color: #ffffff;
+      -webkit-app-region: no-drag;
 
       &:hover {
         opacity: 0.6;
