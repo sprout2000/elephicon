@@ -31,7 +31,6 @@ builder
         identityName: process.env.IDENTITY_NAME,
         publisher: process.env.PUBLISHER,
         publisherDisplayName: 'sprout2000',
-        addAutoLaunchExtension: false,
       },
     },
   })
