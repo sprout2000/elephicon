@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ReactDOM from 'react-dom';
 
 import {
   IoIosCloseCircleOutline,
@@ -10,9 +9,6 @@ import {
 import { Success } from './Success';
 import { Elephant } from './Elephant';
 import { Error } from './Error';
-
-import 'typeface-roboto';
-import './styles.scss';
 
 interface Result {
   type: string;
@@ -234,4 +230,4 @@ const App: React.FC = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default App;
