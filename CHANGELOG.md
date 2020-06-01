@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/sprout2000/elephicon/compare/v0.4.3...v0.5.0) (2020-06-01)
+
+
+### Features
+
+* create Context Menu ([d95ecfb](https://github.com/sprout2000/elephicon/commit/d95ecfb05742dd4a6b0f6d622c46cb76a4023850))
+
+
+### Bug Fixes
+
+* set resizable: false ([6360d4b](https://github.com/sprout2000/elephicon/commit/6360d4b352a32b326e9c807761f2339b7e62bb2c))
+
 ### [0.4.3](https://github.com/sprout2000/elephicon/compare/v0.4.2...v0.4.3) (2020-06-01)
 
 ### [0.4.2](https://github.com/sprout2000/elephicon/compare/v0.4.1...v0.4.2) (2020-06-01)
