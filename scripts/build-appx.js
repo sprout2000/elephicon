@@ -9,7 +9,7 @@ builder
       artifactName: '${productName}-${version}-${platform}.${ext}',
       files: ['dist/**/*'],
       directories: {
-        buildResources: 'assets',
+        buildResources: 'build',
         output: 'release',
       },
       asar: true,
