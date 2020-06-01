@@ -19,7 +19,7 @@ export const contextMenu = (
 ): Menu => {
   const template: MenuItemConstructorOptions[] = [
     {
-      label: '&File',
+      label: 'File',
       submenu: [
         {
           label: 'Open...',
