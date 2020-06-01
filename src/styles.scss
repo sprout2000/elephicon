@@ -3,7 +3,7 @@
     transform: rotate(0deg);
   }
   50% {
-    transform: rotate(30deg);
+    transform: rotate(15deg);
   }
   100% {
     transform: rotate(0deg);
@@ -107,7 +107,7 @@ body,
 
       &.loading {
         transform-origin: 80% 90%;
-        animation: Rotate 3s infinite;
+        animation: Rotate 1.5s infinite;
       }
       &.ondrag {
         opacity: 0.6;
