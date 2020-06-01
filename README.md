@@ -12,7 +12,7 @@ The ideal input is a 24 bit *PNG* with an alpha channel (RGBA) with *1024×1024*
 
 If you only need to create ICO files *256×256* pixels are sufficient. 
 
-![result04](https://user-images.githubusercontent.com/52094761/83347755-35071300-a362-11ea-9345-5476a4d40af6.gif)
+![result05](https://user-images.githubusercontent.com/52094761/83366291-08e2a500-a3e9-11ea-8294-b639fa23d44b.gif)
 
 ## Embedded Sizes
 
