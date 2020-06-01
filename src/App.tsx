@@ -124,6 +124,13 @@ const App: React.FC = () => {
     setOnError(false);
   };
 
+  const onContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (loading) return;
+
+    e.preventDefault();
+    ipcRenderer.send('open-contextmenu');
+  };
+
   const onStart = useCallback(
     async (_e: Event, filepath: string): Promise<void> => {
       setLoading(true);
@@ -168,6 +175,7 @@ const App: React.FC = () => {
   return (
     <div
       className="container"
+      onContextMenu={onContextMenu}
       onDrop={onDrop}
       onDragEnter={onDragOver}
       onDragOver={onDragOver}

@@ -9,7 +9,8 @@ import mime from 'mime-types';
 
 import { mkico, mkicns } from './mkicons';
 import { TypedStore } from './store';
-import { createMenu } from './menu';
+import { template } from './template';
+import { contextMenu } from './contextmenu';
 
 console.log = log.log;
 autoUpdater.logger = log;
@@ -148,7 +149,7 @@ if (!gotTheLock && !isDarwin) {
     }
 
     if (isDarwin) {
-      const menu = createMenu(win, store);
+      const menu = Menu.buildFromTemplate(template);
       Menu.setApplicationMenu(menu);
 
       autoUpdater.checkForUpdatesAndNotify();
@@ -179,6 +180,9 @@ if (!gotTheLock && !isDarwin) {
         }
       });
     }
+
+    const menu = contextMenu(win, store);
+    ipcMain.on('open-contextmenu', () => menu.popup());
 
     win.once('close', () => {
       store.set('state', config);
