@@ -149,8 +149,8 @@ if (!gotTheLock && !isDarwin) {
     }
 
     if (isDarwin) {
-      const menu = Menu.buildFromTemplate(template);
-      Menu.setApplicationMenu(menu);
+      const mainMenu = Menu.buildFromTemplate(template);
+      Menu.setApplicationMenu(mainMenu);
 
       autoUpdater.checkForUpdatesAndNotify();
 
