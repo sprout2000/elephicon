@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.1](https://github.com/sprout2000/elephicon/compare/v0.5.0...v0.5.1) (2020-06-02)
+
+
+### Features
+
+* frame: true & no context menu ([2fd04df](https://github.com/sprout2000/elephicon/commit/2fd04df27274e1e67221c75f49ad0aba056d2c83))
+
+
+### Bug Fixes
+
+* appx assets handling ([854ed70](https://github.com/sprout2000/elephicon/commit/854ed702019818f27ee4b931dd002e53ba200ba5))
+
 ## [0.5.0](https://github.com/sprout2000/elephicon/compare/v0.4.3...v0.5.0) (2020-06-01)
 
 
