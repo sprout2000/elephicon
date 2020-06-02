@@ -10,6 +10,10 @@ body {
   padding: 40px 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   background-color: #ffffff;
   width: 80vw;
@@ -26,13 +30,43 @@ body {
 .title {
   color: #33415c;
   font-size: 48px;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-weight: 100;
 }
 
 .lead {
   margin-top: 1em;
   color: #33415c;
+  font-size: 24px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+}
+
+.banner {
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.os {
+  width: 300px;
+  height: 50px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #1d3557;
+}
+
+.download {
+  margin-left: 0.5em;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
 .usage {
@@ -43,6 +77,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
 }
 
 .privacy {
@@ -60,7 +96,7 @@ body {
 
 h3 {
   font-family: "Roboto", sans-serif;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .paragraph {
@@ -68,7 +104,7 @@ h3 {
   max-width: 640px;
   margin-bottom: 1em;
   font-family: "Roboto", sans-serif;
-  font-weight: 400;
+  font-weight: 100;
 }
 
 .policy {
@@ -89,6 +125,8 @@ h3 {
 
 .size {
   color: #a8dadc;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
 .app-name {
