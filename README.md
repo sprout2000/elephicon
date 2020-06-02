@@ -50,8 +50,15 @@ You will find the installer in `release` directory.
 
 ## Download
 
+
+### macOS
+
 You can download the latest version of *Elephicon* from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
+
+### Windows10
+
+Download the latest version for Windows10 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
 
 ## Security
 
