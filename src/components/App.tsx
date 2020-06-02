@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import {
-  IoIosCloseCircleOutline,
-  IoLogoApple,
-  IoLogoWindows,
-} from 'react-icons/io';
+import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
 
 import { Success } from './Success';
 import { Elephant } from './Elephant';
@@ -111,20 +107,9 @@ const App: React.FC = () => {
     setChecked(!checked);
   };
 
-  const onClickClose = () => {
-    ipcRenderer.send('close-window');
-  };
-
   const onClickBack = () => {
     setSuccess(false);
     setOnError(false);
-  };
-
-  const onContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (loading) return;
-
-    e.preventDefault();
-    ipcRenderer.send('open-contextmenu');
   };
 
   const onStart = useCallback(
@@ -171,14 +156,10 @@ const App: React.FC = () => {
   return (
     <div
       className="container"
-      onContextMenu={onContextMenu}
       onDrop={onDrop}
       onDragEnter={onDragOver}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}>
-      <div className="close-button" title="Close" onClick={onClickClose}>
-        <IoIosCloseCircleOutline size="2em" />
-      </div>
       {!success && !onError ? (
         <React.Fragment>
           <div className="icon">
