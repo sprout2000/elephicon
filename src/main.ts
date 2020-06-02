@@ -9,7 +9,8 @@ import mime from 'mime-types';
 
 import { mkico, mkicns } from './mkicons';
 import { TypedStore } from './store';
-import { createMenu } from './menu';
+import { template } from './template';
+import { contextMenu } from './contextmenu';
 
 console.log = log.log;
 autoUpdater.logger = log;
@@ -72,12 +73,11 @@ if (!gotTheLock && !isDarwin) {
       y: store.get('y'),
       width: 360,
       height: 320,
+      show: false,
+      frame: false,
       resizable: false,
       maximizable: false,
       fullscreenable: false,
-      autoHideMenuBar: true,
-      titleBarStyle: 'hidden',
-      show: false,
       backgroundColor: '#00c6fb',
       webPreferences: {
         enableRemoteModule: false,
@@ -125,6 +125,10 @@ if (!gotTheLock && !isDarwin) {
       if (win) win.close();
     });
 
+    ipcMain.once('close-window', () => {
+      if (win) win.close();
+    });
+
     win.once('ready-to-show', () => win?.show());
 
     win.webContents.once('did-finish-load', () => {
@@ -149,6 +153,9 @@ if (!gotTheLock && !isDarwin) {
     }
 
     if (isDarwin) {
+      const mainMenu = Menu.buildFromTemplate(template);
+      Menu.setApplicationMenu(mainMenu);
+
       autoUpdater.checkForUpdatesAndNotify();
 
       autoUpdater.once('error', (_e, err) => {
@@ -178,8 +185,8 @@ if (!gotTheLock && !isDarwin) {
       });
     }
 
-    const menu = createMenu(win, store);
-    Menu.setApplicationMenu(menu);
+    const menu = contextMenu(win, store);
+    ipcMain.on('open-contextmenu', () => menu.popup());
 
     win.once('close', () => {
       store.set('state', config);
