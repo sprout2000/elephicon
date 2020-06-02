@@ -25,6 +25,8 @@ const App: React.FC = () => {
   const [onError, setOnError] = useState(false);
   const [message, setMessage] = useState('');
 
+  const isDarwin = ipcRenderer.invoke('platform');
+
   const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
       setLoading(false);
@@ -170,7 +172,7 @@ const App: React.FC = () => {
 
   return (
     <div
-      className="container"
+      className={isDarwin ? 'container_darwin' : 'container'}
       onContextMenu={onContextMenu}
       onDrop={onDrop}
       onDragEnter={onDragOver}

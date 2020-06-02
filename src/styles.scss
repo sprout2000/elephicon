@@ -15,6 +15,7 @@
   text-align: center;
   font-family: "Roboto", sans-serif;
   font-weight: 100;
+  -webkit-app-region: no-drag;
 
   &:hover {
     cursor: pointer;
@@ -33,18 +34,7 @@
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-}
-
-.container {
+@mixin CONTAINER {
   background: linear-gradient(to top, #005bea 0%, #00c6fb 100%);
   height: 100%;
   overflow: hidden;
@@ -56,12 +46,6 @@ body,
   position: relative;
 
   .dragzone {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 32px;
-    -webkit-app-region: drag;
-
     .close-button {
       position: absolute;
       top: 0;
@@ -86,6 +70,7 @@ body,
 
     .elephant {
       fill: #ffffff;
+      -webkit-app-region: no-drag;
 
       &:hover {
         opacity: 0.9;
@@ -178,4 +163,32 @@ body,
       }
     }
   }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.container {
+  @include CONTAINER();
+
+  .dragzone {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 32px;
+    -webkit-app-region: drag;
+  }
+}
+
+.container_darwin {
+  @include CONTAINER();
+  -webkit-app-region: drag;
 }
