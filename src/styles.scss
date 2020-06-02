@@ -15,7 +15,6 @@
   text-align: center;
   font-family: "Roboto", sans-serif;
   font-weight: 100;
-  -webkit-app-region: no-drag;
 
   &:hover {
     cursor: pointer;
@@ -52,7 +51,6 @@
       right: 0;
       padding: 6px;
       color: #ffffff;
-      -webkit-app-region: no-drag;
 
       &:hover {
         opacity: 0.6;
@@ -79,7 +77,6 @@
       &:active {
         opacity: 0.6;
       }
-
       &.loading {
         transform-origin: 80% 90%;
         animation: Rotate 1.5s infinite;
@@ -145,7 +142,6 @@
       &.loading {
         opacity: 0.4;
       }
-
       &.checked {
         opacity: 0.6;
       }
@@ -191,4 +187,26 @@ body,
 .container_darwin {
   @include CONTAINER();
   -webkit-app-region: drag;
+
+  .dragzone {
+    .close-button {
+      -webkit-app-region: no-drag;
+    }
+  }
+
+  .icon {
+    .elephant {
+      -webkit-app-region: no-drag;
+    }
+  }
+
+  .switch {
+    .icon-container {
+      -webkit-app-region: no-drag;
+    }
+
+    .back-container {
+      -webkit-app-region: no-drag;
+    }
+  }
 }
