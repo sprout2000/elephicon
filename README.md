@@ -14,7 +14,7 @@ If you only need to create ICO files *256×256* pixels are sufficient.
 
 ![result06](https://user-images.githubusercontent.com/52094761/83374029-50772a00-a405-11ea-897b-bba19e439b0c.gif)
 
-On *Windows*, you can also change the settings from the menu bar shown by hitting `Alt` key.
+You can also configure the settings by `right-click` context menu.
 
 ## Embedded Sizes
 
