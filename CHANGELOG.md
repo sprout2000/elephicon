@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/sprout2000/elephicon/compare/v0.5.1...v0.6.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* context menu issue on Windows ([adc2891](https://github.com/sprout2000/elephicon/commit/adc28915af9f0e06bc412e03452331e26a710c16))
+
 ### [0.5.1](https://github.com/sprout2000/elephicon/compare/v0.5.0...v0.5.1) (2020-06-02)
 
 
