@@ -14,7 +14,7 @@ builder
         },
       ],
       directories: {
-        buildResources: 'build',
+        buildResources: 'assets',
         output: 'release',
       },
       asar: true,
