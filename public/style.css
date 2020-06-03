@@ -11,6 +11,7 @@ body {
 }
 
 a {
+  color: rgb(0, 138, 243);
   text-decoration: none;
 }
 
@@ -129,8 +130,9 @@ h3 {
   font-weight: 400;
 }
 
-.app-name {
-  color: rgb(26, 207, 139);
+.issues {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
 .github {
