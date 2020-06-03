@@ -33,18 +33,7 @@
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-}
-
-.container {
+@mixin CONTAINER {
   background: linear-gradient(to top, #005bea 0%, #00c6fb 100%);
   height: 100%;
   overflow: hidden;
@@ -56,19 +45,12 @@ body,
   position: relative;
 
   .dragzone {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 32px;
-    -webkit-app-region: drag;
-
     .close-button {
       position: absolute;
       top: 0;
       right: 0;
       padding: 6px;
       color: #ffffff;
-      -webkit-app-region: no-drag;
 
       &:hover {
         opacity: 0.6;
@@ -86,6 +68,7 @@ body,
 
     .elephant {
       fill: #ffffff;
+      -webkit-app-region: no-drag;
 
       &:hover {
         opacity: 0.9;
@@ -94,7 +77,6 @@ body,
       &:active {
         opacity: 0.6;
       }
-
       &.loading {
         transform-origin: 80% 90%;
         animation: Rotate 1.5s infinite;
@@ -160,7 +142,6 @@ body,
       &.loading {
         opacity: 0.4;
       }
-
       &.checked {
         opacity: 0.6;
       }
@@ -176,6 +157,56 @@ body,
       &:active {
         opacity: 0.2;
       }
+    }
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.container {
+  @include CONTAINER();
+
+  .dragzone {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 32px;
+    -webkit-app-region: drag;
+  }
+}
+
+.container_darwin {
+  @include CONTAINER();
+  -webkit-app-region: drag;
+
+  .dragzone {
+    .close-button {
+      -webkit-app-region: no-drag;
+    }
+  }
+
+  .icon {
+    .elephant {
+      -webkit-app-region: no-drag;
+    }
+  }
+
+  .switch {
+    .icon-container {
+      -webkit-app-region: no-drag;
+    }
+
+    .back-container {
+      -webkit-app-region: no-drag;
     }
   }
 }

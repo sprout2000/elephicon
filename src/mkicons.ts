@@ -41,10 +41,8 @@ export const mkico = async (
       console.log(`Quality: ${num}`);
       console.log(`BMP: ${bmp}`);
 
-      const buf = createICO(buffer, qualities[num], 0, !bmp, bmp);
-      if (!buf) throw new Error();
-
-      const ico = Uint8Array.from(buf);
+      const ico = createICO(buffer, qualities[num], 0, !bmp, bmp);
+      if (!ico) throw new Error();
 
       await fs.promises
         .writeFile(path.join(dirname, `${basename}.ico`), ico)
@@ -82,10 +80,8 @@ export const mkicns = async (
       setLogger(console.log);
       console.log(`Quality: ${num}`);
 
-      const buf = createICNS(buffer, qualities[num], 0);
-      if (!buf) throw new Error();
-
-      const icns = Uint8Array.from(buf);
+      const icns = createICNS(buffer, qualities[num], 0);
+      if (!icns) throw new Error();
 
       await fs.promises
         .writeFile(path.join(dirname, `${basename}.icns`), icns)

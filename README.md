@@ -1,4 +1,4 @@
-# Elephicon
+![preview](https://user-images.githubusercontent.com/52094761/83580862-1a0dec00-a578-11ea-8f37-2d9944733384.png)
 
 [![GitHub CI](https://github.com/sprout2000/elephicon/workflows/GitHub%20CI/badge.svg)](https://github.com/sprout2000/elephicon/actions?query=workflow%3A%22GitHub+CI%22)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
@@ -50,18 +50,15 @@ You will find the installer in `release` directory.
 
 ## Download
 
+
+### macOS
+
 You can download the latest version of *Elephicon* from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
 
-## Security
+### Windows10
 
-API | Boolean
-:--- | :---
-nodeIntegration | `false`
-enableRemoteModule | `false`
-contextIsolation | `true`
-safeDialogs | `true`
-sandbox | `true`
+Download the latest version for Windows10 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
 
 ## License
 

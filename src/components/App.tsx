@@ -9,13 +9,9 @@ import {
 import { Success } from './Success';
 import { Elephant } from './Elephant';
 import { Error } from './Error';
+import { Result } from '../result';
 
-interface Result {
-  type: string;
-  msg: string;
-}
-
-const { ipcRenderer } = window;
+const { myAPI } = window;
 
 const App: React.FC = () => {
   const [onDrag, setOnDrag] = useState(false);
@@ -24,6 +20,8 @@ const App: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [onError, setOnError] = useState(false);
   const [message, setMessage] = useState('');
+
+  const isDarwin = myAPI.platform();
 
   const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
@@ -43,10 +41,7 @@ const App: React.FC = () => {
 
   const convert = useCallback(
     async (filepath: string): Promise<void> => {
-      const mime: string | false = await ipcRenderer.invoke(
-        'mime-check',
-        filepath
-      );
+      const mime: string | false = await myAPI.mimecheck(filepath);
 
       if (!mime || !mime.match(/png/)) {
         setLoading(false);
@@ -59,10 +54,10 @@ const App: React.FC = () => {
       }
 
       if (checked) {
-        const result: Result = await ipcRenderer.invoke('make-icns', filepath);
+        const result: Result = await myAPI.mkIcns(filepath);
         afterConvert(result);
       } else {
-        const result: Result = await ipcRenderer.invoke('make-ico', filepath);
+        const result: Result = await myAPI.mkIco(filepath);
         afterConvert(result);
       }
     },
@@ -97,7 +92,7 @@ const App: React.FC = () => {
   };
 
   const onClickOpen = async (): Promise<void> => {
-    const filepath = await ipcRenderer.invoke('open-file-dialog');
+    const filepath = await myAPI.openDialog();
 
     if (!filepath) return;
 
@@ -112,7 +107,7 @@ const App: React.FC = () => {
   };
 
   const onClickClose = () => {
-    ipcRenderer.send('close-window');
+    myAPI.closeWindow();
   };
 
   const onClickBack = () => {
@@ -124,7 +119,7 @@ const App: React.FC = () => {
     if (loading) return;
 
     e.preventDefault();
-    ipcRenderer.send('open-contextmenu');
+    myAPI.openContextMenu();
   };
 
   const onStart = useCallback(
@@ -136,15 +131,15 @@ const App: React.FC = () => {
   );
 
   useEffect(() => {
-    ipcRenderer.on('dropped', onStart);
+    myAPI.onDrop(onStart);
 
     return (): void => {
-      ipcRenderer.removeAllListeners('dropped');
+      myAPI.removeOnDrop();
     };
   }, [onStart]);
 
   useEffect(() => {
-    ipcRenderer.on('menu-open', async (_e, filepath) => {
+    myAPI.menuOpen(async (_e, filepath) => {
       if (!filepath) return;
 
       setLoading(true);
@@ -152,25 +147,25 @@ const App: React.FC = () => {
     });
 
     return (): void => {
-      ipcRenderer.removeAllListeners('menu-open');
+      myAPI.removeMenuOpen();
     };
   }, [convert]);
 
   useEffect(() => {
-    ipcRenderer.send('change-state', checked);
+    myAPI.changeState(checked);
   }, [checked]);
 
   useEffect(() => {
-    ipcRenderer.once('set-state', (_e, arg) => setChecked(arg));
+    myAPI.setState((_e, arg) => setChecked(arg));
 
     return (): void => {
-      ipcRenderer.removeAllListeners('set-state');
+      myAPI.removeSetState();
     };
   }, []);
 
   return (
     <div
-      className="container"
+      className={isDarwin ? 'container_darwin' : 'container'}
       onContextMenu={onContextMenu}
       onDrop={onDrop}
       onDragEnter={onDragOver}
