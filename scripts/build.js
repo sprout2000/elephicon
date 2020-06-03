@@ -1,4 +1,3 @@
-require('dotenv').config();
 const builder = require('electron-builder');
 
 builder
