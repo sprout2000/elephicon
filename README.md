@@ -60,16 +60,6 @@ You can download the latest version of *Elephicon* from the releases page here:
 
 Download the latest version for Windows10 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
 
-## Security
-
-API | Boolean
-:--- | :---
-nodeIntegration | `false`
-enableRemoteModule | `false`
-contextIsolation | `true`
-safeDialogs | `true`
-sandbox | `true`
-
 ## License
 
 ### [png2icons](https://github.com/idesis-gmbh/png2icons)
