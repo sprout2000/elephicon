@@ -10,6 +10,7 @@ import mime from 'mime-types';
 import { mkico, mkicns } from './mkicons';
 import { TypedStore } from './store';
 import { template } from './template';
+import { win32menu } from './win32menu';
 import { contextMenu } from './contextmenu';
 
 console.log = log.log;
@@ -74,10 +75,11 @@ if (!gotTheLock && !isDarwin) {
       width: 360,
       height: 320,
       show: false,
-      frame: false,
+      frame: isDarwin ? false : true,
       resizable: false,
       maximizable: false,
       fullscreenable: false,
+      autoHideMenuBar: true,
       backgroundColor: '#00c6fb',
       webPreferences: {
         enableRemoteModule: false,
@@ -156,6 +158,9 @@ if (!gotTheLock && !isDarwin) {
       const mainMenu = Menu.buildFromTemplate(template);
       Menu.setApplicationMenu(mainMenu);
 
+      const menu = contextMenu(win, store);
+      ipcMain.on('open-contextmenu', () => menu.popup());
+
       autoUpdater.checkForUpdatesAndNotify();
 
       autoUpdater.once('error', (_e, err) => {
@@ -183,10 +188,10 @@ if (!gotTheLock && !isDarwin) {
             .catch((err) => log.info(`Error in showMessageBox: ${err}`));
         }
       });
+    } else {
+      const menu = win32menu(win, store);
+      Menu.setApplicationMenu(menu);
     }
-
-    const menu = contextMenu(win, store);
-    ipcMain.on('open-contextmenu', () => menu.popup());
 
     win.once('close', () => {
       store.set('state', config);
