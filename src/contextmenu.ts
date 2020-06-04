@@ -1,5 +1,4 @@
 import {
-  app,
   MenuItemConstructorOptions,
   shell,
   Menu,
@@ -10,7 +9,6 @@ import Store from 'electron-store';
 
 import { TypedStore } from './store';
 
-const isDarwin = process.platform === 'darwin';
 const url = 'https://github.com/sprout2000/elephicon#readme';
 
 export const contextMenu = (
@@ -45,9 +43,9 @@ export const contextMenu = (
         },
         { type: 'separator' },
         {
-          label: isDarwin ? 'Close' : 'Quit',
-          accelerator: isDarwin ? 'Cmd+W' : 'Ctrl+Q',
-          role: isDarwin ? 'close' : 'quit',
+          label: 'Close',
+          accelerator: 'Cmd+W',
+          role: 'close',
         },
       ],
     },
@@ -102,10 +100,7 @@ export const contextMenu = (
       ],
     },
     { type: 'separator' },
-  ];
-
-  if (isDarwin) {
-    template.push({
+    {
       label: 'Help',
       role: 'help',
       submenu: [
@@ -114,23 +109,8 @@ export const contextMenu = (
           click: async (): Promise<void> => await shell.openExternal(url),
         },
       ],
-    });
-  } else {
-    template.push({
-      label: 'Help',
-      submenu: [
-        {
-          label: 'Support URL...',
-          click: async (): Promise<void> => await shell.openExternal(url),
-        },
-        {
-          label: 'About Elephicon',
-          accelerator: 'Ctrl+I',
-          click: () => app.showAboutPanel(),
-        },
-      ],
-    });
-  }
+    },
+  ];
 
   const menu = Menu.buildFromTemplate(template);
 
