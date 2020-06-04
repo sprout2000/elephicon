@@ -16,11 +16,7 @@ import {
 } from 'png2icons';
 
 import { TypedStore } from './store';
-
-interface Result {
-  type: string;
-  msg: string;
-}
+import { Result } from './result';
 
 const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 
