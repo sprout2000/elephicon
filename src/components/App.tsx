@@ -172,10 +172,8 @@ const App: React.FC = () => {
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}>
       {isDarwin && (
-        <div className="dragzone">
-          <div className="close-button" title="Close" onClick={onClickClose}>
-            <IoIosCloseCircleOutline size="2em" />
-          </div>
+        <div className="close-button" title="Close" onClick={onClickClose}>
+          <IoIosCloseCircleOutline size="2em" />
         </div>
       )}
       {!success && !onError ? (
