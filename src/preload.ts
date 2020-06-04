@@ -28,13 +28,11 @@ contextBridge.exposeInMainWorld('myAPI', {
   menuOpen: (
     listener: (_e: Electron.IpcRendererEvent, filepath: string) => Promise<void>
   ) => ipcRenderer.on('menu-open', listener),
-
   removeMenuOpen: () => ipcRenderer.removeAllListeners('menu-open'),
 
   changeState: (arg: boolean) => ipcRenderer.send('change-state', arg),
 
   setState: (listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void) =>
     ipcRenderer.once('set-state', listener),
-
   removeSetState: () => ipcRenderer.removeAllListeners('set-state'),
 });
