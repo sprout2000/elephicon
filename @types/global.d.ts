@@ -7,6 +7,8 @@ declare global {
 }
 
 export interface Sandbox {
+  platform: () => Promise<boolean>;
+
   mimecheck: (filepath: string) => Promise<string | false>;
 
   mkIcns: (filepath: string) => Promise<Result>;
@@ -35,9 +37,4 @@ export interface Sandbox {
     listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
   ) => Electron.IpcRenderer;
   removeSetState: () => Electron.IpcRenderer;
-
-  getOS: (
-    listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
-  ) => Electron.IpcRenderer;
-  removeGetOS: () => Electron.IpcRenderer;
 }
