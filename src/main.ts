@@ -91,7 +91,6 @@ if (!gotTheLock && !isDarwin) {
       },
     });
 
-    ipcMain.handle('platform', () => process.platform === 'darwin');
     ipcMain.handle('mime-check', (_e, filepath) => mime.lookup(filepath));
     ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath, store));
     ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
@@ -136,6 +135,7 @@ if (!gotTheLock && !isDarwin) {
     win.webContents.once('did-finish-load', () => {
       const state = store.get('state', false);
       win?.webContents.send('set-state', state);
+      win?.webContents.send('platform', isDarwin);
 
       if (!isDarwin && !isDev && process.argv.length >= 2) {
         win?.webContents.send('dropped', process.argv[process.argv.length - 1]);

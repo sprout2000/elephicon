@@ -20,8 +20,7 @@ const App: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [onError, setOnError] = useState(false);
   const [message, setMessage] = useState('');
-
-  const isDarwin = myAPI.platform();
+  const [isDarwin, setIsDarwin] = useState(true);
 
   const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
@@ -70,6 +69,8 @@ const App: React.FC = () => {
   };
 
   const onDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
+    if (loading) return;
+
     preventDefault(e);
     setOnDrag(true);
   };
@@ -80,6 +81,8 @@ const App: React.FC = () => {
   };
 
   const onDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
+    if (loading) return;
+
     preventDefault(e);
     setOnDrag(false);
 
@@ -92,8 +95,9 @@ const App: React.FC = () => {
   };
 
   const onClickOpen = async (): Promise<void> => {
-    const filepath = await myAPI.openDialog();
+    if (loading) return;
 
+    const filepath = await myAPI.openDialog();
     if (!filepath) return;
 
     setLoading(true);
@@ -160,6 +164,14 @@ const App: React.FC = () => {
 
     return (): void => {
       myAPI.removeSetState();
+    };
+  }, []);
+
+  useEffect(() => {
+    myAPI.getOS((_e, arg) => setIsDarwin(arg));
+
+    return (): void => {
+      myAPI.removeGetOS();
     };
   }, []);
 
