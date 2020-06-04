@@ -69,6 +69,8 @@ const App: React.FC = () => {
   };
 
   const onDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
+    if (loading) return;
+
     preventDefault(e);
     setOnDrag(true);
   };
@@ -79,6 +81,8 @@ const App: React.FC = () => {
   };
 
   const onDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
+    if (loading) return;
+
     preventDefault(e);
     setOnDrag(false);
 
@@ -91,8 +95,9 @@ const App: React.FC = () => {
   };
 
   const onClickOpen = async (): Promise<void> => {
-    const filepath = await myAPI.openDialog();
+    if (loading) return;
 
+    const filepath = await myAPI.openDialog();
     if (!filepath) return;
 
     setLoading(true);
