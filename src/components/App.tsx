@@ -41,7 +41,7 @@ const App: React.FC = () => {
 
   const convert = useCallback(
     async (filepath: string): Promise<void> => {
-      const mime: string | false = await myAPI.mimecheck(filepath);
+      const mime = await myAPI.mimecheck(filepath);
 
       if (!mime || !mime.match(/png/)) {
         setLoading(false);
@@ -54,10 +54,10 @@ const App: React.FC = () => {
       }
 
       if (checked) {
-        const result: Result = await myAPI.mkIcns(filepath);
+        const result = await myAPI.mkIcns(filepath);
         afterConvert(result);
       } else {
-        const result: Result = await myAPI.mkIco(filepath);
+        const result = await myAPI.mkIco(filepath);
         afterConvert(result);
       }
     },
@@ -171,11 +171,11 @@ const App: React.FC = () => {
       onDragEnter={onDragOver}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}>
-      <div className="dragzone">
+      {isDarwin && (
         <div className="close-button" title="Close" onClick={onClickClose}>
           <IoIosCloseCircleOutline size="2em" />
         </div>
-      </div>
+      )}
       {!success && !onError ? (
         <React.Fragment>
           <div className="icon">

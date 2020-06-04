@@ -1,4 +1,5 @@
 import {
+  app,
   MenuItemConstructorOptions,
   shell,
   Menu,
@@ -11,7 +12,7 @@ import { TypedStore } from './store';
 
 const url = 'https://github.com/sprout2000/elephicon#readme';
 
-export const contextMenu = (
+export const win32menu = (
   win: BrowserWindow,
   store: Store<TypedStore>
 ): Menu => {
@@ -43,9 +44,9 @@ export const contextMenu = (
         },
         { type: 'separator' },
         {
-          label: 'Close',
-          accelerator: 'Cmd+W',
-          role: 'close',
+          label: 'Quit',
+          accelerator: 'Ctrl+Q',
+          role: 'quit',
         },
       ],
     },
@@ -99,14 +100,17 @@ export const contextMenu = (
         },
       ],
     },
-    { type: 'separator' },
     {
       label: 'Help',
-      role: 'help',
       submenu: [
         {
           label: 'Support URL...',
           click: async (): Promise<void> => await shell.openExternal(url),
+        },
+        {
+          label: 'About Elephicon',
+          accelerator: 'Ctrl+I',
+          click: () => app.showAboutPanel(),
         },
       ],
     },
