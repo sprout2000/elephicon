@@ -80,7 +80,7 @@ if (!gotTheLock && !isDarwin) {
       maximizable: false,
       fullscreenable: false,
       autoHideMenuBar: true,
-      backgroundColor: '#00c6fb',
+      backgroundColor: '#005bea',
       webPreferences: {
         enableRemoteModule: false,
         nodeIntegration: false,
