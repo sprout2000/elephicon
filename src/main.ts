@@ -29,7 +29,7 @@ const store = new Store<TypedStore>({
     state: false,
     x: undefined,
     y: undefined,
-    quality: 1,
+    quality: 2,
     bmp: true,
   },
 });
