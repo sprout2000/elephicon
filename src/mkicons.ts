@@ -27,7 +27,7 @@ export const mkico = async (
   const dirname = app.getPath('desktop');
   const basename = path.basename(filepath, path.extname(filepath));
 
-  const num = store.get('quality', 1);
+  const num = store.get('quality', 2);
   const bmp = store.get('bmp', true);
 
   const result: Result = await fs.promises
@@ -68,7 +68,7 @@ export const mkicns = async (
   const dirname = app.getPath('desktop');
   const basename = path.basename(filepath, path.extname(filepath));
 
-  const num = store.get('quality', 1);
+  const num = store.get('quality', 2);
 
   const result: Result = await fs.promises
     .readFile(filepath)
