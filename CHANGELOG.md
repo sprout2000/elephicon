@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.2](https://github.com/sprout2000/elephicon/compare/v0.6.1...v0.6.2) (2020-06-04)
+
+
+### Features
+
+* create win32menu.ts ([12a4854](https://github.com/sprout2000/elephicon/commit/12a4854d04741ba5983c3398677feae655c738c5))
+
+
+### Bug Fixes
+
+* container_darwin issue ([93c58b3](https://github.com/sprout2000/elephicon/commit/93c58b30e949764a9e1491566ebcb8b23447af76))
+* loading action issues ([9c58694](https://github.com/sprout2000/elephicon/commit/9c58694fd14813f654c461e765007ee509039a7b))
+
 ### [0.6.1](https://github.com/sprout2000/elephicon/compare/v0.6.0...v0.6.1) (2020-06-03)
 
 ## [0.6.0](https://github.com/sprout2000/elephicon/compare/v0.5.1...v0.6.0) (2020-06-03)
