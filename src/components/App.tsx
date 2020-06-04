@@ -20,7 +20,8 @@ const App: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [onError, setOnError] = useState(false);
   const [message, setMessage] = useState('');
-  const [isDarwin, setIsDarwin] = useState(true);
+
+  const isDarwin = async () => await myAPI.platform();
 
   const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
@@ -167,23 +168,15 @@ const App: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    myAPI.getOS((_e, arg) => setIsDarwin(arg));
-
-    return (): void => {
-      myAPI.removeGetOS();
-    };
-  }, []);
-
   return (
     <div
-      className={isDarwin ? 'container_darwin' : 'container'}
+      className={isDarwin() ? 'container_darwin' : 'container'}
       onContextMenu={onContextMenu}
       onDrop={onDrop}
       onDragEnter={onDragOver}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}>
-      {isDarwin && (
+      {isDarwin() && (
         <div className="close-button" title="Close" onClick={onClickClose}>
           <IoIosCloseCircleOutline size="2em" />
         </div>
