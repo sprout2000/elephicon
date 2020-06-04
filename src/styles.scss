@@ -44,24 +44,6 @@
   user-select: none;
   position: relative;
 
-  .dragzone {
-    .close-button {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 6px;
-      color: #ffffff;
-
-      &:hover {
-        opacity: 0.6;
-        cursor: pointer;
-      }
-      &:active {
-        opacity: 0.3;
-      }
-    }
-  }
-
   .icon {
     margin: 0;
     padding: 0;
@@ -180,9 +162,20 @@ body,
   @include CONTAINER();
   -webkit-app-region: drag;
 
-  .dragzone {
-    .close-button {
-      -webkit-app-region: no-drag;
+  .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 6px;
+    color: #ffffff;
+    -webkit-app-region: no-drag;
+
+    &:hover {
+      opacity: 0.6;
+      cursor: pointer;
+    }
+    &:active {
+      opacity: 0.3;
     }
   }
 
