@@ -7,8 +7,6 @@ declare global {
 }
 
 export interface Sandbox {
-  platform: () => Promise<boolean>;
-
   mimecheck: (filepath: string) => Promise<string | false>;
 
   mkIcns: (filepath: string) => Promise<Result>;
