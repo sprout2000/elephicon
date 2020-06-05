@@ -91,7 +91,6 @@ if (!gotTheLock && !isDarwin) {
       },
     });
 
-    ipcMain.handle('platform', () => isDarwin);
     ipcMain.handle('mime-check', (_e, filepath) => mime.lookup(filepath));
     ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath, store));
     ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
