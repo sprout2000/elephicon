@@ -21,7 +21,7 @@ const App: React.FC = () => {
   const [onError, setOnError] = useState(false);
   const [message, setMessage] = useState('');
 
-  const isDarwin = async () => await myAPI.platform();
+  const isDarwin = window.navigator.userAgent.includes('Mac OS X');
 
   const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
@@ -170,13 +170,13 @@ const App: React.FC = () => {
 
   return (
     <div
-      className={isDarwin() ? 'container_darwin' : 'container'}
+      className={isDarwin ? 'container_darwin' : 'container'}
       onContextMenu={onContextMenu}
       onDrop={onDrop}
       onDragEnter={onDragOver}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}>
-      {isDarwin() && (
+      {isDarwin && (
         <div className="close-button" title="Close" onClick={onClickClose}>
           <IoIosCloseCircleOutline size="2em" />
         </div>
