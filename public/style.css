@@ -132,7 +132,8 @@ h3 {
 
 .issues {
   font-family: "Roboto", sans-serif;
-  font-weight: 400;
+  font-weight: 100;
+  text-decoration: underline;
 }
 
 .github {
