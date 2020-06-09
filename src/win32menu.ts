@@ -112,6 +112,18 @@ export const win32menu = (
           accelerator: 'Ctrl+I',
           click: () => app.showAboutPanel(),
         },
+        { type: 'separator' },
+        {
+          label: 'Toggle Developer Tools',
+          accelerator: 'Ctrl+Alt+I',
+          click: (): void => {
+            if (win.webContents.isDevToolsOpened()) {
+              win.webContents.closeDevTools();
+            } else {
+              win.webContents.openDevTools({ mode: 'detach' });
+            }
+          },
+        },
       ],
     },
   ];

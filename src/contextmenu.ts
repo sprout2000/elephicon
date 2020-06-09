@@ -108,6 +108,18 @@ export const contextMenu = (
           label: 'Support URL...',
           click: async (): Promise<void> => await shell.openExternal(url),
         },
+        { type: 'separator' },
+        {
+          label: 'Toggle Developer Tools',
+          accelerator: 'Cmd+Option+I',
+          click: (): void => {
+            if (win.webContents.isDevToolsOpened()) {
+              win.webContents.closeDevTools();
+            } else {
+              win.webContents.openDevTools({ mode: 'detach' });
+            }
+          },
+        },
       ],
     },
   ];
