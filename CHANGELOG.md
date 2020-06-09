@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.4](https://github.com/sprout2000/elephicon/compare/v0.6.3...v0.6.4) (2020-06-09)
+
+
+### Features
+
+* add toggleDevtools to context menu ([d6d28b9](https://github.com/sprout2000/elephicon/commit/d6d28b9341f55a576f260b9d2d64f3b13c34bc1b))
+* add toggleDevtools to Help menu ([88e5af5](https://github.com/sprout2000/elephicon/commit/88e5af5696de303bf223b37f349d2cafed2a7494))
+
 ### [0.6.3](https://github.com/sprout2000/elephicon/compare/v0.6.2...v0.6.3) (2020-06-05)
 
 
