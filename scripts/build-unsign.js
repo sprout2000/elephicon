@@ -4,6 +4,7 @@ builder
   .build({
     config: {
       productName: 'Elephicon',
+      artifactName: '${productName}-${version}-${platform}.${ext}',
       copyright: 'Copyright (C) 2020 sprout2000.',
       files: ['dist/**/*'],
       directories: {
@@ -13,7 +14,6 @@ builder
       asarUnpack: ['dist/preload.js'],
       mac: {
         category: 'public.app-category.developer-tools',
-        artifactName: '${productName}-${version}-x64.${ext}',
         target: ['dmg'],
         icon: 'assets/icon.icns',
         extendInfo: {
@@ -36,7 +36,6 @@ builder
         icon: 'assets/dmg.icns',
       },
       win: {
-        artifactName: '${productName}-${version}-x64.${ext}',
         icon: 'assets/icon.ico',
         target: ['nsis'],
         publisherName: 'sprout2000',
@@ -53,7 +52,6 @@ builder
         createDesktopShortcut: false,
         createStartMenuShortcut: true,
         installerIcon: 'assets/installerIcon.ico',
-        artifactName: '${productName}-${version}-x64-installer.${ext}',
       },
     },
   })
