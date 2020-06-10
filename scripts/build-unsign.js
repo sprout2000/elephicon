@@ -51,7 +51,7 @@ builder
         perMachine: false,
         createDesktopShortcut: false,
         createStartMenuShortcut: true,
-        installerIcon: 'assets/installerIcon.ico',
+        installerIcon: 'assets/installer.ico',
       },
     },
   })
