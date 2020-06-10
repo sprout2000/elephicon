@@ -24,6 +24,7 @@ builder
       mac: {
         appId: process.env.APP_BUNDLE_ID,
         category: 'public.app-category.developer-tools',
+        artifactName: '${productName}-${version}-x64.${ext}',
         target: ['dmg', 'zip'],
         icon: 'assets/icon.icns',
         extendInfo: {
@@ -67,6 +68,7 @@ builder
         identityName: process.env.IDENTITY_NAME,
         publisher: process.env.PUBLISHER,
         publisherDisplayName: 'sprout2000',
+        artifactName: '${productName}-${version}-x64-installer.${ext}',
       },
     },
   })
