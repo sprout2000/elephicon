@@ -25,7 +25,7 @@ builder
         appId: process.env.APP_BUNDLE_ID,
         category: 'public.app-category.developer-tools',
         artifactName: '${productName}-${version}-x64.${ext}',
-        target: ['dmg', 'zip'],
+        target: 'default',
         icon: 'assets/icon.icns',
         extendInfo: {
           CFBundleName: 'Elephicon',
