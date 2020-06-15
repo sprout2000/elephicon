@@ -6,7 +6,6 @@ builder
     config: {
       productName: 'Elephicon',
       copyright: 'Copyright (C) 2020 sprout2000.',
-      artifactName: '${productName}-${version}-${platform}.${ext}',
       files: ['dist/**/*'],
       publish: [
         {
@@ -23,8 +22,9 @@ builder
       afterSign: 'scripts/notarize.js',
       mac: {
         appId: process.env.APP_BUNDLE_ID,
+        artifactName: '${productName}-${version}-x64.${ext}',
         category: 'public.app-category.developer-tools',
-        target: ['dmg', 'zip'],
+        target: 'default',
         icon: 'assets/icon.icns',
         extendInfo: {
           CFBundleName: 'Elephicon',
@@ -51,6 +51,7 @@ builder
         sign: false,
       },
       win: {
+        artifactName: '${productName}-${version}-${platform}.${ext}',
         icon: 'assets/icon.ico',
         target: ['appx'],
         fileAssociations: [

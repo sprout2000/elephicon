@@ -4,8 +4,8 @@ builder
   .build({
     config: {
       productName: 'Elephicon',
-      copyright: 'Copyright (C) 2020 sprout2000.',
       artifactName: '${productName}-${version}-${platform}.${ext}',
+      copyright: 'Copyright (C) 2020 sprout2000.',
       files: ['dist/**/*'],
       directories: {
         output: 'release',
@@ -51,8 +51,7 @@ builder
         perMachine: false,
         createDesktopShortcut: false,
         createStartMenuShortcut: true,
-        installerIcon: 'assets/installerIcon.ico',
-        artifactName: '${productName}-${version}-installer.${ext}',
+        installerIcon: 'assets/installer.ico',
       },
     },
   })
