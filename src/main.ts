@@ -179,7 +179,8 @@ if (!gotTheLock && !isDarwin) {
               title: 'Update',
               message: 'Updates are available!',
               detail:
-                'We have finished downloading the latest updates.\nDo you want to install the updates now?',
+                'We have finished downloading the latest updates.\n' +
+                'Do you want to install the updates now?',
             })
             .then((result) => {
               result.response === 0 && autoUpdater.quitAndInstall();
