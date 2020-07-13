@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { isMacOs } from 'react-device-detect';
 
 import {
   IoLogoApple,
@@ -20,8 +21,6 @@ const App: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [onError, setOnError] = useState(false);
   const [message, setMessage] = useState('');
-
-  const isDarwin = window.navigator.userAgent.includes('Mac OS X');
 
   const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
@@ -170,13 +169,13 @@ const App: React.FC = () => {
 
   return (
     <div
-      className={isDarwin ? 'container_darwin' : 'container'}
+      className={isMacOs ? 'container_darwin' : 'container'}
       onContextMenu={onContextMenu}
       onDrop={onDrop}
       onDragEnter={onDragOver}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}>
-      {isDarwin && (
+      {isMacOs && (
         <div className="close-button" title="Close" onClick={onClickClose}>
           <IoIosCloseCircleOutline size="2em" />
         </div>
