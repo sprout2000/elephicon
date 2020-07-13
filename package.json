@@ -52,6 +52,7 @@
     "mime-types": "^2.1.27",
     "png2icons": "^2.0.1",
     "react": "^16.13.1",
+    "react-device-detect": "^1.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
     "typeface-roboto": "^0.0.75"
