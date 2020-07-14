@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { isMacOs } from 'react-device-detect';
+import { UAParser } from 'ua-parser-js';
 
 import {
   IoLogoApple,
@@ -21,6 +21,11 @@ const App: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [onError, setOnError] = useState(false);
   const [message, setMessage] = useState('');
+
+  const isDarwin = () => {
+    const ua = new UAParser();
+    return ua.getOS().name === 'Mac OS';
+  };
 
   const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
@@ -169,13 +174,13 @@ const App: React.FC = () => {
 
   return (
     <div
-      className={isMacOs ? 'container_darwin' : 'container'}
+      className={isDarwin() ? 'container_darwin' : 'container'}
       onContextMenu={onContextMenu}
       onDrop={onDrop}
       onDragEnter={onDragOver}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}>
-      {isMacOs && (
+      {isDarwin() && (
         <div className="close-button" title="Close" onClick={onClickClose}>
           <IoIosCloseCircleOutline size="2em" />
         </div>
