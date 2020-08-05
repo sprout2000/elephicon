@@ -94,7 +94,7 @@ const createWindow = () => {
   ipcMain.handle('make-icns', (_e, filepath) => mkicns(filepath, store));
 
   ipcMain.handle('open-file-dialog', async () => {
-    const filepath = await dialog
+    return await dialog
       .showOpenDialog(mainWindow, {
         properties: ['openFile'],
         title: 'Select',
@@ -110,8 +110,6 @@ const createWindow = () => {
         return result.filePaths[0];
       })
       .catch((err): void => console.log(err));
-
-    return filepath;
   });
 
   ipcMain.on('change-state', (_e, arg) => {
