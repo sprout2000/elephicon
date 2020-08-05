@@ -1,77 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
 /** @type import('webpack').Configuration */
-const main = {
-  target: 'electron-main',
-  mode: isDev ? 'development' : 'production',
-  resolve: {
-    extensions: ['.js', '.ts', '.json'],
-  },
-  entry: {
-    main: './src/main.ts',
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        loader: 'ts-loader',
-      },
-    ],
-  },
-  optimization: {
-    minimizer: [new TerserWebpackPlugin()],
-  },
-  devtool: isDev ? 'inline-source-map' : false,
-};
-
-/** @type import('webpack').Configuration */
-const preload = {
-  target: 'electron-preload',
-  mode: isDev ? 'development' : 'production',
-  resolve: {
-    extensions: ['.js', '.ts', '.json'],
-  },
-  entry: {
-    preload: './src/preload.ts',
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        loader: 'ts-loader',
-      },
-    ],
-  },
-  optimization: {
-    minimizer: [new TerserWebpackPlugin()],
-  },
-  devtool: isDev ? 'inline-source-map' : false,
-};
-
-/** @type import('webpack').Configuration */
-const renderer = {
-  target: 'web',
+const base = {
   mode: isDev ? 'development' : 'production',
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
-  },
-  entry: {
-    renderer: './src/renderer.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -87,12 +26,12 @@ const renderer = {
       {
         test: /\.s?css$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1,
               sourceMap: isDev,
+              importLoaders: 1,
             },
           },
           {
@@ -105,22 +44,53 @@ const renderer = {
       },
       {
         test: /\.(bmp|ico|gif|jpe?g|png|svg|ttf|eot|woff?2?)$/,
-        loader: 'url-loader',
+        loader: 'file-loader',
+        options: {
+          name: 'images/[name].[ext]',
+        },
       },
     ],
+  },
+  optimization: {
+    minimizer: [new TerserWebpackPlugin(), OptimizeCssAssetsPlugin()],
+  },
+  devtool: isDev ? 'inline-source-map' : false,
+};
+
+/** @type import('webpack').Configuration */
+const main = {
+  ...base,
+  target: 'electron-main',
+  entry: {
+    main: './src/main.ts',
+  },
+};
+
+/** @type import('webpack').Configuration */
+const preload = {
+  ...base,
+  target: 'electron-preload',
+  entry: {
+    preload: './src/preload.ts',
+  },
+};
+
+/** @type import('webpack').Configuration */
+const renderer = {
+  ...base,
+  target: 'web',
+  entry: {
+    renderer: './src/index.tsx',
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    new MiniCssExtractPlugin(),
   ],
-  optimization: {
-    minimizer: [new TerserWebpackPlugin(), new OptimizeCssAssetsPlugin()],
-  },
   performance: {
     hints: false,
   },
-  devtool: isDev ? 'inline-source-map' : false,
 };
 
 module.exports = [main, preload, renderer];
