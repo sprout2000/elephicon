@@ -52,7 +52,7 @@ const base = {
     ],
   },
   optimization: {
-    minimizer: [new TerserWebpackPlugin(), OptimizeCssAssetsPlugin()],
+    minimizer: [new TerserWebpackPlugin(), new OptimizeCssAssetsPlugin()],
   },
   devtool: isDev ? 'inline-source-map' : false,
 };
