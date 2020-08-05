@@ -1,10 +1,10 @@
-![preview](https://user-images.githubusercontent.com/52094761/83580862-1a0dec00-a578-11ea-8f37-2d9944733384.png)
+# Elephicon
+
+**Elephicon** (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](https://en.wikipedia.org/wiki/ICO_(file_format)) files from PNG files.**
 
 [![GitHub CI](https://github.com/sprout2000/elephicon/workflows/GitHub%20CI/badge.svg)](https://github.com/sprout2000/elephicon/actions?query=workflow%3A%22GitHub+CI%22)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/elephicon)
-
-**Elephicon** (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](https://en.wikipedia.org/wiki/ICO_(file_format)) files from PNG files.**
 
 ## Usage
 
