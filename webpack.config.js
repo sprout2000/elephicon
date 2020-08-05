@@ -80,7 +80,7 @@ const renderer = {
   ...base,
   target: 'web',
   entry: {
-    renderer: './src/index.tsx',
+    renderer: './src/renderer.tsx',
   },
   plugins: [
     new HtmlWebpackPlugin({
