@@ -39,11 +39,7 @@
     "prepackage": "run-s clean build:prod",
     "package": "cross-env CSC_IDENTITY_AUTO_DISCOVERY=false node scripts/build-unsign.js",
     "prepackage:appx": "run-s clean build:prod",
-    "package:appx": "node scripts/build.js",
-    "release:patch": "standard-version --release-as patch",
-    "release:minor": "standard-version --release-as minor",
-    "release:major": "standard-version --release-as major",
-    "release:push": "git push --follow-tags origin master"
+    "package:appx": "node scripts/build.js"
   },
   "dependencies": {
     "electron-log": "^4.2.2",
@@ -95,7 +91,6 @@
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^4.0.8",
     "gh-pages": "^3.1.0",
-    "prettier": "^2.0.5",
-    "standard-version": "^8.0.2"
+    "prettier": "^2.0.5"
   }
 }
