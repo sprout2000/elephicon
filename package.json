@@ -44,14 +44,14 @@
   "dependencies": {
     "electron-log": "^4.2.4",
     "electron-store": "^6.0.0",
-    "electron-updater": "^4.3.4",
+    "electron-updater": "^4.3.5",
     "mime-types": "^2.1.27",
     "png2icons": "^2.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.11.0",
     "typeface-roboto": "^0.0.75",
-    "ua-parser-js": "^0.7.21"
+    "ua-parser-js": "^0.7.22"
   },
   "devDependencies": {
     "@types/electron-load-devtool": "^1.2.0",
