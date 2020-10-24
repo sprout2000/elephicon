@@ -1,6 +1,6 @@
 # Elephicon
 
-**Elephicon** (GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](https://en.wikipedia.org/wiki/ICO_(file_format)) files from PNG files.**
+**Elephicon** (A GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](<https://en.wikipedia.org/wiki/ICO_(file_format)>) files from PNG files.**
 
 [![GitHub CI](https://github.com/sprout2000/elephicon/workflows/GitHub%20CI/badge.svg)](https://github.com/sprout2000/elephicon/actions?query=workflow%3A%22GitHub+CI%22)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
@@ -8,9 +8,9 @@
 
 ## Usage
 
-The ideal input is a 24 bit *PNG* with an alpha channel (RGBA) with *1024×1024* pixels but any other dimensions and most other PNG formats do also work. 
+The ideal input is a 24 bit _PNG_ with an alpha channel (RGBA) with _1024×1024_ pixels but any other dimensions and most other PNG formats do also work.
 
-If you only need to create ICO files *256×256* pixels are sufficient. 
+If you only need to create ICO files _256×256_ pixels are sufficient.
 
 ![result06](https://user-images.githubusercontent.com/52094761/83374029-50772a00-a405-11ea-897b-bba19e439b0c.gif)
 
@@ -18,23 +18,23 @@ You can also configure the settings by `right-click` context menu.
 
 ## Embedded Sizes
 
-| Dimension | ICO | ICNS |
-| :--- | :---: | :---: |
-| 16x16 | ✅ | ✅ |
-| 16x16@2x | | ✅ |
-| 24x24 | ✅ | |
-| 32x32 | ✅ | ✅ |
-| 32x32@2x | | ✅ |
-| 48x48 | ✅ | |
-| 64x64 | ✅ | |
-| 72x72 | ✅ | |
-| 96x96 | ✅ | |
-| 128x128 | ✅ | ✅ |
-| 128x128@2x | | ✅ |
-| 256x256 | ✅ | ✅ |
-| 256x256@2x | | ✅ |
-| 512x512 | | ✅ |
-| 512x512@2x | | ✅ |
+| Dimension  | ICO | ICNS |
+| :--------- | :-: | :--: |
+| 16x16      | ✅  |  ✅  |
+| 16x16@2x   |     |  ✅  |
+| 24x24      | ✅  |      |
+| 32x32      | ✅  |  ✅  |
+| 32x32@2x   |     |  ✅  |
+| 48x48      | ✅  |      |
+| 64x64      | ✅  |      |
+| 72x72      | ✅  |      |
+| 96x96      | ✅  |      |
+| 128x128    | ✅  |  ✅  |
+| 128x128@2x |     |  ✅  |
+| 256x256    | ✅  |  ✅  |
+| 256x256@2x |     |  ✅  |
+| 512x512    |     |  ✅  |
+| 512x512@2x |     |  ✅  |
 
 ## Build & Install
 
@@ -46,14 +46,13 @@ $ yarn install && yarn package
 
 You will find the installer in `release` directory.
 
-*Note that you will need to have [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [Yarn](https://yarnpkg.com/) installed.*
+_Note that you will need to have [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [Yarn](https://yarnpkg.com/) installed._
 
 ## Download
 
-
 ### macOS
 
-You can download the latest version of *Elephicon* from the releases page here:  
+You can download the latest version of _Elephicon_ from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
 
 ### Windows10
