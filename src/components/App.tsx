@@ -175,18 +175,19 @@ const App: React.FC = () => {
   return (
     <div
       className={isDarwin() ? 'container_darwin' : 'container'}
-      onContextMenu={onContextMenu}
-      onDrop={onDrop}
-      onDragEnter={onDragOver}
-      onDragOver={onDragOver}
-      onDragLeave={onDragLeave}>
+      onContextMenu={onContextMenu}>
       {isDarwin() && (
         <div className="close-button" title="Close" onClick={onClickClose}>
           <IoIosCloseCircleOutline size="2em" />
         </div>
       )}
       {!success && !onError ? (
-        <React.Fragment>
+        <div
+          className="drop-zone"
+          onDrop={onDrop}
+          onDragEnter={onDragOver}
+          onDragOver={onDragOver}
+          onDragLeave={onDragLeave}>
           <div className="icon">
             <Elephant onDrag={onDrag} loading={loading} onClick={onClickOpen} />
           </div>
@@ -226,11 +227,25 @@ const App: React.FC = () => {
               <div>ICNS</div>
             </div>
           </div>
-        </React.Fragment>
+        </div>
       ) : success ? (
-        <Success onClick={onClickBack} message={message} />
+        <Success
+          onClick={onClickBack}
+          message={message}
+          onDrop={preventDefault}
+          onDragEnter={preventDefault}
+          onDragOver={preventDefault}
+          onDragLeave={preventDefault}
+        />
       ) : (
-        <Error onClick={onClickBack} message={message} />
+        <Error
+          onClick={onClickBack}
+          message={message}
+          onDrop={preventDefault}
+          onDragEnter={preventDefault}
+          onDragOver={preventDefault}
+          onDragLeave={preventDefault}
+        />
       )}
     </div>
   );
