@@ -1,3 +1,5 @@
+import { app } from 'electron';
+
 import fs from 'fs';
 import path from 'path';
 
@@ -22,7 +24,7 @@ export const mkico = async (
   filepath: string,
   store: Store<TypedStore>
 ): Promise<Result> => {
-  const dirname = path.dirname(filepath);
+  const dirname = app.getPath('desktop');
   const basename = path.basename(filepath, path.extname(filepath));
 
   const num = store.get('quality', 2);
@@ -63,7 +65,7 @@ export const mkicns = async (
   filepath: string,
   store: Store<TypedStore>
 ): Promise<Result> => {
-  const dirname = path.dirname(filepath);
+  const dirname = app.getPath('desktop');
   const basename = path.basename(filepath, path.extname(filepath));
 
   const num = store.get('quality', 2);
