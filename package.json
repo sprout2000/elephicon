@@ -50,7 +50,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.11.0",
-    "typeface-roboto": "^0.0.75",
+    "typeface-roboto": "^1.1.13",
     "ua-parser-js": "^0.7.22"
   },
   "devDependencies": {
