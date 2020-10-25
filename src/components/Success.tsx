@@ -22,7 +22,7 @@ export const Success: React.FC<Props> = (props) => {
       <div className="text">Successfully Completed!</div>
       <div className="result">
         <div className="filename">{props.message}</div>
-        was created in the current folder.
+        was created on your desktop.
       </div>
       <div className="switch">
         <div className="back-container" onClick={props.onClick}>
