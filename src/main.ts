@@ -32,6 +32,7 @@ const store = new Store<TypedStore>({
     y: undefined,
     quality: 2,
     bmp: true,
+    desktop: true,
   },
 });
 
