@@ -18,7 +18,7 @@ export const win32menu = (
 ): Menu => {
   const template: MenuItemConstructorOptions[] = [
     {
-      label: 'File',
+      label: '&File',
       submenu: [
         {
           label: 'Open...',
@@ -51,7 +51,7 @@ export const win32menu = (
       ],
     },
     {
-      label: 'Settings',
+      label: '&Settings',
       submenu: [
         {
           label: 'Quality',
@@ -120,7 +120,7 @@ export const win32menu = (
       ],
     },
     {
-      label: 'Help',
+      label: '&Help',
       submenu: [
         {
           label: 'Support URL...',
