@@ -98,6 +98,25 @@ export const win32menu = (
             },
           ],
         },
+        {
+          label: 'Destination',
+          submenu: [
+            {
+              label: 'Desktop',
+              type: 'radio',
+              id: 'desktop',
+              click: (): void => store.set('desktop', true),
+              checked: store.get('desktop'),
+            },
+            {
+              label: 'Same folder as the input PNGs',
+              type: 'radio',
+              id: 'current',
+              click: (): void => store.set('desktop', false),
+              checked: !store.get('desktop'),
+            },
+          ],
+        },
       ],
     },
     {

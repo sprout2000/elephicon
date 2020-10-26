@@ -24,7 +24,8 @@ export const mkico = async (
   filepath: string,
   store: Store<TypedStore>
 ): Promise<Result> => {
-  const dirname = app.getPath('desktop');
+  const isDesktop = store.get('desktop', true);
+  const dirname = isDesktop ? app.getPath('desktop') : path.dirname(filepath);
   const basename = path.basename(filepath, path.extname(filepath));
 
   const num = store.get('quality', 2);
@@ -50,12 +51,12 @@ export const mkico = async (
       clearCache();
       console.log('Successfully Completed!');
 
-      return { type: 'success', msg: `${basename}.ico` };
+      return { type: 'success', msg: `${basename}.ico`, desktop: isDesktop };
     })
     .catch((err: string) => {
       console.log(`Something went wrong: ${err}`);
 
-      return { type: 'failed', msg: err };
+      return { type: 'failed', msg: err, desktop: isDesktop };
     });
 
   return result;
@@ -65,7 +66,8 @@ export const mkicns = async (
   filepath: string,
   store: Store<TypedStore>
 ): Promise<Result> => {
-  const dirname = app.getPath('desktop');
+  const isDesktop = store.get('desktop', true);
+  const dirname = isDesktop ? app.getPath('desktop') : path.dirname(filepath);
   const basename = path.basename(filepath, path.extname(filepath));
 
   const num = store.get('quality', 2);
@@ -89,12 +91,12 @@ export const mkicns = async (
       clearCache();
       console.log('Successfully Completed!');
 
-      return { type: 'success', msg: `${basename}.icns` };
+      return { type: 'success', msg: `${basename}.icns`, desktop: isDesktop };
     })
     .catch((err: string) => {
       console.log(`Something went wrong: ${err}`);
 
-      return { type: 'failed', msg: err };
+      return { type: 'failed', msg: err, desktop: isDesktop };
     });
 
   return result;

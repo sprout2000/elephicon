@@ -21,6 +21,7 @@ const App: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [onError, setOnError] = useState(false);
   const [message, setMessage] = useState('');
+  const [desktop, setDesktop] = useState(true);
 
   const isDarwin = () => {
     const ua = new UAParser();
@@ -32,12 +33,14 @@ const App: React.FC = () => {
       setLoading(false);
       setOnError(true);
       setMessage(result.msg);
+      setDesktop(result.desktop);
 
       return;
     } else {
       setLoading(false);
       setSuccess(true);
       setMessage(result.msg);
+      setDesktop(result.desktop);
 
       return;
     }
@@ -232,6 +235,7 @@ const App: React.FC = () => {
         <Success
           onClick={onClickBack}
           message={message}
+          isDesktop={desktop}
           onDrop={preventDefault}
           onDragEnter={preventDefault}
           onDragOver={preventDefault}

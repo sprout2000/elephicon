@@ -5,6 +5,7 @@ import { IoIosUndo } from 'react-icons/io';
 interface Props {
   onClick: () => void;
   message: string;
+  isDesktop: boolean;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragEnter: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
@@ -22,7 +23,8 @@ export const Success: React.FC<Props> = (props) => {
       <div className="text">Successfully Completed!</div>
       <div className="result">
         <div className="filename">{props.message}</div>
-        was created on your desktop.
+        was created{' '}
+        {props.isDesktop ? 'on your desktop' : 'in the current folder'}.
       </div>
       <div className="switch">
         <div className="back-container" onClick={props.onClick}>
