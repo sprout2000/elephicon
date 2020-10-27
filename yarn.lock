@@ -156,9 +156,9 @@
   integrity sha512-5ImO01Fb8YsEOYpV+aeyGYztcYcjGsBvN4D7G5r1ef2cuQOpymjWNQi5V0rKHE6PC2ru3HkoUr/Br2/8GUA84w==
 
 "@types/node@^14.11.2":
-  version "14.14.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.4.tgz#38ca24d94a935506eeaf77b6062c906fba054ef0"
-  integrity sha512-AtE3ulstIxbCVBYMrO178jewndK5OzcwvHDAjv69N9G3TcXHyZe7Jr0MuPhqRkf7Bik/bt3vpg19ALxvJO0rAg==
+  version "14.14.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.5.tgz#e92d3b8f76583efa26c1a63a21c9d3c1143daa29"
+  integrity sha512-H5Wn24s/ZOukBmDn03nnGTp18A60ny9AmCwnEcgJiTgSGsCO7k+NWP7zjCCbhlcnVCoI+co52dUAt9GMhOSULw==
 
 "@types/prop-types@*":
   version "15.7.3"
