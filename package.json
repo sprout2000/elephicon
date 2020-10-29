@@ -19,9 +19,9 @@
     "png2icons"
   ],
   "engines": {
-    "node": ">=10.14",
+    "node": ">=12.16",
     "npm": "please_use_yarn_instead",
-    "yarn": "1.22.x"
+    "yarn": ">=1.22"
   },
   "os": [
     "win32",
