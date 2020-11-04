@@ -42,7 +42,7 @@
     "package:appx": "node scripts/build.js"
   },
   "dependencies": {
-    "electron-log": "^4.2.4",
+    "electron-log": "^4.3.0",
     "electron-store": "^6.0.0",
     "electron-updater": "^4.3.5",
     "mime-types": "^2.1.27",
