@@ -1,0 +1,23 @@
+name: GitHub CI
+on:
+  pull_request:
+    branches:
+      - master
+    types: [closed]
+jobs:
+  build:
+    name: Merge
+    runs-on: macOS-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@master
+        with:
+          node-version: 14.x
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build:prod
+      - name: Package
+        run: yarn package
