@@ -65,6 +65,7 @@ builder
         applicationId: 'sprout2000.Elephicon',
         backgroundColor: '#1d3557',
         displayName: 'Elephicon',
+        showNameOnTiles: true,
         identityName: process.env.IDENTITY_NAME,
         publisher: process.env.PUBLISHER,
         publisherDisplayName: 'sprout2000',
