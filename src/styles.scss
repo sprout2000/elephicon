@@ -167,6 +167,10 @@ body,
   @include CONTAINER();
   -webkit-app-region: drag;
 
+  &:active {
+    cursor: grabbing;
+  }
+
   .close-button {
     position: absolute;
     top: 0;
