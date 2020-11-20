@@ -1,5 +1,4 @@
 import { BrowserWindow, app, ipcMain, dialog, Menu } from 'electron';
-import loadDevtool from 'electron-load-devtool';
 import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
@@ -141,7 +140,6 @@ const createWindow = () => {
 
   if (isDev) {
     mainWindow.webContents.openDevTools({ mode: 'detach' });
-    loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS);
   }
 
   if (isDarwin) {
