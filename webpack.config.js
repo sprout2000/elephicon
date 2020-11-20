@@ -84,7 +84,8 @@ const renderer = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: isDev ? './src/index.dev.html' : './src/index.html',
+      filename: 'index.html',
     }),
     new MiniCssExtractPlugin(),
   ],
