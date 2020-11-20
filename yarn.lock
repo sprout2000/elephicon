@@ -118,11 +118,6 @@
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.5.tgz#b14efa8852b7768d898906613c23f688713e02cd"
   integrity sha512-Q1y515GcOdTHgagaVFhHnIFQ38ygs/kmxdNpvpou+raI9UO3YZcHDngBSYKQklcKlvA7iuQlmIKbzvmxcOE9CQ==
 
-"@types/electron-load-devtool@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@types/electron-load-devtool/-/electron-load-devtool-1.2.0.tgz#cceed303049b3cc825bce3d98c2afe544dbda162"
-  integrity sha512-+XI2K4Q+XhG/Jobq0ffR+Q67O3lrWKk2DBGuKhcw3fCqKMfXyh0IZoD2UPnNCwnz7ZxLhp0hMKwaPpI2pJpVLg==
-
 "@types/fs-extra@^9.0.1":
   version "9.0.2"
   resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-9.0.2.tgz#e1e1b578c48e8d08ae7fc36e552b94c6f4621609"
@@ -1999,18 +1994,6 @@ electron-builder@^22.8.1:
     sanitize-filename "^1.6.3"
     update-notifier "^4.1.1"
     yargs "^16.0.3"
-
-electron-is-dev@^1.0.1:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-1.2.0.tgz#2e5cea0a1b3ccf1c86f577cee77363ef55deb05e"
-  integrity sha512-R1oD5gMBPS7PVU8gJwH6CtT0e6VSoD0+SzSnYpNm+dBkcijgA+K7VAMHDfnRq/lkKPZArpzplTW6jfiMYosdzw==
-
-electron-load-devtool@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/electron-load-devtool/-/electron-load-devtool-1.2.0.tgz#78bea4a57b70b247c959d86ba8ffd6727967a077"
-  integrity sha512-ify+P5BGvi13Qqs+tlgwRkbtyq/Llv06udbhAEdL9Iuux7i2FNU0gkD+BcsbdpgcGs5dmU9UlBSAb3CezuQwPg==
-  dependencies:
-    electron-is-dev "^1.0.1"
 
 electron-log@^4.3.0:
   version "4.3.0"

@@ -54,7 +54,6 @@
     "ua-parser-js": "^0.7.22"
   },
   "devDependencies": {
-    "@types/electron-load-devtool": "^1.2.0",
     "@types/mime-types": "^2.1.0",
     "@types/node": "^14.14.9",
     "@types/react": "^16.9.56",
@@ -66,7 +65,6 @@
     "dotenv": "^8.2.0",
     "electron": "^8.5.3",
     "electron-builder": "^22.8.1",
-    "electron-load-devtool": "^1.2.0",
     "electron-notarize": "^1.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
