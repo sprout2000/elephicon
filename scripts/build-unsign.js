@@ -54,7 +54,7 @@ builder
         createDesktopShortcut: false,
         createStartMenuShortcut: true,
         installerIcon: 'assets/installer.ico',
-        artifactName: '${productName}-${version}-${platform}.${ext}',
+        artifactName: '${productName}-${version}-${platform}-installer.${ext}',
       },
     },
   })
