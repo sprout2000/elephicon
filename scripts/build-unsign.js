@@ -16,7 +16,7 @@ builder
       asarUnpack: ['dist/preload.js'],
       mac: {
         category: 'public.app-category.developer-tools',
-        target: ['dmg'],
+        target: ['dmg', 'zip'],
         icon: 'assets/icon.icns',
         extendInfo: {
           CFBundleName: 'Elephicon',
@@ -39,7 +39,7 @@ builder
       },
       win: {
         icon: 'assets/icon.ico',
-        target: ['nsis'],
+        target: ['nsis', 'zip'],
         publisherName: 'sprout2000',
         fileAssociations: [
           {
