@@ -1,6 +1,8 @@
 require('dotenv').config();
 const builder = require('electron-builder');
 
+const arch = require('os').arch();
+
 builder
   .build({
     config: {
@@ -22,7 +24,8 @@ builder
       afterSign: 'scripts/notarize.js',
       mac: {
         appId: process.env.APP_BUNDLE_ID,
-        artifactName: '${productName}-${version}-x64.${ext}',
+        artifactName:
+          '${productName}-${version}-${platform}-' + `${arch}` + '.${ext}',
         category: 'public.app-category.developer-tools',
         target: 'default',
         icon: 'assets/icon.icns',
@@ -51,7 +54,6 @@ builder
         sign: false,
       },
       win: {
-        artifactName: '${productName}-${version}-${platform}.${ext}',
         icon: 'assets/icon.ico',
         target: ['appx'],
         fileAssociations: [

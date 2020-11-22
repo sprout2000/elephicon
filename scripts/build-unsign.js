@@ -1,10 +1,12 @@
 const builder = require('electron-builder');
+const arch = require('os').arch();
 
 builder
   .build({
     config: {
       productName: 'Elephicon',
-      artifactName: '${productName}-${version}-${platform}.${ext}',
+      artifactName:
+        '${productName}-${version}-${platform}-' + `${arch}` + '.${ext}',
       copyright: 'Copyright (C) 2020 sprout2000.',
       files: ['dist/**/*'],
       directories: {
@@ -52,6 +54,7 @@ builder
         createDesktopShortcut: false,
         createStartMenuShortcut: true,
         installerIcon: 'assets/installer.ico',
+        artifactName: '${productName}-${version}-${platform}.${ext}',
       },
     },
   })
