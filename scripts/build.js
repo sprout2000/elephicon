@@ -66,6 +66,8 @@ builder
         ],
       },
       appx: {
+        artifactName:
+          '${productName}-${version}-${platform}-' + `${arch}` + '.${ext}',
         applicationId: 'sprout2000.Elephicon',
         backgroundColor: '#1d3557',
         displayName: 'Elephicon',
