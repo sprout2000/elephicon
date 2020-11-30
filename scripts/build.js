@@ -1,9 +1,6 @@
 require('dotenv').config();
 const builder = require('electron-builder');
-
-const os = require('os');
-const arch = os.arch();
-const isSur = os.platform() === 'darwin' && parseInt(os.release()) >= 20;
+const arch = require('os').arch();
 
 builder
   .build({
@@ -30,7 +27,7 @@ builder
           '${productName}-${version}-${platform}-' + `${arch}` + '.${ext}',
         category: 'public.app-category.developer-tools',
         target: 'default',
-        icon: isSur ? 'assets/icon-sur.icns' : 'assets/icon.icns',
+        icon: 'assets/icon.icns',
         extendInfo: {
           CFBundleName: 'Elephicon',
           CFBundleDisplayName: 'Elephicon',

@@ -1,8 +1,5 @@
 const builder = require('electron-builder');
-
-const os = require('os');
-const arch = os.arch();
-const isSur = os.platform() === 'darwin' && parseInt(os.release()) >= 20;
+const arch = require('os').arch();
 
 builder
   .build({
@@ -20,7 +17,7 @@ builder
       mac: {
         category: 'public.app-category.developer-tools',
         target: ['dmg', 'zip'],
-        icon: isSur ? 'assets/icon-sur.icns' : 'assets/icon.icns',
+        icon: 'assets/icon.icns',
         extendInfo: {
           CFBundleName: 'Elephicon',
           CFBundleDisplayName: 'Elephicon',
