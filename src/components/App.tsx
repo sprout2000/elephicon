@@ -175,6 +175,14 @@ const App: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    myAPI.setDesktop((_e, arg) => setDesktop(arg));
+
+    return (): void => {
+      myAPI.removeDesktop();
+    };
+  }, []);
+
   return (
     <div
       className={isDarwin() ? 'container_darwin' : 'container'}

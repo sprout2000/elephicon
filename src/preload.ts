@@ -33,4 +33,9 @@ contextBridge.exposeInMainWorld('myAPI', {
   setICO: (listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void) =>
     ipcRenderer.once('set-ico', listener),
   removeSetICO: () => ipcRenderer.removeAllListeners('set-ico'),
+
+  setDesktop: (
+    listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
+  ) => ipcRenderer.once('set-desktop', listener),
+  removeSetDesktop: () => ipcRenderer.removeAllListeners('set-desktop'),
 });

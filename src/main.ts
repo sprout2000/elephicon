@@ -120,8 +120,8 @@ const createWindow = () => {
   mainWindow.once('ready-to-show', () => mainWindow.show());
 
   mainWindow.webContents.once('did-finish-load', () => {
-    const state = store.get('state', false);
-    mainWindow.webContents.send('set-state', state);
+    const ico = store.get('ico', false);
+    mainWindow.webContents.send('set-ico', ico);
 
     if (!isDarwin && !isDev && process.argv.length >= 2) {
       const filepath = process.argv[process.argv.length - 1];
@@ -180,7 +180,8 @@ const createWindow = () => {
   }
 
   mainWindow.once('close', () => {
-    store.set('state', isICO);
+    store.set('ico', isICO);
+    store.set('desktop', store.get('desktop'));
 
     const pos = mainWindow.getPosition();
     store.set('x', pos[0]);

@@ -35,4 +35,9 @@ export interface Sandbox {
     listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
   ) => Electron.IpcRenderer;
   removeSetICO: () => Electron.IpcRenderer;
+
+  setDesktop: (
+    listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
+  ) => Electron.IpcRenderer;
+  removeDesktop: () => Electron.IpcRenderer;
 }
