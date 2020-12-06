@@ -26,12 +26,12 @@ process.once('uncaughtException', (err) => {
 
 const store = new Store<TypedStore>({
   defaults: {
-    state: false,
+    ico: true,
+    desktop: true,
     x: undefined,
     y: undefined,
     quality: 2,
     bmp: true,
-    desktop: true,
   },
 });
 
@@ -40,7 +40,7 @@ const isDarwin = process.platform === 'darwin';
 const isDev = process.env.NODE_ENV === 'development';
 
 let filepath: string | null = null;
-let config = false;
+let isICO = true;
 
 const getResourceDirectory = (): string => {
   return isDev
@@ -111,8 +111,8 @@ const createWindow = () => {
       .catch((err): void => console.log(err));
   });
 
-  ipcMain.on('change-state', (_e, arg) => {
-    config = arg;
+  ipcMain.on('change-ico', (_e, arg) => {
+    isICO = arg;
   });
 
   ipcMain.once('close-window', () => mainWindow.close());
@@ -180,7 +180,7 @@ const createWindow = () => {
   }
 
   mainWindow.once('close', () => {
-    store.set('state', config);
+    store.set('state', isICO);
 
     const pos = mainWindow.getPosition();
     store.set('x', pos[0]);

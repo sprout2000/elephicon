@@ -28,9 +28,9 @@ contextBridge.exposeInMainWorld('myAPI', {
   ) => ipcRenderer.on('menu-open', listener),
   removeMenuOpen: () => ipcRenderer.removeAllListeners('menu-open'),
 
-  changeState: (arg: boolean) => ipcRenderer.send('change-state', arg),
+  changeICO: (arg: boolean) => ipcRenderer.send('change-ico', arg),
 
-  setState: (listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void) =>
-    ipcRenderer.once('set-state', listener),
-  removeSetState: () => ipcRenderer.removeAllListeners('set-state'),
+  setICO: (listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void) =>
+    ipcRenderer.once('set-ico', listener),
+  removeSetICO: () => ipcRenderer.removeAllListeners('set-ico'),
 });
