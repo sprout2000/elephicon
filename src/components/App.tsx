@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { UAParser } from 'ua-parser-js';
+import UAParser from 'ua-parser-js';
 
 import {
   IoLogoApple,
