@@ -17,11 +17,11 @@ const { myAPI } = window;
 const App: React.FC = () => {
   const [onDrag, setOnDrag] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [ico, setIco] = useState(true);
+  const [desktop, setDesktop] = useState(true);
   const [success, setSuccess] = useState(false);
   const [onError, setOnError] = useState(false);
   const [message, setMessage] = useState('');
-  const [desktop, setDesktop] = useState(true);
 
   const isDarwin = () => {
     const ua = new UAParser();
@@ -60,15 +60,15 @@ const App: React.FC = () => {
         return;
       }
 
-      if (checked) {
-        const result = await myAPI.mkIcns(filepath);
+      if (ico) {
+        const result = await myAPI.mkIco(filepath);
         afterConvert(result);
       } else {
-        const result = await myAPI.mkIco(filepath);
+        const result = await myAPI.mkIcns(filepath);
         afterConvert(result);
       }
     },
-    [checked]
+    [ico]
   );
 
   const preventDefault = (e: React.DragEvent<HTMLDivElement>): void => {
@@ -115,7 +115,7 @@ const App: React.FC = () => {
   const onClickOS = () => {
     if (loading) return;
 
-    setChecked(!checked);
+    setIco(!ico);
   };
 
   const onClickClose = () => {
@@ -164,14 +164,22 @@ const App: React.FC = () => {
   }, [convert]);
 
   useEffect(() => {
-    myAPI.changeState(checked);
-  }, [checked]);
+    myAPI.changeICO(ico);
+  }, [ico]);
 
   useEffect(() => {
-    myAPI.setState((_e, arg) => setChecked(arg));
+    myAPI.setICO((_e, arg) => setIco(arg));
 
     return (): void => {
-      myAPI.removeSetState();
+      myAPI.removeSetICO();
+    };
+  }, []);
+
+  useEffect(() => {
+    myAPI.setDesktop((_e, arg) => setDesktop(arg));
+
+    return (): void => {
+      myAPI.removeDesktop();
     };
   }, []);
 
@@ -205,9 +213,9 @@ const App: React.FC = () => {
               className={
                 loading
                   ? 'icon-container loading'
-                  : checked
-                  ? 'icon-container checked'
-                  : 'icon-container'
+                  : ico
+                  ? 'icon-container'
+                  : 'icon-container checked'
               }
               onClick={onClickOS}>
               <div className="os">
@@ -219,9 +227,9 @@ const App: React.FC = () => {
               className={
                 loading
                   ? 'icon-container loading'
-                  : checked
-                  ? 'icon-container'
-                  : 'icon-container checked'
+                  : ico
+                  ? 'icon-container checked'
+                  : 'icon-container'
               }
               onClick={onClickOS}>
               <div className="os">

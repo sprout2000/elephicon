@@ -29,10 +29,15 @@ export interface Sandbox {
   ) => Electron.IpcRenderer;
   removeMenuOpen: () => Electron.IpcRenderer;
 
-  changeState: (arg: boolean) => void;
+  changeICO: (arg: boolean) => void;
 
-  setState: (
+  setICO: (
     listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
   ) => Electron.IpcRenderer;
-  removeSetState: () => Electron.IpcRenderer;
+  removeSetICO: () => Electron.IpcRenderer;
+
+  setDesktop: (
+    listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
+  ) => Electron.IpcRenderer;
+  removeDesktop: () => Electron.IpcRenderer;
 }
