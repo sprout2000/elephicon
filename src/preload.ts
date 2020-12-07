@@ -20,7 +20,6 @@ contextBridge.exposeInMainWorld('myAPI', {
 
   onDrop: (listener: (_e: Event, filepath: string) => Promise<void>) =>
     ipcRenderer.on('dropped', listener),
-
   removeOnDrop: () => ipcRenderer.removeAllListeners('dropped'),
 
   menuOpen: (
