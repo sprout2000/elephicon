@@ -12,7 +12,7 @@ contextBridge.exposeInMainWorld('myAPI', {
     await ipcRenderer.invoke('make-ico', filepath),
 
   openDialog: async (): Promise<string | void> =>
-    ipcRenderer.invoke('open-file-dialog'),
+    await ipcRenderer.invoke('open-file-dialog'),
 
   closeWindow: (): void => ipcRenderer.send('close-window'),
 
@@ -20,7 +20,6 @@ contextBridge.exposeInMainWorld('myAPI', {
 
   onDrop: (listener: (_e: Event, filepath: string) => Promise<void>) =>
     ipcRenderer.on('dropped', listener),
-
   removeOnDrop: () => ipcRenderer.removeAllListeners('dropped'),
 
   menuOpen: (
