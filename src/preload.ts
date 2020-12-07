@@ -12,7 +12,7 @@ contextBridge.exposeInMainWorld('myAPI', {
     await ipcRenderer.invoke('make-ico', filepath),
 
   openDialog: async (): Promise<string | void> =>
-    ipcRenderer.invoke('open-file-dialog'),
+    await ipcRenderer.invoke('open-file-dialog'),
 
   closeWindow: (): void => ipcRenderer.send('close-window'),
 
