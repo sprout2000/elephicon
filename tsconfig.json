@@ -28,5 +28,12 @@
 
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "target": "ES2015",
+      "module": "CommonJS",
+      "lib": ["ES2015"]
+    }
   }
 }
