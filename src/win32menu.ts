@@ -139,7 +139,7 @@ export const win32menu = (
         { type: 'separator' },
         {
           label: 'Toggle Developer Tools',
-          accelerator: 'Ctrl+Alt+I',
+          accelerator: 'Ctrl+Shift+I',
           click: (): void => {
             if (win.webContents.isDevToolsOpened()) {
               win.webContents.closeDevTools();
