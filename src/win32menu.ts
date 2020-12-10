@@ -10,8 +10,6 @@ import Store from 'electron-store';
 
 import { TypedStore } from './store';
 
-const url = 'https://github.com/sprout2000/elephicon#readme';
-
 export const win32menu = (
   win: BrowserWindow,
   store: Store<TypedStore>
@@ -130,7 +128,8 @@ export const win32menu = (
       submenu: [
         {
           label: 'Support URL...',
-          click: async (): Promise<void> => await shell.openExternal(url),
+          click: async (): Promise<void> =>
+            await shell.openExternal('https://sprout2000.github.io/elephicon'),
         },
         {
           label: 'About Elephicon',
