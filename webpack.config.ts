@@ -87,6 +87,9 @@ const renderer: Configuration = {
         isDev ? 'index.dev.html' : 'index.html'
       ),
       filename: 'index.html',
+      scriptLoading: 'blocking',
+      inject: 'body',
+      minify: true,
     }),
     new MiniCssExtractPlugin(),
   ],
