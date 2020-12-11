@@ -2,6 +2,7 @@ import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserWebpackPlugin from 'terser-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerWebpackPlugin from 'css-minimizer-webpack-plugin';
 
 import path from 'path';
 
@@ -51,7 +52,7 @@ const base: Configuration = {
     ],
   },
   optimization: {
-    minimizer: [new TerserWebpackPlugin()],
+    minimizer: [new TerserWebpackPlugin(), new CssMinimizerWebpackPlugin()],
   },
   stats: 'none',
   devtool: isDev ? 'inline-source-map' : false,
@@ -89,7 +90,7 @@ const renderer: Configuration = {
       filename: 'index.html',
       scriptLoading: 'blocking',
       inject: 'body',
-      minify: true,
+      minify: false,
     }),
     new MiniCssExtractPlugin(),
   ],
