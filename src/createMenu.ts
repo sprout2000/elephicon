@@ -1,23 +1,24 @@
 import {
-  MenuItemConstructorOptions,
-  shell,
-  Menu,
+  app,
   dialog,
   BrowserWindow,
+  Menu,
+  MenuItemConstructorOptions,
+  shell,
 } from 'electron';
 import Store from 'electron-store';
 
 import { TypedStore } from './store';
 
-const url = 'https://github.com/sprout2000/elephicon#readme';
-
-export const contextMenu = (
+export const createMenu = (
   win: BrowserWindow,
   store: Store<TypedStore>
 ): Menu => {
+  const darwin = process.platform === 'darwin';
+
   const template: MenuItemConstructorOptions[] = [
     {
-      label: 'File',
+      label: '&File',
       submenu: [
         {
           label: 'Open...',
@@ -43,14 +44,14 @@ export const contextMenu = (
         },
         { type: 'separator' },
         {
-          label: 'Close',
-          accelerator: 'Cmd+W',
-          role: 'close',
+          label: darwin ? 'Close' : 'Quit',
+          accelerator: darwin ? 'Cmd+W' : 'Ctrl+Q',
+          role: darwin ? 'close' : 'quit',
         },
       ],
     },
     {
-      label: 'Settings',
+      label: '&Settings',
       submenu: [
         {
           label: 'Quality',
@@ -124,14 +125,49 @@ export const contextMenu = (
         },
       ],
     },
-    { type: 'separator' },
-    {
+  ];
+
+  if (!darwin) {
+    template.push({
+      label: '&Help',
+      submenu: [
+        {
+          label: 'Support URL...',
+          click: async (): Promise<void> =>
+            await shell.openExternal('https://sprout2000.github.io/elephicon'),
+        },
+        {
+          label: 'About Elephicon',
+          accelerator: 'Ctrl+I',
+          click: () => app.showAboutPanel(),
+        },
+        { type: 'separator' },
+        {
+          label: 'Toggle Developer Tools',
+          accelerator: 'Ctrl+Shift+I',
+          click: (): void => {
+            if (win.webContents.isDevToolsOpened()) {
+              win.webContents.closeDevTools();
+            } else {
+              win.webContents.openDevTools({ mode: 'detach' });
+            }
+          },
+        },
+      ],
+    });
+  }
+
+  if (darwin) {
+    template.push({
       label: 'Help',
       role: 'help',
       submenu: [
         {
           label: 'Support URL...',
-          click: async (): Promise<void> => await shell.openExternal(url),
+          click: async (): Promise<void> =>
+            await shell.openExternal(
+              'https://github.com/sprout2000/elephicon#readme'
+            ),
         },
         { type: 'separator' },
         {
@@ -146,10 +182,38 @@ export const contextMenu = (
           },
         },
       ],
-    },
-  ];
+    });
+
+    template.unshift({
+      label: 'Elephicon',
+      submenu: [
+        {
+          label: 'About',
+          accelerator: 'Cmd+I',
+          role: 'about',
+        },
+        { type: 'separator' },
+        {
+          label: 'Hide Elephicon',
+          role: 'hide',
+        },
+        {
+          label: 'Hide Others',
+          role: 'hideOthers',
+        },
+        {
+          label: 'Show All',
+          role: 'unhide',
+        },
+        { type: 'separator' },
+        {
+          label: 'Quit Elephicon',
+          role: 'quit',
+        },
+      ],
+    });
+  }
 
   const menu = Menu.buildFromTemplate(template);
-
   return menu;
 };

@@ -8,9 +8,7 @@ import mime from 'mime-types';
 
 import { mkico, mkicns } from './mkicons';
 import { TypedStore } from './store';
-import { template } from './template';
-import { win32menu } from './win32menu';
-import { contextMenu } from './contextmenu';
+import { createMenu } from './createMenu';
 
 console.log = log.log;
 autoUpdater.logger = log;
@@ -135,6 +133,8 @@ const createWindow = () => {
     }
   });
 
+  const menu = createMenu(mainWindow, store);
+  Menu.setApplicationMenu(menu);
   mainWindow.loadFile('dist/index.html');
 
   if (isDev) {
@@ -142,12 +142,6 @@ const createWindow = () => {
   }
 
   if (isDarwin) {
-    const mainMenu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(mainMenu);
-
-    const menu = contextMenu(mainWindow, store);
-    ipcMain.on('open-contextmenu', () => menu.popup());
-
     autoUpdater.checkForUpdatesAndNotify();
 
     autoUpdater.once('error', (_e, err) => {
@@ -174,9 +168,6 @@ const createWindow = () => {
         })
         .catch((err) => log.info(`Error in showMessageBox: ${err}`));
     });
-  } else {
-    const menu = win32menu(mainWindow, store);
-    Menu.setApplicationMenu(menu);
   }
 
   mainWindow.once('close', () => {
