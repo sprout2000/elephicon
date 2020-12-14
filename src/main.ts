@@ -9,6 +9,7 @@ import mime from 'mime-types';
 import { mkico, mkicns } from './mkicons';
 import { TypedStore } from './store';
 import { createMenu } from './createMenu';
+import { setLocales } from './setLocales';
 
 console.log = log.log;
 autoUpdater.logger = log;
@@ -190,7 +191,11 @@ if (!gotTheLock && !isDarwin) {
     });
   });
 
-  app.whenReady().then(() => createWindow());
+  app.whenReady().then(() => {
+    const locale = app.getLocale();
+    setLocales(locale);
+    createWindow();
+  });
 
   app.setAboutPanelOptions({
     applicationName: app.name,
