@@ -7,6 +7,7 @@ import {
   shell,
 } from 'electron';
 import Store from 'electron-store';
+import i18next from 'i18next';
 
 import { TypedStore } from './store';
 
@@ -18,16 +19,16 @@ export const createMenu = (
 
   const template: MenuItemConstructorOptions[] = [
     {
-      label: '&File',
+      label: i18next.t('file'),
       submenu: [
         {
-          label: 'Open...',
+          label: i18next.t('open'),
           accelerator: 'CmdOrCtrl+O',
           click: async (): Promise<void> => {
             await dialog
               .showOpenDialog(win, {
                 properties: ['openFile'],
-                title: 'Select',
+                title: i18next.t('select'),
                 filters: [
                   {
                     name: 'PNG File',
@@ -44,34 +45,34 @@ export const createMenu = (
         },
         { type: 'separator' },
         {
-          label: darwin ? 'Close' : 'Quit',
+          label: darwin ? i18next.t('close') : i18next.t('quit'),
           accelerator: darwin ? 'Cmd+W' : 'Ctrl+Q',
           role: darwin ? 'close' : 'quit',
         },
       ],
     },
     {
-      label: '&Settings',
+      label: i18next.t('settings'),
       submenu: [
         {
-          label: 'Quality',
+          label: i18next.t('quality'),
           submenu: [
             {
-              label: 'Low',
+              label: i18next.t('low'),
               type: 'radio',
               id: 'low',
               click: (): void => store.set('quality', 0),
               checked: store.get('quality') === 0,
             },
             {
-              label: 'Medium',
+              label: i18next.t('medium'),
               type: 'radio',
               id: 'mid',
               click: (): void => store.set('quality', 1),
               checked: store.get('quality') === 1,
             },
             {
-              label: 'High',
+              label: i18next.t('high'),
               type: 'radio',
               id: 'high',
               click: (): void => store.set('quality', 2),
@@ -83,14 +84,14 @@ export const createMenu = (
           label: 'ICO',
           submenu: [
             {
-              label: 'Use BMP format for the smaller icon sizes',
+              label: i18next.t('bmp'),
               type: 'radio',
               id: 'bmp',
               click: (): void => store.set('bmp', true),
               checked: store.get('bmp'),
             },
             {
-              label: 'Use PNG for each icon in the created ICO file',
+              label: i18next.t('png'),
               type: 'radio',
               id: 'png',
               click: (): void => store.set('bmp', false),
@@ -99,10 +100,10 @@ export const createMenu = (
           ],
         },
         {
-          label: 'Destination',
+          label: i18next.t('destination'),
           submenu: [
             {
-              label: 'Desktop',
+              label: i18next.t('desktop'),
               type: 'radio',
               id: 'desktop',
               click: (): void => {
@@ -112,7 +113,7 @@ export const createMenu = (
               checked: store.get('desktop'),
             },
             {
-              label: 'Same folder as the input PNGs',
+              label: i18next.t('same'),
               type: 'radio',
               id: 'current',
               click: (): void => {
@@ -129,21 +130,21 @@ export const createMenu = (
 
   if (!darwin) {
     template.push({
-      label: '&Help',
+      label: i18next.t('help'),
       submenu: [
         {
-          label: 'Support URL...',
+          label: i18next.t('support'),
           click: async (): Promise<void> =>
             await shell.openExternal('https://sprout2000.github.io/elephicon'),
         },
         {
-          label: 'About Elephicon',
+          label: i18next.t('about'),
           accelerator: 'Ctrl+I',
           click: () => app.showAboutPanel(),
         },
         { type: 'separator' },
         {
-          label: 'Toggle Developer Tools',
+          label: i18next.t('devtools'),
           accelerator: 'Ctrl+Shift+I',
           click: (): void => {
             if (win.webContents.isDevToolsOpened()) {
@@ -159,11 +160,11 @@ export const createMenu = (
 
   if (darwin) {
     template.push({
-      label: 'Help',
+      label: i18next.t('help'),
       role: 'help',
       submenu: [
         {
-          label: 'Support URL...',
+          label: i18next.t('support'),
           click: async (): Promise<void> =>
             await shell.openExternal(
               'https://github.com/sprout2000/elephicon#readme'
@@ -171,7 +172,7 @@ export const createMenu = (
         },
         { type: 'separator' },
         {
-          label: 'Toggle Developer Tools',
+          label: i18next.t('devtools'),
           accelerator: 'Cmd+Option+I',
           click: (): void => {
             if (win.webContents.isDevToolsOpened()) {
@@ -188,26 +189,26 @@ export const createMenu = (
       label: 'Elephicon',
       submenu: [
         {
-          label: 'About',
+          label: i18next.t('about'),
           accelerator: 'Cmd+I',
           role: 'about',
         },
         { type: 'separator' },
         {
-          label: 'Hide Elephicon',
+          label: i18next.t('hide'),
           role: 'hide',
         },
         {
-          label: 'Hide Others',
+          label: i18next.t('hideOthers'),
           role: 'hideOthers',
         },
         {
-          label: 'Show All',
+          label: i18next.t('unhide'),
           role: 'unhide',
         },
         { type: 'separator' },
         {
-          label: 'Quit Elephicon',
+          label: i18next.t('quit'),
           role: 'quit',
         },
       ],
