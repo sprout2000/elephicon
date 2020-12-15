@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import UAParser from 'ua-parser-js';
 
-import {
-  IoLogoApple,
-  IoLogoWindows,
-  IoIosCloseCircleOutline,
-} from 'react-icons/io';
+import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
 
 import { Success } from './Success';
 import { Elephant } from './Elephant';
@@ -118,20 +114,9 @@ const App: React.FC = () => {
     setIco(!ico);
   };
 
-  const onClickClose = () => {
-    myAPI.closeWindow();
-  };
-
   const onClickBack = () => {
     setSuccess(false);
     setOnError(false);
-  };
-
-  const onContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (loading) return;
-
-    e.preventDefault();
-    myAPI.openContextMenu();
   };
 
   const onStart = useCallback(
@@ -184,14 +169,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div
-      className={isDarwin() ? 'container_darwin' : 'container'}
-      onContextMenu={onContextMenu}>
-      {isDarwin() && (
-        <div className="close-button" title="Close" onClick={onClickClose}>
-          <IoIosCloseCircleOutline size="2em" />
-        </div>
-      )}
+    <div className={isDarwin() ? 'container_darwin' : 'container'}>
       {!success && !onError ? (
         <div
           className="drop-zone"
