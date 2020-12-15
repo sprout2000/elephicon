@@ -15,10 +15,6 @@ export interface Sandbox {
 
   openDialog: () => Promise<string | void>;
 
-  closeWindow: () => void;
-
-  openContextMenu: () => void;
-
   onDrop: (
     listener: (_e: Event, filepath: string) => Promise<void>
   ) => Electron.IpcRenderer;
