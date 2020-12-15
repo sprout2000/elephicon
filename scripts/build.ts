@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 import { build } from 'electron-builder';
-import os from 'os';
 
-const arch = os.arch();
 dotenv.config();
 
 build({
@@ -25,8 +23,7 @@ build({
     afterSign: 'scripts/notarize.ts',
     mac: {
       appId: process.env.APP_BUNDLE_ID,
-      artifactName:
-        '${productName}-${version}-${platform}-' + `${arch}` + '.${ext}',
+      artifactName: '${productName}-${version}-${platform}.${ext}',
       category: 'public.app-category.developer-tools',
       target: 'default',
       icon: 'assets/icon.icns',
@@ -65,8 +62,7 @@ build({
       ],
     },
     appx: {
-      artifactName:
-        '${productName}-${version}-${platform}-' + `${arch}` + '.${ext}',
+      artifactName: '${productName}-${version}-${platform}.${ext}',
       applicationId: 'sprout2000.Elephicon',
       backgroundColor: '#1d3557',
       displayName: 'Elephicon',

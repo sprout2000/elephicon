@@ -1,13 +1,9 @@
 import { build } from 'electron-builder';
-import os from 'os';
-
-const arch = os.arch();
 
 build({
   config: {
     productName: 'Elephicon',
-    artifactName:
-      '${productName}-${version}-${platform}-' + `${arch}` + '.${ext}',
+    artifactName: '${productName}-${version}-${platform}.${ext}',
     copyright: 'Copyright (C) 2020 sprout2000.',
     files: ['dist/**/*'],
     directories: {
