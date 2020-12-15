@@ -57,6 +57,32 @@ You can download the latest version of _Elephicon_ from the releases page here:
 
 Download the latest version for Windows10 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
 
+## Contribution
+
+I need more locale files.  
+When you translate the menu into your language, please send me the locale file as a pull request.
+
+- Create `{your_LANG}.json` in `src/locales`.
+- And then add your locale to `src/setLocales.ts` like:
+
+```diff
+  import en from './locales/en.json';
+  import ja from './locales/ja.json';
++ import cs from './locales/cs.json';
+
+ export const setLocales = (locale: string): void => {
+   i18next.init({
+     lng: locale,
+     fallbackLng: 'en',
+     resources: {
+       en: { translation: en },
+       ja: { translation: ja },
++      cs: { translation: cs },
+     },
+   });
+ };
+```
+
 ## License
 
 ### [png2icons](https://github.com/idesis-gmbh/png2icons)
