@@ -14,10 +14,6 @@ contextBridge.exposeInMainWorld('myAPI', {
   openDialog: async (): Promise<string | void> =>
     await ipcRenderer.invoke('open-file-dialog'),
 
-  closeWindow: (): void => ipcRenderer.send('close-window'),
-
-  openContextMenu: (): void => ipcRenderer.send('open-contextmenu'),
-
   onDrop: (listener: (_e: Event, filepath: string) => Promise<void>) =>
     ipcRenderer.on('dropped', listener),
   removeOnDrop: () => ipcRenderer.removeAllListeners('dropped'),

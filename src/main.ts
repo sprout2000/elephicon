@@ -54,7 +54,7 @@ const createWindow = () => {
     width: 360,
     height: isDarwin ? 320 : 400,
     show: false,
-    frame: isDarwin ? false : true,
+    titleBarStyle: isDarwin ? 'hidden' : 'default',
     resizable: false,
     maximizable: false,
     fullscreenable: false,
