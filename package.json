@@ -19,7 +19,7 @@
     "png2icons"
   ],
   "engines": {
-    "node": ">=12.16",
+    "node": ">=14",
     "npm": "please_use_yarn_instead",
     "yarn": ">=1.22"
   },
