@@ -138,10 +138,6 @@ const createWindow = () => {
   Menu.setApplicationMenu(menu);
   mainWindow.loadFile('dist/index.html');
 
-  if (isDev) {
-    mainWindow.webContents.openDevTools({ mode: 'detach' });
-  }
-
   if (isDarwin) {
     autoUpdater.checkForUpdatesAndNotify();
 
