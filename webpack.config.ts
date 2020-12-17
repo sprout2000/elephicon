@@ -6,11 +6,10 @@ import CssMinimizerWebpackPlugin from 'css-minimizer-webpack-plugin';
 
 import path from 'path';
 
-const isProd = process.env.NODE_ENV === 'production';
 const isDev = process.env.NODE_ENV === 'development';
 
 const base: Configuration = {
-  mode: isProd ? 'production' : 'development',
+  mode: isDev ? 'development' : 'production',
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
   },
@@ -34,14 +33,14 @@ const base: Configuration = {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: !isProd,
+              sourceMap: isDev,
               importLoaders: 1,
             },
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: !isProd,
+              sourceMap: isDev,
             },
           },
         ],
@@ -56,7 +55,7 @@ const base: Configuration = {
     minimizer: [new TerserWebpackPlugin(), new CssMinimizerWebpackPlugin()],
   },
   stats: 'none',
-  devtool: isProd ? false : 'inline-source-map',
+  devtool: isDev ? 'inline-source-map' : false,
 };
 
 const main: Configuration = {
