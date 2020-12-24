@@ -6,14 +6,9 @@ dotenv.config();
 build({
   config: {
     productName: 'Elephicon',
+    artifactName: '${productName}-${version}-${platform}-${arch}.${ext}',
     copyright: 'Copyright (C) 2020 sprout2000.',
     files: ['dist/**/*'],
-    publish: [
-      {
-        provider: 'github',
-        releaseType: 'release',
-      },
-    ],
     directories: {
       buildResources: 'assets',
       output: 'release',
@@ -23,9 +18,11 @@ build({
     afterSign: 'scripts/notarize.ts',
     mac: {
       appId: process.env.APP_BUNDLE_ID,
-      artifactName: '${productName}-${version}-${platform}.${ext}',
       category: 'public.app-category.developer-tools',
-      target: 'default',
+      target: {
+        target: 'default',
+        arch: ['arm64', 'x64'],
+      },
       icon: 'assets/icon.icns',
       extendInfo: {
         CFBundleName: 'Elephicon',
@@ -50,27 +47,6 @@ build({
     dmg: {
       icon: 'assets/dmg.icns',
       sign: false,
-    },
-    win: {
-      icon: 'assets/icon.ico',
-      target: ['appx'],
-      fileAssociations: [
-        {
-          ext: ['png'],
-          description: 'PNG files',
-        },
-      ],
-    },
-    appx: {
-      artifactName: '${productName}-${version}-${platform}.${ext}',
-      applicationId: 'sprout2000.Elephicon',
-      backgroundColor: '#1d3557',
-      displayName: 'Elephicon',
-      showNameOnTiles: true,
-      languages: ['EN-US', 'JA-JP'],
-      identityName: process.env.IDENTITY_NAME,
-      publisher: process.env.PUBLISHER,
-      publisherDisplayName: 'sprout2000',
     },
   },
 }).catch((err) => console.log(err));
