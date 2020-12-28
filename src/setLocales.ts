@@ -2,7 +2,7 @@ import i18next from 'i18next';
 
 import en from './locales/en.json';
 import ja from './locales/ja.json';
-Import de from './locales/de.json';
+import de from './locales/de.json';
 
 export const setLocales = (locale: string): void => {
   i18next.init({
@@ -11,7 +11,7 @@ export const setLocales = (locale: string): void => {
     resources: {
       en: { translation: en },
       ja: { translation: ja },
-      de: { translation: de }
+      de: { translation: de },
     },
   });
 };
