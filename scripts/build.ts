@@ -21,7 +21,7 @@ build({
       category: 'public.app-category.developer-tools',
       target: {
         target: 'default',
-        arch: 'universal',
+        arch: ['arm64', 'x64', 'universal'],
       },
       icon: 'assets/icon.icns',
       extendInfo: {
