@@ -61,7 +61,7 @@
     "@types/css-minimizer-webpack-plugin": "^1.1.1",
     "@types/mime-types": "^2.1.0",
     "@types/mini-css-extract-plugin": "^1.2.2",
-    "@types/node": "^14.14.16",
+    "@types/node": "^14.14.17",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/terser-webpack-plugin": "^5.0.2",
@@ -91,7 +91,7 @@
     "@typescript-eslint/parser": "^4.11.1",
     "eslint": "^7.16.0",
     "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.2.1",
     "react-devtools": "^4.10.1"
