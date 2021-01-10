@@ -1,4 +1,4 @@
-import { Result } from '../src/result';
+import { Result } from '../result';
 
 declare global {
   interface Window {
