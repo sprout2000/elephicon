@@ -227,7 +227,7 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/node@*", "@types/node@^14.14.20":
+"@types/node@*":
   version "14.14.20"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
   integrity sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
@@ -236,6 +236,11 @@
   version "12.19.12"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.19.12.tgz#04793c2afa4ce833a9972e4c476432e30f9df47b"
   integrity sha512-UwfL2uIU9arX/+/PRcIkT08/iBadGN2z6ExOROA2Dh5mAuWTBj6iJbQX4nekiV5H8cTrEG569LeX+HRco9Cbxw==
+
+"@types/node@^14.14.21":
+  version "14.14.21"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.21.tgz#d934aacc22424fe9622ebf6857370c052eae464e"
+  integrity sha512-cHYfKsnwllYhjOzuC5q1VpguABBeecUp24yFluHpn/BQaVxB1CuQ1FSRZCzrPxrkIfWISXV2LbeoBthLWg0+0A==
 
 "@types/plist@^3.0.1":
   version "3.0.2"
@@ -1915,6 +1920,14 @@ enhanced-resolve@^5.3.1:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
 
+enhanced-resolve@^5.7.0:
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-5.7.0.tgz#525c5d856680fbd5052de453ac83e32049958b5c"
+  integrity sha512-6njwt/NsZFUKhM6j9U8hzVyD4E4r0x7NQzhTCbcWOJ0IQjNSAoalWmb0AE51Wn+fwan5qVESWi7t2ToBxs9vrw==
+  dependencies:
+    graceful-fs "^4.2.4"
+    tapable "^2.2.0"
+
 enquirer@^2.3.5, enquirer@^2.3.6:
   version "2.3.6"
   resolved "https://registry.yarnpkg.com/enquirer/-/enquirer-2.3.6.tgz#2a7fe5dd634a1e4125a975ec994ff5456dc3734d"
@@ -1990,6 +2003,11 @@ es-abstract@^1.18.0-next.1:
     object.assign "^4.1.1"
     string.prototype.trimend "^1.0.1"
     string.prototype.trimstart "^1.0.1"
+
+es-module-lexer@^0.3.26:
+  version "0.3.26"
+  resolved "https://registry.yarnpkg.com/es-module-lexer/-/es-module-lexer-0.3.26.tgz#7b507044e97d5b03b01d4392c74ffeb9c177a83b"
+  integrity sha512-Va0Q/xqtrss45hWzP8CZJwzGSZJjDM5/MJRE3IXXnUCcVLElR9BRaE9F62BopysASyc4nM3uwhSW7FFB9nlWAA==
 
 es-to-primitive@^1.2.1:
   version "1.2.1"
@@ -3349,10 +3367,10 @@ mimic-response@^1.0.0, mimic-response@^1.0.1:
   resolved "https://registry.yarnpkg.com/mimic-response/-/mimic-response-1.0.1.tgz#4923538878eef42063cb8a3e3b0798781487ab1b"
   integrity sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==
 
-mini-css-extract-plugin@^1.3.3:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-1.3.3.tgz#7802e62b34199aa7d1a62e654395859a836486a0"
-  integrity sha512-7lvliDSMiuZc81kI+5/qxvn47SCM7BehXex3f2c6l/pR3Goj58IQxZh9nuPQ3AkGQgoETyXuIqLDaO5Oa0TyBw==
+mini-css-extract-plugin@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-1.3.4.tgz#706e69632cdcdb8b15bf8e638442a0dba304a9c8"
+  integrity sha512-dNjqyeogUd8ucUgw5sxm1ahvSfSUgef7smbmATRSbDm4EmNx5kQA6VdUEhEeCKSjX6CTYjb5vxgMUvRjqP3uHg==
   dependencies:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
@@ -4559,10 +4577,10 @@ sanitize-filename@^1.6.2, sanitize-filename@^1.6.3:
   dependencies:
     truncate-utf8-bytes "^1.0.0"
 
-sass-loader@^10.1.0:
-  version "10.1.0"
-  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-10.1.0.tgz#1727fcc0c32ab3eb197cda61d78adf4e9174a4b3"
-  integrity sha512-ZCKAlczLBbFd3aGAhowpYEy69Te3Z68cg8bnHHl6WnSCvnKpbM6pQrz957HWMa8LKVuhnD9uMplmMAHwGQtHeg==
+sass-loader@^10.1.1:
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-10.1.1.tgz#4ddd5a3d7638e7949065dd6e9c7c04037f7e663d"
+  integrity sha512-W6gVDXAd5hR/WHsPicvZdjAWHBcEJ44UahgxcIE196fW2ong0ZHMPO1kZuI5q0VlvMQZh32gpv69PLWQm70qrw==
   dependencies:
     klona "^2.0.4"
     loader-utils "^2.0.0"
@@ -4570,10 +4588,10 @@ sass-loader@^10.1.0:
     schema-utils "^3.0.0"
     semver "^7.3.2"
 
-sass@^1.32.2:
-  version "1.32.2"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.32.2.tgz#66dc0250bc86c15d19ddee7135e93d0cf3d3257b"
-  integrity sha512-u1pUuzqwz3SAgvHSWp1k0mRhX82b2DdlVnP6UIetQPZtYbuJUDaPQhZE12jyjB7vYeOScfz9WPsZJB6Rpk7heA==
+sass@^1.32.4:
+  version "1.32.4"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.32.4.tgz#308bf29dd7f53d44ae4f06580e9a910ad9aa411e"
+  integrity sha512-N0BT0PI/t3+gD8jKa83zJJUb7ssfQnRRfqN+GIErokW6U4guBpfYl8qYB+OFLEho+QvnV5ZH1R9qhUC/Z2Ch9w==
   dependencies:
     chokidar ">=2.0.0 <4.0.0"
 
@@ -5420,7 +5438,7 @@ webpack-sources@^2.1.1:
     source-list-map "^2.0.1"
     source-map "^0.6.1"
 
-webpack@^5.1.0, webpack@^5.12.3:
+webpack@^5.1.0:
   version "5.12.3"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.12.3.tgz#2682aeb6bdf5622a365ef855392f8fa338bcaa28"
   integrity sha512-7tiQmcTnKhZwbf7X7sEfXe0pgkGjUZjT6JfYkZHvvIb4/ZsXl1rJu5PxsJoN7W3v5sNSP/8TgBoiOdDqVdvK5w==
@@ -5434,6 +5452,36 @@ webpack@^5.1.0, webpack@^5.12.3:
     browserslist "^4.14.5"
     chrome-trace-event "^1.0.2"
     enhanced-resolve "^5.3.1"
+    eslint-scope "^5.1.1"
+    events "^3.2.0"
+    glob-to-regexp "^0.4.1"
+    graceful-fs "^4.2.4"
+    json-parse-better-errors "^1.0.2"
+    loader-runner "^4.2.0"
+    mime-types "^2.1.27"
+    neo-async "^2.6.2"
+    pkg-dir "^5.0.0"
+    schema-utils "^3.0.0"
+    tapable "^2.1.1"
+    terser-webpack-plugin "^5.1.1"
+    watchpack "^2.0.0"
+    webpack-sources "^2.1.1"
+
+webpack@^5.15.0:
+  version "5.15.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.15.0.tgz#63d7b6228a4e15ee8c89899c2cfdd993e809bdd2"
+  integrity sha512-y/xG+ONDz78yn3VvP6gAvGr1/gkxOgitvHSXBmquyN8KDtrGEyE3K9WkXOPB7QmfcOBCpO4ELXwNcCYQnEmexA==
+  dependencies:
+    "@types/eslint-scope" "^3.7.0"
+    "@types/estree" "^0.0.45"
+    "@webassemblyjs/ast" "1.11.0"
+    "@webassemblyjs/wasm-edit" "1.11.0"
+    "@webassemblyjs/wasm-parser" "1.11.0"
+    acorn "^8.0.4"
+    browserslist "^4.14.5"
+    chrome-trace-event "^1.0.2"
+    enhanced-resolve "^5.7.0"
+    es-module-lexer "^0.3.26"
     eslint-scope "^5.1.1"
     events "^3.2.0"
     glob-to-regexp "^0.4.1"
