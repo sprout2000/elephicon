@@ -41,7 +41,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const extPath = path.join(
   os.homedir(),
-  '/Library/Application\\ Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.10.1_0'
+  '/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.10.1_0'
 );
 
 let filepath: string | null = null;
@@ -142,6 +142,8 @@ const createWindow = () => {
 
   const menu = createMenu(mainWindow, store);
   Menu.setApplicationMenu(menu);
+
+  if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
   mainWindow.loadFile('dist/index.html');
 
   if (isDarwin) {
