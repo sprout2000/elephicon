@@ -1,13 +1,13 @@
 import { BrowserWindow, app, ipcMain, dialog, Menu } from 'electron';
+import log from 'electron-log';
 import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
-import log from 'electron-log';
 
 import path from 'path';
 import mime from 'mime-types';
 
-import { mkico, mkicns } from './mkicons';
 import { TypedStore } from './store';
+import { mkico, mkicns } from './mkicons';
 import { createMenu } from './createMenu';
 import { setLocales } from './setLocales';
 
