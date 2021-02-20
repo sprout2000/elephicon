@@ -1,8 +1,9 @@
-import { BrowserWindow, app, ipcMain, dialog, Menu } from 'electron';
+import { BrowserWindow, app, ipcMain, dialog, Menu, session } from 'electron';
 import log from 'electron-log';
 import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
 
+import os from 'os';
 import path from 'path';
 import mime from 'mime-types';
 
@@ -37,6 +38,11 @@ const store = new Store<TypedStore>({
 const gotTheLock = app.requestSingleInstanceLock();
 const isDarwin = process.platform === 'darwin';
 const isDev = process.env.NODE_ENV === 'development';
+
+const extPath = path.join(
+  os.homedir(),
+  '/Library/Application\\ Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.10.1_0'
+);
 
 let filepath: string | null = null;
 let isICO = true;
@@ -187,9 +193,16 @@ if (!gotTheLock && !isDarwin) {
     });
   });
 
-  app.whenReady().then(() => {
+  app.whenReady().then(async () => {
     const locale = app.getLocale();
     setLocales(locale);
+
+    if (isDev) {
+      await session.defaultSession.loadExtension(extPath, {
+        allowFileAccess: true,
+      });
+    }
+
     createWindow();
   });
 
