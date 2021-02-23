@@ -39,11 +39,6 @@ const gotTheLock = app.requestSingleInstanceLock();
 const isDarwin = process.platform === 'darwin';
 const isDev = process.env.NODE_ENV === 'development';
 
-const extPath = path.join(
-  os.homedir(),
-  '/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.10.1_0'
-);
-
 let filepath: string | null = null;
 let isICO = true;
 
@@ -200,6 +195,12 @@ if (!gotTheLock && !isDarwin) {
     setLocales(locale);
 
     if (isDev) {
+      const extPath = path.join(
+        os.homedir(),
+        isDarwin
+          ? '/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.10.1_0'
+          : '\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\4.10.1_0'
+      );
       await session.defaultSession.loadExtension(extPath, {
         allowFileAccess: true,
       });
