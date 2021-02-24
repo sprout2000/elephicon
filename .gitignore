@@ -3,5 +3,7 @@ release
 dist
 apps
 gh-pages
+npm-*.log
+yarn-*.log
 .env
 .DS_Store
