@@ -82,6 +82,7 @@ const renderer: Configuration = {
     renderer: './src/renderer.tsx',
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       minify: !isDev,
@@ -89,7 +90,6 @@ const renderer: Configuration = {
       filename: 'index.html',
       scriptLoading: 'blocking',
     }),
-    new MiniCssExtractPlugin(),
   ],
 };
 
