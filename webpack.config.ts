@@ -1,6 +1,5 @@
 import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import TerserWebpackPlugin from 'terser-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerWebpackPlugin from 'css-minimizer-webpack-plugin';
 
@@ -52,9 +51,11 @@ const base: Configuration = {
     ],
   },
   optimization: {
-    minimizer: [new TerserWebpackPlugin(), new CssMinimizerWebpackPlugin()],
+    minimize: !isDev,
+    minimizer: [new CssMinimizerWebpackPlugin()],
   },
-  stats: 'none',
+  stats: 'errors-only',
+  performance: { hints: false },
   devtool: isDev ? 'inline-source-map' : false,
 };
 
@@ -90,9 +91,6 @@ const renderer: Configuration = {
     }),
     new MiniCssExtractPlugin(),
   ],
-  performance: {
-    hints: false,
-  },
 };
 
 export default [main, preload, renderer];
