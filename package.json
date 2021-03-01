@@ -29,17 +29,14 @@
     "lint": "run-s lint:*",
     "lint:eslint": "eslint . --ext .ts,.tsx --fix",
     "lint:prettier": "prettier --write .",
+    "lint-staged": "lint-staged",
     "prepackage": "run-s clean build:prod",
     "package": "ts-node scripts/build-unsign.ts",
     "prepackage:darwin": "run-s clean build:prod",
     "package:darwin": "ts-node scripts/build.ts",
     "prepackage:appx": "run-s clean build:prod",
-    "package:appx": "ts-node scripts/build-appx.ts"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "package:appx": "ts-node scripts/build-appx.ts",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
@@ -96,7 +93,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^4.3.8",
+    "husky": "^5.1.2",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1"
   }
