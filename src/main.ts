@@ -3,7 +3,6 @@ import log from 'electron-log';
 import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
 
-import os from 'os';
 import path from 'path';
 import mime from 'mime-types';
 
@@ -11,6 +10,7 @@ import { TypedStore } from './store';
 import { mkico, mkicns } from './mkicons';
 import { createMenu } from './createMenu';
 import { setLocales } from './setLocales';
+import { searchDevtools } from './searchDevtools';
 
 console.log = log.log;
 autoUpdater.logger = log;
@@ -195,12 +195,7 @@ if (!gotTheLock && !isDarwin) {
     setLocales(locale);
 
     if (isDev) {
-      const extPath = path.join(
-        os.homedir(),
-        isDarwin
-          ? '/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.10.1_0'
-          : '\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\4.10.1_0'
-      );
+      const extPath = await searchDevtools();
       await session.defaultSession.loadExtension(extPath, {
         allowFileAccess: true,
       });
