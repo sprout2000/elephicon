@@ -196,9 +196,11 @@ if (!gotTheLock && !isDarwin) {
 
     if (isDev) {
       const extPath = await searchDevtools();
-      await session.defaultSession.loadExtension(extPath, {
-        allowFileAccess: true,
-      });
+      if (extPath) {
+        await session.defaultSession.loadExtension(extPath, {
+          allowFileAccess: true,
+        });
+      }
     }
 
     createWindow();
