@@ -61,11 +61,8 @@ const createWindow = () => {
     fullscreenable: false,
     backgroundColor: '#005bea',
     webPreferences: {
-      enableRemoteModule: false,
-      nodeIntegration: false,
-      contextIsolation: true,
-      safeDialogs: true,
       sandbox: true,
+      safeDialogs: true,
       preload: path.resolve(getResourceDirectory(), 'preload.js'),
     },
   });
