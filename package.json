@@ -1,7 +1,7 @@
 {
   "name": "elephicon",
   "productName": "Elephicon",
-  "version": "0.15.0",
+  "version": "0.14.0",
   "description": "Elephicon generates Apple ICNS and Microsoft ICO files from PNG files.",
   "author": "sprout2000",
   "license": "MIT",
@@ -32,10 +32,6 @@
     "lint-staged": "lint-staged",
     "prepackage": "run-s clean build:prod",
     "package": "ts-node scripts/build-unsign.ts",
-    "prepackage:darwin": "run-s clean build:prod",
-    "package:darwin": "ts-node scripts/build.ts",
-    "prepackage:appx": "run-s clean build:prod",
-    "package:appx": "ts-node scripts/build-appx.ts",
     "prepare": "husky install"
   },
   "lint-staged": {
