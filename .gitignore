@@ -2,8 +2,10 @@ node_modules
 release
 dist
 apps
+coverage
 gh-pages
 npm-*.log
 yarn-*.log
+__snapshots__
 .env
 .DS_Store
