@@ -12,7 +12,7 @@ describe('Success component', () => {
       e.preventDefault()
     );
 
-    render(
+    const { rerender } = render(
       <Success
         isDesktop={true}
         message="test"
@@ -28,6 +28,21 @@ describe('Success component', () => {
     expect(text).toHaveTextContent(/Successfully Completed!/);
 
     expect(screen.getByTestId('result')).toHaveTextContent(/on your desktop/);
+
+    rerender(
+      <Success
+        isDesktop={false}
+        message=""
+        onClick={onClick}
+        onDragEnter={preventDefault}
+        onDragLeave={preventDefault}
+        onDragOver={preventDefault}
+        onDrop={preventDefault}
+      />
+    );
+    expect(screen.getByTestId('result')).toHaveTextContent(
+      /in the current folder/
+    );
 
     userEvent.click(screen.getByTestId('back-container-success'));
     expect(onClick).toBeCalledTimes(1);
