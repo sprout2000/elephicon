@@ -9,8 +9,16 @@ describe('Elephant component', () => {
   test('render Elephant component', () => {
     const onClick = jest.fn();
 
-    render(<Elephant onDrag={false} onClick={onClick} loading={true} />);
+    const { rerender } = render(
+      <Elephant onDrag={false} onClick={onClick} loading={false} />
+    );
 
+    expect(screen.getByTestId('elephant')).toHaveClass('elephant');
+
+    rerender(<Elephant onDrag={true} onClick={onClick} loading={false} />);
+    expect(screen.getByTestId('elephant')).toHaveClass('elephant', 'ondrag');
+
+    rerender(<Elephant onDrag={false} onClick={onClick} loading={true} />);
     expect(screen.getByTestId('elephant')).toHaveClass('elephant', 'loading');
 
     userEvent.click(screen.getByTestId('elephant'));
