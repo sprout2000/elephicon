@@ -16,6 +16,7 @@ export const Elephant: React.FC<Props> = (props) => {
           ? 'elephant loading'
           : 'elephant'
       }
+      data-testid="elephant"
       onClick={props.onClick}
       width="104"
       height="121"

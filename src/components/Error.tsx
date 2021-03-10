@@ -15,6 +15,7 @@ export const Error: React.FC<Props> = (props) => {
   return (
     <div
       className="drop-zone"
+      data-testid="drop-zone"
       onDrop={props.onDrop}
       onDragEnter={props.onDragEnter}
       onDragOver={props.onDragOver}
@@ -22,7 +23,10 @@ export const Error: React.FC<Props> = (props) => {
       <div className="text">Something went wrong...</div>
       <div className="error">{props.message}</div>
       <div className="switch">
-        <div className="back-container" onClick={props.onClick}>
+        <div
+          className="back-container"
+          data-testid="back-container"
+          onClick={props.onClick}>
           <div className="os">
             <IoIosUndo />
           </div>
