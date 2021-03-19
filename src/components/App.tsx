@@ -26,20 +26,14 @@ const App: React.FC = () => {
 
   const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
-      setLoading(false);
       setOnError(true);
-      setMessage(result.msg);
-      setDesktop(result.desktop);
-
-      return;
     } else {
-      setLoading(false);
       setSuccess(true);
-      setMessage(result.msg);
-      setDesktop(result.desktop);
-
-      return;
     }
+
+    setLoading(false);
+    setMessage(result.msg);
+    setDesktop(result.desktop);
   };
 
   const convert = useCallback(
