@@ -3,12 +3,12 @@ import React from 'react';
 import { IoIosUndo } from 'react-icons/io';
 
 interface Props {
-  onClick: () => void;
   message: string;
   isDesktop: boolean;
+  onClick: () => void;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragEnter: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragEnter: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 

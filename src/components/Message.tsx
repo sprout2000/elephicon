@@ -5,9 +5,12 @@ interface Props {
   loading: boolean;
 }
 
-export const Message: React.FC<Props> = ({ drag, loading }) => {
+export const Message: React.FC<Props> = (props) => {
   return (
-    <div className={drag ? 'text ondrag' : loading ? 'text loading' : 'text'}>
+    <div
+      className={
+        props.drag ? 'text ondrag' : props.loading ? 'text loading' : 'text'
+      }>
       Drop your PNGs here...
     </div>
   );

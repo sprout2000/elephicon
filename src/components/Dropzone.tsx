@@ -8,33 +8,32 @@ interface Props {
   ico: boolean;
   drag: boolean;
   loading: boolean;
-  onDrop: (e: React.DragEvent<HTMLDivElement>) => Promise<void>;
   onClickOS: () => void;
+  onClickOpen: () => Promise<void>;
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
-  onClickOpen: () => Promise<void>;
+  onDrop: (e: React.DragEvent<HTMLDivElement>) => Promise<void>;
 }
 
-export const Dropzone: React.FC<Props> = ({
-  ico,
-  drag,
-  loading,
-  onDrop,
-  onClickOS,
-  onDragOver,
-  onDragLeave,
-  onClickOpen,
-}) => {
+export const Dropzone: React.FC<Props> = (props) => {
   return (
     <div
       className="drop-zone"
-      onDrop={onDrop}
-      onDragEnter={onDragOver}
-      onDragOver={onDragOver}
-      onDragLeave={onDragLeave}>
-      <Elephant drag={drag} loading={loading} onClick={onClickOpen} />
-      <Message drag={drag} loading={loading} />
-      <Switch ico={ico} loading={loading} onClickOS={onClickOS} />
+      onDrop={props.onDrop}
+      onDragEnter={props.onDragOver}
+      onDragOver={props.onDragOver}
+      onDragLeave={props.onDragLeave}>
+      <Elephant
+        drag={props.drag}
+        loading={props.loading}
+        onClick={props.onClickOpen}
+      />
+      <Message drag={props.drag} loading={props.loading} />
+      <Switch
+        ico={props.ico}
+        loading={props.loading}
+        onClickOS={props.onClickOS}
+      />
     </div>
   );
 };

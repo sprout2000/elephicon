@@ -6,15 +6,19 @@ interface Props {
   onClick: () => void;
 }
 
-export const Elephant: React.FC<Props> = ({ drag, loading, onClick }) => {
+export const Elephant: React.FC<Props> = (props) => {
   return (
     <div className="icon">
       <svg
         className={
-          drag ? 'elephant ondrag' : loading ? 'elephant loading' : 'elephant'
+          props.drag
+            ? 'elephant ondrag'
+            : props.loading
+            ? 'elephant loading'
+            : 'elephant'
         }
         data-testid="elephant"
-        onClick={onClick}
+        onClick={props.onClick}
         width="104"
         height="121"
         viewBox="0 0 104 121"

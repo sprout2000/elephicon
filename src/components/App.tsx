@@ -9,7 +9,7 @@ import { Result } from '../lib/Result';
 
 const { myAPI } = window;
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   const [ico, setIco] = useState(true);
   const [drag, setDrag] = useState(false);
   const [error, setError] = useState(false);
@@ -194,5 +194,3 @@ const App: React.FC = () => {
     </div>
   );
 };
-
-export default App;
