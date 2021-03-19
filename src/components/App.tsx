@@ -6,7 +6,7 @@ import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
 import { Success } from './Success';
 import { Elephant } from './Elephant';
 import { Error } from './Error';
-import { Result } from '../result';
+import { Result } from '../lib/Result';
 
 const { myAPI } = window;
 
