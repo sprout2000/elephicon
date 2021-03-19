@@ -11,6 +11,7 @@ export const Switch: React.FC<Props> = (props) => {
   return (
     <div className="switch">
       <div
+        data-testid="ICO"
         className={
           props.loading
             ? 'icon-container loading'
@@ -25,6 +26,7 @@ export const Switch: React.FC<Props> = (props) => {
         <div>ICO</div>
       </div>
       <div
+        data-testid="ICNS"
         className={
           props.loading
             ? 'icon-container loading'
