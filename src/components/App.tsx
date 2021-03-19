@@ -171,9 +171,7 @@ const App: React.FC = () => {
           onDragEnter={onDragOver}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}>
-          <div className="icon">
-            <Elephant onDrag={onDrag} loading={loading} onClick={onClickOpen} />
-          </div>
+          <Elephant onDrag={onDrag} loading={loading} onClick={onClickOpen} />
           <div
             className={
               onDrag ? 'text ondrag' : loading ? 'text loading' : 'text'
