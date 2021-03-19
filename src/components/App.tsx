@@ -7,6 +7,9 @@ import { Dropzone } from './Dropzone';
 
 import { Result } from '../lib/Result';
 
+import 'typeface-roboto';
+import './App.scss';
+
 const { myAPI } = window;
 
 export const App: React.FC = () => {
