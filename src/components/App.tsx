@@ -1,22 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import UAParser from 'ua-parser-js';
 
-import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
-
-import { Success } from './Success';
-import { Elephant } from './Elephant';
 import { Error } from './Error';
+import { Success } from './Success';
+import { Dropzone } from './Dropzone';
+
 import { Result } from '../lib/Result';
 
 const { myAPI } = window;
 
 const App: React.FC = () => {
-  const [onDrag, setOnDrag] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [ico, setIco] = useState(true);
+  const [drag, setDrag] = useState(false);
+  const [error, setError] = useState(false);
   const [desktop, setDesktop] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [onError, setOnError] = useState(false);
   const [message, setMessage] = useState('');
 
   const isDarwin = () => {
@@ -26,7 +25,7 @@ const App: React.FC = () => {
 
   const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
-      setOnError(true);
+      setError(true);
     } else {
       setSuccess(true);
     }
@@ -45,7 +44,7 @@ const App: React.FC = () => {
 
         const message = mime ? mime : 'Unknown';
         setMessage(`Invalid Format: ${message}`);
-        setOnError(true);
+        setError(true);
 
         return;
       }
@@ -70,19 +69,19 @@ const App: React.FC = () => {
     if (loading) return;
 
     preventDefault(e);
-    setOnDrag(true);
+    setDrag(true);
   };
 
   const onDragLeave = (e: React.DragEvent<HTMLDivElement>): void => {
     preventDefault(e);
-    setOnDrag(false);
+    setDrag(false);
   };
 
   const onDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
     if (loading) return;
 
     preventDefault(e);
-    setOnDrag(false);
+    setDrag(false);
 
     if (e.dataTransfer) {
       setLoading(true);
@@ -110,7 +109,7 @@ const App: React.FC = () => {
 
   const onClickBack = () => {
     setSuccess(false);
-    setOnError(false);
+    setError(false);
   };
 
   const onStart = useCallback(
@@ -164,51 +163,17 @@ const App: React.FC = () => {
 
   return (
     <div className={isDarwin() ? 'container_darwin' : 'container'}>
-      {!success && !onError ? (
-        <div
-          className="drop-zone"
+      {!success && !error ? (
+        <Dropzone
+          ico={ico}
+          drag={drag}
+          loading={loading}
+          onClickOS={onClickOS}
+          onClickOpen={onClickOpen}
           onDrop={onDrop}
-          onDragEnter={onDragOver}
           onDragOver={onDragOver}
-          onDragLeave={onDragLeave}>
-          <Elephant onDrag={onDrag} loading={loading} onClick={onClickOpen} />
-          <div
-            className={
-              onDrag ? 'text ondrag' : loading ? 'text loading' : 'text'
-            }>
-            Drop your PNGs here...
-          </div>
-          <div className="switch">
-            <div
-              className={
-                loading
-                  ? 'icon-container loading'
-                  : ico
-                  ? 'icon-container'
-                  : 'icon-container checked'
-              }
-              onClick={onClickOS}>
-              <div className="os">
-                <IoLogoWindows />
-              </div>
-              <div>ICO</div>
-            </div>
-            <div
-              className={
-                loading
-                  ? 'icon-container loading'
-                  : ico
-                  ? 'icon-container checked'
-                  : 'icon-container'
-              }
-              onClick={onClickOS}>
-              <div className="os">
-                <IoLogoApple />
-              </div>
-              <div>ICNS</div>
-            </div>
-          </div>
-        </div>
+          onDragLeave={onDragLeave}
+        />
       ) : success ? (
         <Success
           onClick={onClickBack}

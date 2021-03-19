@@ -1,24 +1,20 @@
 import React from 'react';
 
 interface Props {
-  onDrag: boolean;
+  drag: boolean;
   loading: boolean;
   onClick: () => void;
 }
 
-export const Elephant: React.FC<Props> = (props) => {
+export const Elephant: React.FC<Props> = ({ drag, loading, onClick }) => {
   return (
     <div className="icon">
       <svg
         className={
-          props.onDrag
-            ? 'elephant ondrag'
-            : props.loading
-            ? 'elephant loading'
-            : 'elephant'
+          drag ? 'elephant ondrag' : loading ? 'elephant loading' : 'elephant'
         }
         data-testid="elephant"
-        onClick={props.onClick}
+        onClick={onClick}
         width="104"
         height="121"
         viewBox="0 0 104 121"
