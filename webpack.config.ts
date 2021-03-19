@@ -23,7 +23,7 @@ const base: Configuration = {
     rules: [
       {
         test: /\.tsx?$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules|tests|mocks)/,
         loader: 'ts-loader',
       },
       {
