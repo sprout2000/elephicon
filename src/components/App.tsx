@@ -111,8 +111,10 @@ export const App: React.FC = () => {
   };
 
   const onClickBack = () => {
-    setSuccess(false);
+    setDrag(false);
     setError(false);
+    setSuccess(false);
+    setMessage('');
   };
 
   useEffect(() => {
