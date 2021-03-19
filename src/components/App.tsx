@@ -112,21 +112,18 @@ const App: React.FC = () => {
     setError(false);
   };
 
-  const onStart = useCallback(
-    async (_e: Event, filepath: string): Promise<void> => {
-      setLoading(true);
-      await convert(filepath);
-    },
-    [convert]
-  );
-
   useEffect(() => {
-    myAPI.onDrop(onStart);
+    myAPI.onDrop(
+      async (_e: Event, filepath: string): Promise<void> => {
+        setLoading(true);
+        await convert(filepath);
+      }
+    );
 
     return (): void => {
       myAPI.removeOnDrop();
     };
-  }, [onStart]);
+  }, [convert]);
 
   useEffect(() => {
     myAPI.menuOpen(async (_e, filepath) => {
