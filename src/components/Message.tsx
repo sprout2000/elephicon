@@ -8,6 +8,7 @@ interface Props {
 export const Message: React.FC<Props> = (props) => {
   return (
     <div
+      data-testid="message"
       className={
         props.drag ? 'text ondrag' : props.loading ? 'text loading' : 'text'
       }>
