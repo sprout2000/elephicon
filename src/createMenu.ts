@@ -9,7 +9,7 @@ import {
 import Store from 'electron-store';
 import i18next from 'i18next';
 
-import { TypedStore } from './store';
+import { TypedStore } from './lib/TypedStore';
 
 export const createMenu = (
   win: BrowserWindow,

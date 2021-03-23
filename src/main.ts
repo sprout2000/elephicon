@@ -6,11 +6,12 @@ import { autoUpdater } from 'electron-updater';
 import path from 'path';
 import mime from 'mime-types';
 
-import { TypedStore } from './store';
-import { mkico, mkicns } from './mkicons';
 import { createMenu } from './createMenu';
 import { setLocales } from './setLocales';
+import { mkico, mkicns } from './mkicons';
 import { searchDevtools } from './searchDevtools';
+
+import { TypedStore } from './lib/TypedStore';
 
 console.log = log.log;
 autoUpdater.logger = log;

@@ -15,8 +15,8 @@ import {
   BEZIER,
 } from 'png2icons';
 
-import { TypedStore } from './store';
 import { Result } from './lib/Result';
+import { TypedStore } from './lib/TypedStore';
 
 const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 
