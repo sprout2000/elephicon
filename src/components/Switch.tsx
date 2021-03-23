@@ -17,7 +17,7 @@ export const Switch: React.FC<Props> = (props) => {
             ? 'icon-container loading'
             : props.ico
             ? 'icon-container'
-            : 'icon-container checked'
+            : 'icon-container unchecked'
         }
         onClick={props.onClickOS}>
         <div className="os">
@@ -31,7 +31,7 @@ export const Switch: React.FC<Props> = (props) => {
           props.loading
             ? 'icon-container loading'
             : props.ico
-            ? 'icon-container checked'
+            ? 'icon-container unchecked'
             : 'icon-container'
         }
         onClick={props.onClickOS}>
