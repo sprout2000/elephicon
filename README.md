@@ -6,7 +6,7 @@
 [![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/elephicon)
 
-## Usage
+## 📗 Usage
 
 The ideal input is a 24 bit _PNG_ with an alpha channel (RGBA) with _1024×1024_ pixels but any other dimensions and most other PNG formats do also work.
 
@@ -14,7 +14,7 @@ If you only need to create ICO files _256×256_ pixels are sufficient.
 
 ![elephicon2020-12-15](https://user-images.githubusercontent.com/52094761/102158835-a86b0f00-3ec5-11eb-8862-b5b6dacd0c34.gif)
 
-## Embedded Sizes
+## 🌈 Embedded Sizes
 
 | Dimension  | ICO | ICNS |
 | :--------- | :-: | :--: |
@@ -34,7 +34,7 @@ If you only need to create ICO files _256×256_ pixels are sufficient.
 | 512x512    |     |  ✅  |
 | 512x512@2x |     |  ✅  |
 
-## Build & Install
+## 🛠️ Build & Install
 
 ```
 $ git clone git@github.com:sprout2000/elephicon.git
@@ -46,18 +46,18 @@ You will find the installer in `release` directory.
 
 _Note that you will need to have [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [Yarn](https://yarnpkg.com/) installed._
 
-## Download
+## ✨ Download
 
-### macOS (x64, arm64)
+###  macOS (x64, arm64)
 
 You can download the latest version of _Elephicon_ from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
 
-### Windows10
+### 🖥️ Windows10
 
 Download the latest version for Windows10 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
 
-## Contribution
+## 🍻 Contribution
 
 I need more locale files.  
 When you translate the menu into your language, please send me the locale file as a pull request.
@@ -83,7 +83,7 @@ When you translate the menu into your language, please send me the locale file a
  };
 ```
 
-## License
+## 🏛️ License
 
 ### [png2icons](https://github.com/idesis-gmbh/png2icons)
 
