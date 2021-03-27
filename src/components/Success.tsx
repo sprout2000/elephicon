@@ -12,7 +12,7 @@ interface Props {
   onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 
-export const Success: React.FC<Props> = (props) => {
+export const Success = (props: Props): JSX.Element => {
   return (
     <div
       className="drop-zone"

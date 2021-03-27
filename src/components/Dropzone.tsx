@@ -15,7 +15,7 @@ interface Props {
   onDrop: (e: React.DragEvent<HTMLDivElement>) => Promise<void>;
 }
 
-export const Dropzone: React.FC<Props> = (props) => {
+export const Dropzone = (props: Props): JSX.Element => {
   return (
     <div
       className="drop-zone"

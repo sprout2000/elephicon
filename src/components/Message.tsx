@@ -5,7 +5,7 @@ interface Props {
   loading: boolean;
 }
 
-export const Message: React.FC<Props> = (props) => {
+export const Message = (props: Props): JSX.Element => {
   return (
     <div
       data-testid="message"

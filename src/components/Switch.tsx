@@ -7,7 +7,7 @@ interface Props {
   onClickOS: () => void;
 }
 
-export const Switch: React.FC<Props> = (props) => {
+export const Switch = (props: Props): JSX.Element => {
   return (
     <div className="switch">
       <div

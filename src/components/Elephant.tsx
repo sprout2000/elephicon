@@ -6,7 +6,7 @@ interface Props {
   onClick: () => void;
 }
 
-export const Elephant: React.FC<Props> = (props) => {
+export const Elephant = (props: Props): JSX.Element => {
   return (
     <div className="icon">
       <svg

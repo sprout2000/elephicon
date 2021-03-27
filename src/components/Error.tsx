@@ -11,7 +11,7 @@ interface Props {
   onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 
-export const Error: React.FC<Props> = (props) => {
+export const Error = (props: Props): JSX.Element => {
   return (
     <div
       className="drop-zone"
