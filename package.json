@@ -46,7 +46,7 @@
     "electron-store": "^7.0.2",
     "electron-updater": "^4.3.8",
     "i18next": "^20.1.0",
-    "mime-types": "^2.1.29",
+    "mime-types": "^2.1.30",
     "png2icons": "^2.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
