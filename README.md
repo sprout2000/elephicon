@@ -48,7 +48,7 @@ _Note that you will need to have [Node.js](https://nodejs.org/en/), [Git](https:
 
 ## ✨ Download
 
-###  macOS (x64, arm64)
+### 💻 macOS (x64, arm64)
 
 You can download the latest version of _Elephicon_ from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
