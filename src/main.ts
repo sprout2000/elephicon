@@ -43,12 +43,6 @@ const isDev = process.env.NODE_ENV === 'development';
 let filepath: string | null = null;
 let isICO = true;
 
-const getResourceDirectory = (): string => {
-  return isDev
-    ? path.join(process.cwd(), 'dist')
-    : path.join(process.resourcesPath, 'app.asar.unpacked', 'dist');
-};
-
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     x: store.get('x'),
@@ -64,7 +58,7 @@ const createWindow = () => {
     webPreferences: {
       sandbox: true,
       safeDialogs: true,
-      preload: path.resolve(getResourceDirectory(), 'preload.js'),
+      preload: path.join(__dirname, 'preload.js'),
     },
   });
 
