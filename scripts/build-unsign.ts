@@ -9,8 +9,6 @@ build({
     directories: {
       output: 'release',
     },
-    asar: true,
-    asarUnpack: ['dist/preload.js'],
     mac: {
       category: 'public.app-category.developer-tools',
       target: ['dmg', 'zip'],

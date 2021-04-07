@@ -12,8 +12,6 @@ build({
       buildResources: 'assets',
       output: 'release',
     },
-    asar: true,
-    asarUnpack: ['dist/preload.js'],
     win: {
       icon: 'assets/icon.ico',
       target: ['appx'],
