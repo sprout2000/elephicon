@@ -45,14 +45,14 @@
     "electron-log": "^4.3.2",
     "electron-store": "^7.0.2",
     "electron-updater": "^4.3.8",
-    "i18next": "^20.1.0",
+    "i18next": "^20.2.0",
     "mime-types": "^2.1.30",
     "png2icons": "^2.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "typeface-roboto": "^1.1.13",
-    "ua-parser-js": "^0.7.26"
+    "ua-parser-js": "^0.7.27"
   },
   "devDependencies": {
     "@jest/types": "^26.6.2",
@@ -89,8 +89,8 @@
     "webpack-cli": "^4.6.0"
   },
   "optionalDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.20.0",
-    "@typescript-eslint/parser": "^4.20.0",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-react": "^7.23.1",
