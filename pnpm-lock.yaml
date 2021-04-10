@@ -10,22 +10,22 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^4.21.0
   '@typescript-eslint/parser': ^4.21.0
   cross-env: ^7.0.3
-  css-loader: ^5.2.0
+  css-loader: ^5.2.1
   dotenv: ^8.2.0
   electron: ^12.0.2
   electron-builder: ^22.10.5
-  electron-log: ^4.3.2
+  electron-log: ^4.3.4
   electron-notarize: ^1.0.0
-  electron-store: ^7.0.2
+  electron-store: ^7.0.3
   electron-updater: ^4.3.8
-  eslint: ^7.23.0
+  eslint: ^7.24.0
   eslint-config-prettier: ^8.1.0
-  eslint-plugin-react: ^7.23.1
+  eslint-plugin-react: ^7.23.2
   eslint-plugin-react-hooks: ^4.2.0
   html-webpack-plugin: ^5.3.1
-  i18next: ^20.2.0
+  i18next: ^20.2.1
   mime-types: ^2.1.30
-  mini-css-extract-plugin: ^1.4.0
+  mini-css-extract-plugin: ^1.4.1
   npm-run-all: ^4.1.5
   png2icons: ^2.0.1
   prettier: ^2.2.1
@@ -38,9 +38,9 @@ specifiers:
   ts-loader: ^8.1.0
   ts-node: ^9.1.1
   typeface-roboto: ^1.1.13
-  typescript: ^4.2.3
-  ua-parser-js: ^0.7.27
-  webpack: ^5.30.0
+  typescript: ^4.2.4
+  ua-parser-js: ^0.7.28
+  webpack: ^5.31.2
   webpack-cli: ^4.6.0
 
 dependencies:
@@ -54,7 +54,7 @@ dependencies:
   react-dom: 17.0.2_react@17.0.2
   react-icons: 4.2.0_react@17.0.2
   typeface-roboto: 1.1.13
-  ua-parser-js: 0.7.27
+  ua-parser-js: 0.7.28
 
 optionalDependencies:
   '@typescript-eslint/eslint-plugin': 4.21.0_bb1772e1f887ed78c68f06416685750e
@@ -718,7 +718,7 @@ packages:
     engines: {node: '>= 8'}
     dependencies:
       normalize-path: 3.0.0
-      picomatch: 2.2.2
+      picomatch: 2.2.3
     dev: true
 
   /app-builder-bin/3.5.12:
@@ -1958,8 +1958,8 @@ packages:
       '@nodelib/fs.walk': 1.2.6
       glob-parent: 5.1.2
       merge2: 1.4.1
-      micromatch: 4.0.3
-      picomatch: 2.2.2
+      micromatch: 4.0.4
+      picomatch: 2.2.3
     dev: false
     optional: true
 
@@ -2839,12 +2839,12 @@ packages:
     dev: false
     optional: true
 
-  /micromatch/4.0.3:
-    resolution: {integrity: sha512-ueuSaP4i67F/FAUac9zzZ0Dz/5KeKDkITYIS/k4fps+9qeh1SkeH6gbljcqz97mNBOsaWZ+iv2UobMKK/yD+aw==}
+  /micromatch/4.0.4:
+    resolution: {integrity: sha512-pRmzw/XUcwXGpD9aI9q/0XOwLNygjETJ8y0ao0wdqprrzDa4YnxLcz7fQRZr8voh8V10kGhABbNcHVk5wHgWwg==}
     engines: {node: '>=8.6'}
     dependencies:
       braces: 3.0.2
-      picomatch: 2.2.2
+      picomatch: 2.2.3
 
   /mime-db/1.47.0:
     resolution: {integrity: sha512-QBmA/G2y+IfeS4oktet3qRZ+P5kPhCKRXxXnQEudYqUaEioAU1/Lq2us3D/t1Jfo4hE9REQPrbB7K5sOczJVIw==}
@@ -3210,8 +3210,8 @@ packages:
     resolution: {integrity: sha1-elfrVQpng/kRUzH89GY9XI4AelA=}
     dev: true
 
-  /picomatch/2.2.2:
-    resolution: {integrity: sha512-q0M/9eZHzmr0AulXyPwNfZjtwZ/RBZlbN3K3CErVrk50T2ASYI7Bye0EvekFY3IP1Nt2DHu0re+V2ZHIpMkuWg==}
+  /picomatch/2.2.3:
+    resolution: {integrity: sha512-KpELjfwcCDUb9PeigTs2mBJzXUPzAuP2oPcA989He8Rte0+YUAjw1JVedDhuTKPkHjSYzMN3npC9luThGYEKdg==}
     engines: {node: '>=8.6'}
 
   /pidtree/0.3.1:
@@ -3485,7 +3485,7 @@ packages:
     resolution: {integrity: sha512-cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ==}
     engines: {node: '>=8.10.0'}
     dependencies:
-      picomatch: 2.2.2
+      picomatch: 2.2.3
     dev: true
 
   /rechoir/0.7.0:
@@ -4112,7 +4112,7 @@ packages:
       chalk: 4.1.0
       enhanced-resolve: 4.5.0
       loader-utils: 2.0.0
-      micromatch: 4.0.3
+      micromatch: 4.0.4
       semver: 7.3.5
       typescript: 4.2.4
       webpack: 5.31.2_webpack-cli@4.6.0
@@ -4204,8 +4204,8 @@ packages:
     hasBin: true
     dev: true
 
-  /ua-parser-js/0.7.27:
-    resolution: {integrity: sha512-eXMaRYK2skomGocoX0x9sBXzx5A1ZVQgXfrW4mTc8dT0zS7olEcyfudAzRC5tIIRgLxQ69B6jut3DI+n5hslPA==}
+  /ua-parser-js/0.7.28:
+    resolution: {integrity: sha512-6Gurc1n//gjp9eQNXjD9O3M/sMwVtN5S8Lv9bvOYBfKfDNiIIhqiyi01vMBO45u4zkDE420w/e0se7Vs+sIg+g==}
     dev: false
 
   /unbox-primitive/1.0.1:
