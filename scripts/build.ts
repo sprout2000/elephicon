@@ -27,14 +27,6 @@ build({
         CFBundleDisplayName: 'Elephicon',
         CFBundleExecutable: 'Elephicon',
         CFBundlePackageType: 'APPL',
-        CFBundleDocumentTypes: [
-          {
-            CFBundleTypeName: 'ImageFile',
-            CFBundleTypeRole: 'Viewer',
-            LSItemContentTypes: ['public.png'],
-            LSHandlerRank: 'Default',
-          },
-        ],
         NSRequiresAquaSystemAppearance: false,
         hardenedRuntime: true,
         gatekeeperAssess: false,

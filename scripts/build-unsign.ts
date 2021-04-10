@@ -18,14 +18,6 @@ build({
         CFBundleDisplayName: 'Elephicon',
         CFBundleExecutable: 'Elephicon',
         CFBundlePackageType: 'APPL',
-        CFBundleDocumentTypes: [
-          {
-            CFBundleTypeName: 'ImageFile',
-            CFBundleTypeRole: 'Viewer',
-            LSItemContentTypes: ['public.png'],
-            LSHandlerRank: 'Default',
-          },
-        ],
         NSRequiresAquaSystemAppearance: false,
       },
       identity: null,
@@ -37,12 +29,6 @@ build({
       icon: 'assets/icon.ico',
       target: ['nsis', 'zip'],
       publisherName: 'sprout2000',
-      fileAssociations: [
-        {
-          ext: ['png'],
-          description: 'Image files',
-        },
-      ],
     },
     nsis: {
       oneClick: false,

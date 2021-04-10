@@ -15,12 +15,6 @@ build({
     win: {
       icon: 'assets/icon.ico',
       target: ['appx'],
-      fileAssociations: [
-        {
-          ext: ['png'],
-          description: 'PNG files',
-        },
-      ],
     },
     appx: {
       artifactName: '${productName}-${version}-${platform}.${ext}',
