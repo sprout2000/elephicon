@@ -40,9 +40,6 @@ const gotTheLock = app.requestSingleInstanceLock();
 const isDarwin = process.platform === 'darwin';
 const isDev = process.env.NODE_ENV === 'development';
 
-let filepath: string | null = null;
-let isICO = true;
-
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     x: store.get('x'),
@@ -60,24 +57,6 @@ const createWindow = () => {
       safeDialogs: true,
       preload: path.join(__dirname, 'preload.js'),
     },
-  });
-
-  app.on('second-instance', (_e, argv) => {
-    if (mainWindow.isMinimized()) mainWindow.restore();
-    mainWindow.focus();
-
-    if (!isDarwin && argv.length >= 4) {
-      mainWindow.webContents.send('dropped', argv[argv.length - 1]);
-    }
-  });
-
-  app.on('open-file', (e, path) => {
-    e.preventDefault();
-
-    if (mainWindow.isMinimized()) mainWindow.restore();
-    mainWindow.focus();
-
-    mainWindow.webContents.send('dropped', path);
   });
 
   ipcMain.handle('mime-check', (_e, filepath) => mime.lookup(filepath));
@@ -102,36 +81,6 @@ const createWindow = () => {
       })
       .catch((err): void => console.log(err));
   });
-
-  ipcMain.on('change-ico', (_e, arg) => {
-    isICO = arg;
-  });
-
-  ipcMain.once('close-window', () => mainWindow.close());
-
-  mainWindow.once('ready-to-show', () => mainWindow.show());
-
-  mainWindow.webContents.once('did-finish-load', () => {
-    const ico = store.get('ico', false);
-    mainWindow.webContents.send('set-ico', ico);
-
-    if (!isDarwin && !isDev && process.argv.length >= 2) {
-      const filepath = process.argv[process.argv.length - 1];
-
-      mainWindow.webContents.send('dropped', filepath);
-    }
-
-    if (isDarwin && filepath) {
-      mainWindow.webContents.send('dropped', filepath);
-      filepath = null;
-    }
-  });
-
-  const menu = createMenu(mainWindow, store);
-  Menu.setApplicationMenu(menu);
-
-  if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
-  mainWindow.loadFile('dist/index.html');
 
   if (isDarwin) {
     autoUpdater.checkForUpdatesAndNotify();
@@ -162,10 +111,14 @@ const createWindow = () => {
     });
   }
 
-  mainWindow.once('close', () => {
-    store.set('ico', isICO);
-    store.set('desktop', store.get('desktop'));
+  const menu = createMenu(mainWindow, store);
+  Menu.setApplicationMenu(menu);
 
+  if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
+  mainWindow.loadFile('dist/index.html');
+  mainWindow.once('ready-to-show', () => mainWindow.show());
+
+  mainWindow.once('close', () => {
     const pos = mainWindow.getPosition();
     store.set('x', pos[0]);
     store.set('y', pos[1]);
@@ -175,13 +128,6 @@ const createWindow = () => {
 if (!gotTheLock && !isDarwin) {
   app.exit();
 } else {
-  app.once('will-finish-launching', () => {
-    app.once('open-file', (e, path) => {
-      e.preventDefault();
-      filepath = path;
-    });
-  });
-
   app.whenReady().then(async () => {
     const locale = app.getLocale();
     setLocales(locale);

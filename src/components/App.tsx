@@ -115,19 +115,6 @@ export const App = (): JSX.Element => {
   };
 
   useEffect(() => {
-    myAPI.onDrop(
-      async (_e: Event, filepath: string): Promise<void> => {
-        dispatch({ type: 'loading', value: true });
-        await convert(filepath);
-      }
-    );
-
-    return (): void => {
-      myAPI.removeOnDrop();
-    };
-  }, [convert]);
-
-  useEffect(() => {
     myAPI.menuOpen(async (_e, filepath) => {
       if (!filepath) return;
 
@@ -139,18 +126,6 @@ export const App = (): JSX.Element => {
       myAPI.removeMenuOpen();
     };
   }, [convert]);
-
-  useEffect(() => {
-    myAPI.changeICO(state.ico);
-  }, [state.ico]);
-
-  useEffect(() => {
-    myAPI.setICO((_e, arg) => dispatch({ type: 'ico', value: arg }));
-
-    return (): void => {
-      myAPI.removeSetICO();
-    };
-  }, []);
 
   useEffect(() => {
     myAPI.setDesktop((_e, arg) => dispatch({ type: 'desktop', value: arg }));
