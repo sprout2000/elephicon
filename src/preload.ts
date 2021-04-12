@@ -16,7 +16,7 @@ contextBridge.exposeInMainWorld('myAPI', {
 
   menuOpen: (
     listener: (_e: Electron.IpcRendererEvent, filepath: string) => Promise<void>
-  ) => ipcRenderer.on('menu-open', listener),
+  ) => ipcRenderer.once('menu-open', listener),
   removeMenuOpen: () => ipcRenderer.removeAllListeners('menu-open'),
 
   setDesktop: (
