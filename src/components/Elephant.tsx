@@ -1,24 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from './App';
 
-interface Props {
-  drag: boolean;
-  loading: boolean;
-  onClick: () => void;
-}
+const { myAPI } = window;
 
-export const Elephant = (props: Props): JSX.Element => {
+export const Elephant: React.FC = () => {
+  const { state, dispatch, convert } = useContext(AppContext);
+
+  const onClickOpen = async (): Promise<void> => {
+    if (state.loading) return;
+
+    const filepath = await myAPI.openDialog();
+    if (!filepath) return;
+
+    dispatch({ type: 'loading', value: true });
+    await convert(filepath);
+  };
+
   return (
     <div className="icon">
       <svg
         className={
-          props.drag
+          state.drag
             ? 'elephant ondrag'
-            : props.loading
+            : state.loading
             ? 'elephant loading'
             : 'elephant'
         }
         data-testid="elephant"
-        onClick={props.onClick}
+        onClick={onClickOpen}
         width="104"
         height="121"
         viewBox="0 0 104 121"

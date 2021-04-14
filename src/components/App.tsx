@@ -1,10 +1,17 @@
-import React, { useReducer, useEffect, useCallback } from 'react';
+import React, {
+  useReducer,
+  useEffect,
+  useCallback,
+  createContext,
+} from 'react';
 import UAParser from 'ua-parser-js';
 
 import { Error } from './Error';
 import { Success } from './Success';
 import { Dropzone } from './Dropzone';
 
+import { State } from '../lib/State';
+import { Action } from '../lib/Action';
 import { Result } from '../lib/Result';
 
 import { reducer } from '../lib/reducer';
@@ -14,6 +21,15 @@ import 'typeface-roboto';
 import './App.scss';
 
 const { myAPI } = window;
+
+export const AppContext = createContext(
+  {} as {
+    state: State;
+    dispatch: React.Dispatch<Action>;
+    convert: (filepath: string) => Promise<void>;
+    onClickBack: () => void;
+  }
+);
 
 export const App = (): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -60,53 +76,6 @@ export const App = (): JSX.Element => {
     [state.ico]
   );
 
-  const preventDefault = (e: React.DragEvent<HTMLDivElement>): void => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const onDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
-    if (state.loading) return;
-
-    preventDefault(e);
-    dispatch({ type: 'drag', value: true });
-  };
-
-  const onDragLeave = (e: React.DragEvent<HTMLDivElement>): void => {
-    preventDefault(e);
-    dispatch({ type: 'drag', value: false });
-  };
-
-  const onDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
-    if (state.loading) return;
-
-    preventDefault(e);
-    dispatch({ type: 'drag', value: false });
-
-    if (e.dataTransfer) {
-      dispatch({ type: 'loading', value: true });
-      const file = e.dataTransfer.files[0];
-
-      await convert(file.path);
-    }
-  };
-
-  const onClickOpen = async (): Promise<void> => {
-    if (state.loading) return;
-
-    const filepath = await myAPI.openDialog();
-    if (!filepath) return;
-
-    dispatch({ type: 'loading', value: true });
-    await convert(filepath);
-  };
-
-  const onClickOS = () => {
-    if (state.loading) return;
-
-    dispatch({ type: 'ico', value: !state.ico });
-  };
-
   const onClickBack = () => {
     dispatch({ type: 'drag', value: false });
     dispatch({ type: 'error', value: false });
@@ -136,38 +105,16 @@ export const App = (): JSX.Element => {
   }, []);
 
   return (
-    <div className={isDarwin() ? 'container_darwin' : 'container'}>
-      {!state.success && !state.error ? (
-        <Dropzone
-          ico={state.ico}
-          drag={state.drag}
-          loading={state.loading}
-          onClickOS={onClickOS}
-          onClickOpen={onClickOpen}
-          onDrop={onDrop}
-          onDragOver={onDragOver}
-          onDragLeave={onDragLeave}
-        />
-      ) : state.success ? (
-        <Success
-          onClick={onClickBack}
-          message={state.message}
-          isDesktop={state.desktop}
-          onDrop={preventDefault}
-          onDragEnter={preventDefault}
-          onDragOver={preventDefault}
-          onDragLeave={preventDefault}
-        />
-      ) : (
-        <Error
-          onClick={onClickBack}
-          message={state.message}
-          onDrop={preventDefault}
-          onDragEnter={preventDefault}
-          onDragOver={preventDefault}
-          onDragLeave={preventDefault}
-        />
-      )}
-    </div>
+    <AppContext.Provider value={{ state, dispatch, convert, onClickBack }}>
+      <div className={isDarwin() ? 'container_darwin' : 'container'}>
+        {!state.success && !state.error ? (
+          <Dropzone />
+        ) : state.success ? (
+          <Success />
+        ) : (
+          <Error />
+        )}
+      </div>
+    </AppContext.Provider>
   );
 };

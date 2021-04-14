@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from './App';
 
-interface Props {
-  drag: boolean;
-  loading: boolean;
-}
-
-export const Message = (props: Props): JSX.Element => {
+export const Message: React.FC = () => {
+  const { state } = useContext(AppContext);
   return (
     <div
       data-testid="message"
       className={
-        props.drag ? 'text ondrag' : props.loading ? 'text loading' : 'text'
+        state.drag ? 'text ondrag' : state.loading ? 'text loading' : 'text'
       }>
       Drop your PNGs here...
     </div>

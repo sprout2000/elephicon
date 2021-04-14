@@ -1,25 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from './App';
+
 import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
 
-interface Props {
-  ico: boolean;
-  loading: boolean;
-  onClickOS: () => void;
-}
+export const Switch: React.FC = () => {
+  const { state, dispatch } = useContext(AppContext);
 
-export const Switch = (props: Props): JSX.Element => {
+  const onClickOS = () => {
+    if (state.loading) return;
+
+    dispatch({ type: 'ico', value: !state.ico });
+  };
+
   return (
     <div className="switch">
       <div
         data-testid="ICO"
         className={
-          props.loading
+          state.loading
             ? 'icon-container loading'
-            : props.ico
+            : state.ico
             ? 'icon-container'
             : 'icon-container unchecked'
         }
-        onClick={props.onClickOS}>
+        onClick={onClickOS}>
         <div className="os">
           <IoLogoWindows />
         </div>
@@ -28,13 +32,13 @@ export const Switch = (props: Props): JSX.Element => {
       <div
         data-testid="ICNS"
         className={
-          props.loading
+          state.loading
             ? 'icon-container loading'
-            : props.ico
+            : state.ico
             ? 'icon-container unchecked'
             : 'icon-container'
         }
-        onClick={props.onClickOS}>
+        onClick={onClickOS}>
         <div className="os">
           <IoLogoApple />
         </div>

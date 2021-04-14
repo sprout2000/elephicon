@@ -1,39 +1,51 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { preventDefault } from '../lib/preventDefault';
 
 import { Switch } from './Switch';
 import { Message } from './Message';
 import { Elephant } from './Elephant';
+import { AppContext } from './App';
 
-interface Props {
-  ico: boolean;
-  drag: boolean;
-  loading: boolean;
-  onClickOS: () => void;
-  onClickOpen: () => Promise<void>;
-  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDrop: (e: React.DragEvent<HTMLDivElement>) => Promise<void>;
-}
+export const Dropzone: React.FC = () => {
+  const { state, dispatch, convert } = useContext(AppContext);
 
-export const Dropzone = (props: Props): JSX.Element => {
+  const onDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
+    if (state.loading) return;
+
+    preventDefault(e);
+    dispatch({ type: 'drag', value: true });
+  };
+
+  const onDragLeave = (e: React.DragEvent<HTMLDivElement>): void => {
+    preventDefault(e);
+    dispatch({ type: 'drag', value: false });
+  };
+
+  const onDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
+    if (state.loading) return;
+
+    preventDefault(e);
+    dispatch({ type: 'drag', value: false });
+
+    if (e.dataTransfer) {
+      dispatch({ type: 'loading', value: true });
+      const file = e.dataTransfer.files[0];
+
+      await convert(file.path);
+    }
+  };
+
   return (
     <div
       className="drop-zone"
-      onDrop={props.onDrop}
-      onDragEnter={props.onDragOver}
-      onDragOver={props.onDragOver}
-      onDragLeave={props.onDragLeave}>
-      <Elephant
-        drag={props.drag}
-        loading={props.loading}
-        onClick={props.onClickOpen}
-      />
-      <Message drag={props.drag} loading={props.loading} />
-      <Switch
-        ico={props.ico}
-        loading={props.loading}
-        onClickOS={props.onClickOS}
-      />
+      onDrop={onDrop}
+      onDragEnter={onDragOver}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}>
+      <Elephant />
+      <Message />
+      <Switch />
     </div>
   );
 };
