@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppContext } from './App';
+import { AppContext } from '../lib/AppContext';
 
 export const Message: React.FC = () => {
   const { state } = useContext(AppContext);

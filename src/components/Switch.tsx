@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppContext } from './App';
+import { AppContext } from '../lib/AppContext';
 
 import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
 

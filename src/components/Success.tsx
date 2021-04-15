@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { AppContext } from './App';
+import { AppContext } from '../lib/AppContext';
 import { preventDefault } from '../lib/preventDefault';
 
 import { IoIosUndo } from 'react-icons/io';

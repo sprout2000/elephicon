@@ -1,18 +1,12 @@
-import React, {
-  useReducer,
-  useEffect,
-  useCallback,
-  createContext,
-} from 'react';
+import React, { useReducer, useEffect, useCallback } from 'react';
 import UAParser from 'ua-parser-js';
 
 import { Error } from './Error';
 import { Success } from './Success';
 import { Dropzone } from './Dropzone';
 
-import { State } from '../lib/State';
-import { Action } from '../lib/Action';
 import { Result } from '../lib/Result';
+import { AppContext } from '../lib/AppContext';
 
 import { reducer } from '../lib/reducer';
 import { initialState } from '../lib/initialState';
@@ -21,15 +15,6 @@ import 'typeface-roboto';
 import './App.scss';
 
 const { myAPI } = window;
-
-export const AppContext = createContext(
-  {} as {
-    state: State;
-    dispatch: React.Dispatch<Action>;
-    convert: (filepath: string) => Promise<void>;
-    onClickBack: () => void;
-  }
-);
 
 export const App = (): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);

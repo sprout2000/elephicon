@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 
+import { AppContext } from '../lib/AppContext';
 import { preventDefault } from '../lib/preventDefault';
 
 import { Switch } from './Switch';
 import { Message } from './Message';
 import { Elephant } from './Elephant';
-import { AppContext } from './App';
 
 export const Dropzone: React.FC = () => {
   const { state, dispatch, convert } = useContext(AppContext);
