@@ -1,12 +1,12 @@
-import { createContext } from 'react';
+import { createContext, Dispatch } from 'react';
 
-import { Action } from './Action';
 import { State } from './State';
+import { Action } from './Action';
 
 export const AppContext = createContext(
   {} as {
     state: State;
-    dispatch: React.Dispatch<Action>;
+    dispatch: Dispatch<Action>;
     convert: (filepath: string) => Promise<void>;
     onClickBack: () => void;
   }
