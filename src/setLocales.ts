@@ -8,7 +8,8 @@ import de from './locales/de.json';
 /** Merge the pull request sent by kitt3911. */
 /** https://github.com/sprout2000/elephicon/pull/135 */
 import ru from './locales/ru.json';
-
+/** Merge the pull request sent by godrix. */
+/** https://github.com/sprout2000/elephicon/pull/136 */
 import pt from './locales/pt.json';
 
 export const setLocales = (locale: string): void => {
