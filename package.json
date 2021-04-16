@@ -25,7 +25,7 @@
     "devtools": "react-devtools",
     "clean": "rimraf dist release",
     "build": "cross-env NODE_ENV=\"development\" webpack --progress",
-    "build:prod": "cross-env NODE_ENV=\"production\" webpack",
+    "build:prod": "cross-env NODE_ENV=\"production\" webpack --progress",
     "build:unsign": "ts-node scripts/build-unsign.ts",
     "build:darwin": "ts-node scripts/build.ts",
     "build:appx": "ts-node scripts/build-appx.ts",
