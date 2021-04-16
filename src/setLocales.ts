@@ -9,6 +9,8 @@ import de from './locales/de.json';
 /** https://github.com/sprout2000/elephicon/pull/135 */
 import ru from './locales/ru.json';
 
+import pt from './locales/pt.json';
+
 export const setLocales = (locale: string): void => {
   i18next.init({
     lng: locale,
@@ -18,6 +20,7 @@ export const setLocales = (locale: string): void => {
       ja: { translation: ja },
       de: { translation: de },
       ru: { translation: ru },
+      pt: { translation: pt },
     },
   });
 };
