@@ -1,6 +1,8 @@
 import i18next from 'i18next';
 
-import en from './locales/en.json';
+import template from './locales/template.json';
+
+import enUS from './locales/en_US.json';
 import ja from './locales/ja.json';
 /** Merge the pull request sent by DrDeee. */
 /** https://github.com/sprout2000/elephicon/pull/108 */
@@ -10,18 +12,19 @@ import de from './locales/de.json';
 import ru from './locales/ru.json';
 /** Merge the pull request sent by godrix. */
 /** https://github.com/sprout2000/elephicon/pull/136 */
-import pt from './locales/pt.json';
+import ptBR from './locales/pt_BR.json';
 
 export const setLocales = (locale: string): void => {
   i18next.init({
     lng: locale,
     fallbackLng: 'en',
     resources: {
-      en: { translation: en },
+      en: { translation: template },
+      'en-US': { translation: enUS },
       ja: { translation: ja },
       de: { translation: de },
       ru: { translation: ru },
-      pt: { translation: pt },
+      'pt-BR': { translation: ptBR },
     },
   });
 };
