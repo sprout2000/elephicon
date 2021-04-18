@@ -20,8 +20,13 @@ export const setLocales = (locale: string): void => {
       en: { translation: en },
       ja: { translation: ja },
       de: { translation: de },
+      'de-AT': { translation: de },
+      'de-CH': { translation: de },
+      'de-DE': { translation: de },
       ru: { translation: ru },
       pt: { translation: pt },
+      'pt-PT': { translation: pt },
+      'pt-BR': { translation: pt },
     },
   });
 };
