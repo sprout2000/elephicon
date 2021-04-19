@@ -16,7 +16,7 @@ import './App.scss';
 
 const { myAPI } = window;
 
-export const App = (): JSX.Element => {
+export const App: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const isDarwin = () => {
