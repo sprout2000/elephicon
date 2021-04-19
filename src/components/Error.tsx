@@ -3,10 +3,10 @@ import React, { useContext } from 'react';
 import { AppContext } from '../lib/AppContext';
 import { preventDefault } from '../lib/preventDefault';
 
-import { IoIosUndo } from 'react-icons/io';
+import { BackButton } from './BackButton';
 
 export const Error: React.FC = () => {
-  const { state, onClickBack } = useContext(AppContext);
+  const { state } = useContext(AppContext);
 
   return (
     <div
@@ -19,15 +19,7 @@ export const Error: React.FC = () => {
       <div className="text">Something went wrong...</div>
       <div className="error">{state.message}</div>
       <div className="switch">
-        <div
-          className="back-container"
-          data-testid="back-container"
-          onClick={onClickBack}>
-          <div className="os">
-            <IoIosUndo />
-          </div>
-          <div>Back</div>
-        </div>
+        <BackButton />
       </div>
     </div>
   );

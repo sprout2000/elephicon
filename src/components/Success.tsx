@@ -3,10 +3,10 @@ import React, { useContext } from 'react';
 import { AppContext } from '../lib/AppContext';
 import { preventDefault } from '../lib/preventDefault';
 
-import { IoIosUndo } from 'react-icons/io';
+import { BackButton } from './BackButton';
 
 export const Success: React.FC = () => {
-  const { state, onClickBack } = useContext(AppContext);
+  const { state } = useContext(AppContext);
 
   return (
     <div
@@ -23,15 +23,7 @@ export const Success: React.FC = () => {
         {state.desktop ? 'on your desktop' : 'in the current folder'}.
       </div>
       <div className="switch">
-        <div
-          className="back-container"
-          data-testid="back-container-success"
-          onClick={onClickBack}>
-          <div className="os">
-            <IoIosUndo />
-          </div>
-          <div>Back</div>
-        </div>
+        <BackButton />
       </div>
     </div>
   );
