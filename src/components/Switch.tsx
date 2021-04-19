@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import { AppContext } from '../lib/AppContext';
 
 import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
 
-export const Switch: React.FC = () => {
+export const Switch: React.FC = memo(() => {
   const { state, dispatch } = useContext(AppContext);
 
   const onClickOS = () => {
@@ -46,4 +46,6 @@ export const Switch: React.FC = () => {
       </div>
     </div>
   );
-};
+});
+
+Switch.displayName = 'Switch';

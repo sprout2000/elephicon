@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import { AppContext } from '../lib/AppContext';
 
 const { myAPI } = window;
 
-export const Elephant: React.FC = () => {
+export const Elephant: React.FC = memo(() => {
   const { state, dispatch, convert } = useContext(AppContext);
 
   const onClickOpen = async (): Promise<void> => {
@@ -72,4 +72,6 @@ export const Elephant: React.FC = () => {
       </svg>
     </div>
   );
-};
+});
+
+Elephant.displayName = 'Elephant';

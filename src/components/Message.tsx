@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import { AppContext } from '../lib/AppContext';
 
-export const Message: React.FC = () => {
+export const Message: React.FC = memo(() => {
   const { state } = useContext(AppContext);
   return (
     <div
@@ -12,4 +12,6 @@ export const Message: React.FC = () => {
       Drop your PNGs here...
     </div>
   );
-};
+});
+
+Message.displayName = 'Message';
