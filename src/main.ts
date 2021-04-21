@@ -82,7 +82,7 @@ const createWindow = () => {
       .catch((err): void => console.log(err));
   });
 
-  if (isDarwin) {
+  if (isDarwin && !isDev) {
     autoUpdater.checkForUpdatesAndNotify();
 
     autoUpdater.once('error', (_e, err) => {
