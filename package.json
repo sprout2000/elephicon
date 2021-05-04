@@ -18,6 +18,10 @@
     "icns",
     "png2icons"
   ],
+  "engines": {
+    "node": ">=14.0.0 <16.0.0",
+    "npm": "Use yarn instead and take care of yarn.lock"
+  },
   "main": "dist/main.js",
   "scripts": {
     "start": "run-s clean build serve",
