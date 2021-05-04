@@ -46,6 +46,8 @@ You will find the installer in `release` directory.
 
 _Note that you will need to have [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [Yarn](https://yarnpkg.com/) installed._
 
+_And you might also need to have some build tools (ex. [Microsoft Build Tools](https://www.microsoft.com/en-us/download/details.aspx?id=48159), [Xcode](https://apps.apple.com/app/xcode/id497799835)) installed._
+
 ## ✨ Download
 
 ### 💻 macOS (x64, arm64)
