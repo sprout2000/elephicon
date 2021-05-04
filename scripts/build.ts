@@ -1,18 +1,12 @@
-import os from 'os';
 import dotenv from 'dotenv';
 import { build } from 'electron-builder';
 
 dotenv.config();
 
-const x64 = os.arch() === 'x64';
-const artifactName = x64
-  ? '${productName}-${version}-${platform}-x64.${ext}'
-  : '${productName}-${version}-${platform}-${arch}.${ext}';
-
 build({
   config: {
     productName: 'Elephicon',
-    artifactName: artifactName,
+    artifactName: '${productName}-${version}-${platform}-${arch}.${ext}',
     copyright: 'Copyright (C) 2020 sprout2000.',
     files: ['dist/**/*'],
     directories: {
