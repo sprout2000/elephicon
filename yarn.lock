@@ -1394,10 +1394,10 @@ dotenv-expand@^5.1.0:
   resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
   integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
 
-dotenv@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
-  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+dotenv@^8.2.0, dotenv@^8.5.0:
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.5.0.tgz#8169c05469a60ccd9e8bd81056438db46312a021"
+  integrity sha512-vRlOiNG7p4iPlnX4wgjPbmhnHDOoUH+TgbGOC09de/lwz/Iv1OK1Gj2qC3+cW2V32uN4KFU6mTLyYsvSAHHMCw==
 
 duplexer3@^0.1.4:
   version "0.1.4"
