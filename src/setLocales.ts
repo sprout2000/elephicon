@@ -11,6 +11,9 @@ import ru from './locales/ru.json';
 /** Merge the pull request sent by godrix. */
 /** https://github.com/sprout2000/elephicon/pull/136 */
 import pt from './locales/pt.json';
+/** Merge the pull request sent by LightwithoutLisonlyight. */
+/** https://github.com/sprout2000/elephicon/pull/140 */
+import it from './locales/it.json';
 
 export const setLocales = (locale: string): void => {
   i18next.init({
@@ -27,6 +30,7 @@ export const setLocales = (locale: string): void => {
       pt: { translation: pt },
       'pt-PT': { translation: pt },
       'pt-BR': { translation: pt },
+      it: { translation: it },
     },
   });
 };
