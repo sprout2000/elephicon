@@ -32,6 +32,7 @@ export const setLocales = (locale: string): void => {
       'pt-BR': { translation: pt },
       it: { translation: it },
       'it-CH': { translation: it },
+      'it-IT': { translation: it },
     },
   });
 };
