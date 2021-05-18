@@ -30,8 +30,6 @@ build({
         NSRequiresAquaSystemAppearance: false,
         hardenedRuntime: true,
         gatekeeperAssess: false,
-        entitlements: 'scripts/entitlements.plist',
-        entitlementsInherit: 'scripts/entitlements.plist',
       },
     },
     dmg: {
