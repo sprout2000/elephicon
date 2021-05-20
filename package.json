@@ -19,8 +19,8 @@
     "png2icons"
   ],
   "engines": {
-    "node": ">=14.0.0 <16.0.0",
-    "npm": "Use yarn instead and take care of yarn.lock."
+    "node": ">=14.10.0",
+    "npm": ">=6.14.0"
   },
   "main": "dist/main.js",
   "scripts": {
