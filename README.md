@@ -51,14 +51,17 @@ If you only need to create ICO files _256×256_ pixels are sufficient.
 ```
 $ git clone git@github.com:sprout2000/elephicon.git
 $ cd elephicon
+
+// on Windows
 $ yarn install && yarn package
+
+// on macOS
+$ yarn add -D dmg-license && yarn package
 ```
 
 You will find the installer in `release` directory.
 
 _Note that you will need to have [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [Yarn](https://yarnpkg.com/) installed._
-
-_Note that if you are building on Windows, you may have to remove [dmg-license](https://www.npmjs.com/package/dmg-license) from the package.json dependency beforehand._
 
 _And you might also need to have some build tools (ex. [Microsoft Build Tools](https://www.microsoft.com/en-us/download/details.aspx?id=48159), [Xcode](https://apps.apple.com/app/xcode/id497799835)) installed._
 
