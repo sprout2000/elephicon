@@ -51,12 +51,12 @@ If you only need to create ICO files _256×256_ pixels are sufficient.
 ```
 $ git clone git@github.com:sprout2000/elephicon.git
 $ cd elephicon
-$ npm ci && npm run package
+$ yarn install && yarn package
 ```
 
 You will find the installer in `release` directory.
 
-**Note:** _You will need to have [Node.js](https://nodejs.org/en/), and [Git](https://git-scm.com/) installed._
+**Note:** _You will need to have [Node.js](https://nodejs.org/en/), [Git](https://git-scm.com/) and [Yarn](https://yarnpkg.com/) installed._
 
 ## ✨ Download
 
