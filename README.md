@@ -101,8 +101,7 @@ When you translate the menu into your language, please send me the locale file a
 
 - [@LightwithoutLisonlyight](https://github.com/LightwithoutLisonlyight) [#140](https://github.com/sprout2000/elephicon/pull/140)
 - [@godrix](https://github.com/godrix) [#136](https://github.com/sprout2000/elephicon/pull/136)
-- [@guaycuru](https://github.com/guaycuru) [#135](https://github.com/sprout2000/elephicon/pull/135)
-- [@kitt3911](https://github.com/kitt3911) [#134](https://github.com/sprout2000/elephicon/pull/134)
+- [@kitt3911](https://github.com/kitt3911) [#135](https://github.com/sprout2000/elephicon/pull/135)
 - [@DrDeee](https://github.com/DrDeee) [#108](https://github.com/sprout2000/elephicon/pull/108)
 
 ## 🏛️ License
