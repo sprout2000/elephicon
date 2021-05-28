@@ -43,7 +43,6 @@ If you only need to create ICO files _256×256_ pixels are sufficient.
 | Deutsch 🇩🇪 🇨🇭 🇦🇹 | `de` |
 | Русский 🇷🇺       | `ru` |
 | Português 🇵🇹 🇧🇷  | `pt` |
-| Español 🇪🇸 🇲🇽    | `es` |
 | Italiano 🇮🇹 🇨🇭   | `it` |
 
 ## 🛠️ Build & Install
