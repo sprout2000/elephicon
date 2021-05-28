@@ -1,6 +1,6 @@
 # Elephicon
 
-**Elephicon** (A GUI Wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons)) **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](<https://en.wikipedia.org/wiki/ICO_(file_format)>) files from PNG files.**
+**Elecphicon**, a GUI wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons), **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](<https://en.wikipedia.org/wiki/ICO_(file_format)>) files from PNG files.**
 
 [![GitHub CI](https://github.com/sprout2000/elephicon/workflows/GitHub%20CI/badge.svg)](https://github.com/sprout2000/elephicon/actions?query=workflow%3A%22GitHub+CI%22)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
@@ -8,9 +8,11 @@
 
 ## 📗 Usage
 
-The ideal input is a 24 bit _PNG_ with an alpha channel (RGBA) with _1024×1024_ pixels but any other dimensions and most other PNG formats do also work.
+The ideal input is a 24-bit PNG file with _1024x1024_ pixels and an alpha channel, but any other dimensions and most other PNG formats will do work.
 
-If you only need to create ICO files _256×256_ pixels are sufficient.
+If you only need to create ICO files, _256×256_ pixels will be enough.
+
+It's also possible to create icon files from non-quadratic source PNGs.
 
 ![elephicon2020-12-15](https://user-images.githubusercontent.com/52094761/102158835-a86b0f00-3ec5-11eb-8862-b5b6dacd0c34.gif)
 
@@ -71,10 +73,10 @@ Download the latest version for Windows10 at [Microsoft Store](https://www.micro
 ## 🍻 Contribution
 
 I need more locale files.  
-When you translate the menu into your language, please send me the locale file as a pull request.
+When you have translated the menu into your language, could you please send me the locale file as a [pull request](https://github.com/sprout2000/elephicon/pulls)?
 
-- Create `{your_LANG}.json` in `src/locales`.
-- And then add your locale to `src/setLocales.ts` like:
+1. Create `{your_LANG}.json` in `src/locales`.
+2. Then import the locale file into `src/setLocales.ts` as follows:
 
 ```diff
   import en from './locales/en.json';
