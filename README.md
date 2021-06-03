@@ -6,7 +6,7 @@
 [![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/elephicon)
 
-## 📗 Usage
+## :green_book: Usage
 
 The ideal input is a 24-bit PNG file with _1024x1024_ pixels and an alpha channel, but any other dimensions and most other PNG formats will do work.
 
@@ -16,7 +16,7 @@ It's also possible to create icon files from non-quadratic source PNGs.
 
 ![elephicon2020-12-15](https://user-images.githubusercontent.com/52094761/102158835-a86b0f00-3ec5-11eb-8862-b5b6dacd0c34.gif)
 
-## 🌈 Embedded Sizes
+## :rainbow: Embedded Sizes
 
 | Dimension  | ICO | ICNS |
 | :--------- | :-: | :--: |
@@ -36,18 +36,18 @@ It's also possible to create icon files from non-quadratic source PNGs.
 | 512x512    |     |  ✅  |
 | 512x512@2x |     |  ✅  |
 
-## 📚 Supported Languages (App Menu)
+## :books: Supported Languages (App Menu)
 
-| Language         | Code |
-| :--------------- | :--: |
-| English 🇺🇸 🇬🇧 🌐 | `en` |
-| 日本語 🇯🇵        | `ja` |
-| Deutsch 🇩🇪 🇨🇭 🇦🇹 | `de` |
-| Русский 🇷🇺       | `ru` |
-| Português 🇵🇹 🇧🇷  | `pt` |
-| Italiano 🇮🇹 🇨🇭   | `it` |
+| Language                           | Code |
+| :--------------------------------- | :--: |
+| English :us: :uk: :earth_americas: | `en` |
+| 日本語 :jp:                        | `ja` |
+| Deutsch :de:                       | `de` |
+| Русский :ru:                       | `ru` |
+| Português 🇵🇹 🇧🇷                    | `pt` |
+| Italiano :it:                      | `it` |
 
-## 🛠️ Build & Install
+## :wrench: Build & Install
 
 ```sh
 $ git clone git@github.com:sprout2000/elephicon.git
@@ -59,18 +59,18 @@ You will find the installer in the `release` directory.
 
 **Note:** _You will need to have [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/) installed._
 
-## ✨ Download
+## :gift: Download
 
-### 💻 macOS (x64, arm64)
+### :computer: macOS (x64, arm64)
 
 You can download the latest version of _Elephicon_ from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
 
-### 🖥️ Windows10
+### :computer: Windows10
 
 Download the latest version for Windows10 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
 
-## 🍻 Contribution
+## :beers: Contribution
 
 I need more locale files.  
 When you have translated the menu into your language, could you please send me the locale file as a [pull request](https://github.com/sprout2000/elephicon/pulls)?
@@ -96,7 +96,7 @@ When you have translated the menu into your language, could you please send me t
  };
 ```
 
-## 🎉 Contributors
+## :tada: Contributors
 
 **Special Thanks to:**
 
@@ -105,7 +105,7 @@ When you have translated the menu into your language, could you please send me t
 - [@kitt3911](https://github.com/kitt3911) [#135](https://github.com/sprout2000/elephicon/pull/135)
 - [@DrDeee](https://github.com/DrDeee) [#108](https://github.com/sprout2000/elephicon/pull/108)
 
-## 🏛️ License
+## :copyright: License
 
 ### [png2icons](https://github.com/idesis-gmbh/png2icons)
 
