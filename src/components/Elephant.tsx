@@ -16,16 +16,17 @@ export const Elephant: React.FC = memo(() => {
     await convert(filepath);
   };
 
+  const getElephantClass = () => {
+    if (state.drag) {
+      return 'elephant ondrag';
+    }
+    return state.loading ? 'elephant loading' : 'elephant';
+  };
+
   return (
     <div className="icon">
       <svg
-        className={
-          state.drag
-            ? 'elephant ondrag'
-            : state.loading
-            ? 'elephant loading'
-            : 'elephant'
-        }
+        className={getElephantClass()}
         data-testid="elephant"
         onClick={onClickOpen}
         width="104"
