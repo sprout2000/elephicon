@@ -13,7 +13,7 @@ build({
       buildResources: 'assets',
       output: 'release',
     },
-    afterSign: 'scripts/notarize.ts',
+    afterSign: 'scripts/notarizing.ts',
     mac: {
       appId: process.env.APP_BUNDLE_ID,
       category: 'public.app-category.developer-tools',
