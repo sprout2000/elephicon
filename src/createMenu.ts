@@ -197,6 +197,5 @@ export const createMenu = (
     });
   }
 
-  const menu = Menu.buildFromTemplate(template);
-  return menu;
+  return Menu.buildFromTemplate(template);
 };
