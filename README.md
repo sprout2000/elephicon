@@ -38,14 +38,15 @@ It's also possible to create icon files from non-quadratic source PNGs.
 
 ## :books: Supported Languages (App Menu)
 
-| Language                           | Code |
-| :--------------------------------- | :--: |
-| English :us: :uk: :earth_americas: | `en` |
-| 日本語 :jp:                        | `ja` |
-| Deutsch :de:                       | `de` |
-| Русский :ru:                       | `ru` |
-| Português 🇵🇹 🇧🇷                    | `pt` |
-| Italiano :it:                      | `it` |
+| Language                           |  Code   |
+| :--------------------------------- | :-----: |
+| English :us: :uk: :earth_americas: |  `en`   |
+| 日本語 :jp:                        |  `ja`   |
+| Deutsch :de:                       |  `de`   |
+| Русский :ru:                       |  `ru`   |
+| Português 🇵🇹 🇧🇷                    |  `pt`   |
+| Italiano :it:                      |  `it`   |
+| 简体中文 :cn:                      | `zh_CN` |
 
 ## :wrench: Build & Install
 
