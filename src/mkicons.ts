@@ -37,7 +37,7 @@ export const mkico = async (
   const num = store.get('quality', 2);
   const bmp = store.get('bmp', true);
 
-  return await fs.promises
+  return fs.promises
     .readFile(filepath)
     .then(async (buffer) => {
       setLogger(console.log);
@@ -72,7 +72,7 @@ export const mkicns = async (
 
   const num = store.get('quality', 2);
 
-  return await fs.promises
+  return fs.promises
     .readFile(filepath)
     .then(async (buffer) => {
       setLogger(console.log);
