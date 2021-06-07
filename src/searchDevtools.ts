@@ -19,7 +19,7 @@ export const searchDevtools = async (): Promise<string | void | undefined> => {
 
   const dirPath = path.join(os.homedir(), getExtDir(), reactDevtools);
 
-  return await fs.promises
+  return fs.promises
     .readdir(dirPath, { withFileTypes: true })
     .then((dirents) =>
       dirents
