@@ -3,16 +3,16 @@ import { Result } from './lib/Result';
 
 contextBridge.exposeInMainWorld('myAPI', {
   mimecheck: async (filepath: string): Promise<string | false> =>
-    await ipcRenderer.invoke('mime-check', filepath),
+    ipcRenderer.invoke('mime-check', filepath),
 
   mkIco: async (filepath: string): Promise<Result> =>
-    await ipcRenderer.invoke('make-ico', filepath),
+    ipcRenderer.invoke('make-ico', filepath),
 
   mkIcns: async (filepath: string): Promise<Result> =>
-    await ipcRenderer.invoke('make-icns', filepath),
+    ipcRenderer.invoke('make-icns', filepath),
 
   openDialog: async (): Promise<string | void> =>
-    await ipcRenderer.invoke('open-file-dialog'),
+    ipcRenderer.invoke('open-file-dialog'),
 
   menuOpen: (
     listener: (_e: Electron.IpcRendererEvent, filepath: string) => Promise<void>
