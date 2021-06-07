@@ -20,6 +20,12 @@ import { TypedStore } from './lib/TypedStore';
 
 const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 
+const errorMessage = (err: string, desktop: boolean) => {
+  console.log(`Something went wrong: ${err}`);
+
+  return { type: 'failed', msg: err, desktop };
+};
+
 export const mkico = async (
   filepath: string,
   store: Store<TypedStore>
@@ -53,11 +59,7 @@ export const mkico = async (
 
       return { type: 'success', msg: `${basename}.ico`, desktop: isDesktop };
     })
-    .catch((err: string) => {
-      console.log(`Something went wrong: ${err}`);
-
-      return { type: 'failed', msg: err, desktop: isDesktop };
-    });
+    .catch((err) => errorMessage(err, isDesktop));
 
   return result;
 };
@@ -93,11 +95,7 @@ export const mkicns = async (
 
       return { type: 'success', msg: `${basename}.icns`, desktop: isDesktop };
     })
-    .catch((err: string) => {
-      console.log(`Something went wrong: ${err}`);
-
-      return { type: 'failed', msg: err, desktop: isDesktop };
-    });
+    .catch((err) => errorMessage(err, isDesktop));
 
   return result;
 };
