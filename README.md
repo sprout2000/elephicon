@@ -101,6 +101,7 @@ When you have translated the menu into your language, could you please send me t
 
 **Special Thanks to:**
 
+- [@ArcherGu](https://github.com/ArcherGu) [#151](https://github.com/sprout2000/elephicon/pull/151)
 - [@LightwithoutLisonlyight](https://github.com/LightwithoutLisonlyight) [#140](https://github.com/sprout2000/elephicon/pull/140)
 - [@godrix](https://github.com/godrix) [#136](https://github.com/sprout2000/elephicon/pull/136)
 - [@kitt3911](https://github.com/kitt3911) [#135](https://github.com/sprout2000/elephicon/pull/135)
