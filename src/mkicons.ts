@@ -37,7 +37,7 @@ export const mkico = async (
   const num = store.get('quality', 2);
   const bmp = store.get('bmp', true);
 
-  const result: Result = await fs.promises
+  return await fs.promises
     .readFile(filepath)
     .then(async (buffer) => {
       setLogger(console.log);
@@ -60,8 +60,6 @@ export const mkico = async (
       return { type: 'success', msg: `${basename}.ico`, desktop: isDesktop };
     })
     .catch((err) => errorMessage(err, isDesktop));
-
-  return result;
 };
 
 export const mkicns = async (
@@ -74,7 +72,7 @@ export const mkicns = async (
 
   const num = store.get('quality', 2);
 
-  const result: Result = await fs.promises
+  return await fs.promises
     .readFile(filepath)
     .then(async (buffer) => {
       setLogger(console.log);
@@ -96,6 +94,4 @@ export const mkicns = async (
       return { type: 'success', msg: `${basename}.icns`, desktop: isDesktop };
     })
     .catch((err) => errorMessage(err, isDesktop));
-
-  return result;
 };
