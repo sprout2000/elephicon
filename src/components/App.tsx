@@ -68,6 +68,13 @@ export const App: React.FC = () => {
     dispatch({ type: 'message', value: '' });
   };
 
+  const getChildComponent = () => {
+    if (!state.success && !state.error) {
+      return <Dropzone />;
+    }
+    return state.success ? <Success /> : <Error />;
+  };
+
   useEffect(() => {
     myAPI.menuOpen(async (_e, filepath) => {
       if (!filepath) return;
@@ -92,13 +99,7 @@ export const App: React.FC = () => {
   return (
     <AppContext.Provider value={{ state, dispatch, convert, onClickBack }}>
       <div className={isDarwin() ? 'container_darwin' : 'container'}>
-        {!state.success && !state.error ? (
-          <Dropzone />
-        ) : state.success ? (
-          <Success />
-        ) : (
-          <Error />
-        )}
+        {getChildComponent()}
       </div>
     </AppContext.Provider>
   );
