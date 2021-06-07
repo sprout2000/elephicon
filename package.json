@@ -19,8 +19,8 @@
     "png2icons"
   ],
   "engines": {
-    "node": ">=14.10.0",
-    "npm": ">=7.0.0"
+    "node": ">=14.17.0",
+    "npm": ">=7.15.0"
   },
   "main": "dist/main.js",
   "scripts": {
