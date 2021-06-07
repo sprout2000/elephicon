@@ -15,7 +15,41 @@ export const createMenu = (
   win: BrowserWindow,
   store: Store<TypedStore>
 ): Menu => {
-  const darwin = process.platform === 'darwin';
+  const isDarwin = process.platform === 'darwin';
+  const isDev = process.env.NODE_ENV === 'development';
+
+  const helpSub: MenuItemConstructorOptions[] = [
+    {
+      label: i18next.t('support'),
+      click: async (): Promise<void> =>
+        await shell.openExternal('https://sprout2000.github.io/elephicon'),
+    },
+  ];
+
+  if (!isDarwin) {
+    helpSub.push({
+      label: i18next.t('about'),
+      accelerator: 'Ctrl+I',
+      click: () => app.showAboutPanel(),
+    });
+  }
+
+  if (isDev) {
+    helpSub.push(
+      { type: 'separator' },
+      {
+        label: i18next.t('devtools'),
+        accelerator: isDarwin ? 'Cmd+Option+I' : 'Ctrl+Shift+I',
+        click: (): void => {
+          if (win.webContents.isDevToolsOpened()) {
+            win.webContents.closeDevTools();
+          } else {
+            win.webContents.openDevTools({ mode: 'detach' });
+          }
+        },
+      }
+    );
+  }
 
   const template: MenuItemConstructorOptions[] = [
     {
@@ -45,9 +79,9 @@ export const createMenu = (
         },
         { type: 'separator' },
         {
-          label: darwin ? i18next.t('close') : i18next.t('quit'),
-          accelerator: darwin ? 'Cmd+W' : 'Alt+F4',
-          role: darwin ? 'close' : 'quit',
+          label: isDarwin ? i18next.t('close') : i18next.t('quit'),
+          accelerator: isDarwin ? 'Cmd+W' : 'Alt+F4',
+          role: isDarwin ? 'close' : 'quit',
         },
       ],
     },
@@ -126,65 +160,13 @@ export const createMenu = (
         },
       ],
     },
+    {
+      label: i18next.t('help'),
+      submenu: helpSub,
+    },
   ];
 
-  if (!darwin) {
-    template.push({
-      label: i18next.t('help'),
-      submenu: [
-        {
-          label: i18next.t('support'),
-          click: async (): Promise<void> =>
-            await shell.openExternal('https://sprout2000.github.io/elephicon'),
-        },
-        {
-          label: i18next.t('about'),
-          accelerator: 'Ctrl+I',
-          click: () => app.showAboutPanel(),
-        },
-        { type: 'separator' },
-        {
-          label: i18next.t('devtools'),
-          accelerator: 'Ctrl+Shift+I',
-          click: (): void => {
-            if (win.webContents.isDevToolsOpened()) {
-              win.webContents.closeDevTools();
-            } else {
-              win.webContents.openDevTools({ mode: 'detach' });
-            }
-          },
-        },
-      ],
-    });
-  }
-
-  if (darwin) {
-    template.push({
-      label: i18next.t('help'),
-      role: 'help',
-      submenu: [
-        {
-          label: i18next.t('support'),
-          click: async (): Promise<void> =>
-            await shell.openExternal(
-              'https://github.com/sprout2000/elephicon#readme'
-            ),
-        },
-        { type: 'separator' },
-        {
-          label: i18next.t('devtools'),
-          accelerator: 'Cmd+Option+I',
-          click: (): void => {
-            if (win.webContents.isDevToolsOpened()) {
-              win.webContents.closeDevTools();
-            } else {
-              win.webContents.openDevTools({ mode: 'detach' });
-            }
-          },
-        },
-      ],
-    });
-
+  if (isDarwin) {
     template.unshift({
       label: 'Elephicon',
       submenu: [
