@@ -16,7 +16,8 @@
     "electron",
     "ico",
     "icns",
-    "png2icons"
+    "png2icons",
+    "cross-platform"
   ],
   "engines": {
     "node": ">=14.17.0",
