@@ -61,6 +61,7 @@
     "@types/ua-parser-js": "^0.7.36",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
+    "css-what": "^5.0.1",
     "dotenv": "^10.0.0",
     "electron": "^13.1.1",
     "electron-builder": "^22.11.5",
