@@ -116,4 +116,4 @@ MIT © [idesis GmbH](https://www.idesis.de), Rellinghauser Straße 334F, D-45136
 
 ### Elephicon
 
-[MIT](https://github.com/sprout2000/lessview/blob/master/LICENSE.md) © 2020-2021 sprout2000, contributors
+[MIT](https://github.com/sprout2000/lessview/blob/master/LICENSE.md) © 2020-2021 sprout2000 and other contributors
