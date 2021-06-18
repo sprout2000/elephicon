@@ -1,6 +1,6 @@
 # Notes for Ubuntu 20.04 users
 
-The node installed on ubuntu 20.0.4 is v12.x, but this app does not support node@12.
+The node installed on ubuntu 20.04 is v12.x, but this app does not support node@12.
 So you will need to have node@14.17+ and npm@7.15+ installed.
 
 ## How?
