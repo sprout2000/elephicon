@@ -108,6 +108,10 @@ When you have translated the menu into your language, could you please send me t
 - [@kitt3911](https://github.com/kitt3911) [#135](https://github.com/sprout2000/elephicon/pull/135)
 - [@DrDeee](https://github.com/DrDeee) [#108](https://github.com/sprout2000/elephicon/pull/108)
 
+## :notes: Notes for Ubuntu 20.04 users
+
+_see [UBUNTU.md](https://github.com/sprout2000/elephicon/blob/main/UBUNTU.md)._
+
 ## :copyright: License
 
 ### [png2icons](https://github.com/idesis-gmbh/png2icons)
