@@ -38,14 +38,15 @@ const store = new Store<TypedStore>({
 
 const gotTheLock = app.requestSingleInstanceLock();
 const isDarwin = process.platform === 'darwin';
+const isWin32 = process.platform === 'win32';
 const isDev = process.env.NODE_ENV === 'development';
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     x: store.get('x'),
     y: store.get('y'),
-    width: isDarwin ? 360 : 400,
-    height: isDarwin ? 320 : 400,
+    width: isWin32 ? 400 : 360,
+    height: isWin32 ? 400 : 320,
     show: false,
     titleBarStyle: isDarwin ? 'hidden' : 'default',
     resizable: false,
