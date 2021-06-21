@@ -15,6 +15,7 @@ export const createMenu = (
   win: BrowserWindow,
   store: Store<TypedStore>
 ): Menu => {
+  const isLinux = process.platform === 'linux';
   const isDarwin = process.platform === 'darwin';
   const isDev = process.env.NODE_ENV === 'development';
 
@@ -80,7 +81,7 @@ export const createMenu = (
         { type: 'separator' },
         {
           label: isDarwin ? i18next.t('close') : i18next.t('quit'),
-          accelerator: isDarwin ? 'Cmd+W' : 'Alt+F4',
+          accelerator: isDarwin ? 'Cmd+W' : isLinux ? 'Ctrl+Q' : 'Alt+F4',
           role: isDarwin ? 'close' : 'quit',
         },
       ],

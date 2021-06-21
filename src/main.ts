@@ -38,6 +38,7 @@ const store = new Store<TypedStore>({
 
 const gotTheLock = app.requestSingleInstanceLock();
 const isDarwin = process.platform === 'darwin';
+const isLinux = process.platform === 'linux';
 const isWin32 = process.platform === 'win32';
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -47,6 +48,7 @@ const createWindow = () => {
     y: store.get('y'),
     width: isWin32 ? 400 : 360,
     height: isWin32 ? 400 : 320,
+    icon: isLinux ? path.join(__dirname, 'icon.png') : undefined,
     show: false,
     titleBarStyle: isDarwin ? 'hidden' : 'default',
     resizable: false,
