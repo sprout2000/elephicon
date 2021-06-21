@@ -44,5 +44,8 @@ build({
       installerIcon: 'assets/installer.ico',
       artifactName: '${productName}-${version}-${platform}-installer.${ext}',
     },
+    linux: {
+      target: ['AppImage'],
+    },
   },
 }).catch((err) => console.log(err));
