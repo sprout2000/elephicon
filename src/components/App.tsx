@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useCallback } from 'react';
+import { useReducer, useEffect, useCallback } from 'react';
 import UAParser from 'ua-parser-js';
 
 import { Error } from './Error';
@@ -16,7 +16,7 @@ import './App.scss';
 
 const { myAPI } = window;
 
-export const App: React.FC = () => {
+export const App = (): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const isDarwin = () => {

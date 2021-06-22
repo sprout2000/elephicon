@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import { AppContext } from '../lib/AppContext';
 import { preventDefault } from '../lib/preventDefault';
 
 import { BackButton } from './BackButton';
 
-export const Success: React.FC = () => {
+export const Success = (): JSX.Element => {
   const { state } = useContext(AppContext);
 
   return (

@@ -1,9 +1,9 @@
-import React, { useContext, memo } from 'react';
+import { useContext, memo } from 'react';
 import { AppContext } from '../lib/AppContext';
 
 const { myAPI } = window;
 
-export const Elephant: React.FC = memo(() => {
+export const Elephant = memo(() => {
   const { state, dispatch, convert } = useContext(AppContext);
 
   const onClickOpen = async (): Promise<void> => {

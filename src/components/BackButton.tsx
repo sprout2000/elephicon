@@ -1,10 +1,10 @@
-import React, { useContext, memo } from 'react';
+import { useContext, memo } from 'react';
 
 import { AppContext } from '../lib/AppContext';
 
 import { IoIosUndo } from 'react-icons/io';
 
-export const BackButton: React.FC = memo(() => {
+export const BackButton = memo(() => {
   const { onClickBack } = useContext(AppContext);
 
   return (

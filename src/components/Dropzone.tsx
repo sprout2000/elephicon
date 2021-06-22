@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import { AppContext } from '../lib/AppContext';
 import { preventDefault } from '../lib/preventDefault';
@@ -7,7 +7,7 @@ import { Switch } from './Switch';
 import { Message } from './Message';
 import { Elephant } from './Elephant';
 
-export const Dropzone: React.FC = () => {
+export const Dropzone = (): JSX.Element => {
   const { state, dispatch, convert } = useContext(AppContext);
 
   const onDragOver = (e: React.DragEvent<HTMLDivElement>): void => {

@@ -1,7 +1,7 @@
-import React, { useContext, memo } from 'react';
+import { useContext, memo } from 'react';
 import { AppContext } from '../lib/AppContext';
 
-export const Message: React.FC = memo(() => {
+export const Message = memo(() => {
   const { state } = useContext(AppContext);
 
   const getMessageClass = () => {
