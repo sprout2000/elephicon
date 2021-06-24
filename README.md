@@ -49,18 +49,6 @@ It's also possible to create icon files from non-quadratic source PNGs.
 | Italiano :it:                      |  `it`   |
 | 简体中文 :cn:                      | `zh_CN` |
 
-## :wrench: Build & Install
-
-```sh
-$ git clone git@github.com:sprout2000/elephicon.git
-$ cd elephicon
-$ npm install && npm run package
-```
-
-You will find the installer in the `release` directory.
-
-**Note:** _You will need to have [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/) installed._
-
 ## :gift: Download
 
 ### :computer: macOS (x64, arm64)
