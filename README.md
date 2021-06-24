@@ -49,6 +49,18 @@ It's also possible to create icon files from non-quadratic source PNGs.
 | Italiano :it:                      |  `it`   |
 | 简体中文 :cn:                      | `zh_CN` |
 
+## :closed_lock_with_key: Security
+
+| API                        | Value   |
+| :------------------------- | :------ |
+| default-src (CSP)          | `self`  |
+| nodeIntegration            | `false` |
+| enableRemoteModule         | `false` |
+| worldSafeExecuteJavaScript | `true`  |
+| contextIsolation           | `true`  |
+| safeDialogs                | `true`  |
+| sandbox                    | `true`  |
+
 ## :gift: Download
 
 ### :computer: macOS (x64, arm64)
