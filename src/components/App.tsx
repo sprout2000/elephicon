@@ -1,4 +1,4 @@
-import { useReducer, useEffect, useCallback } from 'react';
+import React, { useReducer, useEffect, useCallback } from 'react';
 import UAParser from 'ua-parser-js';
 
 import { Error } from './Error';

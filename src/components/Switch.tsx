@@ -1,4 +1,4 @@
-import { useContext, memo } from 'react';
+import React, { useContext, memo } from 'react';
 import { AppContext } from '../lib/AppContext';
 
 import { IoLogoApple, IoLogoWindows } from 'react-icons/io';

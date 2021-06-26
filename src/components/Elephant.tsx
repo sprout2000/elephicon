@@ -1,4 +1,4 @@
-import { useContext, memo } from 'react';
+import React, { useContext, memo } from 'react';
 import { AppContext } from '../lib/AppContext';
 
 const { myAPI } = window;
