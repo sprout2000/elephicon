@@ -6,7 +6,7 @@ dotenv.config();
 build({
   config: {
     productName: 'Elephicon',
-    copyright: 'Copyright (C) 2020 sprout2000.',
+    copyright: '© 2020 sprout2000 and other contributors.',
     files: ['dist/**/*'],
     directories: {
       buildResources: 'assets',
