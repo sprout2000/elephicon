@@ -40,7 +40,8 @@ build({
         '${productName}-${version}-${platform}-${arch}-installer.${ext}',
     },
     linux: {
-      target: ['AppImage'],
+      target: ['AppImage', 'zip'],
+      category: 'Development',
     },
   },
 }).catch((err) => console.log(err));
