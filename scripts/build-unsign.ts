@@ -1,15 +1,9 @@
-import os from 'os';
 import { build } from 'electron-builder';
-
-const x64 = os.arch() === 'x64';
-const artifactName = x64
-  ? '${productName}-${version}-${platform}-x64.${ext}'
-  : '${productName}-${version}-${platform}-${arch}.${ext}';
 
 build({
   config: {
     productName: 'Elephicon',
-    artifactName: artifactName,
+    artifactName: '${productName}-${version}-${platform}-${arch}.${ext}',
     copyright: '© 2020 sprout2000 and other contributors.',
     files: ['dist/**/*'],
     directories: {
@@ -42,7 +36,8 @@ build({
       createDesktopShortcut: false,
       createStartMenuShortcut: true,
       installerIcon: 'assets/installer.ico',
-      artifactName: '${productName}-${version}-${platform}-installer.${ext}',
+      artifactName:
+        '${productName}-${version}-${platform}-${arch}-installer.${ext}',
     },
     linux: {
       target: ['AppImage'],
