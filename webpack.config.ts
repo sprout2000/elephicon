@@ -18,7 +18,6 @@ const base: Configuration = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: './',
     filename: '[name].js',
     assetModuleFilename: 'fonts/[name][ext]',
   },
