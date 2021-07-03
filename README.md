@@ -46,7 +46,7 @@ It's also possible to create icon files from non-quadratic source PNGs.
 | 日本語 :jp:                        |  `ja`   |
 | Deutsch :de:                       |  `de`   |
 | Русский :ru:                       |  `ru`   |
-| Português 🇵🇹 🇧🇷                    |  `pt`   |
+| Português :portugal: :brazil:      |  `pt`   |
 | Italiano :it:                      |  `it`   |
 | 简体中文 :cn:                      | `zh_CN` |
 
