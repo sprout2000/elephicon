@@ -19,7 +19,7 @@ import it from './locales/it.json';
 import zh_CN from './locales/zh_cn.json';
 /** Merge the pull request sent by umitseyhan75 */
 /** https://github.com/sprout2000/elephicon/pull/159 */
-import tr from './locales/tr.json';
+import tr from './locales/tr_TR.json';
 
 export const setLocales = (locale: string): void => {
   i18next.init({
@@ -42,6 +42,7 @@ export const setLocales = (locale: string): void => {
       zh: { translation: zh_CN },
       'zh-CN': { translation: zh_CN },
       tr: { translation: tr },
+      'tr-TR': { translation: tr },
     },
   });
 };
