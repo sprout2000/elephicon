@@ -49,7 +49,7 @@ It's also possible to create icon files from non-quadratic source PNGs.
 | Português :portugal: :brazil:      |  `pt`   |
 | Italiano :it:                      |  `it`   |
 | 简体中文 :cn:                      | `zh_CN` |
-| Türk :tr:                          |  `tr`   |
+| Türkçe :tr:                        |  `tr`   |
 
 ## :closed_lock_with_key: Security
 
