@@ -49,6 +49,7 @@ It's also possible to create icon files from non-quadratic source PNGs.
 | Português :portugal: :brazil:      |  `pt`   |
 | Italiano :it:                      |  `it`   |
 | 简体中文 :cn:                      | `zh_CN` |
+| Türk :tr:                          |  `tr`   |
 
 ## :closed_lock_with_key: Security
 
@@ -103,6 +104,7 @@ When you have translated the menu into your language, could you please send me t
 
 **Special Thanks to:**
 
+- [@umitseyhan75](https://github.com/umitseyhan75) [#159](https://github.com/sprout2000/elephicon/pull/159)
 - [@ArcherGu](https://github.com/ArcherGu) [#151](https://github.com/sprout2000/elephicon/pull/151)
 - [@LightwithoutLisonlyight](https://github.com/LightwithoutLisonlyight) [#140](https://github.com/sprout2000/elephicon/pull/140)
 - [@godrix](https://github.com/godrix) [#136](https://github.com/sprout2000/elephicon/pull/136)
