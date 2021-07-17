@@ -21,6 +21,7 @@ import zh_CN from './locales/zh_cn.json';
 /** https://github.com/sprout2000/elephicon/pull/159 */
 import tr from './locales/tr_TR.json';
 /** Malayalam language translation. */
+/** https://github.com/sprout2000/elephicon/pull/163 */
 import ml from './locales/ml.json';
 
 export const setLocales = (locale: string): void => {
