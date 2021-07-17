@@ -45,7 +45,7 @@ export const setLocales = (locale: string): void => {
       'zh-CN': { translation: zh_CN },
       tr: { translation: tr },
       'tr-TR': { translation: tr },
-      ml: {translation: ml},
+      ml: { translation: ml },
     },
   });
 };
