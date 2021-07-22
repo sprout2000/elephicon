@@ -5,11 +5,11 @@ import { Error } from './Error';
 import { Success } from './Success';
 import { Dropzone } from './Dropzone';
 
-import { Result } from '../lib/Result';
-import { AppContext } from '../lib/AppContext';
+import { Result } from '../../lib/Result';
+import { AppContext } from '../../lib/AppContext';
 
-import { reducer } from '../lib/reducer';
-import { initialState } from '../lib/initialState';
+import { reducer } from '../../lib/reducer';
+import { initialState } from '../../lib/initialState';
 
 import 'typeface-roboto';
 import './App.scss';

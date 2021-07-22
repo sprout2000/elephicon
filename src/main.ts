@@ -7,7 +7,7 @@ import path from 'path';
 import mime from 'mime-types';
 
 import { createMenu } from './createMenu';
-import { setLocales } from './setLocales';
+import { setLocales } from './lib/setLocales';
 import { mkico, mkicns } from './mkicons';
 import { searchDevtools } from './searchDevtools';
 
@@ -41,6 +41,22 @@ const isDarwin = process.platform === 'darwin';
 const isLinux = process.platform === 'linux';
 const isWin32 = process.platform === 'win32';
 const isDev = process.env.NODE_ENV === 'development';
+
+/// #if DEBUG
+const execPath =
+  process.platform === 'win32'
+    ? '../node_modules/electron/dist/electron.exe'
+    : '../node_modules/.bin/electron';
+
+if (isDev) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require('electron-reload')(__dirname, {
+    electron: path.resolve(__dirname, execPath),
+    forceHardReset: true,
+    hardResetMethod: 'exit',
+  });
+}
+/// #endif
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
