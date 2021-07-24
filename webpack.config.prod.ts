@@ -17,7 +17,7 @@ const base: Configuration = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: './',
     filename: '[name].js',
-    assetModuleFilename: 'images/[name][ext]',
+    assetModuleFilename: 'fonts/[name][ext]',
   },
   module: {
     rules: [
