@@ -45,7 +45,7 @@
     "pre-commit": "yarn lint"
   },
   "dependencies": {
-    "electron-log": "^4.4.0",
+    "electron-log": "^4.4.1",
     "electron-store": "^8.0.0",
     "electron-updater": "^4.3.9",
     "i18next": "^20.3.5",
@@ -61,7 +61,7 @@
     "@types/copy-webpack-plugin": "^8.0.1",
     "@types/mime-types": "^2.1.0",
     "@types/mini-css-extract-plugin": "^2.0.1",
-    "@types/node": "^16.4.8",
+    "@types/node": "^16.4.9",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
     "@types/ua-parser-js": "^0.7.36",
