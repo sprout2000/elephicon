@@ -42,7 +42,8 @@ export const Dropzone = (): JSX.Element => {
       onDrop={onDrop}
       onDragEnter={onDragOver}
       onDragOver={onDragOver}
-      onDragLeave={onDragLeave}>
+      onDragLeave={onDragLeave}
+    >
       <Elephant />
       <Message />
       <Switch />

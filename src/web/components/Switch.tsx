@@ -23,7 +23,8 @@ export const Switch = memo(() => {
             ? 'icon-container'
             : 'icon-container unchecked'
         }
-        onClick={onClickOS}>
+        onClick={onClickOS}
+      >
         <div className="os">
           <IoLogoWindows />
         </div>
@@ -38,7 +39,8 @@ export const Switch = memo(() => {
             ? 'icon-container unchecked'
             : 'icon-container'
         }
-        onClick={onClickOS}>
+        onClick={onClickOS}
+      >
         <div className="os">
           <IoLogoApple />
         </div>

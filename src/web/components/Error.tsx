@@ -15,7 +15,8 @@ export const Error = (): JSX.Element => {
       onDrop={preventDefault}
       onDragEnter={preventDefault}
       onDragOver={preventDefault}
-      onDragLeave={preventDefault}>
+      onDragLeave={preventDefault}
+    >
       <div className="text">Something went wrong...</div>
       <div className="error">{state.message}</div>
       <div className="switch">

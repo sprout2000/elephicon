@@ -15,7 +15,8 @@ export const Success = (): JSX.Element => {
       onDrop={preventDefault}
       onDragEnter={preventDefault}
       onDragOver={preventDefault}
-      onDragLeave={preventDefault}>
+      onDragLeave={preventDefault}
+    >
       <div className="text">Successfully Completed!</div>
       <div className="result" data-testid="result">
         <div className="filename">{state.message}</div>

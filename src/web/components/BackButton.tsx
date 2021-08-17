@@ -11,7 +11,8 @@ export const BackButton = memo(() => {
     <div
       className="back-container"
       data-testid="back-container-success"
-      onClick={onClickBack}>
+      onClick={onClickBack}
+    >
       <div className="os">
         <IoIosUndo />
       </div>
