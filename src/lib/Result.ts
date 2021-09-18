@@ -1,5 +1,5 @@
-export interface Result {
+export type Result = {
   type: string;
   msg: string;
   desktop: boolean;
-}
+};

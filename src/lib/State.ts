@@ -1,4 +1,4 @@
-export interface State {
+export type State = {
   ico: boolean;
   drag: boolean;
   error: boolean;
@@ -6,4 +6,4 @@ export interface State {
   loading: boolean;
   success: boolean;
   message: string;
-}
+};
