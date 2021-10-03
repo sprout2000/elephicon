@@ -1,8 +1,22 @@
 import { Result } from '../lib/Result';
 
+type Brand = {
+  readonly brand: string;
+  readonly version: string;
+};
+
+type NavigatorUAData = {
+  readonly brands: Brand[];
+  readonly mobile: boolean;
+  readonly platform: string;
+};
+
 declare global {
   interface Window {
     myAPI: Sandbox;
+  }
+  interface Navigator {
+    userAgentData: NavigatorUAData;
   }
 }
 

@@ -14,7 +14,7 @@ import 'typeface-roboto';
 import './App.scss';
 
 const { myAPI } = window;
-const isDarwin = window.navigator.userAgent.includes('Mac OS X');
+const isDarwin = window.navigator.userAgentData.platform === 'macOS';
 
 export const App = (): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
