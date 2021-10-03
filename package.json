@@ -55,8 +55,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
-    "typeface-roboto": "^1.1.13",
-    "ua-parser-js": "^0.7.28"
+    "typeface-roboto": "^1.1.13"
   },
   "devDependencies": {
     "@types/copy-webpack-plugin": "^8.0.1",
@@ -65,7 +64,6 @@
     "@types/node": "^16.10.2",
     "@types/react": "^17.0.26",
     "@types/react-dom": "^17.0.9",
-    "@types/ua-parser-js": "^0.7.36",
     "copy-webpack-plugin": "^9.0.1",
     "cross-env": "^7.0.3",
     "css-loader": "^6.3.0",
