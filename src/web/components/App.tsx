@@ -63,6 +63,13 @@ export const App = (): JSX.Element => {
     dispatch({ type: 'message', value: '' });
   };
 
+  const onContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDarwin) return;
+
+    e.preventDefault();
+    myAPI.contextMenu();
+  };
+
   const getChildComponent = () => {
     if (!state.success && !state.error) {
       return <Dropzone />;
@@ -93,7 +100,10 @@ export const App = (): JSX.Element => {
 
   return (
     <AppContext.Provider value={{ state, dispatch, convert, onClickBack }}>
-      <div className={isDarwin() ? 'container_darwin' : 'container'}>
+      <div
+        className={isDarwin ? 'container_darwin' : 'container'}
+        onContextMenu={onContextMenu}
+      >
         {getChildComponent()}
       </div>
     </AppContext.Provider>
