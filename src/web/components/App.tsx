@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect, useCallback } from 'react';
-import UAParser from 'ua-parser-js';
 
 import { Error } from './Error';
 import { Success } from './Success';
@@ -15,14 +14,10 @@ import 'typeface-roboto';
 import './App.scss';
 
 const { myAPI } = window;
+const isDarwin = window.navigator.userAgent.includes('Mac OS X');
 
 export const App = (): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const isDarwin = () => {
-    const ua = new UAParser();
-    return ua.getOS().name === 'Mac OS';
-  };
 
   const afterConvert = (result: Result): void => {
     if (result.type === 'failed') {
