@@ -38,8 +38,6 @@ const store = new Store<TypedStore>({
 
 const gotTheLock = app.requestSingleInstanceLock();
 const isDarwin = process.platform === 'darwin';
-const isLinux = process.platform === 'linux';
-const isWin32 = process.platform === 'win32';
 const isDev = process.env.NODE_ENV === 'development';
 
 /// #if DEBUG
@@ -62,10 +60,11 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     x: store.get('x'),
     y: store.get('y'),
-    width: isWin32 ? 400 : 360,
-    height: isWin32 ? 400 : 320,
-    icon: isLinux ? path.join(__dirname, 'icon.png') : undefined,
+    width: isDarwin ? 360 : 400,
+    height: isDarwin ? 320 : 340,
+    icon: path.join(__dirname, 'icon.png'),
     show: false,
+    autoHideMenuBar: true,
     titleBarStyle: isDarwin ? 'hidden' : 'default',
     resizable: false,
     maximizable: false,
@@ -136,6 +135,12 @@ const createWindow = () => {
 
   const menu = createMenu(mainWindow, store);
   Menu.setApplicationMenu(menu);
+
+  if (!isDarwin) {
+    ipcMain.on('show-context-menu', () => {
+      menu.popup();
+    });
+  }
 
   if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
   mainWindow.loadFile('dist/index.html');

@@ -13,6 +13,8 @@ export interface Sandbox {
 
   mkIcns: (filepath: string) => Promise<Result>;
 
+  contextMenu: () => void;
+
   openDialog: () => Promise<string | void>;
 
   menuOpen: (
