@@ -136,11 +136,9 @@ const createWindow = () => {
   const menu = createMenu(mainWindow, store);
   Menu.setApplicationMenu(menu);
 
-  if (!isDarwin) {
-    ipcMain.on('show-context-menu', () => {
-      menu.popup();
-    });
-  }
+  ipcMain.on('show-context-menu', () => {
+    menu.popup();
+  });
 
   if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
   mainWindow.loadFile('dist/index.html');

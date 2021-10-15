@@ -14,7 +14,6 @@ import 'typeface-roboto';
 import './App.scss';
 
 const { myAPI } = window;
-const isDarwin = window.navigator.userAgentData.platform === 'macOS';
 
 export const App = (): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -64,17 +63,8 @@ export const App = (): JSX.Element => {
   };
 
   const onContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isDarwin) return;
-
     e.preventDefault();
     myAPI.contextMenu();
-  };
-
-  const getChildComponent = () => {
-    if (!state.success && !state.error) {
-      return <Dropzone />;
-    }
-    return state.success ? <Success /> : <Error />;
   };
 
   useEffect(() => {
@@ -100,11 +90,14 @@ export const App = (): JSX.Element => {
 
   return (
     <AppContext.Provider value={{ state, dispatch, convert, onClickBack }}>
-      <div
-        className={isDarwin ? 'container_darwin' : 'container'}
-        onContextMenu={onContextMenu}
-      >
-        {getChildComponent()}
+      <div className="container" onContextMenu={onContextMenu}>
+        {!state.success && !state.error ? (
+          <Dropzone />
+        ) : state.success ? (
+          <Success />
+        ) : (
+          <Error />
+        )}
       </div>
     </AppContext.Provider>
   );
