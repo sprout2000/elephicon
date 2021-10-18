@@ -13,14 +13,12 @@
     "url": "https://github.com/sprout2000/elephicon/issues"
   },
   "keywords": [
-    "electron",
     "ico",
     "icns",
-    "png2icons",
-    "cross-platform"
+    "png2icons"
   ],
   "engines": {
-    "node": ">=12.13"
+    "node": ">=12.13.1"
   },
   "main": "dist/main.js",
   "scripts": {
