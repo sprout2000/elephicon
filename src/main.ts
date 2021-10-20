@@ -36,12 +36,10 @@ const store = new Store<TypedStore>({
   },
 });
 
-const isLinux = process.platform === 'linux';
 const isDarwin = process.platform === 'darwin';
 const isDev = process.env.NODE_ENV === 'development';
 
 const gotTheLock = app.requestSingleInstanceLock();
-const iconPath = path.join(__dirname, isLinux ? 'icon_linux.png' : 'icon.png');
 
 /// #if DEBUG
 const execPath =
@@ -65,7 +63,6 @@ const createWindow = () => {
     y: store.get('y'),
     width: isDarwin ? 360 : 400,
     height: isDarwin ? 320 : 340,
-    icon: iconPath,
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: isDarwin ? 'hidden' : 'default',
@@ -182,8 +179,8 @@ if (!gotTheLock && !isDarwin) {
       ? app.getVersion()
       : `v${app.getVersion()} (${process.versions['electron']})`,
     version: process.versions['electron'],
+    iconPath: path.join(__dirname, 'assets/icon.png'),
     copyright: '© 2020 sprout2000 and other contributors',
-    iconPath: iconPath,
   });
 
   app.once('window-all-closed', () => app.exit());
