@@ -4,6 +4,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+const isDarwin = process.platform === 'win32';
+
 const config: Configuration = {
   mode: 'development',
   target: 'web',
@@ -55,23 +57,34 @@ const config: Configuration = {
       },
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/web/index.html',
-      filename: 'index.html',
-      scriptLoading: 'blocking',
-      inject: 'body',
-      minify: false,
-    }),
-    new CopyWebpackPlugin({
-      patterns: [{ from: './assets/icon.png', to: '.' }],
-    }),
-  ],
+  plugins: isDarwin
+    ? [
+        new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({
+          template: './src/web/index.html',
+          filename: 'index.html',
+          scriptLoading: 'blocking',
+          inject: 'body',
+          minify: false,
+        }),
+      ]
+    : [
+        new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({
+          template: './src/web/index.html',
+          filename: 'index.html',
+          scriptLoading: 'blocking',
+          inject: 'body',
+          minify: false,
+        }),
+        new CopyWebpackPlugin({
+          patterns: [{ from: './assets/icon.png', to: '.' }],
+        }),
+      ],
   stats: 'errors-only',
+  devtool: 'source-map',
   performance: { hints: false },
   optimization: { minimize: false },
-  devtool: 'source-map',
 };
 
 export default config;
