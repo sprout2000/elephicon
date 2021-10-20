@@ -40,7 +40,8 @@ build({
         '${productName}-${version}-${platform}-${arch}-installer.${ext}',
     },
     linux: {
-      target: ['AppImage', 'zip'],
+      icon: 'assets/icon_linux.icns',
+      target: ['AppImage'],
       category: 'Development',
     },
   },
