@@ -22,7 +22,7 @@ $ sudo bash nodesource_setup.sh
 $ sudo apt install nodejs
 ```
 
-### 2. Install yarn v1.22.x
+### 2. Install yarn v1.22.x:
 
 ```bash
 # Activate the Yarn repository.
@@ -40,12 +40,16 @@ $ sudo apt install yarn
 
 ```bash
 # Clone this repo.
-$ git clone git@github.com:sprout2000/elephicon.git
+$ git clone https://github.com/sprout2000/leafview.git
 
 # And then build this project
-$ cd elephicon
+$ cd leafview
 
 $ yarn install && yarn package
 ```
 
-You will find the AppImage in `release/Elephicon-1.x-linux-x64/`.
+You will find the AppImage in `release/LeafView-1.x-linux-x64/`.
+
+### 4. Integrate LeafView into your system
+
+You will need to have [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher/wiki/Install-on-Ubuntu-or-Debian) installed to integrate AppImage into your system.
