@@ -179,7 +179,7 @@ if (!gotTheLock && !isDarwin) {
       ? app.getVersion()
       : `v${app.getVersion()} (${process.versions['electron']})`,
     version: process.versions['electron'],
-    iconPath: path.join(__dirname, 'assets/icon.png'),
+    iconPath: path.join(__dirname, 'icon.png'),
     copyright: '© 2020 sprout2000 and other contributors',
   });
 
