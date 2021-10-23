@@ -40,7 +40,8 @@ build({
         '${productName}-${version}-${platform}-${arch}-installer.${ext}',
     },
     linux: {
-      icon: 'assets/icon_linux.icns',
+      artifactName: '${productName}-${version}-${platform}-x64.${ext}',
+      icon: 'assets/linux.icns',
       target: ['AppImage'],
       category: 'Development',
     },
