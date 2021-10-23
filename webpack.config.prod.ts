@@ -106,7 +106,10 @@ const renderer: Configuration = {
           scriptLoading: 'blocking',
         }),
         new CopyWebpackPlugin({
-          patterns: [{ from: './assets/icon.png', to: '.' }],
+          patterns: [
+            { from: './assets/icon.png', to: '.' },
+            { from: './assets/linux.png', to: '.' },
+          ],
         }),
       ],
 };
