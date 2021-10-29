@@ -14,7 +14,7 @@ If you only need to create ICO files, _256×256_ pixels will be enough.
 
 It's also possible to create icon files from non-quadratic source PNGs.
 
-![elephicon2020-12-15](https://user-images.githubusercontent.com/52094761/102158835-a86b0f00-3ec5-11eb-8862-b5b6dacd0c34.gif)
+![animation](https://user-images.githubusercontent.com/52094761/139361597-e047b841-53e7-4a60-804a-60ab61124c38.gif)
 
 ## :rainbow: Embedded Sizes
 
@@ -111,9 +111,10 @@ When you have translated the menu into your language, could you please send me t
 - [@kitt3911](https://github.com/kitt3911) [#135](https://github.com/sprout2000/elephicon/pull/135)
 - [@DrDeee](https://github.com/DrDeee) [#108](https://github.com/sprout2000/elephicon/pull/108)
 
-## :notes: Notes for Ubuntu 20.04 users
+## :vertical_traffic_light: Privacy Policy
 
-_see [UBUNTU.md](https://github.com/sprout2000/elephicon/blob/main/UBUNTU.md)._
+- Elephicon and the developer do NOT collect any personal information or privacy-related information about the user.
+- Elephicon and the developer do NOT collect the information of files opened by Elephicon.
 
 ## :copyright: License
 
