@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+const isWin32 = process.platform === 'win32';
 const isDarwin = process.platform === 'darwin';
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -107,8 +108,10 @@ const renderer: Configuration = {
         }),
         new CopyWebpackPlugin({
           patterns: [
-            { from: './assets/icon.png', to: '.' },
-            { from: './assets/linux.png', to: '.' },
+            {
+              from: isWin32 ? './assets/win32.png' : './assets/linux.png',
+              to: '.',
+            },
           ],
         }),
       ],
