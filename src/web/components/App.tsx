@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect, useCallback } from 'react';
+import { UAParser } from 'ua-parser-js';
 
 import { Error } from './Error';
 import { Success } from './Success';
@@ -14,6 +15,7 @@ import 'typeface-roboto';
 import './App.scss';
 
 const { myAPI } = window;
+const isDarwin = new UAParser().getOS().name === 'Mac OS';
 
 export const App = (): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -63,6 +65,8 @@ export const App = (): JSX.Element => {
   };
 
   const onContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDarwin) return;
+
     e.preventDefault();
     myAPI.contextMenu();
   };
