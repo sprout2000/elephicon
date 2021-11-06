@@ -15,7 +15,6 @@ export const createMenu = (
   win: BrowserWindow,
   store: Store<TypedStore>
 ): Menu => {
-  const isWin32 = process.platform === 'win32';
   const isDarwin = process.platform === 'darwin';
   const isDev = process.env.NODE_ENV === 'development';
 
@@ -27,7 +26,7 @@ export const createMenu = (
     },
   ];
 
-  if (isWin32) {
+  if (!isDarwin) {
     helpSub.push({
       label: i18next.t('about'),
       accelerator: 'Ctrl+I',
