@@ -110,7 +110,7 @@ const renderer: Configuration = {
           patterns: [
             {
               from: isWin32 ? './assets/win32.png' : './assets/linux.png',
-              to: '.',
+              to: './images/logo.png',
             },
           ],
         }),
