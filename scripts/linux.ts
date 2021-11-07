@@ -17,7 +17,7 @@ build({
       output: 'release',
     },
     linux: {
-      icon: 'assets/linux.icns',
+      icon: 'assets/icon.icns',
       target: ['AppImage'],
       category: 'Development',
     },
