@@ -37,7 +37,7 @@ const store = new Store<TypedStore>({
 });
 
 const isDarwin = process.platform === 'darwin';
-const isDev = process.env.NODE_ENV === 'development';
+const isDevelop = process.env.NODE_ENV === 'development';
 
 const gotTheLock = app.requestSingleInstanceLock();
 
@@ -47,7 +47,7 @@ const execPath =
     ? '../node_modules/electron/dist/electron.exe'
     : '../node_modules/.bin/electron';
 
-if (isDev) {
+if (isDevelop) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   require('electron-reload')(__dirname, {
     electron: path.resolve(__dirname, execPath),
@@ -100,7 +100,7 @@ const createWindow = () => {
       .catch((err): void => console.log(err));
   });
 
-  if (isDarwin && !isDev) {
+  if (isDarwin && !isDevelop) {
     autoUpdater.checkForUpdatesAndNotify();
 
     autoUpdater.once('error', (_e, err) => {
@@ -142,7 +142,7 @@ const createWindow = () => {
     });
   }
 
-  if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
+  if (isDevelop) mainWindow.webContents.openDevTools({ mode: 'detach' });
   mainWindow.loadFile('dist/index.html');
   mainWindow.once('ready-to-show', () => mainWindow.show());
 
@@ -160,7 +160,7 @@ if (!gotTheLock && !isDarwin) {
     const locale = app.getLocale();
     setLocales(locale);
 
-    if (isDev) {
+    if (isDevelop) {
       const extPath = await searchDevtools();
       if (extPath) {
         await session.defaultSession
