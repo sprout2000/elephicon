@@ -36,7 +36,6 @@ const store = new Store<TypedStore>({
   },
 });
 
-const isLinux = process.platform === 'linux';
 const isDarwin = process.platform === 'darwin';
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -66,7 +65,6 @@ const createWindow = () => {
     height: isDarwin ? 320 : 340,
     show: false,
     autoHideMenuBar: true,
-    icon: isLinux ? path.join(__dirname, 'linux.png') : undefined,
     titleBarStyle: isDarwin ? 'hidden' : 'default',
     resizable: false,
     maximizable: false,
