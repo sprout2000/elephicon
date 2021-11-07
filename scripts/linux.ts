@@ -17,6 +17,7 @@ build({
       output: 'release',
     },
     linux: {
+      asarUnpack: ['dist/images/logo.png'],
       icon: 'assets/icon.icns',
       target: ['AppImage'],
       category: 'Development',

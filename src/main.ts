@@ -36,10 +36,17 @@ const store = new Store<TypedStore>({
   },
 });
 
+const isLinux = process.platform === 'linux';
 const isDarwin = process.platform === 'darwin';
 const isDevelop = process.env.NODE_ENV === 'development';
 
 const gotTheLock = app.requestSingleInstanceLock();
+
+const getResourceDirectory = () => {
+  return isDevelop
+    ? path.join(process.cwd(), 'dist')
+    : path.join(process.resourcesPath, 'app.asar.unpacked', 'dist');
+};
 
 /// #if DEBUG
 const execPath =
@@ -66,6 +73,9 @@ const createWindow = () => {
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: isDarwin ? 'hidden' : 'default',
+    icon: isLinux
+      ? path.join(getResourceDirectory(), 'images/logo.png')
+      : undefined,
     resizable: false,
     maximizable: false,
     fullscreenable: false,
@@ -181,7 +191,9 @@ if (!gotTheLock && !isDarwin) {
       ? app.getVersion()
       : `v${app.getVersion()} (${process.versions['electron']})`,
     version: process.versions['electron'],
-    iconPath: path.join(__dirname, 'images/logo.png'),
+    iconPath: isLinux
+      ? path.join(getResourceDirectory(), 'images/logo.png')
+      : path.join(__dirname, 'images/logo.png'),
     copyright: '© 2020 sprout2000 and other contributors',
   });
 

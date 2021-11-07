@@ -40,6 +40,7 @@ build({
         '${productName}-${version}-${platform}-${arch}-installer.${ext}',
     },
     linux: {
+      asarUnpack: ['dist/images/logo.png'],
       artifactName: '${productName}-${version}-${platform}-x64.${ext}',
       icon: 'assets/icon.icns',
       target: ['AppImage'],
