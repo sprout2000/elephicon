@@ -16,9 +16,20 @@ export const createMenu = (
   store: Store<TypedStore>
 ): Menu => {
   const isDarwin = process.platform === 'darwin';
-  const isDev = process.env.NODE_ENV === 'development';
 
   const helpSub: MenuItemConstructorOptions[] = [
+    {
+      label: i18next.t('devtools'),
+      accelerator: isDarwin ? 'Cmd+Option+I' : 'Ctrl+Shift+I',
+      click: (): void => {
+        if (win.webContents.isDevToolsOpened()) {
+          win.webContents.closeDevTools();
+        } else {
+          win.webContents.openDevTools({ mode: 'detach' });
+        }
+      },
+    },
+    { type: 'separator' },
     {
       label: i18next.t('support'),
       click: async (): Promise<void> =>
@@ -27,28 +38,11 @@ export const createMenu = (
   ];
 
   if (!isDarwin) {
-    helpSub.push({
+    helpSub.unshift({
       label: i18next.t('about'),
       accelerator: 'Ctrl+I',
       click: () => app.showAboutPanel(),
     });
-  }
-
-  if (isDev) {
-    helpSub.push(
-      { type: 'separator' },
-      {
-        label: i18next.t('devtools'),
-        accelerator: isDarwin ? 'Cmd+Option+I' : 'Ctrl+Shift+I',
-        click: (): void => {
-          if (win.webContents.isDevToolsOpened()) {
-            win.webContents.closeDevTools();
-          } else {
-            win.webContents.openDevTools({ mode: 'detach' });
-          }
-        },
-      }
-    );
   }
 
   const template: MenuItemConstructorOptions[] = [
