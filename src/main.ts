@@ -68,7 +68,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     x: store.get('x'),
     y: store.get('y'),
-    width: isDarwin || isLinux ? 360 : 400,
+    width: isDarwin ? 360 : 400,
     height: isDarwin || isLinux ? 320 : 340,
     show: false,
     autoHideMenuBar: true,
