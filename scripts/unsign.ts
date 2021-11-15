@@ -43,7 +43,7 @@ build({
       asarUnpack: ['dist/images/logo.png'],
       artifactName: '${productName}-${version}-${platform}-x64.${ext}',
       icon: 'assets/icon.icns',
-      target: ['AppImage'],
+      target: ['AppImage', 'zip'],
       category: 'Development',
     },
   },
