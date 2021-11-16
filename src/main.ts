@@ -2,6 +2,7 @@ import { BrowserWindow, app, ipcMain, dialog, Menu, session } from 'electron';
 import log from 'electron-log';
 import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
+import { searchDevtools } from 'electron-search-devtools';
 
 import path from 'path';
 import mime from 'mime-types';
@@ -9,7 +10,6 @@ import mime from 'mime-types';
 import { createMenu } from './createMenu';
 import { setLocales } from './lib/setLocales';
 import { mkico, mkicns } from './mkicons';
-import { searchDevtools } from './searchDevtools';
 
 import { TypedStore } from './lib/TypedStore';
 
@@ -171,7 +171,7 @@ if (!gotTheLock && !isDarwin) {
     setLocales(locale);
 
     if (isDevelop) {
-      const extPath = await searchDevtools();
+      const extPath = await searchDevtools('REACT');
       if (extPath) {
         await session.defaultSession
           .loadExtension(extPath, {
