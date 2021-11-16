@@ -64,14 +64,18 @@ It's also possible to create icon files from non-quadratic source PNGs.
 
 ## :gift: Download
 
-### :computer: macOS (x64, arm64)
+### :desktop_computer: macOS (x64, arm64)
 
 You can download the latest version of _Elephicon_ from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
 
-### :computer: Windows10
+### :computer: Windows10, 11
 
-Download the latest version for Windows10 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
+Download the latest version for Windows 10 and 11 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
+
+### :penguin: Linux
+
+see [LINUX.md](https://github.com/sprout2000/elephicon/blob/main/LINUX.md#notes-for-linux-users).
 
 ## :beers: Contribution
 
