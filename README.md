@@ -2,7 +2,7 @@
 
 **Elephicon**, a GUI wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons), **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](<https://en.wikipedia.org/wiki/ICO_(file_format)>) files from PNG files.**
 
-[![GitHub CI](https://github.com/sprout2000/elephicon/actions/workflows/build.yml/badge.svg)](https://github.com/sprout2000/elephicon/actions/workflows/build.yml)
+[![GitHub CI](https://github.com/sprout2000/elephicon/actions/workflows/release.yml/badge.svg)](https://github.com/sprout2000/elephicon/actions/workflows/release.yml)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
 ![GitHub all releases](https://img.shields.io/github/downloads/sprout2000/elephicon/total)
 [![GitHub stars](https://img.shields.io/github/stars/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/stargazers)
