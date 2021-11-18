@@ -20,6 +20,12 @@ jobs:
       - name: Install
         run: yarn install --ignore-optional --frozen-lockfile
 
+      - name: Install
+        run: yarn install --ignore-optional --frozen-lockfile
+
+      - name: Build
+        run: yarn build:prod
+
       - name: Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
