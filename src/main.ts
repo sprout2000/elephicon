@@ -124,19 +124,17 @@ const createWindow = () => {
         .showMessageBox(mainWindow, {
           type: 'info',
           buttons: ['Restart', 'Not now'],
-          defaultId: 0,
-          cancelId: 1,
           title: 'Update',
-          message: 'Updates are available!',
+          message: 'Update Installed',
           detail:
-            'We have finished downloading the latest updates.\n' +
-            'Would you like to install the update and restart now?',
+            'The update has been installed.\n' +
+            'Would you like to restart now?',
         })
         .then((result) => {
           if (result.response === 0) {
             autoUpdater.quitAndInstall();
           } else {
-            log.info('The installation of the update has been cancelled...');
+            log.info('Restart cancelled...');
           }
         })
         .catch((err) => log.info(`Error in showMessageBox: ${err}`));
