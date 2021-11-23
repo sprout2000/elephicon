@@ -16,7 +16,7 @@ import {
 } from 'png2icons';
 
 import { Result } from './lib/Result';
-import { TypedStore } from './lib/TypedStore';
+import { StoreType } from './lib/StoreType';
 
 const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 
@@ -28,7 +28,7 @@ const errorMessage = (err: string, desktop: boolean) => {
 
 export const mkico = async (
   filepath: string,
-  store: Store<TypedStore>
+  store: Store<StoreType>
 ): Promise<Result> => {
   const isDesktop = store.get('desktop', true);
   const dirname = isDesktop ? app.getPath('desktop') : path.dirname(filepath);
@@ -64,7 +64,7 @@ export const mkico = async (
 
 export const mkicns = async (
   filepath: string,
-  store: Store<TypedStore>
+  store: Store<StoreType>
 ): Promise<Result> => {
   const isDesktop = store.get('desktop', true);
   const dirname = isDesktop ? app.getPath('desktop') : path.dirname(filepath);

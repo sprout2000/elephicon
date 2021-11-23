@@ -1,4 +1,4 @@
-export type TypedStore = {
+export type StoreType = {
   ico: boolean;
   desktop: boolean;
   x: number | undefined;

@@ -9,11 +9,11 @@ import {
 import Store from 'electron-store';
 import i18next from 'i18next';
 
-import { TypedStore } from './lib/TypedStore';
+import { StoreType } from './lib/StoreType';
 
 export const createMenu = (
   win: BrowserWindow,
-  store: Store<TypedStore>
+  store: Store<StoreType>
 ): Menu => {
   const isLinux = process.platform === 'linux';
   const isDarwin = process.platform === 'darwin';

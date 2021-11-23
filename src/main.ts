@@ -11,7 +11,7 @@ import { createMenu } from './createMenu';
 import { setLocales } from './lib/setLocales';
 import { mkico, mkicns } from './mkicons';
 
-import { TypedStore } from './lib/TypedStore';
+import { StoreType } from './lib/StoreType';
 
 console.log = log.log;
 autoUpdater.logger = log;
@@ -25,7 +25,8 @@ process.once('uncaughtException', (err) => {
   app.exit();
 });
 
-const store = new Store<TypedStore>({
+const store = new Store<StoreType>({
+  configFileMode: 0o666,
   defaults: {
     ico: true,
     desktop: true,
