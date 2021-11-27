@@ -1,4 +1,4 @@
-export type StoreType = {
+declare type StoreType = {
   ico: boolean;
   desktop: boolean;
   x: number | undefined;

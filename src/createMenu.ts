@@ -9,8 +9,6 @@ import {
 import Store from 'electron-store';
 import i18next from 'i18next';
 
-import { StoreType } from './lib/StoreType';
-
 export const createMenu = (
   win: BrowserWindow,
   store: Store<StoreType>

@@ -15,9 +15,6 @@ import {
   BEZIER,
 } from 'png2icons';
 
-import { Result } from './lib/Result';
-import { StoreType } from './lib/StoreType';
-
 const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 
 const errorMessage = (err: string, desktop: boolean) => {

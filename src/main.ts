@@ -11,8 +11,6 @@ import { createMenu } from './createMenu';
 import { setLocales } from './lib/setLocales';
 import { mkico, mkicns } from './mkicons';
 
-import { StoreType } from './lib/StoreType';
-
 console.log = log.log;
 autoUpdater.logger = log;
 log.info('App starting...');

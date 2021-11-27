@@ -1,5 +1,3 @@
-import { Result } from '../lib/Result';
-
 declare global {
   interface Window {
     myAPI: Sandbox;
