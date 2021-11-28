@@ -1,17 +1,16 @@
-import React, { useContext, memo } from 'react';
-
-import { AppContext } from '../../lib/AppContext';
-
+import React from 'react';
 import { IoIosUndo } from 'react-icons/io';
 
-export const BackButton = memo(() => {
-  const { onClickBack } = useContext(AppContext);
+type Props = {
+  onClickBack: () => void;
+};
 
+export const BackButton = (props: Props) => {
   return (
     <div
       className="back-container"
       data-testid="back-container-success"
-      onClick={onClickBack}
+      onClick={props.onClickBack}
     >
       <div className="os">
         <IoIosUndo />
@@ -19,6 +18,4 @@ export const BackButton = memo(() => {
       <div>Back</div>
     </div>
   );
-});
-
-BackButton.displayName = 'BackButton';
+};

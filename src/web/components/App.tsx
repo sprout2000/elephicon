@@ -1,12 +1,8 @@
-import React, { useReducer, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { Error } from './Error';
 import { Success } from './Success';
 import { Dropzone } from './Dropzone';
-
-import { reducer } from '../../lib/reducer';
-import { AppContext } from '../../lib/AppContext';
-import { initialState } from '../../lib/initialState';
 
 import 'typeface-roboto';
 import './App.scss';
@@ -14,18 +10,20 @@ import './App.scss';
 const { myAPI } = window;
 
 export const App = (): JSX.Element => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [ico, setIco] = useState(true);
+  const [drag, setDrag] = useState(false);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState('');
+  const [desktop, setDesktop] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const afterConvert = (result: Result): void => {
-    if (result.type === 'failed') {
-      dispatch({ type: 'error', value: true });
-    } else {
-      dispatch({ type: 'success', value: true });
-    }
+    result.type === 'failed' ? setError(true) : setSuccess(true);
 
-    dispatch({ type: 'loading', value: false });
-    dispatch({ type: 'message', value: result.msg });
-    dispatch({ type: 'desktop', value: result.desktop });
+    setLoading(false);
+    setMessage(result.msg);
+    setDesktop(result.desktop);
   };
 
   const convert = useCallback(
@@ -33,16 +31,16 @@ export const App = (): JSX.Element => {
       const mime = await myAPI.mimecheck(filepath);
 
       if (!mime || !mime.match(/png/)) {
-        dispatch({ type: 'loading', value: false });
+        setLoading(false);
 
         const message = mime ? mime : 'Unknown';
-        dispatch({ type: 'message', value: `Invalid format: ${message}` });
-        dispatch({ type: 'error', value: true });
+        setMessage(`Invalid format: ${message}`);
+        setError(true);
 
         return;
       }
 
-      if (state.ico) {
+      if (ico) {
         const result = await myAPI.mkIco(filepath);
         afterConvert(result);
       } else {
@@ -50,14 +48,61 @@ export const App = (): JSX.Element => {
         afterConvert(result);
       }
     },
-    [state.ico]
+    [ico]
   );
 
+  const preventDefault = (e: React.DragEvent<HTMLDivElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const onDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
+    if (loading) return;
+
+    preventDefault(e);
+    setDrag(true);
+  };
+
+  const onDragLeave = (e: React.DragEvent<HTMLDivElement>): void => {
+    preventDefault(e);
+    setDrag(false);
+  };
+
+  const onDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
+    if (loading) return;
+
+    preventDefault(e);
+    setDrag(false);
+
+    if (e.dataTransfer) {
+      setLoading(true);
+      const file = e.dataTransfer.files[0];
+
+      await convert(file.path);
+    }
+  };
+
+  const onClickOS = () => {
+    if (loading) return;
+
+    setIco(!ico);
+  };
+
+  const onClickOpen = async (): Promise<void> => {
+    if (loading) return;
+
+    const filepath = await myAPI.openDialog();
+    if (!filepath) return;
+
+    setLoading(true);
+    await convert(filepath);
+  };
+
   const onClickBack = () => {
-    dispatch({ type: 'drag', value: false });
-    dispatch({ type: 'error', value: false });
-    dispatch({ type: 'success', value: false });
-    dispatch({ type: 'message', value: '' });
+    setDrag(false);
+    setError(false);
+    setSuccess(false);
+    setMessage('');
   };
 
   const onContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -69,7 +114,7 @@ export const App = (): JSX.Element => {
     myAPI.menuOpen(async (_e, filepath) => {
       if (!filepath) return;
 
-      dispatch({ type: 'loading', value: true });
+      setLoading(true);
       await convert(filepath);
     });
 
@@ -79,7 +124,7 @@ export const App = (): JSX.Element => {
   }, [convert]);
 
   useEffect(() => {
-    myAPI.setDesktop((_e, arg) => dispatch({ type: 'desktop', value: arg }));
+    myAPI.setDesktop((_e, arg) => setDesktop(arg));
 
     return (): void => {
       myAPI.removeDesktop();
@@ -87,16 +132,32 @@ export const App = (): JSX.Element => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ state, dispatch, convert, onClickBack }}>
-      <div className="container" onContextMenu={onContextMenu}>
-        {!state.success && !state.error ? (
-          <Dropzone />
-        ) : state.success ? (
-          <Success />
-        ) : (
-          <Error />
-        )}
-      </div>
-    </AppContext.Provider>
+    <div className="container" onContextMenu={onContextMenu}>
+      {!success && !error ? (
+        <Dropzone
+          ico={ico}
+          drag={drag}
+          loading={loading}
+          onDrop={onDrop}
+          onClickOS={onClickOS}
+          onDragOver={onDragOver}
+          onDragLeave={onDragLeave}
+          onClickOpen={onClickOpen}
+        />
+      ) : success ? (
+        <Success
+          desktop={desktop}
+          message={message}
+          onClickBack={onClickBack}
+          preventDefault={preventDefault}
+        />
+      ) : (
+        <Error
+          message={message}
+          onClickBack={onClickBack}
+          preventDefault={preventDefault}
+        />
+      )}
+    </div>
   );
 };

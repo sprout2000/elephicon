@@ -1,26 +1,27 @@
-import React, { useContext } from 'react';
-
-import { AppContext } from '../../lib/AppContext';
-import { preventDefault } from '../../lib/preventDefault';
+import React from 'react';
 
 import { BackButton } from './BackButton';
 
-export const Error = (): JSX.Element => {
-  const { state } = useContext(AppContext);
+type Props = {
+  message: string;
+  onClickBack: () => void;
+  preventDefault: (e: React.DragEvent<HTMLDivElement>) => void;
+};
 
+export const Error = (props: Props): JSX.Element => {
   return (
     <div
       className="drop-zone"
       data-testid="drop-zone"
-      onDrop={preventDefault}
-      onDragEnter={preventDefault}
-      onDragOver={preventDefault}
-      onDragLeave={preventDefault}
+      onDrop={props.preventDefault}
+      onDragEnter={props.preventDefault}
+      onDragOver={props.preventDefault}
+      onDragLeave={props.preventDefault}
     >
       <div className="text">Something went wrong...</div>
-      <div className="error">{state.message}</div>
+      <div className="error">{props.message}</div>
       <div className="switch">
-        <BackButton />
+        <BackButton onClickBack={props.onClickBack} />
       </div>
     </div>
   );
