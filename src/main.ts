@@ -8,7 +8,7 @@ import path from 'path';
 import mime from 'mime-types';
 
 import { createMenu } from './createMenu';
-import { setLocales } from './lib/setLocales';
+import { setLocales } from './setLocales';
 import { mkico, mkicns } from './mkicons';
 
 console.log = log.log;
