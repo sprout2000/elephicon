@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
-import { Error } from './Error';
-import { Success } from './Success';
+import { Message } from './Message';
 import { Dropzone } from './Dropzone';
 
 import 'typeface-roboto';
@@ -10,19 +9,20 @@ import './App.scss';
 const { myAPI } = window;
 
 export const App = (): JSX.Element => {
+  const [log, setLog] = useState('');
   const [ico, setIco] = useState(true);
   const [drag, setDrag] = useState(false);
-  const [error, setError] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(false);
   const [desktop, setDesktop] = useState(true);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const afterConvert = (result: Result): void => {
-    result.type === 'failed' ? setError(true) : setSuccess(true);
+    result.type === 'failed' ? setSuccess(false) : setSuccess(true);
 
+    setMessage(true);
     setLoading(false);
-    setMessage(result.msg);
+    setLog(result.log);
     setDesktop(result.desktop);
   };
 
@@ -34,8 +34,10 @@ export const App = (): JSX.Element => {
         setLoading(false);
 
         const message = mime ? mime : 'Unknown';
-        setMessage(`Invalid format: ${message}`);
-        setError(true);
+        setLog(`Unsupported format: ${message}`);
+
+        setMessage(true);
+        setSuccess(false);
 
         return;
       }
@@ -99,10 +101,10 @@ export const App = (): JSX.Element => {
   };
 
   const onClickBack = () => {
+    setLog('');
     setDrag(false);
-    setError(false);
+    setMessage(false);
     setSuccess(false);
-    setMessage('');
   };
 
   const onContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -133,7 +135,7 @@ export const App = (): JSX.Element => {
 
   return (
     <div className="container" onContextMenu={onContextMenu}>
-      {!success && !error ? (
+      {!message ? (
         <Dropzone
           ico={ico}
           drag={drag}
@@ -144,16 +146,11 @@ export const App = (): JSX.Element => {
           onDragLeave={onDragLeave}
           onClickOpen={onClickOpen}
         />
-      ) : success ? (
-        <Success
-          desktop={desktop}
-          message={message}
-          onClickBack={onClickBack}
-          preventDefault={preventDefault}
-        />
       ) : (
-        <Error
-          message={message}
+        <Message
+          log={log}
+          success={success}
+          desktop={desktop}
           onClickBack={onClickBack}
           preventDefault={preventDefault}
         />

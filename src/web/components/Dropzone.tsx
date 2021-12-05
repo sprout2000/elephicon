@@ -1,4 +1,3 @@
-import React from 'react';
 import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
 
 type Props = {
@@ -21,7 +20,7 @@ export const Dropzone = (props: Props): JSX.Element => {
       onDragOver={props.onDragOver}
       onDragLeave={props.onDragLeave}
     >
-      <div className="icon">
+      <div className="elephant-container">
         <svg
           className={
             props.drag
@@ -30,7 +29,6 @@ export const Dropzone = (props: Props): JSX.Element => {
               ? 'elephant loading'
               : 'elephant'
           }
-          data-testid="elephant"
           onClick={props.onClickOpen}
           width="104"
           height="121"
@@ -78,7 +76,6 @@ export const Dropzone = (props: Props): JSX.Element => {
         </svg>
       </div>
       <div
-        data-testid="message"
         className={
           props.drag ? 'text ondrag' : props.loading ? 'text loading' : 'text'
         }
@@ -87,7 +84,6 @@ export const Dropzone = (props: Props): JSX.Element => {
       </div>
       <div className="switch">
         <div
-          data-testid="ICO"
           className={
             props.loading
               ? 'icon-container loading'
@@ -97,13 +93,12 @@ export const Dropzone = (props: Props): JSX.Element => {
           }
           onClick={props.onClickOS}
         >
-          <div className="os">
+          <div className="icon">
             <IoLogoWindows />
           </div>
           <div>ICO</div>
         </div>
         <div
-          data-testid="ICNS"
           className={
             props.loading
               ? 'icon-container loading'
@@ -113,7 +108,7 @@ export const Dropzone = (props: Props): JSX.Element => {
           }
           onClick={props.onClickOS}
         >
-          <div className="os">
+          <div className="icon">
             <IoLogoApple />
           </div>
           <div>ICNS</div>
