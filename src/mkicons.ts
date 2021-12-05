@@ -20,7 +20,7 @@ const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 const errorMessage = (err: string, desktop: boolean) => {
   console.log(`Something went wrong: ${err}`);
 
-  return { type: 'failed', msg: err, desktop };
+  return { type: 'failed', log: err, desktop };
 };
 
 export const mkico = async (
@@ -54,7 +54,7 @@ export const mkico = async (
       clearCache();
       console.log('Successfully Completed!');
 
-      return { type: 'success', msg: `${basename}.ico`, desktop: isDesktop };
+      return { type: 'success', log: `${basename}.ico`, desktop: isDesktop };
     })
     .catch((err) => errorMessage(err, isDesktop));
 };
@@ -88,7 +88,7 @@ export const mkicns = async (
       clearCache();
       console.log('Successfully Completed!');
 
-      return { type: 'success', msg: `${basename}.icns`, desktop: isDesktop };
+      return { type: 'success', log: `${basename}.icns`, desktop: isDesktop };
     })
     .catch((err) => errorMessage(err, isDesktop));
 };

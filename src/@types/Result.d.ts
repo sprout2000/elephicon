@@ -1,5 +1,5 @@
 declare type Result = {
+  log: string;
   type: string;
-  msg: string;
   desktop: boolean;
 };
