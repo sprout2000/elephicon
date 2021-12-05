@@ -8,10 +8,10 @@ type Props = {
   preventDefault: (e: React.DragEvent<HTMLDivElement>) => void;
 };
 
-export const Message = (props: Props): JSX.Element => {
+export const Message = (props: Props) => {
   return (
     <div
-      className="drop-zone"
+      className="drop-message-zone"
       data-testid="drop-zone"
       onDrop={props.preventDefault}
       onDragEnter={props.preventDefault}

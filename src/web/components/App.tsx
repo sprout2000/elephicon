@@ -8,7 +8,7 @@ import './App.scss';
 
 const { myAPI } = window;
 
-export const App = (): JSX.Element => {
+export const App = () => {
   const [log, setLog] = useState('');
   const [ico, setIco] = useState(true);
   const [drag, setDrag] = useState(false);
@@ -17,7 +17,7 @@ export const App = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const afterConvert = (result: Result): void => {
+  const afterConvert = (result: Result) => {
     result.type === 'failed' ? setSuccess(false) : setSuccess(true);
 
     setMessage(true);
@@ -53,24 +53,24 @@ export const App = (): JSX.Element => {
     [ico]
   );
 
-  const preventDefault = (e: React.DragEvent<HTMLDivElement>): void => {
+  const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
   };
 
-  const onDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
+  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     if (loading) return;
 
     preventDefault(e);
     setDrag(true);
   };
 
-  const onDragLeave = (e: React.DragEvent<HTMLDivElement>): void => {
+  const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
     preventDefault(e);
     setDrag(false);
   };
 
-  const onDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
+  const onDrop = async (e: React.DragEvent<HTMLDivElement>) => {
     if (loading) return;
 
     preventDefault(e);
@@ -90,7 +90,7 @@ export const App = (): JSX.Element => {
     setIco(!ico);
   };
 
-  const onClickOpen = async (): Promise<void> => {
+  const onClickOpen = async () => {
     if (loading) return;
 
     const filepath = await myAPI.openDialog();

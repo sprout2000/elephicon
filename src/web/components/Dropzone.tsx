@@ -11,10 +11,10 @@ type Props = {
   onDrop: (e: React.DragEvent<HTMLDivElement>) => Promise<void>;
 };
 
-export const Dropzone = (props: Props): JSX.Element => {
+export const Dropzone = (props: Props) => {
   return (
     <div
-      className="drop-zone"
+      className="drop-message-zone"
       onDrop={props.onDrop}
       onDragEnter={props.onDragOver}
       onDragOver={props.onDragOver}
