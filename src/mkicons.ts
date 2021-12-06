@@ -17,7 +17,7 @@ import {
 
 const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 
-const errorMessage = (err: string, desktop: boolean) => {
+const errorMessage = (err: string, desktop: boolean): Result => {
   console.log(`Something went wrong: ${err}`);
 
   return { type: 'failed', log: err, desktop };
