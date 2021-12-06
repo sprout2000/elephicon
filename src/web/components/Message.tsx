@@ -12,7 +12,6 @@ export const Message = (props: Props) => {
   return (
     <div
       className="drop-message-zone"
-      data-testid="drop-zone"
       onDrop={props.preventDefault}
       onDragEnter={props.preventDefault}
       onDragOver={props.preventDefault}
@@ -33,11 +32,7 @@ export const Message = (props: Props) => {
         </div>
       )}
       <div className="switch">
-        <div
-          className="back-container"
-          data-testid="back-container-success"
-          onClick={props.onClickBack}
-        >
+        <div className="back-container" onClick={props.onClickBack}>
           <div className="icon">
             <IoIosUndo />
           </div>
