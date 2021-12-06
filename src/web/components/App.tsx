@@ -12,8 +12,8 @@ export const App = () => {
   const [log, setLog] = useState('');
   const [ico, setIco] = useState(true);
   const [drag, setDrag] = useState(false);
-  const [message, setMessage] = useState(false);
   const [desktop, setDesktop] = useState(true);
+  const [message, setMessage] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -33,8 +33,8 @@ export const App = () => {
       if (!mime || !mime.match(/png/)) {
         setLoading(false);
 
-        const message = mime ? mime : 'Unknown';
-        setLog(`Unsupported format: ${message}`);
+        const format = mime ? mime : 'Unknown';
+        setLog(`Unsupported format: ${format}`);
 
         setMessage(true);
         setSuccess(false);
