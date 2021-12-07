@@ -16,7 +16,7 @@ If you only need to create ICO files, _256×256_ pixels will be enough.
 
 It's also possible to create icon files from non-quadratic source PNGs.
 
-<img with="480" alt="animation" src="https://user-images.githubusercontent.com/52094761/144979888-d796c672-ee0a-44cc-bfa2-abce6513d192.gif" />
+<img width="50%" alt="animation" src="https://user-images.githubusercontent.com/52094761/144979888-d796c672-ee0a-44cc-bfa2-abce6513d192.gif" />
 
 ## :rainbow: Embedded Sizes
 
