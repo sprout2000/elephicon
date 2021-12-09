@@ -1,4 +1,12 @@
-import { BrowserWindow, app, ipcMain, dialog, Menu, session } from 'electron';
+import {
+  BrowserWindow,
+  app,
+  ipcMain,
+  dialog,
+  Menu,
+  session,
+  nativeTheme,
+} from 'electron';
 import log from 'electron-log';
 import Store from 'electron-store';
 import { autoUpdater } from 'electron-updater';
@@ -85,6 +93,8 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js'),
     },
   });
+
+  nativeTheme.themeSource = nativeTheme.shouldUseDarkColors ? 'dark' : 'light';
 
   ipcMain.handle('mime-check', (_e, filepath) => mime.lookup(filepath));
   ipcMain.handle('make-ico', (_e, filepath) => mkico(filepath, store));
