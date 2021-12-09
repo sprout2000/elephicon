@@ -1,11 +1,11 @@
 import {
-  BrowserWindow,
   app,
-  ipcMain,
-  dialog,
   Menu,
+  dialog,
+  ipcMain,
   session,
   nativeTheme,
+  BrowserWindow,
 } from 'electron';
 import log from 'electron-log';
 import Store from 'electron-store';
