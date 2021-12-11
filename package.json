@@ -3,7 +3,10 @@
   "productName": "Elephicon",
   "version": "1.5.4",
   "description": "Elephicon generates Apple ICNS and Microsoft ICO files from PNG files.",
-  "author": "sprout2000",
+  "author": {
+    "name": "sprout2000",
+    "email": "sogacey512@iistoria.com"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
