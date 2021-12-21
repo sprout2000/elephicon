@@ -75,6 +75,8 @@ You can download the latest version of _Elephicon_ from the releases page here:
 
 Download the latest version for Windows 10 and 11 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
 
+<a href='https://www.microsoft.com/store/apps/9P1489W92ZDQ'><img width="160px" src='https://developer.microsoft.com/en-us/store/badges/images/English_get-it-from-MS.png' alt='Badge'/></a>
+
 ### :penguin: Linux
 
 see [LINUX.md](https://github.com/sprout2000/elephicon/blob/main/LINUX.md#notes-for-linux-users).
