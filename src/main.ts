@@ -56,12 +56,12 @@ const getResourceDirectory = () => {
 };
 
 /// #if DEBUG
-const execPath =
-  process.platform === 'win32'
-    ? '../node_modules/electron/dist/electron.exe'
-    : '../node_modules/.bin/electron';
-
 if (isDevelop) {
+  const execPath =
+    process.platform === 'win32'
+      ? '../node_modules/electron/dist/electron.exe'
+      : '../node_modules/.bin/electron';
+
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   require('electron-reload')(__dirname, {
     electron: path.resolve(__dirname, execPath),
