@@ -28,7 +28,7 @@ build({
     },
     win: {
       icon: 'assets/icon.ico',
-      target: ['appx'],
+      target: ['appx', 'nsis'],
     },
     appx: {
       artifactName: '${productName}-${version}-${platform}.${ext}',
