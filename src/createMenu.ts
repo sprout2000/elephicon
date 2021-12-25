@@ -18,13 +18,13 @@ export const createMenu = (
 
   const helpSub: MenuItemConstructorOptions[] = [
     {
-      label: i18next.t('support'),
+      label: i18next.t('Support URL...'),
       click: async (): Promise<void> =>
         shell.openExternal('https://github.com/sprout2000/elephicon/#readme'),
     },
     { type: 'separator' },
     {
-      label: i18next.t('devtools'),
+      label: i18next.t('Toggle Developer Tools'),
       accelerator: isDarwin ? 'Cmd+Option+I' : 'Ctrl+Shift+I',
       click: (): void => {
         if (win.webContents.isDevToolsOpened()) {
@@ -38,7 +38,7 @@ export const createMenu = (
 
   if (!isDarwin) {
     helpSub.unshift({
-      label: i18next.t('about'),
+      label: i18next.t('About Elephicon'),
       accelerator: 'Ctrl+I',
       click: () => app.showAboutPanel(),
     });
@@ -46,10 +46,10 @@ export const createMenu = (
 
   const template: MenuItemConstructorOptions[] = [
     {
-      label: i18next.t('file'),
+      label: i18next.t('File'),
       submenu: [
         {
-          label: i18next.t('open'),
+          label: i18next.t('Open...'),
           accelerator: 'CmdOrCtrl+O',
           click: async (): Promise<void> => {
             await dialog
@@ -72,34 +72,34 @@ export const createMenu = (
         },
         { type: 'separator' },
         {
-          label: isDarwin ? i18next.t('close') : i18next.t('quit'),
+          label: isDarwin ? i18next.t('Close') : i18next.t('Quit Elephicon'),
           accelerator: isDarwin ? 'Cmd+W' : isLinux ? 'Ctrl+Q' : 'Alt+F4',
           role: isDarwin ? 'close' : 'quit',
         },
       ],
     },
     {
-      label: i18next.t('settings'),
+      label: i18next.t('Settings'),
       submenu: [
         {
-          label: i18next.t('quality'),
+          label: i18next.t('Quality'),
           submenu: [
             {
-              label: i18next.t('low'),
+              label: i18next.t('Low'),
               type: 'radio',
               id: 'low',
               click: (): void => store.set('quality', 0),
               checked: store.get('quality') === 0,
             },
             {
-              label: i18next.t('medium'),
+              label: i18next.t('Medium'),
               type: 'radio',
               id: 'mid',
               click: (): void => store.set('quality', 1),
               checked: store.get('quality') === 1,
             },
             {
-              label: i18next.t('high'),
+              label: i18next.t('High'),
               type: 'radio',
               id: 'high',
               click: (): void => store.set('quality', 2),
@@ -111,14 +111,14 @@ export const createMenu = (
           label: 'ICO',
           submenu: [
             {
-              label: i18next.t('bmp'),
+              label: i18next.t('Use BMP format for the smaller icon sizes'),
               type: 'radio',
               id: 'bmp',
               click: (): void => store.set('bmp', true),
               checked: store.get('bmp'),
             },
             {
-              label: i18next.t('png'),
+              label: i18next.t('Use PNG for each icon in the created ICO file'),
               type: 'radio',
               id: 'png',
               click: (): void => store.set('bmp', false),
@@ -127,10 +127,10 @@ export const createMenu = (
           ],
         },
         {
-          label: i18next.t('destination'),
+          label: i18next.t('Destination'),
           submenu: [
             {
-              label: i18next.t('desktop'),
+              label: i18next.t('Desktop'),
               type: 'radio',
               id: 'desktop',
               click: (): void => {
@@ -140,7 +140,7 @@ export const createMenu = (
               checked: store.get('desktop'),
             },
             {
-              label: i18next.t('same'),
+              label: i18next.t('Same folder as the input PNGs'),
               type: 'radio',
               id: 'current',
               click: (): void => {
@@ -154,7 +154,7 @@ export const createMenu = (
       ],
     },
     {
-      label: i18next.t('help'),
+      label: i18next.t('Help'),
       submenu: helpSub,
     },
   ];
@@ -164,26 +164,26 @@ export const createMenu = (
       label: 'Elephicon',
       submenu: [
         {
-          label: i18next.t('about'),
+          label: i18next.t('About Elephicon'),
           accelerator: 'Cmd+I',
           role: 'about',
         },
         { type: 'separator' },
         {
-          label: i18next.t('hide'),
+          label: i18next.t('Hide Elephicon'),
           role: 'hide',
         },
         {
-          label: i18next.t('hideOthers'),
+          label: i18next.t('Hide Others'),
           role: 'hideOthers',
         },
         {
-          label: i18next.t('unhide'),
+          label: i18next.t('Show All'),
           role: 'unhide',
         },
         { type: 'separator' },
         {
-          label: i18next.t('quit'),
+          label: i18next.t('Quit Elephicon'),
           role: 'quit',
         },
       ],
