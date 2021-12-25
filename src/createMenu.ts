@@ -55,7 +55,7 @@ export const createMenu = (
             await dialog
               .showOpenDialog(win, {
                 properties: ['openFile'],
-                title: i18next.t('select'),
+                title: i18next.t('Select a PNG File'),
                 filters: [
                   {
                     name: 'PNG File',

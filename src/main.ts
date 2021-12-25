@@ -14,6 +14,7 @@ import { searchDevtools } from 'electron-search-devtools';
 
 import path from 'path';
 import mime from 'mime-types';
+import i18next from 'i18next';
 
 import { createMenu } from './createMenu';
 import { setLocales } from './setLocales';
@@ -104,7 +105,7 @@ const createWindow = () => {
     return dialog
       .showOpenDialog(mainWindow, {
         properties: ['openFile'],
-        title: 'Select',
+        title: i18next.t('Select a PNG File'),
         filters: [
           {
             name: 'PNG file',
