@@ -31,7 +31,6 @@ build({
       target: ['appx', 'nsis'],
     },
     appx: {
-      artifactName: '${productName}-${version}-${platform}.${ext}',
       applicationId: 'sprout2000.Elephicon',
       backgroundColor: '#1d3557',
       displayName: 'Elephicon',
