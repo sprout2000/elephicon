@@ -179,12 +179,9 @@ if (!gotTheLock && !isDarwin) {
     if (isDevelop) {
       const extPath = await searchDevtools('REACT');
       if (extPath) {
-        await session.defaultSession
-          .loadExtension(extPath, {
-            allowFileAccess: true,
-          })
-          .then(() => console.log('React Devtools loaded...'))
-          .catch((err) => console.log(err));
+        await session.defaultSession.loadExtension(extPath, {
+          allowFileAccess: true,
+        });
       }
     }
 
