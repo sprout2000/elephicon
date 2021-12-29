@@ -133,12 +133,12 @@ const createWindow = () => {
       await dialog
         .showMessageBox(mainWindow, {
           type: 'info',
-          buttons: ['Restart', 'Not now'],
+          buttons: ['Restart', 'Later'],
           title: 'Update',
-          message: 'Update Installed',
+          message: 'Update',
           detail:
-            'The update has been installed.\n' +
-            'Would you like to restart now?',
+            'A new version has been downloaded.\n' +
+            'Restart the application to apply the updates.',
         })
         .then((result) => {
           if (result.response === 0) {
