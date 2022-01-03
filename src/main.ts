@@ -56,7 +56,6 @@ const getResourceDirectory = () => {
     : path.join(process.resourcesPath, 'app.asar.unpacked', 'dist');
 };
 
-/// #if DEBUG
 if (isDevelop) {
   const execPath =
     process.platform === 'win32'
@@ -70,7 +69,6 @@ if (isDevelop) {
     hardResetMethod: 'exit',
   });
 }
-/// #endif
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
