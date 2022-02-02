@@ -80,32 +80,6 @@ see [LINUX.md](https://github.com/sprout2000/elephicon/blob/main/LINUX.md#notes-
 | safeDialogs        | `true`  |
 | sandbox            | `true`  |
 
-## :beers: Contribution
-
-I need more locale files.  
-When you have translated the menu into your language, could you please send me the locale file as a [pull request](https://github.com/sprout2000/elephicon/pulls)?
-
-1. Create `{your_LANG}.json` in `src/locales`.
-2. Then import the locale file into `src/setLocales.ts` as follows:
-
-```diff
-  import en from './locales/en.json';
-  import ja from './locales/ja.json';
-+ import de from './locales/de.json';
-
- export const setLocales = (locale: string): void => {
-   i18next.init({
-     lng: locale,
-     fallbackLng: 'en',
-     resources: {
-       en: { translation: en },
-       ja: { translation: ja },
-+      de: { translation: de },
-     },
-   });
- };
-```
-
 ## :tada: Contributors
 
 **Special Thanks to:**
