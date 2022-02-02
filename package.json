@@ -12,17 +12,6 @@
     "type": "git",
     "url": "git@github.com:sprout2000/elephicon.git"
   },
-  "bugs": {
-    "url": "https://github.com/sprout2000/elephicon/issues"
-  },
-  "keywords": [
-    "ico",
-    "icns",
-    "png2icons"
-  ],
-  "engines": {
-    "node": ">=14.17"
-  },
   "main": "dist/main.js",
   "scripts": {
     "predev": "rimraf dist",
