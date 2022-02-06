@@ -71,14 +71,14 @@ see [LINUX.md](https://github.com/sprout2000/elephicon/blob/main/LINUX.md#notes-
 
 ## :closed_lock_with_key: Security
 
-| API                | Value   |
-| :----------------- | :------ |
-| default-src (CSP)  | `self`  |
-| nodeIntegration    | `false` |
-| enableRemoteModule | `false` |
-| contextIsolation   | `true`  |
-| safeDialogs        | `true`  |
-| sandbox            | `true`  |
+| API                     | Value              |
+| :---------------------- | :----------------- |
+| Content-Security-Policy | `default-src self` |
+| nodeIntegration         | `false`            |
+| enableRemoteModule      | `false`            |
+| contextIsolation        | `true`             |
+| safeDialogs             | `true`             |
+| sandbox                 | `true`             |
 
 ## :tada: Contributors
 
