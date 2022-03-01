@@ -23,7 +23,7 @@ build({
       category: 'Development',
       icon: 'assets/icon.icns',
       asarUnpack: ['dist/images/logo.png'],
-      target: ['zip', 'AppImage', 'deb', 'rpm'],
+      target: ['zip', 'AppImage'],
       mimeTypes: ['image/png'],
     },
     win: {
