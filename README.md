@@ -3,10 +3,10 @@
 **Elephicon**, a GUI wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons), **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](<https://en.wikipedia.org/wiki/ICO_(file_format)>) files from PNG files.**
 
 [![GitHub CI](https://github.com/sprout2000/elephicon/actions/workflows/release.yml/badge.svg)](https://github.com/sprout2000/elephicon/actions/workflows/release.yml)
-[![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
+![GitHub Release Date](https://img.shields.io/github/release-date/sprout2000/elephicon)
 ![GitHub all releases](https://img.shields.io/github/downloads/sprout2000/elephicon/total)
 [![GitHub stars](https://img.shields.io/github/stars/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/stargazers)
-[![Twitter](https://img.shields.io/twitter/url?style=flat-square&url=https%3A%2F%2Fgithub.com%2Fsprout2000%2Felephicon)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fsprout2000%2Felephicon)
+[![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
 
 ## :green_book: Usage
 
