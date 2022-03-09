@@ -59,7 +59,6 @@ build({
         '${productName}-${version}-${platform}-${arch}-installer.${ext}',
     },
     mac: {
-      identity: process.env.UNSIGN && null,
       appId: process.env.APP_BUNDLE_ID,
       category: 'public.app-category.developer-tools',
       target: {
@@ -79,6 +78,6 @@ build({
       icon: 'assets/dmg.icns',
       sign: false,
     },
-    afterSign: process.env.UNSIGN ? undefined : 'scripts/notarize.ts',
+    afterSign: 'scripts/notarize.ts',
   },
 }).catch((err) => console.log(err));

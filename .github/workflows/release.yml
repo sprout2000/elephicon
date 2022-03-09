@@ -7,7 +7,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+
     steps:
       - name: Check out Git repositry
         uses: actions/checkout@master
@@ -26,4 +27,10 @@ jobs:
       - name: Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          APP_BUNDLE_ID: ${{ secrets.APP_BUNDLE_ID }}
+          ASC_PROVIDER: ${{ secrets.ASC_PROVIDER }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          CSC_LINK: ${{ secrets.CSC_LINK }}
         run: npm run release
