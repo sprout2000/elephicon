@@ -22,7 +22,7 @@
     "serve": "electron .",
     "clean": "rimraf dist release",
     "start": "run-s clean build serve",
-    "build": "cross-env NODE_ENV=\"production\" webpack --progress",
+    "build": "cross-env NODE_ENV=\"production\" webpack",
     "build:package": "ts-node scripts/build.ts",
     "lint": "run-s lint:*",
     "lint:eslint": "eslint --fix .",
