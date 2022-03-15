@@ -20,12 +20,8 @@
     "build": "cross-env NODE_ENV=\"production\" webpack",
     "build:dev": "cross-env NODE_ENV=\"development\" webpack --progress",
     "build:package": "ts-node scripts/build.ts",
-    "lint": "run-s lint:*",
-    "lint:eslint": "eslint --fix .",
-    "lint:prettier": "prettier --write .",
     "release": "ts-node scripts/build.ts",
-    "package": "run-s clean build build:package",
-    "prepare": "git config --local core.hooksPath .githooks"
+    "package": "run-s clean build build:package"
   },
   "dependencies": {
     "electron-log": "^4.4.6",
