@@ -17,10 +17,10 @@
     "serve": "electron .",
     "clean": "rimraf dist release",
     "start": "run-s clean build:dev serve",
-    "build": "cross-env NODE_ENV=\"production\" webpack",
+    "build": "cross-env NODE_ENV=\"production\" webpack --progress",
     "build:dev": "cross-env NODE_ENV=\"development\" webpack --progress",
-    "build:package": "cross-env NODE_ENV=\"development\" ts-node scripts/build.ts",
-    "release": "ts-node scripts/build.ts",
+    "build:package": "cross-env NODE_ENV=\"development\" CSC_IDENTITY_AUTO_DISCOVERY=\"false\" ts-node scripts/build.ts",
+    "release": "cross-env NODE_ENV=\"production\" ts-node scripts/build.ts",
     "package": "run-s clean build build:package"
   },
   "dependencies": {
