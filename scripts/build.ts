@@ -78,8 +78,9 @@ build({
       icon: 'assets/dmg.icns',
       sign: false,
     },
-    afterSign: process.env.CSC_IDENTITY_AUTO_DISCOVERY
-      ? 'scripts/notarize.ts'
-      : undefined,
+    afterSign:
+      process.env.NODE_ENV === 'development'
+        ? undefined
+        : 'scripts/notarize.ts',
   },
 }).catch((err) => console.log(err));
