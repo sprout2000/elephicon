@@ -79,7 +79,7 @@ build({
       sign: false,
     },
     afterSign:
-      process.env.NODE_ENV === 'development'
+      process.env.CSC_IDENTITY_AUTO_DISCOVERY === 'false'
         ? undefined
         : 'scripts/notarize.ts',
   },
