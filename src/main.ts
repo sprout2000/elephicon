@@ -45,7 +45,6 @@ const store = new Store<StoreType>({
   },
 });
 
-const isLinux = process.platform === 'linux';
 const isDarwin = process.platform === 'darwin';
 const isDevelop = process.env.NODE_ENV === 'development';
 
@@ -62,13 +61,11 @@ const createWindow = () => {
     x: store.get('x'),
     y: store.get('y'),
     width: isDarwin ? 360 : 400,
-    height: isDarwin || isLinux ? 320 : 340,
+    height: isDarwin ? 320 : 340,
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: isDarwin ? 'hidden' : 'default',
-    icon: isLinux
-      ? path.join(getResourceDirectory(), 'images/logo.png')
-      : undefined,
+    icon: path.join(getResourceDirectory(), 'images/logo.png'),
     resizable: false,
     maximizable: false,
     fullscreenable: false,
@@ -105,7 +102,7 @@ const createWindow = () => {
       .catch((err): void => console.log(err));
   });
 
-  if ((isDarwin || isLinux) && !isDevelop) {
+  if (isDarwin && !isDevelop) {
     autoUpdater.checkForUpdatesAndNotify();
 
     autoUpdater.once('error', (_e, err) => {
@@ -179,9 +176,7 @@ if (!gotTheLock && !isDarwin) {
       ? app.getVersion()
       : `v${app.getVersion()} (${process.versions['electron']})`,
     version: process.versions['electron'],
-    iconPath: isLinux
-      ? path.join(getResourceDirectory(), 'images/logo.png')
-      : path.join(__dirname, 'images/logo.png'),
+    iconPath: path.join(getResourceDirectory(), 'images/icon.png'),
     copyright: '© 2020 sprout2000 and other contributors',
   });
 
