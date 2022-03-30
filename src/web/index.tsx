@@ -1,13 +1,11 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { render } from 'react-dom';
 
 import { App } from './App';
 
-const mount = document.getElementById('root');
-const root = mount && createRoot(mount);
-
-root?.render(
+render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
