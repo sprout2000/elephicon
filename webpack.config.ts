@@ -8,10 +8,6 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const common: Configuration = {
   mode: isDev ? 'development' : 'production',
-  node: {
-    __dirname: false,
-    __filename: false,
-  },
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
   },
@@ -31,22 +27,7 @@ const common: Configuration = {
       },
       {
         test: /\.s?css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: isDev,
-              importLoaders: 1,
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: isDev,
-            },
-          },
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(bmp|ico|gif|jpe?g|png|svg|ttf|eot|woff?2?)$/,
@@ -54,10 +35,9 @@ const common: Configuration = {
       },
     ],
   },
-  stats: 'errors-only',
+  stats: 'minimal',
   performance: { hints: false },
-  optimization: { minimize: !isDev },
-  devtool: isDev ? 'inline-source-map' : undefined,
+  devtool: isDev ? 'source-map' : undefined,
 };
 
 const main: Configuration = {
@@ -85,19 +65,14 @@ const renderer: Configuration = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      minify: !isDev,
       inject: 'body',
-      filename: 'index.html',
       template: './src/web/index.html',
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from:
-            process.platform === 'linux'
-              ? './assets/linux.png'
-              : './assets/icon.png',
-          to: './images/logo.png',
+          from: './assets/icon.png',
+          to: './images/icon.png',
         },
       ],
     }),
