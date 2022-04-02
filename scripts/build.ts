@@ -13,13 +13,6 @@ build({
       buildResources: 'assets',
       output: 'release',
     },
-    linux: {
-      category: 'Development',
-      icon: 'assets/icon.icns',
-      asarUnpack: ['dist/images/logo.png'],
-      target: ['zip', 'AppImage'],
-      mimeTypes: ['image/png'],
-    },
     win: {
       icon: 'assets/icon.ico',
       target: ['appx', 'nsis'],
