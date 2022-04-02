@@ -65,7 +65,7 @@ const createWindow = () => {
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: isDarwin ? 'hidden' : 'default',
-    icon: path.join(getResourceDirectory(), 'images/logo.png'),
+    icon: path.join(getResourceDirectory(), 'images/icon.png'),
     resizable: false,
     maximizable: false,
     fullscreenable: false,
