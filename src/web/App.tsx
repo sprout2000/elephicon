@@ -129,7 +129,7 @@ export const App = () => {
     myAPI.setDesktop((_e, arg) => setDesktop(arg));
 
     return (): void => {
-      myAPI.removeDesktop();
+      myAPI.removeSetDesktop();
     };
   }, []);
 

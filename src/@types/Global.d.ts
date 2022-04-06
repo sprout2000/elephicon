@@ -23,5 +23,5 @@ export interface IElectronAPI {
   setDesktop: (
     listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
   ) => Electron.IpcRenderer;
-  removeDesktop: () => Electron.IpcRenderer;
+  removeSetDesktop: () => Electron.IpcRenderer;
 }
