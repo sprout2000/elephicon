@@ -16,6 +16,7 @@ build({
     win: {
       icon: 'assets/icon.ico',
       target: ['appx', 'nsis'],
+      asarUnpack: 'dist/images/icon.png',
     },
     appx: {
       applicationId: 'sprout2000.Elephicon',
