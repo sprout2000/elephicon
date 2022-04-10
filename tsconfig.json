@@ -2,18 +2,16 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ES2020",
-    "moduleResolution": "Node",
     "esModuleInterop": true,
+    "moduleResolution": "Node",
     "lib": ["DOM", "ES2020"],
-    "jsx": "react-jsx",
-    "strict": true,
-    "sourceMap": true,
     "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true
+    "jsx": "react-jsx",
+    "strict": true
   },
   "ts-node": {
     "compilerOptions": {
-      "target": "ES2015",
+      "target": "ES2020",
       "module": "CommonJS"
     }
   }
