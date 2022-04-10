@@ -23,7 +23,10 @@ const common: Configuration = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'ts-loader',
+        use: [
+          { loader: 'ts-loader' },
+          { loader: 'ifdef-loader', options: { DEBUG: isDev } },
+        ],
       },
       {
         test: /\.s?css$/,
@@ -35,6 +38,7 @@ const common: Configuration = {
       },
     ],
   },
+  watch: isDev,
   stats: 'minimal',
   performance: { hints: false },
   devtool: isDev ? 'source-map' : undefined,
@@ -79,4 +83,5 @@ const renderer: Configuration = {
   ],
 };
 
-export default [main, preload, renderer];
+const config = isDev ? renderer : [main, preload, renderer];
+export default config;

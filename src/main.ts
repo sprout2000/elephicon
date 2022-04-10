@@ -48,6 +48,20 @@ const store = new Store<StoreType>({
 const isDarwin = process.platform === 'darwin';
 const isDevelop = process.env.NODE_ENV === 'development';
 
+/// #if DEBUG
+if (isDevelop) {
+  const execPath =
+    process.platform === 'win32'
+      ? '../node_modules/electron/dist/electron.exe'
+      : '../node_modules/.bin/electron';
+
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require('electron-reload')(__dirname, {
+    electron: path.resolve(__dirname, execPath),
+  });
+}
+/// #endif
+
 const gotTheLock = app.requestSingleInstanceLock();
 
 const getResourceDirectory = () => {
