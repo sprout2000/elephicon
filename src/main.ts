@@ -168,18 +168,19 @@ const createWindow = () => {
 if (!gotTheLock && !isDarwin) {
   app.exit();
 } else {
-  app.whenReady().then(async () => {
+  app.whenReady().then(() => {
     const locale = app.getLocale();
     setLocales(locale);
 
-    if (isDevelop) {
-      const extPath = await searchDevtools('REACT');
-      if (extPath) {
-        await session.defaultSession.loadExtension(extPath, {
-          allowFileAccess: true,
-        });
-      }
-    }
+    searchDevtools('REACT')
+      .then((devtools) => {
+        if (devtools) {
+          session.defaultSession.loadExtension(devtools, {
+            allowFileAccess: true,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
 
     createWindow();
   });
