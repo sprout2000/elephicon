@@ -76,6 +76,67 @@ Download the latest version for Windows 10 and 11 at [Microsoft Store](https://w
 | safeDialogs             | `true`             |
 | sandbox                 | `true`             |
 
+## :hammer_and_wrench: Development
+
+You can build this repository as follows:
+
+```sh
+# clone this repo.
+git clone https://github.com/sprout2000/elephicon.git
+
+# install dependencies
+cd elephicon
+npm install
+
+# on development
+npm run dev
+
+# on production
+npm run build && npm run package
+```
+
+## :adhesive_bandage: Contributing
+
+You can easily contribute to this repository by providing translation files.
+
+1. Create `{your_LANG}.json` in `src/locales`.
+
+```diff
+  src
+  ├── @types
+  ├── createMenu.ts
+  ├── locales
++ │   ├── de.json
+  │   ├── en.json
+  │   └── ja.json
+  ├── main.ts
+  ├── preload.ts
+  ├── setLocales.ts
+  └── web
+```
+
+2. Import the locale into `src/setLocales.ts` as follows:
+
+```diff
+  import en from './locales/en.json';
+  import ja from './locales/ja.json';
++ import de from './locales/de.json';
+
+  export const setLocales = (locale: string): void => {
+    i18next.init({
+      lng: locale,
+      fallbackLng: 'en',
+      resources: {
+        en: { translation: en },
+        ja: { translation: ja },
++       de: { translation: de },
+      },
+    });
+  };
+```
+
+3. Send the [pull request](https://github.com/sprout2000/elephicon/pulls) to this repo.
+
 ## :tada: Contributors
 
 **Special Thanks to:**
