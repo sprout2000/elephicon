@@ -49,19 +49,19 @@ Download the latest version for Windows 10 and 11 at [Microsoft Store](https://w
 | 512x512    |     |  ✅  |
 | 512x512@2x |     |  ✅  |
 
-## :books: Supported Languages (App Menu)
+## :globe_with_meridians: Supported Languages (App Menu)
 
-| Language                           |  Code   |
-| :--------------------------------- | :-----: |
-| English :us: :uk: :earth_americas: |  `en`   |
-| 日本語 :jp:                        |  `ja`   |
-| Deutsch :de:                       |  `de`   |
-| Русский :ru:                       |  `ru`   |
-| Português :portugal: :brazil:      |  `pt`   |
-| Italiano :it:                      |  `it`   |
-| 简体中文 :cn:                      | `zh_CN` |
-| Türkçe :tr:                        |  `tr`   |
-| Malayalam :india:                  |  `ml`   |
+| Language  |  Code   |
+| :-------- | :-----: |
+| Deutsch   |  `de`   |
+| English   |  `en`   |
+| Italiano  |  `it`   |
+| 日本語    |  `ja`   |
+| Malayalam |  `ml`   |
+| Português |  `pt`   |
+| Русский   |  `ru`   |
+| Türkçe    |  `tr`   |
+| 简体中文  | `zh_CN` |
 
 ## :closed_lock_with_key: Security
 
