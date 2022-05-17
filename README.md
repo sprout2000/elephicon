@@ -63,36 +63,6 @@ Download the latest version for Windows 10 and 11 at [Microsoft Store](https://w
 | Türkçe    |  `tr`   |
 | 简体中文  | `zh_CN` |
 
-## :closed_lock_with_key: Security
-
-| API                     | Value              |
-| :---------------------- | :----------------- |
-| Content-Security-Policy | `default-src self` |
-| nodeIntegration         | `false`            |
-| enableRemoteModule      | `false`            |
-| contextIsolation        | `true`             |
-| safeDialogs             | `true`             |
-| sandbox                 | `true`             |
-
-## :hammer_and_wrench: Development
-
-You can build this repository as follows:
-
-```sh
-# clone this repo.
-git clone https://github.com/sprout2000/elephicon.git
-
-# install dependencies
-cd elephicon
-npm install
-
-# on development
-npm run dev
-
-# on production
-npm run build && npm run package
-```
-
 ## :adhesive_bandage: Contributing
 
 You can easily contribute to this repository by providing translation files.
