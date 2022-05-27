@@ -45,9 +45,6 @@ const store = new Store<StoreType>({
   },
 });
 
-const isDarwin = process.platform === 'darwin';
-const isDevelop = process.env.NODE_ENV === 'development';
-
 /// #if DEBUG
 if (isDevelop) {
   const execPath =
@@ -62,6 +59,8 @@ if (isDevelop) {
 }
 /// #endif
 
+const isDarwin = process.platform === 'darwin';
+const isDevelop = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
 
 const getResourceDirectory = () => {
@@ -87,6 +86,7 @@ const createWindow = () => {
     webPreferences: {
       sandbox: true,
       safeDialogs: true,
+      devTools: isDevelop,
       preload: path.join(__dirname, 'preload.js'),
     },
   });

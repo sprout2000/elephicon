@@ -13,8 +13,8 @@ export const createMenu = (
   win: BrowserWindow,
   store: Store<StoreType>
 ): Menu => {
-  const isLinux = process.platform === 'linux';
   const isDarwin = process.platform === 'darwin';
+  const isDevelop = process.env.NODE_ENV === 'development';
 
   const helpSub: MenuItemConstructorOptions[] = [
     {
@@ -22,19 +22,24 @@ export const createMenu = (
       click: async (): Promise<void> =>
         shell.openExternal('https://github.com/sprout2000/elephicon/#readme'),
     },
-    { type: 'separator' },
-    {
-      label: i18next.t('Toggle Developer Tools'),
-      accelerator: isDarwin ? 'Cmd+Option+I' : 'Ctrl+Shift+I',
-      click: (): void => {
-        if (win.webContents.isDevToolsOpened()) {
-          win.webContents.closeDevTools();
-        } else {
-          win.webContents.openDevTools({ mode: 'detach' });
-        }
-      },
-    },
   ];
+
+  if (isDevelop) {
+    helpSub.push(
+      { type: 'separator' },
+      {
+        label: i18next.t('Toggle Developer Tools'),
+        accelerator: isDarwin ? 'Cmd+Option+I' : 'Ctrl+Shift+I',
+        click: (): void => {
+          if (win.webContents.isDevToolsOpened()) {
+            win.webContents.closeDevTools();
+          } else {
+            win.webContents.openDevTools({ mode: 'detach' });
+          }
+        },
+      }
+    );
+  }
 
   if (!isDarwin) {
     helpSub.unshift({
@@ -73,7 +78,7 @@ export const createMenu = (
         { type: 'separator' },
         {
           label: isDarwin ? i18next.t('Close') : i18next.t('Quit Elephicon'),
-          accelerator: isDarwin ? 'Cmd+W' : isLinux ? 'Ctrl+Q' : 'Alt+F4',
+          accelerator: isDarwin ? 'Cmd+W' : 'Alt+F4',
           role: isDarwin ? 'close' : 'quit',
         },
       ],
