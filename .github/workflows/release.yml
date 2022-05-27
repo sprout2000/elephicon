@@ -19,7 +19,7 @@ jobs:
           node-version: 16.x
 
       - name: Install
-        run: yarn install --ignore-optional
+        run: yarn install
 
       - name: Build
         run: yarn build
