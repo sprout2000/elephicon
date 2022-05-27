@@ -46,17 +46,15 @@ const store = new Store<StoreType>({
 });
 
 /// #if DEBUG
-if (isDevelop) {
-  const execPath =
-    process.platform === 'win32'
-      ? '../node_modules/electron/dist/electron.exe'
-      : '../node_modules/.bin/electron';
+const execPath =
+  process.platform === 'win32'
+    ? '../node_modules/electron/dist/electron.exe'
+    : '../node_modules/.bin/electron';
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  require('electron-reload')(__dirname, {
-    electron: path.resolve(__dirname, execPath),
-  });
-}
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('electron-reload')(__dirname, {
+  electron: path.resolve(__dirname, execPath),
+});
 /// #endif
 
 const isDarwin = process.platform === 'darwin';
@@ -116,7 +114,7 @@ const createWindow = () => {
       .catch((err): void => console.log(err));
   });
 
-  if (isDarwin && !isDevelop) {
+  if (isDarwin) {
     autoUpdater.checkForUpdatesAndNotify();
 
     autoUpdater.once('error', (_e, err) => {
