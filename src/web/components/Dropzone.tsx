@@ -1,35 +1,126 @@
+import { memo, useContext, useCallback, useEffect } from 'react';
 import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
 
-type Props = {
-  ico: boolean;
-  drag: boolean;
-  loading: boolean;
-  onClickOS: () => void;
-  onClickOpen: () => Promise<void>;
-  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDrop: (e: React.DragEvent<HTMLDivElement>) => Promise<void>;
-};
+import { AppContext } from './lib/AppContext';
+import { preventDefault } from './lib/preventDefault';
 
-export const Dropzone = (props: Props) => {
+const { myAPI } = window;
+
+export const Dropzone = memo(() => {
+  const { state, dispatch } = useContext(AppContext);
+
+  const afterConvert = useCallback(
+    (result: Result) => {
+      result.type === 'failed'
+        ? dispatch({ type: 'success', success: false })
+        : dispatch({ type: 'success', success: true });
+
+      dispatch({ type: 'message', message: true });
+      dispatch({ type: 'loading', loading: false });
+      dispatch({ type: 'log', log: result.log });
+      dispatch({ type: 'desktop', desktop: result.desktop });
+    },
+    [dispatch]
+  );
+
+  const convert = useCallback(
+    async (filepath: string): Promise<void> => {
+      const mime = await myAPI.mimecheck(filepath);
+
+      if (!mime || !mime.match(/png/)) {
+        dispatch({ type: 'loading', loading: false });
+
+        const format = mime ? mime : 'Unknown';
+        dispatch({ type: 'log', log: `Unsupported format: ${format}` });
+        dispatch({ type: 'message', message: true });
+        dispatch({ type: 'success', success: false });
+
+        return;
+      }
+
+      if (state.ico) {
+        const result = await myAPI.mkIco(filepath);
+        afterConvert(result);
+      } else {
+        const result = await myAPI.mkIcns(filepath);
+        afterConvert(result);
+      }
+    },
+    [afterConvert, dispatch, state.ico]
+  );
+
+  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    if (state.loading) return;
+
+    preventDefault(e);
+    dispatch({ type: 'drag', drag: true });
+  };
+
+  const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    preventDefault(e);
+    dispatch({ type: 'drag', drag: false });
+  };
+
+  const onDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    if (state.loading) return;
+
+    preventDefault(e);
+    dispatch({ type: 'drag', drag: false });
+
+    if (e.dataTransfer) {
+      dispatch({ type: 'loading', loading: true });
+      const file = e.dataTransfer.files[0];
+
+      await convert(file.path);
+    }
+  };
+
+  const onClickOS = () => {
+    if (state.loading) return;
+    dispatch({ type: 'ico', ico: !state.ico });
+  };
+
+  const onClickOpen = async () => {
+    if (state.loading) return;
+
+    const filepath = await myAPI.openDialog();
+    if (!filepath) return;
+
+    dispatch({ type: 'loading', loading: true });
+    await convert(filepath);
+  };
+
+  useEffect(() => {
+    myAPI.menuOpen(async (_e, filepath) => {
+      if (!filepath) return;
+
+      dispatch({ type: 'loading', loading: true });
+      await convert(filepath);
+    });
+
+    return (): void => {
+      myAPI.removeMenuOpen();
+    };
+  }, [convert, dispatch]);
+
   return (
     <div
       className="drop-message-zone"
-      onDrop={props.onDrop}
-      onDragEnter={props.onDragOver}
-      onDragOver={props.onDragOver}
-      onDragLeave={props.onDragLeave}
+      onDrop={onDrop}
+      onDragEnter={onDragOver}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
     >
       <div className="elephant-container">
         <svg
           className={
-            props.drag
+            state.drag
               ? 'elephant ondrag'
-              : props.loading
+              : state.loading
               ? 'elephant loading'
               : 'elephant'
           }
-          onClick={props.onClickOpen}
+          onClick={onClickOpen}
           width="104"
           height="121"
           viewBox="0 0 104 121"
@@ -77,7 +168,7 @@ export const Dropzone = (props: Props) => {
       </div>
       <div
         className={
-          props.drag ? 'text ondrag' : props.loading ? 'text loading' : 'text'
+          state.drag ? 'text ondrag' : state.loading ? 'text loading' : 'text'
         }
       >
         Drop your PNGs here...
@@ -85,13 +176,13 @@ export const Dropzone = (props: Props) => {
       <div className="switch">
         <div
           className={
-            props.loading
+            state.loading
               ? 'icon-container loading'
-              : props.ico
+              : state.ico
               ? 'icon-container'
               : 'icon-container unchecked'
           }
-          onClick={props.onClickOS}
+          onClick={onClickOS}
         >
           <div className="icon">
             <IoLogoWindows />
@@ -100,13 +191,13 @@ export const Dropzone = (props: Props) => {
         </div>
         <div
           className={
-            props.loading
+            state.loading
               ? 'icon-container loading'
-              : props.ico
+              : state.ico
               ? 'icon-container unchecked'
               : 'icon-container'
           }
-          onClick={props.onClickOS}
+          onClick={onClickOS}
         >
           <div className="icon">
             <IoLogoApple />
@@ -116,4 +207,6 @@ export const Dropzone = (props: Props) => {
       </div>
     </div>
   );
-};
+});
+
+Dropzone.displayName = 'Dropzone';
