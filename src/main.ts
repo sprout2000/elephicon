@@ -167,6 +167,10 @@ const createWindow = () => {
   mainWindow.loadFile('dist/index.html');
   mainWindow.once('ready-to-show', () => mainWindow.show());
 
+  mainWindow.webContents.once('did-finish-load', () => {
+    mainWindow.webContents.send('set-desktop', store.get('desktop'));
+  });
+
   mainWindow.once('close', () => {
     const pos = mainWindow.getPosition();
     store.set('x', pos[0]);
