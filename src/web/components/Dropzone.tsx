@@ -199,7 +199,7 @@ export const Dropzone = memo(() => {
           }
           onClick={onClickOS}
         >
-          <div className="icon">
+          <div className="icon apple">
             <IoLogoApple />
           </div>
           <div>ICNS</div>
