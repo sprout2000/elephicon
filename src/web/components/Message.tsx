@@ -12,10 +12,13 @@ export const Message = memo(() => {
   };
 
   const onClickBack = () => {
-    dispatch({ type: 'log', log: '' });
-    dispatch({ type: 'drag', drag: false });
-    dispatch({ type: 'message', message: false });
-    dispatch({ type: 'success', success: false });
+    dispatch({
+      type: 'onClickBack',
+      log: '',
+      drag: false,
+      message: false,
+      success: false,
+    });
   };
 
   return (

@@ -15,14 +15,14 @@ export const Dropzone = memo(() => {
 
   const afterConvert = useCallback(
     (result: Result) => {
-      result.type === 'failed'
-        ? dispatch({ type: 'success', success: false })
-        : dispatch({ type: 'success', success: true });
-
-      dispatch({ type: 'message', message: true });
-      dispatch({ type: 'loading', loading: false });
-      dispatch({ type: 'log', log: result.log });
-      dispatch({ type: 'desktop', desktop: result.desktop });
+      dispatch({
+        type: 'afterConvert',
+        message: true,
+        loading: false,
+        log: result.log,
+        desktop: result.desktop,
+        success: result.type === 'failed' ? false : true,
+      });
     },
     [dispatch]
   );
@@ -32,12 +32,15 @@ export const Dropzone = memo(() => {
       const mime = await myAPI.mimecheck(filepath);
 
       if (!mime || !mime.match(/png/)) {
-        dispatch({ type: 'loading', loading: false });
-
         const format = mime ? mime : 'Unknown';
-        dispatch({ type: 'log', log: `Unsupported format: ${format}` });
-        dispatch({ type: 'message', message: true });
-        dispatch({ type: 'success', success: false });
+
+        dispatch({
+          type: 'convert',
+          log: `Unsupported format: ${format}`,
+          message: true,
+          success: false,
+          loading: false,
+        });
 
         return;
       }

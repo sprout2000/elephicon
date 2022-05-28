@@ -16,7 +16,7 @@ export interface IElectronAPI {
   openDialog: () => Promise<string | void>;
 
   menuOpen: (
-    listener: (_e: Electron.IpcRendererEvent, filepath: string) => Promise<void>
+    listener: (_e: Electron.IpcRendererEvent, filepath: string) => void
   ) => Electron.IpcRenderer;
   removeMenuOpen: () => Electron.IpcRenderer;
 
