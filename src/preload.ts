@@ -16,7 +16,7 @@ contextBridge.exposeInMainWorld('myAPI', {
     ipcRenderer.invoke('open-file-dialog'),
 
   menuOpen: (
-    listener: (_e: Electron.IpcRendererEvent, filepath: string) => Promise<void>
+    listener: (_e: Electron.IpcRendererEvent, filepath: string) => void
   ) => ipcRenderer.on('menu-open', listener),
   removeMenuOpen: () => ipcRenderer.removeAllListeners('menu-open'),
 
