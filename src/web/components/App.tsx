@@ -1,9 +1,8 @@
 import { useReducer } from 'react';
-
-import { Container } from './Container';
-
 import { reducer } from '../lib/reducer';
 import { AppContext } from '../lib/AppContext';
+
+import { Container } from './Container';
 
 import 'typeface-roboto';
 import './App.scss';
