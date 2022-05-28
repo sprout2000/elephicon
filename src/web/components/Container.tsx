@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { AppContext } from './lib/AppContext';
+import { AppContext } from '../lib/AppContext';
 
 import { Message } from './Message';
 import { Dropzone } from './Dropzone';

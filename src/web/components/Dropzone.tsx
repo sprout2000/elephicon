@@ -1,13 +1,17 @@
 import { memo, useContext, useCallback, useEffect } from 'react';
-import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
+import { AppContext } from '../lib/AppContext';
 
-import { AppContext } from './lib/AppContext';
-import { preventDefault } from './lib/preventDefault';
+import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
 
 const { myAPI } = window;
 
 export const Dropzone = memo(() => {
   const { state, dispatch } = useContext(AppContext);
+
+  const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   const afterConvert = useCallback(
     (result: Result) => {

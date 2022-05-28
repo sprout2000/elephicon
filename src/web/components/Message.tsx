@@ -1,11 +1,15 @@
 import { memo, useContext } from 'react';
-import { IoIosUndo } from 'react-icons/io';
+import { AppContext } from '../lib/AppContext';
 
-import { AppContext } from './lib/AppContext';
-import { preventDefault } from './lib/preventDefault';
+import { IoIosUndo } from 'react-icons/io';
 
 export const Message = memo(() => {
   const { state, dispatch } = useContext(AppContext);
+
+  const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   const onClickBack = () => {
     dispatch({ type: 'log', log: '' });
