@@ -63,24 +63,22 @@
       margin: 0;
       padding: 0;
 
-      .elephant {
-        fill: #ffffff;
-        -webkit-app-region: no-drag;
+      fill: #ffffff;
+      -webkit-app-region: no-drag;
 
-        &:hover {
-          opacity: 0.9;
-          cursor: pointer;
-        }
-        &:active {
-          opacity: 0.6;
-        }
-        &.loading {
-          transform-origin: 80% 90%;
-          animation: Rotate 1.5s infinite;
-        }
-        &.ondrag {
-          opacity: 0.6;
-        }
+      &:hover {
+        opacity: 0.9;
+        cursor: pointer;
+      }
+      &:active {
+        opacity: 0.6;
+      }
+      &.loading {
+        transform-origin: 80% 90%;
+        animation: Rotate 1.5s infinite;
+      }
+      &.ondrag {
+        opacity: 0.6;
       }
     }
 
@@ -91,9 +89,6 @@
       color: #ffffff;
 
       &.loading {
-        opacity: 0.4;
-      }
-      &.ondrag {
         opacity: 0.4;
       }
     }
