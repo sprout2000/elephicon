@@ -28,7 +28,7 @@ export const Dropzone = memo(() => {
   );
 
   const convert = useCallback(
-    async (filepath: string): Promise<void> => {
+    async (filepath: string) => {
       const mime = await myAPI.mimecheck(filepath);
 
       if (!mime || !mime.match(/png/)) {
@@ -43,11 +43,9 @@ export const Dropzone = memo(() => {
       }
 
       if (state.ico) {
-        const result = await myAPI.mkIco(filepath);
-        afterConvert(result);
+        myAPI.mkIco(filepath).then((result) => afterConvert(result));
       } else {
-        const result = await myAPI.mkIcns(filepath);
-        afterConvert(result);
+        myAPI.mkIcns(filepath).then((result) => afterConvert(result));
       }
     },
     [afterConvert, dispatch, state.ico]
@@ -65,7 +63,7 @@ export const Dropzone = memo(() => {
     dispatch({ type: 'drag', drag: false });
   };
 
-  const onDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+  const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
     if (state.loading) return;
 
     preventDefault(e);
@@ -75,13 +73,8 @@ export const Dropzone = memo(() => {
       dispatch({ type: 'loading', loading: true });
       const file = e.dataTransfer.files[0];
 
-      await convert(file.path);
+      convert(file.path);
     }
-  };
-
-  const onClickOS = () => {
-    if (state.loading) return;
-    dispatch({ type: 'ico', ico: !state.ico });
   };
 
   const onClickOpen = async () => {
@@ -91,18 +84,18 @@ export const Dropzone = memo(() => {
     if (!filepath) return;
 
     dispatch({ type: 'loading', loading: true });
-    await convert(filepath);
+    convert(filepath);
   };
 
   useEffect(() => {
-    myAPI.menuOpen(async (_e, filepath) => {
+    myAPI.menuOpen((_e, filepath) => {
       if (!filepath) return;
 
       dispatch({ type: 'loading', loading: true });
-      await convert(filepath);
+      convert(filepath);
     });
 
-    return (): void => {
+    return () => {
       myAPI.removeMenuOpen();
     };
   }, [convert, dispatch]);
@@ -177,38 +170,7 @@ export const Dropzone = memo(() => {
       >
         Drop your PNGs here...
       </div>
-      <div className="switch">
-        <div
-          className={
-            state.loading
-              ? 'icon-container loading'
-              : state.ico
-              ? 'icon-container'
-              : 'icon-container unchecked'
-          }
-          onClick={onClickOS}
-        >
-          <div className="icon">
-            <IoLogoWindows />
-          </div>
-          <div>ICO</div>
-        </div>
-        <div
-          className={
-            state.loading
-              ? 'icon-container loading'
-              : state.ico
-              ? 'icon-container unchecked'
-              : 'icon-container'
-          }
-          onClick={onClickOS}
-        >
-          <div className="icon apple">
-            <IoLogoApple />
-          </div>
-          <div>ICNS</div>
-        </div>
-      </div>
+      <Switch />
     </div>
   );
 });
