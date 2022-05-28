@@ -1,7 +1,7 @@
 import { memo, useContext, useCallback, useEffect } from 'react';
 import { AppContext } from '../lib/AppContext';
 
-import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
+import { Switch } from './Switch';
 
 const { myAPI } = window;
 
