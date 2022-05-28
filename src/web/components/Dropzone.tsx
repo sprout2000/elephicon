@@ -116,10 +116,10 @@ export const Dropzone = memo(() => {
         onClick={onClickOpen}
         className={
           state.drag
-            ? 'elephant-container ondrag'
+            ? 'elephant ondrag'
             : state.loading
-            ? 'elephant-container loading'
-            : 'elephant-container'
+            ? 'elephant loading'
+            : 'elephant'
         }
       >
         <Elephant />
