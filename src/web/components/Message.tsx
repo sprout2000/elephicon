@@ -1,7 +1,7 @@
 import { memo, useContext } from 'react';
 import { AppContext } from '../lib/AppContext';
 
-import { Reply } from './icons/Reply';
+import { ArrowUndo } from './icons/ArrowUndo';
 
 export const Message = memo(() => {
   const { state, dispatch } = useContext(AppContext);
@@ -45,8 +45,8 @@ export const Message = memo(() => {
       )}
       <div className="switch">
         <div className="back-container" onClick={onClickBack}>
-          <div className="icon reply">
-            <Reply />
+          <div className="icon undo">
+            <ArrowUndo />
           </div>
           <div>Back</div>
         </div>
