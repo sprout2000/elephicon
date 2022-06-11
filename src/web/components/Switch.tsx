@@ -1,7 +1,8 @@
 import { memo, useContext } from 'react';
 import { AppContext } from '../lib/AppContext';
 
-import { IoLogoApple, IoLogoWindows } from 'react-icons/io';
+import { Apple } from './icons/Apple';
+import { Windows } from './icons/Windows';
 
 export const Switch = memo(() => {
   const { state, dispatch } = useContext(AppContext);
@@ -23,8 +24,8 @@ export const Switch = memo(() => {
         }
         onClick={onClickOS}
       >
-        <div className="icon">
-          <IoLogoWindows />
+        <div className="icon windows">
+          <Windows />
         </div>
         <div>ICO</div>
       </div>
@@ -39,7 +40,7 @@ export const Switch = memo(() => {
         onClick={onClickOS}
       >
         <div className="icon apple">
-          <IoLogoApple />
+          <Apple />
         </div>
         <div>ICNS</div>
       </div>

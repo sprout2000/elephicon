@@ -31,10 +31,18 @@
     justify-content: center;
     align-items: center;
 
+    &.windows,
+    &.reply {
+      svg {
+        width: 1em;
+        height: 1em;
+      }
+    }
+
     &.apple {
       svg {
-        height: 1.5em;
-        width: 1.5em;
+        width: 1.25em;
+        height: 1.25em;
       }
     }
   }
