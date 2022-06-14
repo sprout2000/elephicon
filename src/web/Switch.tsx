@@ -1,8 +1,8 @@
 import { memo, useContext } from 'react';
-import { AppContext } from '../lib/AppContext';
+import { AppContext } from './lib/AppContext';
 
-import { LogoApple } from './icons/LogoApple';
-import { LogoWindows } from './icons/LogoWindows';
+import { LogoApple } from './LogoApple';
+import { LogoWindows } from './LogoWindows';
 
 export const Switch = memo(() => {
   const { state, dispatch } = useContext(AppContext);

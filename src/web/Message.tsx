@@ -1,7 +1,7 @@
 import { memo, useContext } from 'react';
-import { AppContext } from '../lib/AppContext';
+import { AppContext } from './lib/AppContext';
 
-import { ArrowUndo } from './icons/ArrowUndo';
+import { ArrowUndo } from './ArrowUndo';
 
 export const Message = memo(() => {
   const { state, dispatch } = useContext(AppContext);

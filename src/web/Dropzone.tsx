@@ -1,5 +1,5 @@
 import { memo, useContext, useCallback, useEffect } from 'react';
-import { AppContext } from '../lib/AppContext';
+import { AppContext } from './lib/AppContext';
 
 import { Switch } from './Switch';
 import { Elephant } from './Elephant';

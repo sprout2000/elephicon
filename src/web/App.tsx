@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
-import { reducer } from '../lib/reducer';
-import { AppContext } from '../lib/AppContext';
+import { reducer } from './lib/reducer';
+import { AppContext } from './lib/AppContext';
 
 import { Container } from './Container';
 
