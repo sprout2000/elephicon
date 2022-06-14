@@ -1,4 +1,6 @@
-export const Elephant = () => (
+import { memo } from 'react';
+
+export const Elephant = memo(() => (
   <svg
     width="104"
     height="121"
@@ -44,4 +46,6 @@ export const Elephant = () => (
       </filter>
     </defs>
   </svg>
-);
+));
+
+Elephant.displayName = 'Elephant';
