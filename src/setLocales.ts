@@ -54,7 +54,3 @@ export const setLocales = (locale: string): void => {
     },
   });
 };
-
-const localeList = ['en', 'ja', 'de', 'ru', 'pt', 'it', 'zh', 'tr', 'ml', 'uk'];
-
-export const locales = localeList.sort((a, b) => a.localeCompare(b));

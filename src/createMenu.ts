@@ -8,7 +8,46 @@ import {
 } from 'electron';
 import Store from 'electron-store';
 import i18next from 'i18next';
-import { locales } from './setLocales';
+
+const localeList = [
+  'de',
+  'en',
+  'it',
+  'ja',
+  'ml',
+  'pt',
+  'ru',
+  'tr',
+  'uk',
+  'zh_CN',
+];
+
+const translate = (locale: string) => {
+  switch (locale) {
+    case 'de':
+      return 'Deutsch';
+    case 'en':
+      return 'English';
+    case 'it':
+      return 'Italiano';
+    case 'ja':
+      return '日本語';
+    case 'ml':
+      return 'Malayalam';
+    case 'pt':
+      return 'Português';
+    case 'ru':
+      return 'Русский';
+    case 'tr':
+      return 'Türkçe';
+    case 'uk':
+      return 'Українська';
+    case 'zh_CN':
+      return '简体中文';
+    default:
+      return 'English';
+  }
+};
 
 export const createMenu = (
   win: BrowserWindow,
@@ -27,22 +66,15 @@ export const createMenu = (
 
   const langSub: MenuItemConstructorOptions[] = [];
 
-  locales.forEach((lang: string) => {
+  localeList.map((locale) => {
     langSub.push({
-      label: i18next.t(lang),
+      label: translate(locale),
       type: 'radio',
-      id: 'language-' + lang,
-      click: (): void => {
-        store.set('language', lang);
-        i18next.changeLanguage(lang, error => {
-          if (error) return console.log('something went wrong loading', error)
-        });
-        // console.log(i18next.language);
-        // console.log('Lang: ' + lang);
-        // console.log(store.get('language'));
-
+      id: `language-${locale}`,
+      click: () => {
+        store.set('language', locale);
       },
-      checked: store.get('language') === lang,
+      checked: store.get('language') === locale,
     });
   });
 
