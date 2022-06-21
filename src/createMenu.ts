@@ -8,6 +8,7 @@ import {
 } from 'electron';
 import Store from 'electron-store';
 import i18next from 'i18next';
+import { locales } from './setLocales';
 
 export const createMenu = (
   win: BrowserWindow,
@@ -23,6 +24,27 @@ export const createMenu = (
         shell.openExternal('https://github.com/sprout2000/elephicon/#readme'),
     },
   ];
+
+  const langSub: MenuItemConstructorOptions[] = [];
+
+  locales.forEach((lang: string) => {
+    langSub.push({
+      label: i18next.t(lang),
+      type: 'radio',
+      id: 'language-' + lang,
+      click: (): void => {
+        store.set('language', lang);
+        i18next.changeLanguage(lang, error => {
+          if (error) return console.log('something went wrong loading', error)
+        });
+        // console.log(i18next.language);
+        // console.log('Lang: ' + lang);
+        // console.log(store.get('language'));
+
+      },
+      checked: store.get('language') === lang,
+    });
+  });
 
   if (isDevelop) {
     helpSub.push(
@@ -155,6 +177,10 @@ export const createMenu = (
               checked: !store.get('desktop'),
             },
           ],
+        },
+        {
+          label: i18next.t('Language'),
+          submenu: langSub,
         },
       ],
     },

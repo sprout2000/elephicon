@@ -23,6 +23,7 @@ import tr from './locales/tr_TR.json';
 /** Malayalam language translation. */
 /** https://github.com/sprout2000/elephicon/pull/163 */
 import ml from './locales/ml.json';
+import uk from './locales/uk.json'
 
 export const setLocales = (locale: string): void => {
   i18next.init({
@@ -47,6 +48,11 @@ export const setLocales = (locale: string): void => {
       tr: { translation: tr },
       'tr-TR': { translation: tr },
       ml: { translation: ml },
+      uk: { translation: uk }
     },
   });
 };
+
+const localeList = ['en', 'ja', 'de', 'ru', 'pt', 'it', 'zh', 'tr', 'ml', 'uk'];
+
+export const locales = localeList.sort((a, b) => a.localeCompare(b));
