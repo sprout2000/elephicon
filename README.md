@@ -51,13 +51,13 @@ Download the latest version for Windows 10 and 11 at [Microsoft Store](https://w
 
 ## :globe_with_meridians: Supported Languages (App Menu)
 
-| Language  | Code | Language  |  Code   |
-| :-------- | :--: | :-------- | :-----: |
-| Deutsch   | `de` | Português |  `pt`   |
-| English   | `en` | Русский   |  `ru`   |
-| Italiano  | `it` | Türkçe    |  `tr`   |
-| 日本語    | `ja` | 简体中文  | `zh_CN` |
-| Malayalam | `ml` | Українська | `uk` |
+| Language  | Code | Language   |  Code   |
+| :-------- | :--: | :--------- | :-----: |
+| Deutsch   | `de` | Português  |  `pt`   |
+| English   | `en` | Русский    |  `ru`   |
+| Italiano  | `it` | Türkçe     |  `tr`   |
+| 日本語    | `ja` | Українська |  `uk`   |
+| Malayalam | `ml` | 简体中文   | `zh_CN` |
 
 ## :adhesive_bandage: Contributing
 
@@ -107,7 +107,7 @@ You can easily contribute to this repository by providing translation files.
   'ml',
 + 'uk'
  ];
- ```
+```
 
 4. Send the [pull request](https://github.com/sprout2000/elephicon/pulls) to this repo.
 
