@@ -20,10 +20,12 @@ import zh_CN from './locales/zh_cn.json';
 /** Merge the pull request sent by umitseyhan75 */
 /** https://github.com/sprout2000/elephicon/pull/159 */
 import tr from './locales/tr_TR.json';
-/** Malayalam language translation. */
+/** Merge the pull request sent by aerocyber */
 /** https://github.com/sprout2000/elephicon/pull/163 */
 import ml from './locales/ml.json';
-import uk from './locales/uk.json'
+/** Merge the pull request sent by whitebear60 */
+/** https://github.com/sprout2000/elephicon/pull/223 */
+import uk from './locales/uk.json';
 
 export const setLocales = (locale: string): void => {
   i18next.init({
@@ -48,7 +50,7 @@ export const setLocales = (locale: string): void => {
       tr: { translation: tr },
       'tr-TR': { translation: tr },
       ml: { translation: ml },
-      uk: { translation: uk }
+      uk: { translation: uk },
     },
   });
 };
