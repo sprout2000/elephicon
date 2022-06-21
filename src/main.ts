@@ -42,7 +42,7 @@ const store = new Store<StoreType>({
     y: undefined,
     quality: 2,
     bmp: true,
-    language: 'en',
+    language: i18next.resolvedLanguage,
   },
 });
 
