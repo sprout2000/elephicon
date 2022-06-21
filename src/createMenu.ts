@@ -19,7 +19,7 @@ const localeList = [
   'ru',
   'tr',
   'uk',
-  'zh_CN',
+  'zh-CN',
 ];
 
 const translate = (locale: string) => {
@@ -42,7 +42,7 @@ const translate = (locale: string) => {
       return 'Türkçe';
     case 'uk':
       return 'Українська';
-    case 'zh_CN':
+    case 'zh-CN':
       return '简体中文';
     default:
       return 'English';
