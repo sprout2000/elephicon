@@ -5,4 +5,5 @@ declare type StoreType = {
   y: number | undefined;
   quality: 0 | 1 | 2;
   bmp: boolean;
+  language: string;
 };

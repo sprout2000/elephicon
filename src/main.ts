@@ -42,6 +42,7 @@ const store = new Store<StoreType>({
     y: undefined,
     quality: 2,
     bmp: true,
+    language: 'en',
   },
 });
 
@@ -185,8 +186,7 @@ if (!gotTheLock && !isDarwin) {
   app.exit();
 } else {
   app.whenReady().then(() => {
-    // const locale = app.getLocale();
-    const locale: string = store.get('language');
+    const locale = store.get('language');
     setLocales(locale);
 
     createWindow();
