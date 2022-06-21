@@ -57,7 +57,7 @@ Download the latest version for Windows 10 and 11 at [Microsoft Store](https://w
 | English   | `en` | Русский   |  `ru`   |
 | Italiano  | `it` | Türkçe    |  `tr`   |
 | 日本語    | `ja` | 简体中文  | `zh_CN` |
-| Malayalam | `ml` |
+| Malayalam | `ml` | Українська | `uk` |
 
 ## :adhesive_bandage: Contributing
 
@@ -99,7 +99,17 @@ You can easily contribute to this repository by providing translation files.
   };
 ```
 
-3. Send the [pull request](https://github.com/sprout2000/elephicon/pulls) to this repo.
+3. Add the locale into `localeList` in `src/setLocales.ts`:
+
+```diff
+ const localeList = [
+  ...
+  'ml',
++ 'uk'
+ ];
+ ```
+
+4. Send the [pull request](https://github.com/sprout2000/elephicon/pulls) to this repo.
 
 ## :tada: Contributors
 
