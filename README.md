@@ -99,17 +99,7 @@ You can easily contribute to this repository by providing translation files.
   };
 ```
 
-3. Add the locale into `localeList` in `src/setLocales.ts`:
-
-```diff
- const localeList = [
-  ...
-  'ml',
-+ 'uk'
- ];
-```
-
-4. Send the [pull request](https://github.com/sprout2000/elephicon/pulls) to this repo.
+3. Send the [pull request](https://github.com/sprout2000/elephicon/pulls) to this repo.
 
 ## :tada: Contributors
 
