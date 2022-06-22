@@ -59,7 +59,7 @@ Download the latest version for Windows 10 and 11 at [Microsoft Store](https://w
 | 日本語    | `ja` | Українська |  `uk`   |
 | Malayalam | `ml` | 简体中文   | `zh_CN` |
 
-## :adhesive_bandage: Contributing
+## :hammer_and_wrench: Contributing
 
 You can easily contribute to this repository by providing translation files.
 
