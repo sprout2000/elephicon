@@ -74,9 +74,9 @@ export const createMenu = (
       click: () => {
         store.set('language', locale);
         dialog.showMessageBox(win, {
-          "message": i18next.t("To change the language, please restart Elephicon"),
-          "type": "warning"
-        })
+          message: i18next.t('Warning'),
+          type: 'warning',
+        });
       },
       checked: store.get('language') === locale,
     });
