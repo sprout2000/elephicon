@@ -102,6 +102,12 @@ You can easily contribute to this repository by providing translation files.
 3. And add an entry for the language to `src/createMenu.ts`.
 
 ```diff
+  const localeList = [
+    'en',
+    'ja',
++   'de',
+  ];
+
   const translate = (locale: string) => {
     switch (locale) {
       case 'en':
