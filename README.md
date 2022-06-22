@@ -99,7 +99,7 @@ You can easily contribute to this repository by providing translation files.
   };
 ```
 
-3. And add an entry for the language to `src/createMenu.ts`.
+3. And add entries for the language to `src/createMenu.ts`.
 
 ```diff
   const localeList = [
