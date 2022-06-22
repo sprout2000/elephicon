@@ -99,7 +99,24 @@ You can easily contribute to this repository by providing translation files.
   };
 ```
 
-3. Send the [pull request](https://github.com/sprout2000/elephicon/pulls) to this repo.
+3. And add an entry for the language to `src/createMenu.ts`.
+
+```diff
+  const translate = (locale: string) => {
+    switch (locale) {
+      case 'en':
+        return 'English';
+      case 'ja':
+        return '日本語';
++     case 'de':
++       return 'Deutsch';
+      default:
+        return 'English';
+    }
+  };
+```
+
+4. Send the [pull request](https://github.com/sprout2000/elephicon/pulls) to this repo.
 
 ## :tada: Contributors
 
