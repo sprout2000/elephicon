@@ -105,7 +105,7 @@ You can easily contribute to this repository by providing translation files.
 
 **Special Thanks to:**
 
-- [@whitebear60](https://github.com/whitebear60) [#223](https://github.com/sprout2000/elephicon/pull/223)
+- [@whitebear60](https://github.com/whitebear60) [#223](https://github.com/sprout2000/elephicon/pull/223), [#225](https://github.com/sprout2000/elephicon/pull/225)
 - [@aerocyber](https://github.com/aerocyber) [#163](https://github.com/sprout2000/elephicon/pull/163)
 - [@umitseyhan75](https://github.com/umitseyhan75) [#159](https://github.com/sprout2000/elephicon/pull/159)
 - [@ArcherGu](https://github.com/ArcherGu) [#151](https://github.com/sprout2000/elephicon/pull/151)
