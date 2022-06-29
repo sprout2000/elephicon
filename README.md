@@ -51,13 +51,13 @@ Download the latest version for Windows 10 and 11 at [Microsoft Store](https://w
 
 ## :globe_with_meridians: Supported Languages (App Menu)
 
-| Language  | Code | Language   |  Code   |
-| :-------- | :--: | :--------- | :-----: |
-| Deutsch   | `de` | Português  |  `pt`   |
-| English   | `en` | Русский    |  `ru`   |
-| Italiano  | `it` | Türkçe     |  `tr`   |
-| 日本語    | `ja` | Українська |  `uk`   |
-| Malayalam | `ml` | 简体中文   | `zh_CN` |
+| Language  | Code |     | Language   |  Code   |
+| :-------- | :--: | :-: | :--------- | :-----: |
+| Deutsch   | `de` |     | Português  |  `pt`   |
+| English   | `en` |     | Русский    |  `ru`   |
+| Italiano  | `it` |     | Türkçe     |  `tr`   |
+| 日本語    | `ja` |     | Українська |  `uk`   |
+| Malayalam | `ml` |     | 简体中文   | `zh_CN` |
 
 ## :hammer_and_wrench: Contributing
 
