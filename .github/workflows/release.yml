@@ -7,8 +7,11 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        platform: [macos-latest, ubuntu-latest]
 
+    runs-on: ${{ matrix.platform }}
     steps:
       - name: Check out Git repositry
         uses: actions/checkout@master
@@ -19,10 +22,10 @@ jobs:
           node-version: 16.x
 
       - name: Install
-        run: yarn install
+        run: npm install
 
       - name: Build
-        run: yarn build
+        run: npm run build
 
       - name: Release
         env:
@@ -33,4 +36,4 @@ jobs:
           ASC_PROVIDER: ${{ secrets.ASC_PROVIDER }}
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
           CSC_LINK: ${{ secrets.CSC_LINK }}
-        run: yarn release
+        run: npm run release
