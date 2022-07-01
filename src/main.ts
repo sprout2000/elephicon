@@ -58,6 +58,7 @@ require('electron-reload')(__dirname, {
 });
 /// #endif
 
+const isLinux = process.platform === 'linux';
 const isDarwin = process.platform === 'darwin';
 const isDevelop = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
@@ -77,7 +78,9 @@ const createWindow = () => {
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: isDarwin ? 'hidden' : 'default',
-    icon: path.join(getResourceDirectory(), 'images/icon.png'),
+    icon: isLinux
+      ? path.join(getResourceDirectory(), 'images/icon.png')
+      : undefined,
     resizable: false,
     maximizable: false,
     fullscreenable: false,
@@ -115,7 +118,7 @@ const createWindow = () => {
       .catch((err): void => console.log(err));
   });
 
-  if (isDarwin) {
+  if (isDarwin || isLinux) {
     autoUpdater.checkForUpdatesAndNotify();
 
     autoUpdater.once('error', (_e, err) => {
