@@ -86,7 +86,6 @@ const createWindow = () => {
     fullscreenable: false,
     backgroundColor: '#005bea',
     webPreferences: {
-      sandbox: true,
       safeDialogs: true,
       devTools: isDevelop,
       preload: path.join(__dirname, 'preload.js'),
