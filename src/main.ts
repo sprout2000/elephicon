@@ -8,9 +8,7 @@ import {
   BrowserWindow,
 } from 'electron';
 
-import log from 'electron-log';
 import Store from 'electron-store';
-import { autoUpdater } from 'electron-updater';
 import { searchDevtools } from 'electron-search-devtools';
 
 import path from 'node:path';
@@ -20,18 +18,6 @@ import i18next from 'i18next';
 import { createMenu } from './createMenu';
 import { setLocales } from './setLocales';
 import { mkico, mkicns } from './mkicons';
-
-console.log = log.log;
-autoUpdater.logger = log;
-log.info('App starting...');
-
-process.once('uncaughtException', (err) => {
-  log.error('electron:uncaughtException');
-  log.error(err.name);
-  log.error(err.message);
-  log.error(err.stack);
-  app.exit();
-});
 
 const store = new Store<StoreType>({
   configFileMode: 0o666,
@@ -116,37 +102,6 @@ const createWindow = () => {
       })
       .catch((err): void => console.log(err));
   });
-
-  if (isDarwin || isLinux) {
-    autoUpdater.checkForUpdatesAndNotify();
-
-    autoUpdater.once('error', (_e, err) => {
-      log.info(`Error in auto-updater: ${err}`);
-    });
-
-    autoUpdater.once('update-downloaded', async () => {
-      log.info(`Update downloaded...`);
-
-      await dialog
-        .showMessageBox(mainWindow, {
-          type: 'info',
-          buttons: ['Restart', 'Later'],
-          title: 'Update',
-          message: 'Update',
-          detail:
-            'A new version has been downloaded.\n' +
-            'Restart the application to apply the updates.',
-        })
-        .then((result) => {
-          if (result.response === 0) {
-            autoUpdater.quitAndInstall();
-          } else {
-            log.info('Restart cancelled...');
-          }
-        })
-        .catch((err) => log.info(`Error in showMessageBox: ${err}`));
-    });
-  }
 
   const menu = createMenu(mainWindow, store);
   Menu.setApplicationMenu(menu);
