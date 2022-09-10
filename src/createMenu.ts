@@ -42,11 +42,14 @@ export const createMenu = (
   }
 
   if (!isDarwin) {
-    helpSub.unshift({
-      label: i18next.t('About Elephicon'),
-      accelerator: 'Ctrl+I',
-      click: () => app.showAboutPanel(),
-    });
+    helpSub.unshift(
+      {
+        label: i18next.t('About Elephicon'),
+        accelerator: 'Ctrl+I',
+        click: () => app.showAboutPanel(),
+      },
+      { type: 'separator' }
+    );
   }
 
   const template: MenuItemConstructorOptions[] = [
