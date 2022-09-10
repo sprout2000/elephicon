@@ -17,12 +17,12 @@ build({
       category: 'Development',
       icon: 'assets/linux.icns',
       asarUnpack: 'dist/images/icon.png',
-      target: ['zip', 'AppImage'],
+      target: ['AppImage'],
       mimeTypes: ['image/png'],
     },
     win: {
       icon: 'assets/icon.ico',
-      target: ['appx', 'nsis'],
+      target: ['appx'],
       asarUnpack: 'dist/images/icon.png',
     },
     appx: {
@@ -54,7 +54,7 @@ build({
       appId: process.env.APP_BUNDLE_ID,
       category: 'public.app-category.developer-tools',
       target: {
-        target: 'default',
+        target: 'dmg',
         arch: ['x64', 'arm64'],
       },
       icon: 'assets/icon.icns',
@@ -65,10 +65,6 @@ build({
         CFBundlePackageType: 'APPL',
         NSRequiresAquaSystemAppearance: false,
       },
-    },
-    dmg: {
-      icon: 'assets/dmg.icns',
-      sign: false,
     },
     afterSign:
       process.env.CSC_IDENTITY_AUTO_DISCOVERY === 'false'
