@@ -9,17 +9,14 @@ import {
 import Store from 'electron-store';
 import i18next from 'i18next';
 
-export const createMenu = (
-  win: BrowserWindow,
-  store: Store<StoreType>
-): Menu => {
+export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
   const isDarwin = process.platform === 'darwin';
   const isDevelop = process.env.NODE_ENV === 'development';
 
   const helpSub: MenuItemConstructorOptions[] = [
     {
       label: i18next.t('Support URL...'),
-      click: async (): Promise<void> =>
+      click: () =>
         shell.openExternal('https://github.com/sprout2000/elephicon/#readme'),
     },
   ];
@@ -30,7 +27,7 @@ export const createMenu = (
       {
         label: i18next.t('Toggle Developer Tools'),
         accelerator: isDarwin ? 'Cmd+Option+I' : 'Ctrl+Shift+I',
-        click: (): void => {
+        click: () => {
           if (win.webContents.isDevToolsOpened()) {
             win.webContents.closeDevTools();
           } else {
@@ -59,7 +56,7 @@ export const createMenu = (
         {
           label: i18next.t('Open...'),
           accelerator: 'CmdOrCtrl+O',
-          click: async (): Promise<void> => {
+          click: async () => {
             await dialog
               .showOpenDialog(win, {
                 properties: ['openFile'],
@@ -71,11 +68,11 @@ export const createMenu = (
                   },
                 ],
               })
-              .then((result): void => {
+              .then((result) => {
                 if (result.canceled) return;
                 win.webContents.send('menu-open', result.filePaths[0]);
               })
-              .catch((err): void => console.log(err));
+              .catch((err) => console.log(err));
           },
         },
         { type: 'separator' },
@@ -96,21 +93,21 @@ export const createMenu = (
               label: i18next.t('Low'),
               type: 'radio',
               id: 'low',
-              click: (): void => store.set('quality', 0),
+              click: () => store.set('quality', 0),
               checked: store.get('quality') === 0,
             },
             {
               label: i18next.t('Medium'),
               type: 'radio',
               id: 'mid',
-              click: (): void => store.set('quality', 1),
+              click: () => store.set('quality', 1),
               checked: store.get('quality') === 1,
             },
             {
               label: i18next.t('High'),
               type: 'radio',
               id: 'high',
-              click: (): void => store.set('quality', 2),
+              click: () => store.set('quality', 2),
               checked: store.get('quality') === 2,
             },
           ],
@@ -122,14 +119,14 @@ export const createMenu = (
               label: i18next.t('Use BMP format for the smaller icon sizes'),
               type: 'radio',
               id: 'bmp',
-              click: (): void => store.set('bmp', true),
+              click: () => store.set('bmp', true),
               checked: store.get('bmp'),
             },
             {
               label: i18next.t('Use PNG for each icon in the created ICO file'),
               type: 'radio',
               id: 'png',
-              click: (): void => store.set('bmp', false),
+              click: () => store.set('bmp', false),
               checked: !store.get('bmp'),
             },
           ],
@@ -141,7 +138,7 @@ export const createMenu = (
               label: i18next.t('Desktop'),
               type: 'radio',
               id: 'desktop',
-              click: (): void => {
+              click: () => {
                 store.set('desktop', true);
                 win.webContents.send('set-desktop', true);
               },
@@ -151,7 +148,7 @@ export const createMenu = (
               label: i18next.t('Same folder as the input PNGs'),
               type: 'radio',
               id: 'current',
-              click: (): void => {
+              click: () => {
                 store.set('desktop', false);
                 win.webContents.send('set-desktop', false);
               },

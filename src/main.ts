@@ -99,7 +99,7 @@ const createWindow = () => {
         if (result.canceled) return;
         return result.filePaths[0];
       })
-      .catch((err): void => console.log(err));
+      .catch((err) => console.log(err));
   });
 
   const menu = createMenu(mainWindow, store);

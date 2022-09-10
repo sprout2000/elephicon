@@ -27,7 +27,7 @@ import ml from './locales/ml.json';
 /** https://github.com/sprout2000/elephicon/pull/223 */
 import uk from './locales/uk.json';
 
-export const setLocales = (locale: string): void => {
+export const setLocales = (locale: string) => {
   i18next.init({
     lng: locale,
     fallbackLng: 'en',
