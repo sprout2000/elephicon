@@ -28,7 +28,7 @@ const store = new Store<StoreType>({
     y: undefined,
     quality: 2,
     bmp: true,
-    language: i18next.resolvedLanguage,
+    language: Intl.DateTimeFormat().resolvedOptions().locale,
   },
 });
 
