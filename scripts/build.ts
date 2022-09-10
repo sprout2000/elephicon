@@ -35,15 +35,6 @@ build({
       publisher: process.env.PUBLISHER,
       publisherDisplayName: 'sprout2000',
     },
-    nsis: {
-      oneClick: false,
-      perMachine: false,
-      createDesktopShortcut: false,
-      createStartMenuShortcut: true,
-      installerIcon: 'assets/installer.ico',
-      artifactName:
-        '${productName}-${version}-${platform}-${arch}-installer.${ext}',
-    },
     mac: {
       publish: [
         {
