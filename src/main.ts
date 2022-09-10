@@ -28,7 +28,6 @@ const store = new Store<StoreType>({
     y: undefined,
     quality: 2,
     bmp: true,
-    language: Intl.DateTimeFormat().resolvedOptions().locale,
   },
 });
 
@@ -143,7 +142,7 @@ if (!gotTheLock && !isDarwin) {
   app.exit();
 } else {
   app.whenReady().then(() => {
-    const locale = store.get('language');
+    const locale = app.getLocale();
     setLocales(locale);
 
     createWindow();
