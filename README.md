@@ -14,6 +14,8 @@
 
 <img width="50%" alt="animation" src="https://user-images.githubusercontent.com/52094761/144979888-d796c672-ee0a-44cc-bfa2-abce6513d192.gif" />
 
+- Various settings are available from the context menu.
+
 ## :gift: Download
 
 ### :desktop_computer: macOS (x64, arm64)
