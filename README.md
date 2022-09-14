@@ -18,12 +18,12 @@
 
 ## :gift: Download
 
-### :desktop_computer: macOS (x64, arm64)
+### :computer: macOS (x64, arm64)
 
 You can download the latest version of _Elephicon_ from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
 
-### :computer: Windows10, 11
+### :desktop_computer: Windows10, 11
 
 Download the latest version for Windows 10 and 11 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
 
