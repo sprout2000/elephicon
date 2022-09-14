@@ -22,18 +22,24 @@ build({
     },
     win: {
       icon: 'assets/icon.ico',
-      target: ['appx'],
+      target: ['zip', 'nsis'],
+      publisherName: 'sprout2000',
+      fileAssociations: [
+        {
+          ext: ['png'],
+          description: 'PNG file',
+        },
+      ],
       asarUnpack: 'dist/images/icon.png',
     },
-    appx: {
-      applicationId: 'sprout2000.Elephicon',
-      backgroundColor: '#1d3557',
-      displayName: 'Elephicon',
-      showNameOnTiles: true,
-      languages: ['en-US', 'ja-JP'],
-      identityName: process.env.IDENTITY_NAME,
-      publisher: process.env.PUBLISHER,
-      publisherDisplayName: 'sprout2000',
+    nsis: {
+      oneClick: false,
+      perMachine: false,
+      createDesktopShortcut: false,
+      createStartMenuShortcut: true,
+      installerIcon: 'assets/installer.ico',
+      artifactName:
+        '${productName}-${version}-${platform}-${arch}-installer.${ext}',
     },
     mac: {
       publish: [
