@@ -20,5 +20,7 @@
   "Toggle Developer Tools": "Перемкнути інструменти розробника",
   "Hide Elephicon": "Сховати Elephicon",
   "Hide Others": "Сховати інші",
-  "Show All": "Показати всі"
+  "Show All": "Показати всі",
+  "Language": "Мова",
+  "Warning": "To change the language, please restart Elephicon."
 }

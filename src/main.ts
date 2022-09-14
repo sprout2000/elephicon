@@ -142,8 +142,9 @@ if (!gotTheLock && !isDarwin) {
   app.exit();
 } else {
   app.whenReady().then(() => {
-    const locale = app.getLocale();
+    const locale = store.get('language') || app.getLocale();
     setLocales(locale);
+    store.set('language', locale);
 
     createWindow();
   });

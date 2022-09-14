@@ -9,6 +9,46 @@ import {
 import Store from 'electron-store';
 import i18next from 'i18next';
 
+const localeList = [
+  'de',
+  'en',
+  'it',
+  'ja',
+  'ml',
+  'pt',
+  'ru',
+  'tr',
+  'uk',
+  'zh-CN',
+];
+
+const translate = (locale: string) => {
+  switch (locale) {
+    case 'de':
+      return 'Deutsch';
+    case 'en':
+      return 'English';
+    case 'it':
+      return 'Italiano';
+    case 'ja':
+      return '日本語';
+    case 'ml':
+      return 'Malayalam';
+    case 'pt':
+      return 'Português';
+    case 'ru':
+      return 'Русский';
+    case 'tr':
+      return 'Türkçe';
+    case 'uk':
+      return 'Українська';
+    case 'zh-CN':
+      return '简体中文';
+    default:
+      return 'English';
+  }
+};
+
 export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
   const isDarwin = process.platform === 'darwin';
   const isDevelop = process.env.NODE_ENV === 'development';
@@ -20,6 +60,24 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
         shell.openExternal('https://github.com/sprout2000/elephicon/#readme'),
     },
   ];
+
+  const langSub: MenuItemConstructorOptions[] = [];
+
+  localeList.map((locale) => {
+    langSub.push({
+      label: translate(locale),
+      type: 'radio',
+      id: `language-${locale}`,
+      click: () => {
+        store.set('language', locale);
+        dialog.showMessageBox(win, {
+          message: i18next.t('Warning'),
+          type: 'warning',
+        });
+      },
+      checked: store.get('language') === locale,
+    });
+  });
 
   if (isDevelop) {
     helpSub.push(
@@ -155,6 +213,10 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
               checked: !store.get('desktop'),
             },
           ],
+        },
+        {
+          label: i18next.t('Language'),
+          submenu: langSub,
         },
       ],
     },
