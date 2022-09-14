@@ -9,7 +9,7 @@ import {
 import Store from 'electron-store';
 import i18next from 'i18next';
 
-const localeList = [
+const localeList: Locale[] = [
   'de',
   'en',
   'it',
@@ -22,7 +22,7 @@ const localeList = [
   'zh-CN',
 ];
 
-const translate = (locale: string) => {
+const translate = (locale: Locale) => {
   switch (locale) {
     case 'de':
       return 'Deutsch';
