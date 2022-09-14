@@ -13,6 +13,10 @@ build({
       buildResources: 'assets',
       output: 'release',
     },
+    publish: {
+      provider: 'github',
+      releaseType: 'release',
+    },
     linux: {
       category: 'Development',
       icon: 'assets/linux.icns',
@@ -42,12 +46,6 @@ build({
         '${productName}-${version}-${platform}-${arch}-installer.${ext}',
     },
     mac: {
-      publish: [
-        {
-          provider: 'github',
-          releaseType: 'release',
-        },
-      ],
       appId: process.env.APP_BUNDLE_ID,
       category: 'public.app-category.developer-tools',
       target: {
