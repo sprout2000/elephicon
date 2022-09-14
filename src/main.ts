@@ -132,9 +132,9 @@ const createWindow = () => {
   });
 
   mainWindow.once('close', () => {
-    const pos = mainWindow.getPosition();
-    store.set('x', pos[0]);
-    store.set('y', pos[1]);
+    const bounds = mainWindow.getBounds();
+    store.set('x', bounds.x);
+    store.set('y', bounds.y);
   });
 };
 
