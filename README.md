@@ -29,6 +29,12 @@ Download the latest version for Windows 10 and 11 at [Microsoft Store](https://w
 
 <a href='https://www.microsoft.com/store/apps/9P1489W92ZDQ'><img width="160px" src='https://developer.microsoft.com/en-us/store/badges/images/English_get-it-from-MS.png' alt='Badge'/></a>
 
+You can also get the latest version via [winget](https://github.com/microsoft/winget-cli):
+
+```sh
+winget install sprout2000.Elephicon
+```
+
 ## :rainbow: Embedded Sizes
 
 | Dimension  | ICO | ICNS |
