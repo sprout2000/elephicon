@@ -35,6 +35,12 @@ You can also get the latest version via [winget](https://github.com/microsoft/wi
 winget install sprout2000.Elephicon
 ```
 
+Or you can upgrade:
+
+```sh
+winget upgrade sprout2000.Elephicon
+```
+
 ## :rainbow: Embedded Sizes
 
 | Dimension  | ICO | ICNS |
