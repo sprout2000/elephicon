@@ -17,7 +17,7 @@
 
 ## :gift: Download
 
-### :computer: macOS (x64, arm64)
+### :computer: macOS & GNU/Linux
 
 You can download the latest version of _Elephicon_ from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
