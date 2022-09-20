@@ -121,12 +121,7 @@ You can easily contribute to this repository by providing translation files.
 - [@kitt3911](https://github.com/kitt3911) [#135](https://github.com/sprout2000/elephicon/pull/135)
 - [@DrDeee](https://github.com/DrDeee) [#108](https://github.com/sprout2000/elephicon/pull/108)
 
-## :vertical_traffic_light: Privacy Policy
-
-- Elephicon and the developer do NOT collect any personal information or privacy-related information about the user.
-- Elephicon and the developer do NOT collect the information of files opened by Elephicon.
-
-## :copyright: License
+## :copyright: Copyright
 
 ### [png2icons](https://github.com/idesis-gmbh/png2icons)
 
@@ -134,5 +129,4 @@ MIT © [idesis GmbH](https://www.idesis.de), Rellinghauser Straße 334F, D-45136
 
 ### Elephicon
 
-Copyright(c) 2020 sprout2000 and other contributors  
-[MIT](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md) Licensed
+Copyright(c) 2020 sprout2000 and other contributors
