@@ -132,11 +132,12 @@ const createWindow = () => {
       dialog
         .showMessageBox(mainWindow, {
           message: 'Found Updates',
-          detail: 'A new version is available.\nDo you want to update now?',
-          buttons: ['Not now', 'Yes'],
+          detail:
+            'A new version is available.\nDo you want to download it now?',
+          buttons: ['Not now', 'OK'],
           defaultId: 1,
           cancelId: 0,
-          checkboxLabel: "Don't ask me again.",
+          checkboxLabel: 'No update notifications required.',
         })
         .then((result) => {
           if (result.response === 1) {
