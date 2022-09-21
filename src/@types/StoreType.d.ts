@@ -1,4 +1,5 @@
 declare type StoreType = {
+  ask: boolean;
   ico: boolean;
   desktop: boolean;
   x: number | undefined;
