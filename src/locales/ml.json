@@ -20,15 +20,5 @@
   "Toggle Developer Tools": "ഡവലപ്പർ ഉപകരണങ്ങൾ ടോഗിൾ ചെയ്യുക",
   "Hide Elephicon": "Elephicon മറയ്‌ക്കുക",
   "Hide Others": "മറ്റുള്ളവ മറയ്ക്കുക",
-  "Show All": "എല്ലാം കാണിക്കൂ",
-  "Language": "Language",
-  "Warning": "To change the language, please restart Elephicon.",
-  "Update Notification": "Update Notification",
-  "A new version is available.": "A new version is available.",
-  "Do you want to download it now?": "Do you want to download it now?",
-  "No update notifications required.": "No update notifications required.",
-  "Not now": "Not now",
-  "Install Updates": "Install Updates",
-  "Updates downloaded.": "Updates downloaded.",
-  "Please restart LeafView...": "Please restart Elephicon..."
+  "Show All": "എല്ലാം കാണിക്കൂ"
 }

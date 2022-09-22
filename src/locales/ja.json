@@ -20,15 +20,5 @@
   "Toggle Developer Tools": "デベロッパーツールのトグル",
   "Hide Elephicon": "Elephicon を隠す",
   "Hide Others": "他を隠す",
-  "Show All": "すべてを表示",
-  "Language": "言語",
-  "Warning": "言語を切り換えるには Elephicon を再起動してください。",
-  "Update Notification": "アップデート通知",
-  "A new version is available.": "新しいバージョンが利用できます。",
-  "Do you want to download it now?": "今すぐダウンロードしますか？",
-  "No update notifications required.": "アップデートの通知は不要です。",
-  "Not now": "今はまだ",
-  "Install Updates": "アップデートのインストール",
-  "Updates downloaded.": "アップデートのダウンロードが完了しました。",
-  "Please restart LeafView...": "Elephicon を再起動してください。"
+  "Show All": "すべてを表示"
 }
