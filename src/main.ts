@@ -189,9 +189,8 @@ const createWindow = () => {
   });
 
   mainWindow.once('close', () => {
-    const bounds = mainWindow.getBounds();
-    store.set('x', bounds.x);
-    store.set('y', bounds.y);
+    const { x, y } = mainWindow.getBounds();
+    store.set({ x, y });
   });
 };
 
