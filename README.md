@@ -30,12 +30,6 @@ You can get the latest version of _Elephicon_ via [winget](https://github.com/mi
 winget install sprout2000.Elephicon
 ```
 
-Or you can also upgrade:
-
-```sh
-winget upgrade sprout2000.Elephicon
-```
-
 ## :rainbow: Embedded Sizes
 
 | Dimension  | ICO | ICNS |
