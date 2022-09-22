@@ -19,7 +19,7 @@ import it from './locales/it.json';
 import zh_CN from './locales/zh_cn.json';
 /** Merge the pull request sent by umitseyhan75 */
 /** https://github.com/sprout2000/elephicon/pull/159 */
-import tr from './locales/tr_TR.json';
+import tr from './locales/tr.json';
 /** Merge the pull request sent by aerocyber */
 /** https://github.com/sprout2000/elephicon/pull/163 */
 import ml from './locales/ml.json';
