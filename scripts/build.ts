@@ -49,7 +49,7 @@ build({
       appId: process.env.APP_BUNDLE_ID,
       category: 'public.app-category.developer-tools',
       target: {
-        target: 'dmg',
+        target: 'default',
         arch: ['x64', 'arm64'],
       },
       icon: 'assets/icon.icns',
