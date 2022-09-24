@@ -21,6 +21,9 @@ import { createMenu } from './createMenu';
 import { setLocales } from './setLocales';
 import { mkico, mkicns } from './mkicons';
 
+console.log = log.log;
+log.info('App starting...');
+
 const store = new Store<StoreType>({
   configFileMode: 0o666,
   defaults: {
