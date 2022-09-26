@@ -70,9 +70,16 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
       id: `language-${locale}`,
       click: () => {
         store.set('language', locale);
-        dialog.showMessageBox(win, {
-          message: 'To change the language, please restart Elephicon.',
-        });
+        dialog
+          .showMessageBox(win, {
+            message: 'To change the language, please restart Elephicon.',
+          })
+          .then(() => {
+            setImmediate(() => {
+              app.relaunch();
+              app.exit(0);
+            });
+          });
       },
       checked: store.get('language') === locale,
     });
