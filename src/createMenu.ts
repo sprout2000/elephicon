@@ -72,7 +72,7 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
         store.set('language', locale);
         dialog
           .showMessageBox(win, {
-            message: 'To change the language, please restart Elephicon.',
+            message: i18next.t('Warning'),
           })
           .then(() => {
             setImmediate(() => {
@@ -221,7 +221,7 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
           ],
         },
         {
-          label: 'Language',
+          label: i18next.t('Language'),
           submenu: langSub,
         },
         { type: 'separator' },
