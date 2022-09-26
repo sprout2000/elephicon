@@ -20,5 +20,7 @@
   "Toggle Developer Tools": "开启/关闭开发者工具",
   "Hide Elephicon": "隐藏 Elephicon",
   "Hide Others": "隐藏其他",
-  "Show All": "显示全部"
+  "Show All": "显示全部",
+  "Language": "语言",
+  "Warning": "To change the language, please restart Elephicon."
 }
