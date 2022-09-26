@@ -51,18 +51,8 @@ const translate = (locale: Locale) => {
 
 export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
   const isDarwin = process.platform === 'darwin';
-  const isDevelop = process.env.NODE_ENV === 'development';
-
-  const helpSub: MenuItemConstructorOptions[] = [
-    {
-      label: i18next.t('Support URL...'),
-      click: () =>
-        shell.openExternal('https://github.com/sprout2000/elephicon/#readme'),
-    },
-  ];
 
   const langSub: MenuItemConstructorOptions[] = [];
-
   localeList.map((locale) => {
     langSub.push({
       label: translate(locale),
@@ -88,22 +78,13 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
     });
   });
 
-  if (isDevelop) {
-    helpSub.push(
-      { type: 'separator' },
-      {
-        label: i18next.t('Toggle Developer Tools'),
-        accelerator: isDarwin ? 'Cmd+Option+I' : 'Ctrl+Shift+I',
-        click: () => {
-          if (win.webContents.isDevToolsOpened()) {
-            win.webContents.closeDevTools();
-          } else {
-            win.webContents.openDevTools({ mode: 'detach' });
-          }
-        },
-      }
-    );
-  }
+  const helpSub: MenuItemConstructorOptions[] = [
+    {
+      label: i18next.t('Support URL...'),
+      click: () =>
+        shell.openExternal('https://github.com/sprout2000/elephicon/#readme'),
+    },
+  ];
 
   if (!isDarwin) {
     helpSub.unshift(
@@ -226,13 +207,6 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
         {
           label: i18next.t('Language'),
           submenu: langSub,
-        },
-        { type: 'separator' },
-        {
-          label: 'Automatic update',
-          type: 'checkbox',
-          checked: store.get('ask'),
-          click: () => store.set('ask', !store.get('ask')),
         },
       ],
     },
