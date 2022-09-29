@@ -1,4 +1,4 @@
-# <img width="48" alt="logo" src="https://user-images.githubusercontent.com/52094761/189471571-a7748fbe-c365-4b52-b98e-01b35e610ae9.svg" /> Elephicon
+# Elephicon
 
 **Elephicon**, a GUI wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons), **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](<https://en.wikipedia.org/wiki/ICO_(file_format)>) files from PNG files.**
 
