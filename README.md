@@ -15,7 +15,7 @@
 
 <img width="50%" alt="animation" src="https://user-images.githubusercontent.com/52094761/144979888-d796c672-ee0a-44cc-bfa2-abce6513d192.gif" />
 
-## :gift: Download
+## :inbox_tray: Download
 
 ### :computer: macOS & GNU/Linux
 
@@ -60,7 +60,7 @@ winget install sprout2000.Elephicon
 | 日本語    | `ja` |     | Українська |  `uk`   |
 | Malayalam | `ml` |     | 简体中文   | `zh_CN` |
 
-## :hammer_and_wrench: Contributing
+## :beers: Contributing
 
 You can easily contribute to this repository by providing translation files.
 
