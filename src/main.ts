@@ -176,9 +176,7 @@ const createWindow = () => {
 
   mainWindow.loadFile('dist/index.html');
   mainWindow.once('ready-to-show', () => {
-    if (isDevelop) {
-      mainWindow.webContents.openDevTools({ mode: 'detach' });
-    }
+    if (isDevelop) mainWindow.webContents.openDevTools({ mode: 'detach' });
     mainWindow.show();
   });
 
