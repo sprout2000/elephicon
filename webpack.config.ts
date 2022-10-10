@@ -83,5 +83,4 @@ const renderer: Configuration = {
   ],
 };
 
-const config = isDev ? renderer : [main, preload, renderer];
-export default config;
+export default isDev ? renderer : [main, preload, renderer];
