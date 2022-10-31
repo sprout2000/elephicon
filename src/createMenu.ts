@@ -10,44 +10,17 @@ import Store from 'electron-store';
 import i18next from 'i18next';
 
 const localeList: Locale[] = [
-  'de',
-  'en',
-  'it',
-  'ja',
-  'ml',
-  'pt',
-  'ru',
-  'tr',
-  'uk',
-  'zh-CN',
+  { code: 'de', value: 'Deutsch' },
+  { code: 'en', value: 'English' },
+  { code: 'it', value: 'Italiano' },
+  { code: 'ja', value: '日本語' },
+  { code: 'ml', value: 'Malayalam' },
+  { code: 'pt', value: 'Português' },
+  { code: 'ru', value: 'Русский' },
+  { code: 'tr', value: 'Türkçe' },
+  { code: 'uk', value: 'Українська' },
+  { code: 'zh-CN', value: '简体中文' },
 ];
-
-const translate = (locale: Locale) => {
-  switch (locale) {
-    case 'de':
-      return 'Deutsch';
-    case 'en':
-      return 'English';
-    case 'it':
-      return 'Italiano';
-    case 'ja':
-      return '日本語';
-    case 'ml':
-      return 'Malayalam';
-    case 'pt':
-      return 'Português';
-    case 'ru':
-      return 'Русский';
-    case 'tr':
-      return 'Türkçe';
-    case 'uk':
-      return 'Українська';
-    case 'zh-CN':
-      return '简体中文';
-    default:
-      return 'English';
-  }
-};
 
 export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
   const isDarwin = process.platform === 'darwin';
@@ -55,12 +28,12 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
   const langSub: MenuItemConstructorOptions[] = [];
   localeList.map((locale) => {
     langSub.push({
-      label: translate(locale),
+      label: locale.value,
       type: 'radio',
-      id: `language-${locale}`,
+      id: `language-${locale.code}`,
       click: () => {
-        if (store.get('language') !== locale) {
-          store.set('language', locale);
+        if (store.get('language') !== locale.code) {
+          store.set('language', locale.code);
           dialog
             .showMessageBox(win, {
               type: 'info',
@@ -74,7 +47,7 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
             });
         }
       },
-      checked: store.get('language') === locale,
+      checked: store.get('language') === locale.code,
     });
   });
 
