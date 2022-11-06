@@ -23,10 +23,7 @@ const common: Configuration = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: [
-          { loader: 'ts-loader' },
-          { loader: 'ifdef-loader', options: { DEBUG: isDev } },
-        ],
+        loader: 'ts-loader',
       },
       {
         test: /\.s?css$/,
@@ -39,8 +36,6 @@ const common: Configuration = {
     ],
   },
   watch: isDev,
-  stats: 'minimal',
-  performance: { hints: false },
   devtool: isDev ? 'source-map' : undefined,
 };
 
