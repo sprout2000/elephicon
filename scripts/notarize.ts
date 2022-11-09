@@ -1,5 +1,5 @@
 import { AfterPackContext } from 'electron-builder';
-import { notarize } from 'electron-notarize';
+import { notarize } from '@electron/notarize';
 import dotenv from 'dotenv';
 
 const notarizing = async (context: AfterPackContext): Promise<void> => {
