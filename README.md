@@ -105,17 +105,11 @@ You can easily contribute to this repository by providing translation files.
 
 ## :tada: Contributors
 
-**Special Thanks to:**
+Thanks go to these wonderful people :slightly_smiling_face::
 
-- [@vedantmgoyal2009](https://github.com/vedantmgoyal2009) [#234](https://github.com/sprout2000/elephicon/pull/234)
-- [@whitebear60](https://github.com/whitebear60) [#223](https://github.com/sprout2000/elephicon/pull/223), [#225](https://github.com/sprout2000/elephicon/pull/225)
-- [@aerocyber](https://github.com/aerocyber) [#163](https://github.com/sprout2000/elephicon/pull/163), [#235](https://github.com/sprout2000/elephicon/pull/235)
-- [@umitseyhan75](https://github.com/umitseyhan75) [#159](https://github.com/sprout2000/elephicon/pull/159)
-- [@ArcherGu](https://github.com/ArcherGu) [#151](https://github.com/sprout2000/elephicon/pull/151)
-- [@LightwithoutLisonlyight](https://github.com/LightwithoutLisonlyight) [#140](https://github.com/sprout2000/elephicon/pull/140)
-- [@godrix](https://github.com/godrix) [#136](https://github.com/sprout2000/elephicon/pull/136)
-- [@kitt3911](https://github.com/kitt3911) [#135](https://github.com/sprout2000/elephicon/pull/135)
-- [@DrDeee](https://github.com/DrDeee) [#108](https://github.com/sprout2000/elephicon/pull/108)
+<a href="https://github.com/sprout2000/elephicon/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=sprout2000/elephicon" />
+</a>
 
 ## :copyright: Copyright
 
