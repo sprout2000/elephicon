@@ -17,7 +17,6 @@ import path from 'node:path';
 import mime from 'mime-types';
 import i18next from 'i18next';
 
-import { reloader } from './reloader';
 import { createMenu } from './createMenu';
 import { setLocales } from './setLocales';
 import { mkico, mkicns } from './mkicons';
@@ -42,13 +41,6 @@ const isLinux = process.platform === 'linux';
 const isDarwin = process.platform === 'darwin';
 const isDevelop = process.env.NODE_ENV === 'development';
 const gotTheLock = app.requestSingleInstanceLock();
-
-if (isDevelop) {
-  reloader({
-    mainPaths: ['dist/main.js', 'dist/preload.js'],
-    rendererPaths: ['dist/index.html', 'dist/index.js', 'dist/index.css'],
-  });
-}
 
 const getResourceDirectory = () => {
   return isDevelop
