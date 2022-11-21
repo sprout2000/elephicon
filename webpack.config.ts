@@ -45,6 +45,16 @@ const main: Configuration = {
   entry: {
     main: './src/main.ts',
   },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: './assets/icon.png',
+          to: './images/icon.png',
+        },
+      ],
+    }),
+  ],
 };
 
 const preload: Configuration = {
@@ -66,14 +76,6 @@ const renderer: Configuration = {
     new HtmlWebpackPlugin({
       inject: 'body',
       template: './src/web/index.html',
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: './assets/icon.png',
-          to: './images/icon.png',
-        },
-      ],
     }),
   ],
 };
