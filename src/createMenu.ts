@@ -53,7 +53,7 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
 
   const helpSub: MenuItemConstructorOptions[] = [
     {
-      label: i18next.t('Support URL...') as string,
+      label: `${i18next.t('Support URL...')}`,
       click: () =>
         shell.openExternal('https://github.com/sprout2000/elephicon/#readme'),
     },
@@ -62,7 +62,7 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
   if (!isDarwin) {
     helpSub.unshift(
       {
-        label: i18next.t('About Elephicon') as string,
+        label: `${i18next.t('About Elephicon')}`,
         accelerator: 'Ctrl+I',
         click: () => app.showAboutPanel(),
       },
@@ -72,16 +72,16 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
 
   const template: MenuItemConstructorOptions[] = [
     {
-      label: i18next.t('File') as string,
+      label: `${i18next.t('File')}`,
       submenu: [
         {
-          label: i18next.t('Open...') as string,
+          label: `${i18next.t('Open...')}`,
           accelerator: 'CmdOrCtrl+O',
           click: async () => {
             await dialog
               .showOpenDialog(win, {
                 properties: ['openFile'],
-                title: i18next.t('Select a PNG File') as string,
+                title: `${i18next.t('Select a PNG File')}`,
                 filters: [
                   {
                     name: 'PNG File',
@@ -99,35 +99,35 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
         { type: 'separator' },
         {
           label: isDarwin
-            ? (i18next.t('Close') as string)
-            : (i18next.t('Quit Elephicon') as string),
+            ? `${i18next.t('Close')}`
+            : `${i18next.t('Quit Elephicon')}`,
           accelerator: isDarwin ? 'Cmd+W' : 'Alt+F4',
           role: isDarwin ? 'close' : 'quit',
         },
       ],
     },
     {
-      label: i18next.t('Settings') as string,
+      label: `${i18next.t('Settings')}`,
       submenu: [
         {
-          label: i18next.t('Quality') as string,
+          label: `${i18next.t('Quality')}`,
           submenu: [
             {
-              label: i18next.t('Low') as string,
+              label: `${i18next.t('Low')}`,
               type: 'radio',
               id: 'low',
               click: () => store.set('quality', 0),
               checked: store.get('quality') === 0,
             },
             {
-              label: i18next.t('Medium') as string,
+              label: `${i18next.t('Medium')}`,
               type: 'radio',
               id: 'mid',
               click: () => store.set('quality', 1),
               checked: store.get('quality') === 1,
             },
             {
-              label: i18next.t('High') as string,
+              label: `${i18next.t('High')}`,
               type: 'radio',
               id: 'high',
               click: () => store.set('quality', 2),
@@ -139,18 +139,18 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
           label: 'ICO',
           submenu: [
             {
-              label: i18next.t(
+              label: `${i18next.t(
                 'Use BMP format for the smaller icon sizes'
-              ) as string,
+              )}`,
               type: 'radio',
               id: 'bmp',
               click: () => store.set('bmp', true),
               checked: store.get('bmp'),
             },
             {
-              label: i18next.t(
+              label: `${i18next.t(
                 'Use PNG for each icon in the created ICO file'
-              ) as string,
+              )}`,
               type: 'radio',
               id: 'png',
               click: () => store.set('bmp', false),
@@ -159,10 +159,10 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
           ],
         },
         {
-          label: i18next.t('Destination') as string,
+          label: `${i18next.t('Destination')}`,
           submenu: [
             {
-              label: i18next.t('Desktop') as string,
+              label: `${i18next.t('Desktop')}`,
               type: 'radio',
               id: 'desktop',
               click: () => {
@@ -172,7 +172,7 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
               checked: store.get('desktop'),
             },
             {
-              label: i18next.t('Same folder as the input PNGs') as string,
+              label: `${i18next.t('Same folder as the input PNGs')}`,
               type: 'radio',
               id: 'current',
               click: () => {
@@ -184,13 +184,13 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
           ],
         },
         {
-          label: i18next.t('Language') as string,
+          label: `${i18next.t('Language')}`,
           submenu: langSub,
         },
       ],
     },
     {
-      label: i18next.t('Help') as string,
+      label: `${i18next.t('Help')}`,
       submenu: helpSub,
     },
   ];
@@ -200,26 +200,26 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
       label: 'Elephicon',
       submenu: [
         {
-          label: i18next.t('About Elephicon') as string,
+          label: `${i18next.t('About Elephicon')}`,
           accelerator: 'Cmd+I',
           role: 'about',
         },
         { type: 'separator' },
         {
-          label: i18next.t('Hide Elephicon') as string,
+          label: `${i18next.t('Hide Elephicon')}`,
           role: 'hide',
         },
         {
-          label: i18next.t('Hide Others') as string,
+          label: `${i18next.t('Hide Others')}`,
           role: 'hideOthers',
         },
         {
-          label: i18next.t('Show All') as string,
+          label: `${i18next.t('Show All')}`,
           role: 'unhide',
         },
         { type: 'separator' },
         {
-          label: i18next.t('Quit Elephicon') as string,
+          label: `${i18next.t('Quit Elephicon')}`,
           role: 'quit',
         },
       ],

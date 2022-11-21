@@ -81,7 +81,7 @@ const createWindow = () => {
     return dialog
       .showOpenDialog(mainWindow, {
         properties: ['openFile'],
-        title: i18next.t('Select a PNG File') as string,
+        title: `${i18next.t('Select a PNG File')}`,
         filters: [
           {
             name: 'PNG file',
