@@ -3,5 +3,9 @@ release
 dist
 npm-*.log
 yarn-*.log
-.env
 .DS_Store
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
