@@ -1,133 +1,76 @@
-import { memo, useContext, useCallback, useEffect } from 'react';
-import { AppContext } from './lib/AppContext';
+import { memo } from 'react';
 
-import { Switch } from './Switch';
 import { Elephant } from './Elephant';
+import { LogoApple } from './LogoApple';
+import { LogoWindows } from './LogoWindows';
 
-const { myAPI } = window;
+type Props = {
+  ico: boolean;
+  drag: boolean;
+  loading: boolean;
+  onClickOS: () => void;
+  onClickOpen: () => Promise<void>;
+  onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
+};
 
-export const Dropzone = memo(() => {
-  const { state, dispatch } = useContext(AppContext);
-
-  const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const afterConvert = useCallback(
-    (result: Result) => {
-      dispatch({
-        type: 'afterConvert',
-        message: true,
-        loading: false,
-        log: result.log,
-        desktop: result.desktop,
-        success: result.type === 'failed' ? false : true,
-      });
-    },
-    [dispatch]
-  );
-
-  const convert = useCallback(
-    async (filepath: string) => {
-      const mime = await myAPI.mimecheck(filepath);
-
-      if (!mime || !mime.match(/png/)) {
-        const format = mime ? mime : 'Unknown';
-
-        dispatch({
-          type: 'convert',
-          log: `Unsupported format: ${format}`,
-          message: true,
-          success: false,
-          loading: false,
-        });
-
-        return;
-      }
-
-      if (state.ico) {
-        myAPI.mkIco(filepath).then((result) => afterConvert(result));
-      } else {
-        myAPI.mkIcns(filepath).then((result) => afterConvert(result));
-      }
-    },
-    [afterConvert, dispatch, state.ico]
-  );
-
-  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    if (state.loading) return;
-
-    preventDefault(e);
-    dispatch({ type: 'drag', drag: true });
-  };
-
-  const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    preventDefault(e);
-    dispatch({ type: 'drag', drag: false });
-  };
-
-  const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    if (state.loading) return;
-
-    preventDefault(e);
-    dispatch({ type: 'drag', drag: false });
-
-    if (e.dataTransfer) {
-      dispatch({ type: 'loading', loading: true });
-      const file = e.dataTransfer.files[0];
-
-      convert(file.path);
-    }
-  };
-
-  const onClickOpen = async () => {
-    if (state.loading) return;
-
-    const filepath = await myAPI.openDialog();
-    if (!filepath) return;
-
-    dispatch({ type: 'loading', loading: true });
-    convert(filepath);
-  };
-
-  useEffect(() => {
-    myAPI.menuOpen((_e, filepath) => {
-      if (!filepath) return;
-
-      dispatch({ type: 'loading', loading: true });
-      convert(filepath);
-    });
-
-    return () => {
-      myAPI.removeMenuOpen();
-    };
-  }, [convert, dispatch]);
-
+export const Dropzone = memo((props: Props) => {
   return (
     <div
       className="drop-message-zone"
-      onDrop={onDrop}
-      onDragEnter={onDragOver}
-      onDragOver={onDragOver}
-      onDragLeave={onDragLeave}
+      onDrop={props.onDrop}
+      onDragEnter={props.onDragOver}
+      onDragOver={props.onDragOver}
+      onDragLeave={props.onDragLeave}
     >
       <div
-        onClick={onClickOpen}
+        onClick={props.onClickOpen}
         className={
-          state.drag
+          props.drag
             ? 'elephant ondrag'
-            : state.loading
+            : props.loading
             ? 'elephant loading'
             : 'elephant'
         }
       >
         <Elephant />
       </div>
-      <div className={state.drag || state.loading ? 'text loading' : 'text'}>
+      <div className={props.drag || props.loading ? 'text loading' : 'text'}>
         Drop your PNGs here...
       </div>
-      <Switch />
+      <div className="switch">
+        <div
+          className={
+            props.loading || props.drag
+              ? 'icon-container loading'
+              : props.ico
+              ? 'icon-container'
+              : 'icon-container unchecked'
+          }
+          onClick={props.onClickOS}
+        >
+          <div className="icon windows">
+            <LogoWindows />
+          </div>
+          <div>ICO</div>
+        </div>
+        <div
+          className={
+            props.loading || props.drag
+              ? 'icon-container loading'
+              : props.ico
+              ? 'icon-container unchecked'
+              : 'icon-container'
+          }
+          onClick={props.onClickOS}
+        >
+          <div className="icon apple">
+            <LogoApple />
+          </div>
+          <div>ICNS</div>
+        </div>
+      </div>
     </div>
   );
 });

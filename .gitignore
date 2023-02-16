@@ -9,3 +9,5 @@ yarn-*.log
 .flaskenv*
 !.env.project
 !.env.vault
+
+devtools

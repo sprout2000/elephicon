@@ -11,7 +11,6 @@ import {
 import Store from 'electron-store';
 import log from 'electron-log';
 import { autoUpdater } from 'electron-updater';
-import { searchDevtools } from 'electron-search-devtools';
 
 import path from 'node:path';
 import mime from 'mime-types';
@@ -104,13 +103,8 @@ const createWindow = () => {
   });
 
   if (isDevelop) {
-    searchDevtools('REACT')
-      .then((devtools) => {
-        session.defaultSession.loadExtension(devtools, {
-          allowFileAccess: true,
-        });
-      })
-      .catch((err) => console.log(err));
+    const extPath = path.resolve(process.cwd(), 'devtools');
+    session.defaultSession.loadExtension(extPath, { allowFileAccess: true });
   }
 
   if (isDarwin || isLinux) {

@@ -1,24 +1,18 @@
-import { memo, useContext } from 'react';
-import { AppContext } from './lib/AppContext';
+import { memo } from 'react';
 
 import { ArrowUndo } from './ArrowUndo';
 
-export const Message = memo(() => {
-  const { state, dispatch } = useContext(AppContext);
+type Props = {
+  success: boolean;
+  log: string;
+  desktop: boolean;
+  onClickBack: () => void;
+};
 
+export const Message = memo((props: Props) => {
   const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
-  };
-
-  const onClickBack = () => {
-    dispatch({
-      type: 'onClickBack',
-      log: '',
-      drag: false,
-      message: false,
-      success: false,
-    });
   };
 
   return (
@@ -30,21 +24,21 @@ export const Message = memo(() => {
       onDragLeave={preventDefault}
     >
       <div className="text">
-        {state.success ? 'Successfully Completed!' : 'Something went wrong...'}
+        {props.success ? 'Successfully Completed!' : 'Something went wrong...'}
       </div>
-      {state.success ? (
+      {props.success ? (
         <div className="result">
-          <div className="filename">{state.log}</div>
+          <div className="filename">{props.log}</div>
           was created
-          {state.desktop ? ' on your desktop' : ' in the current folder'}.
+          {props.desktop ? ' on your desktop' : ' in the current folder'}.
         </div>
       ) : (
         <div className="result">
-          <div className="error">{state.log}</div>
+          <div className="error">{props.log}</div>
         </div>
       )}
       <div className="switch">
-        <div className="back-container" onClick={onClickBack}>
+        <div className="back-container" onClick={props.onClickBack}>
           <div className="icon undo">
             <ArrowUndo />
           </div>
