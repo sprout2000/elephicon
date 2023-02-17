@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { ArrowUndo } from './ArrowUndo';
 
 type Props = {
-  success: boolean;
+  result: Result['type'];
   log: string;
   desktop: boolean;
   onClickBack: () => void;
@@ -24,9 +24,11 @@ export const Message = memo((props: Props) => {
       onDragLeave={preventDefault}
     >
       <div className="text">
-        {props.success ? 'Successfully Completed!' : 'Something went wrong...'}
+        {props.result === 'success'
+          ? 'Successfully Completed!'
+          : 'Something went wrong...'}
       </div>
-      {props.success ? (
+      {props.result === 'success' ? (
         <div className="result">
           <div className="filename">{props.log}</div>
           was created
