@@ -15,7 +15,7 @@ specifiers:
   cross-env: ^7.0.3
   css-loader: ^6.7.3
   dotenv: ^16.0.3
-  electron: ^22.2.1
+  electron: ^22.3.0
   electron-builder: ^23.6.0
   electron-log: ^4.4.8
   electron-store: ^8.1.0
