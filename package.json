@@ -68,5 +68,8 @@
     "overrides": {
       "minimatch": "^3.0.5"
     }
+  },
+  "volta": {
+    "node": "16.19.1"
   }
 }
