@@ -1,8 +1,7 @@
-import { app } from 'electron';
-
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { app } from 'electron';
 import Store from 'electron-store';
 
 import {
@@ -10,9 +9,9 @@ import {
   createICO,
   createICNS,
   clearCache,
-  NEAREST_NEIGHBOR,
-  BICUBIC,
   BEZIER,
+  BICUBIC,
+  NEAREST_NEIGHBOR,
 } from 'png2icons';
 
 const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
