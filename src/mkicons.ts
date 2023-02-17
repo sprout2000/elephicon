@@ -50,7 +50,7 @@ export const mkico = async (
           console.log(`created: ${dirname}${path.sep}${basename}.ico`);
         });
     })
-    .then(() => {
+    .then((): Result => {
       clearCache();
       console.log('Successfully Completed!');
 
@@ -84,7 +84,7 @@ export const mkicns = async (
           console.log(`created: ${dirname}${path.sep}${basename}.icns`);
         });
     })
-    .then(() => {
+    .then((): Result => {
       clearCache();
       console.log('Successfully Completed!');
 
