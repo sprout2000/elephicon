@@ -12,7 +12,7 @@ export const App = () => {
   const [drag, setDrag] = useState(false);
   const [desktop, setDesktop] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<Result['type']>('');
+  const [status, setStatus] = useState<Result['type']>(null);
 
   const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ export const App = () => {
   };
 
   const afterConvert = useCallback((result: Result) => {
-    setResult('success');
+    setStatus('success');
     setLoading(false);
     setLog(result.log);
     setDesktop(result.desktop);
@@ -34,7 +34,7 @@ export const App = () => {
         const format = mime ? mime : 'Unknown';
 
         setLog(`Unsupported format: ${format}`);
-        setResult('failed');
+        setStatus('failed');
         setLoading(false);
 
         return;
@@ -96,7 +96,7 @@ export const App = () => {
 
   const handleClickBack = () => {
     setDrag(false);
-    setResult('');
+    setStatus(null);
   };
 
   useEffect(() => {
@@ -122,7 +122,7 @@ export const App = () => {
 
   return (
     <div className="container" onContextMenu={handleContextMenu}>
-      {result === '' ? (
+      {!status ? (
         <Dropzone
           ico={ico}
           drag={drag}
@@ -136,8 +136,8 @@ export const App = () => {
       ) : (
         <Message
           log={log}
+          status={status}
           desktop={desktop}
-          result={result}
           onClickBack={handleClickBack}
         />
       )}
