@@ -19,8 +19,8 @@ export const Message = memo((props: Props) => {
     <div
       className="drop-message-zone"
       onDrop={preventDefault}
-      onDragEnter={preventDefault}
       onDragOver={preventDefault}
+      onDragEnter={preventDefault}
       onDragLeave={preventDefault}
     >
       <div className="text">
