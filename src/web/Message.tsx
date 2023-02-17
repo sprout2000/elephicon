@@ -3,9 +3,9 @@ import { memo } from 'react';
 import { ArrowUndo } from './ArrowUndo';
 
 type Props = {
-  result: Result['type'];
   log: string;
   desktop: boolean;
+  result: Result['type'];
   onClickBack: () => void;
 };
 
