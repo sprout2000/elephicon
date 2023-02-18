@@ -24,9 +24,9 @@ const initialState: State = {
   log: '',
   ico: true,
   drag: false,
+  result: null,
   desktop: true,
   loading: false,
-  result: null,
 };
 
 export const App = () => {
