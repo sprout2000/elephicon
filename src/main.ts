@@ -98,7 +98,7 @@ const createWindow = () => {
   const menu = createMenu(mainWindow, store);
   Menu.setApplicationMenu(menu);
 
-  ipcMain.on('show-context-menu', () => {
+  ipcMain.handle('show-context-menu', () => {
     menu.popup();
   });
 

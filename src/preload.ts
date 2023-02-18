@@ -10,7 +10,7 @@ contextBridge.exposeInMainWorld('myAPI', {
   mkIcns: async (filepath: string): Promise<Result> =>
     ipcRenderer.invoke('make-icns', filepath),
 
-  contextMenu: () => ipcRenderer.send('show-context-menu'),
+  contextMenu: (): Promise<void> => ipcRenderer.invoke('show-context-menu'),
 
   openDialog: async (): Promise<string | void> =>
     ipcRenderer.invoke('open-file-dialog'),

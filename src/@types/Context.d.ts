@@ -11,7 +11,7 @@ export interface IElectronAPI {
 
   mkIcns: (filepath: string) => Promise<Result>;
 
-  contextMenu: () => void;
+  contextMenu: () => Promise<void>;
 
   openDialog: () => Promise<string | void>;
 
