@@ -17,11 +17,9 @@ export interface IElectronAPI {
 
   menuOpen: (
     listener: (_e: Electron.IpcRendererEvent, filepath: string) => void
-  ) => Electron.IpcRenderer;
-  removeMenuOpen: () => Electron.IpcRenderer;
+  ) => () => Electron.IpcRenderer;
 
   setDesktop: (
     listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
-  ) => Electron.IpcRenderer;
-  removeSetDesktop: () => Electron.IpcRenderer;
+  ) => () => Electron.IpcRenderer;
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useReducer } from 'react';
 
 import { Message } from './Message';
 import { Dropzone } from './Dropzone';
@@ -6,25 +6,45 @@ import { Dropzone } from './Dropzone';
 import 'typeface-roboto';
 import './App.scss';
 
-export const App = () => {
-  const [log, setLog] = useState('');
-  const [ico, setIco] = useState(true);
-  const [drag, setDrag] = useState(false);
-  const [desktop, setDesktop] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<Result['type']>(null);
+type State = {
+  log: string;
+  ico: boolean;
+  drag: boolean;
+  desktop: boolean;
+  loading: boolean;
+  result: Result['type'];
+};
 
-  const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
+const reducer = (state: State, newState: Partial<State>) => ({
+  ...state,
+  ...newState,
+});
+
+const initialState: State = {
+  log: '',
+  ico: true,
+  drag: false,
+  desktop: true,
+  loading: false,
+  result: null,
+};
+
+export const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const preventDefault = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
-  };
-
-  const afterConvert = useCallback((result: Result) => {
-    setStatus('success');
-    setLoading(false);
-    setLog(result.log);
-    setDesktop(result.desktop);
   }, []);
+
+  const afterConvert = (result: Result) => {
+    dispatch({
+      result: 'success',
+      loading: false,
+      log: result.log,
+      desktop: result.desktop,
+    });
+  };
 
   const convert = useCallback(
     async (filepath: string) => {
@@ -33,20 +53,22 @@ export const App = () => {
       if (!mime || !mime.match(/png/)) {
         const format = mime ? mime : 'Unknown';
 
-        setLog(`Unsupported format: ${format}`);
-        setStatus('failed');
-        setLoading(false);
+        dispatch({
+          log: `Unsupported format: ${format}`,
+          result: 'failed',
+          loading: false,
+        });
 
         return;
       }
 
-      if (ico) {
+      if (state.ico) {
         window.myAPI.mkIco(filepath).then((result) => afterConvert(result));
       } else {
         window.myAPI.mkIcns(filepath).then((result) => afterConvert(result));
       }
     },
-    [ico, afterConvert]
+    [state.ico]
   );
 
   const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -55,78 +77,79 @@ export const App = () => {
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    if (loading) return;
+    if (state.loading) return;
 
     preventDefault(e);
-    setDrag(true);
+    dispatch({ drag: true });
   };
 
   const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
     preventDefault(e);
-    setDrag(false);
+    dispatch({ drag: false });
   };
 
   const hanleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    if (loading) return;
+    if (state.loading) return;
 
     preventDefault(e);
-    setDrag(false);
+    dispatch({ drag: false });
 
     if (e.dataTransfer) {
-      setLoading(true);
+      dispatch({ loading: true });
       const file = e.dataTransfer.files[0];
       convert(file.path);
     }
   };
 
   const handleClickOS = () => {
-    if (loading) return;
-    setIco(!ico);
+    if (state.loading) return;
+    dispatch({ ico: !state.ico });
   };
 
   const handleClickOpen = async () => {
-    if (loading) return;
+    if (state.loading) return;
 
     const filepath = await window.myAPI.openDialog();
     if (!filepath) return;
 
-    setLoading(true);
+    dispatch({ loading: true });
     convert(filepath);
   };
 
   const handleClickBack = () => {
-    setDrag(false);
-    setStatus(null);
+    dispatch({ drag: false, result: null, log: '' });
   };
 
   useEffect(() => {
-    window.myAPI.menuOpen((_e, filepath) => {
+    const unlistenFn = window.myAPI.menuOpen((_e, filepath) => {
       if (!filepath) return;
 
-      setLoading(true);
+      dispatch({ loading: true });
       convert(filepath);
     });
 
     return () => {
-      window.myAPI.removeMenuOpen();
+      unlistenFn();
     };
   }, [convert]);
 
   useEffect(() => {
-    window.myAPI.setDesktop((_e, arg) => setDesktop(arg));
+    const unlistenFn = window.myAPI.setDesktop((_e, arg) => {
+      dispatch({ desktop: arg });
+    });
 
     return (): void => {
-      window.myAPI.removeSetDesktop();
+      unlistenFn();
     };
   }, []);
 
   return (
     <div className="container" onContextMenu={handleContextMenu}>
-      {!status ? (
+      {!state.result ? (
         <Dropzone
-          ico={ico}
-          drag={drag}
-          loading={loading}
+          ico={state.ico}
+          drag={state.drag}
+          loading={state.loading}
           onDrop={hanleDrop}
           onClickOS={handleClickOS}
           onDragOver={handleDragOver}
@@ -135,9 +158,9 @@ export const App = () => {
         />
       ) : (
         <Message
-          log={log}
-          status={status}
-          desktop={desktop}
+          log={state.log}
+          result={state.result}
+          desktop={state.desktop}
           onClickBack={handleClickBack}
         />
       )}

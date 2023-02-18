@@ -17,11 +17,15 @@ contextBridge.exposeInMainWorld('myAPI', {
 
   menuOpen: (
     listener: (_e: Electron.IpcRendererEvent, filepath: string) => void
-  ) => ipcRenderer.on('menu-open', listener),
-  removeMenuOpen: () => ipcRenderer.removeAllListeners('menu-open'),
+  ) => {
+    ipcRenderer.on('menu-open', listener);
+    return () => ipcRenderer.removeAllListeners('menu-open');
+  },
 
   setDesktop: (
     listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
-  ) => ipcRenderer.on('set-desktop', listener),
-  removeSetDesktop: () => ipcRenderer.removeAllListeners('set-desktop'),
+  ) => {
+    ipcRenderer.on('set-desktop', listener);
+    return () => ipcRenderer.removeAllListeners('set-desktop');
+  },
 });
