@@ -46,7 +46,7 @@ build({
     ],
     publish: {
       provider: "github",
-      releaseType: "draft",
+      releaseType: "release",
     },
     linux: {
       category: "Development",
