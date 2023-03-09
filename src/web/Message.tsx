@@ -1,11 +1,11 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import { ArrowUndo } from './ArrowUndo';
+import { ArrowUndo } from "./ArrowUndo";
 
 type Props = {
   log: string;
   desktop: boolean;
-  result: Result['type'];
+  result: Result["type"];
   onClickBack: () => void;
 };
 
@@ -24,15 +24,15 @@ export const Message = memo((props: Props) => {
       onDragLeave={preventDefault}
     >
       <div className="text">
-        {props.result === 'success'
-          ? 'Successfully Completed!'
-          : 'Something went wrong...'}
+        {props.result === "success"
+          ? "Successfully Completed!"
+          : "Something went wrong..."}
       </div>
-      {props.result === 'success' ? (
+      {props.result === "success" ? (
         <div className="result">
           <div className="filename">{props.log}</div>
           was created
-          {props.desktop ? ' on your desktop' : ' in the current folder'}.
+          {props.desktop ? " on your desktop" : " in the current folder"}.
         </div>
       ) : (
         <div className="result">
@@ -51,4 +51,4 @@ export const Message = memo((props: Props) => {
   );
 });
 
-Message.displayName = 'Message';
+Message.displayName = "Message";

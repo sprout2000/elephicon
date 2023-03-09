@@ -13,7 +13,7 @@
 @mixin ICON_CONTAINER {
   color: #ffffff;
   text-align: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 100;
 
   &:hover {
@@ -92,7 +92,7 @@
 
     .text {
       font-size: 24px;
-      font-family: 'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       font-weight: 100;
       color: #ffffff;
 
@@ -105,7 +105,7 @@
       margin-top: 1em;
       color: #ffffff;
       text-align: center;
-      font-family: 'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       font-weight: 100;
 
       .error {
@@ -113,7 +113,7 @@
         color: #ffffff;
         width: 300px;
         text-align: center;
-        font-family: 'Roboto', sans-serif;
+        font-family: "Roboto", sans-serif;
         font-weight: 100;
         overflow: hidden;
         position: relative;

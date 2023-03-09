@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useReducer } from 'react';
+import { useCallback, useEffect, useReducer } from "react";
 
-import { Message } from './Message';
-import { Dropzone } from './Dropzone';
+import { Message } from "./Message";
+import { Dropzone } from "./Dropzone";
 
-import 'typeface-roboto';
-import './App.scss';
+import "typeface-roboto";
+import "./App.scss";
 
 type State = {
   log: string;
@@ -12,7 +12,7 @@ type State = {
   drag: boolean;
   desktop: boolean;
   loading: boolean;
-  result: Result['type'];
+  result: Result["type"];
 };
 
 const reducer = (state: State, newState: Partial<State>) => ({
@@ -21,7 +21,7 @@ const reducer = (state: State, newState: Partial<State>) => ({
 });
 
 const initialState: State = {
-  log: '',
+  log: "",
   ico: true,
   drag: false,
   result: null,
@@ -39,7 +39,7 @@ export const App = () => {
 
   const afterConvert = (result: Result) => {
     dispatch({
-      result: 'success',
+      result: "success",
       loading: false,
       log: result.log,
       desktop: result.desktop,
@@ -51,11 +51,11 @@ export const App = () => {
       const mime = await window.myAPI.mimecheck(filepath);
 
       if (!mime || !mime.match(/png/)) {
-        const format = mime ? mime : 'Unknown';
+        const format = mime ? mime : "Unknown";
 
         dispatch({
           log: `Unsupported format: ${format}`,
-          result: 'failed',
+          result: "failed",
           loading: false,
         });
 
@@ -117,7 +117,7 @@ export const App = () => {
   };
 
   const handleClickBack = () => {
-    dispatch({ drag: false, result: null, log: '' });
+    dispatch({ drag: false, result: null, log: "" });
   };
 
   useEffect(() => {

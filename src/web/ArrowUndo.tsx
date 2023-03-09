@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from "react";
 
 export const ArrowUndo = memo(() => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff">
@@ -6,4 +6,4 @@ export const ArrowUndo = memo(() => (
   </svg>
 ));
 
-ArrowUndo.displayName = 'ArrowUndo';
+ArrowUndo.displayName = "ArrowUndo";

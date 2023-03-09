@@ -1,8 +1,8 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import fs from "node:fs";
+import path from "node:path";
 
-import { app } from 'electron';
-import Store from 'electron-store';
+import { app } from "electron";
+import Store from "electron-store";
 
 import {
   setLogger,
@@ -12,26 +12,26 @@ import {
   BEZIER,
   BICUBIC,
   NEAREST_NEIGHBOR,
-} from 'png2icons';
+} from "png2icons";
 
 const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 
 const errorMessage = (err: string, desktop: boolean): Result => {
   console.log(`Something went wrong: ${err}`);
 
-  return { type: 'failed', log: err, desktop };
+  return { type: "failed", log: err, desktop };
 };
 
 export const mkico = async (
   filepath: string,
   store: Store<StoreType>
 ): Promise<Result> => {
-  const isDesktop = store.get('desktop', true);
-  const dirname = isDesktop ? app.getPath('desktop') : path.dirname(filepath);
+  const isDesktop = store.get("desktop", true);
+  const dirname = isDesktop ? app.getPath("desktop") : path.dirname(filepath);
   const basename = path.basename(filepath, path.extname(filepath));
 
-  const num = store.get('quality', 2);
-  const bmp = store.get('bmp', true);
+  const num = store.get("quality", 2);
+  const bmp = store.get("bmp", true);
 
   return fs.promises
     .readFile(filepath)
@@ -51,9 +51,9 @@ export const mkico = async (
     })
     .then((): Result => {
       clearCache();
-      console.log('Successfully Completed!');
+      console.log("Successfully Completed!");
 
-      return { type: 'success', log: `${basename}.ico`, desktop: isDesktop };
+      return { type: "success", log: `${basename}.ico`, desktop: isDesktop };
     })
     .catch((err) => errorMessage(err, isDesktop));
 };
@@ -62,11 +62,11 @@ export const mkicns = async (
   filepath: string,
   store: Store<StoreType>
 ): Promise<Result> => {
-  const isDesktop = store.get('desktop', true);
-  const dirname = isDesktop ? app.getPath('desktop') : path.dirname(filepath);
+  const isDesktop = store.get("desktop", true);
+  const dirname = isDesktop ? app.getPath("desktop") : path.dirname(filepath);
   const basename = path.basename(filepath, path.extname(filepath));
 
-  const num = store.get('quality', 2);
+  const num = store.get("quality", 2);
 
   return fs.promises
     .readFile(filepath)
@@ -85,9 +85,9 @@ export const mkicns = async (
     })
     .then((): Result => {
       clearCache();
-      console.log('Successfully Completed!');
+      console.log("Successfully Completed!");
 
-      return { type: 'success', log: `${basename}.icns`, desktop: isDesktop };
+      return { type: "success", log: `${basename}.icns`, desktop: isDesktop };
     })
     .catch((err) => errorMessage(err, isDesktop));
 };

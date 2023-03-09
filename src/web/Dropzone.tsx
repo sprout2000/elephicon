@@ -1,8 +1,8 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import { Elephant } from './Elephant';
-import { LogoApple } from './LogoApple';
-import { LogoWindows } from './LogoWindows';
+import { Elephant } from "./Elephant";
+import { LogoApple } from "./LogoApple";
+import { LogoWindows } from "./LogoWindows";
 
 type Props = {
   ico: boolean;
@@ -28,25 +28,25 @@ export const Dropzone = memo((props: Props) => {
         onClick={props.onClickOpen}
         className={
           props.drag
-            ? 'elephant ondrag'
+            ? "elephant ondrag"
             : props.loading
-            ? 'elephant loading'
-            : 'elephant'
+            ? "elephant loading"
+            : "elephant"
         }
       >
         <Elephant />
       </div>
-      <div className={props.drag || props.loading ? 'text loading' : 'text'}>
+      <div className={props.drag || props.loading ? "text loading" : "text"}>
         Drop your PNGs here...
       </div>
       <div className="switch">
         <div
           className={
             props.loading || props.drag
-              ? 'icon-container loading'
+              ? "icon-container loading"
               : props.ico
-              ? 'icon-container'
-              : 'icon-container unchecked'
+              ? "icon-container"
+              : "icon-container unchecked"
           }
           onClick={props.onClickOS}
         >
@@ -58,10 +58,10 @@ export const Dropzone = memo((props: Props) => {
         <div
           className={
             props.loading || props.drag
-              ? 'icon-container loading'
+              ? "icon-container loading"
               : props.ico
-              ? 'icon-container unchecked'
-              : 'icon-container'
+              ? "icon-container unchecked"
+              : "icon-container"
           }
           onClick={props.onClickOS}
         >
@@ -75,4 +75,4 @@ export const Dropzone = memo((props: Props) => {
   );
 });
 
-Dropzone.displayName = 'Dropzone';
+Dropzone.displayName = "Dropzone";

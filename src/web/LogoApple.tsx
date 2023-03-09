@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from "react";
 
 export const LogoApple = memo(() => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#fff">
@@ -7,4 +7,4 @@ export const LogoApple = memo(() => (
   </svg>
 ));
 
-LogoApple.displayName = 'LogoApple';
+LogoApple.displayName = "LogoApple";

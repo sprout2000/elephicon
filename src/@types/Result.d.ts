@@ -1,5 +1,5 @@
 declare type Result = {
   log: string;
-  type: 'failed' | 'success' | null;
+  type: "failed" | "success" | null;
   desktop: boolean;
 };

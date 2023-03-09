@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from "react";
 
 export const Elephant = memo(() => (
   <svg
@@ -48,4 +48,4 @@ export const Elephant = memo(() => (
   </svg>
 ));
 
-Elephant.displayName = 'Elephant';
+Elephant.displayName = "Elephant";
