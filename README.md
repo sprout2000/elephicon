@@ -25,11 +25,9 @@ You can download the latest version of _Elephicon_ from the releases page here:
 
 ### :desktop_computer: Windows 10 & 11
 
-You can get _(or upgrade to)_ the latest version of _Elephicon_ via [winget](https://github.com/microsoft/winget-cli):
+Download the latest version for Windows 10 and 11 at [Microsoft Store](https://www.microsoft.com/store/apps/9P1489W92ZDQ).
 
-```sh
-winget install sprout2000.Elephicon
-```
+<a href='https://www.microsoft.com/store/apps/9P1489W92ZDQ'><img width="160px" src='https://developer.microsoft.com/en-us/store/badges/images/English_get-it-from-MS.png' alt='Badge'/></a>
 
 ## :rainbow: Embedded Sizes
 
