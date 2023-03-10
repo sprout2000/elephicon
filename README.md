@@ -109,6 +109,11 @@ Thanks go to these wonderful people :slightly_smiling_face::
   <img src="https://contrib.rocks/image?repo=sprout2000/elephicon" />
 </a>
 
+## :vertical_traffic_light: Privacy Policy
+
+- Elephicon and the developer do NOT collect any personal information or privacy-related information about the user.
+- Elephicon and the developer do NOT collect the information of files opened by Elephicon.
+
 ## :copyright: Copyright
 
 ### [png2icons](https://github.com/idesis-gmbh/png2icons)
