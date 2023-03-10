@@ -60,7 +60,7 @@ build({
     },
     win: {
       icon: "assets/icon.ico",
-      target: ["zip", "nsis"],
+      target: ["appx"],
       publisherName: "sprout2000",
       fileAssociations: [
         {
@@ -75,19 +75,10 @@ build({
       backgroundColor: "#1d3557",
       displayName: "Elephicon",
       showNameOnTiles: true,
-      languages: ["en-US", "ja-JP", "zh-CN"],
+      languages: ["en-US", "ja-JP"],
       identityName: process.env.IDENTITY_NAME,
       publisher: process.env.PUBLISHER,
       publisherDisplayName: "sprout2000",
-    },
-    nsis: {
-      oneClick: false,
-      perMachine: false,
-      createDesktopShortcut: false,
-      createStartMenuShortcut: true,
-      installerIcon: "assets/installer.ico",
-      artifactName:
-        "${productName}-${version}-${platform}-${arch}-installer.${ext}",
     },
     mac: {
       appId: "jp.wassabie64.Elephicon",
