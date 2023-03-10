@@ -1,6 +1,9 @@
+import dotenv from "dotenv";
 import { build } from "electron-builder";
 
 const isDev = process.env.NODE_ENV === "development";
+
+dotenv.config();
 
 build({
   config: {
@@ -66,6 +69,16 @@ build({
         },
       ],
       asarUnpack: "dist/images/icon.png",
+    },
+    appx: {
+      applicationId: "sprout2000.Elephicon",
+      backgroundColor: "#1d3557",
+      displayName: "Elephicon",
+      showNameOnTiles: true,
+      languages: ["en-US", "ja-JP", "zh-CN"],
+      identityName: process.env.IDENTITY_NAME,
+      publisher: process.env.PUBLISHER,
+      publisherDisplayName: "sprout2000",
     },
     nsis: {
       oneClick: false,
