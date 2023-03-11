@@ -71,14 +71,14 @@ build({
       asarUnpack: "dist/images/icon.png",
     },
     appx: {
-      applicationId: "sprout2000.Elephicon",
       backgroundColor: "#1d3557",
       displayName: "Elephicon",
       showNameOnTiles: true,
       languages: ["en-US", "ja-JP"],
-      identityName: process.env.IDENTITY_NAME,
-      publisher: process.env.PUBLISHER,
       publisherDisplayName: "sprout2000",
+      applicationId: "sprout2000.Elephicon",
+      publisher: process.env.PUBLISHER,
+      identityName: process.env.IDENTITY_NAME,
     },
     mac: {
       appId: "jp.wassabie64.Elephicon",
