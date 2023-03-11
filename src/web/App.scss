@@ -53,9 +53,12 @@
   padding: 0;
 }
 
+.drag-region {
+  -webkit-app-region: drag;
+}
+
 .container {
   background: linear-gradient(to top, #005bea 0%, #00c6fb 100%);
-  -webkit-app-region: drag;
 
   .drop-message-zone {
     display: flex;

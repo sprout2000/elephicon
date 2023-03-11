@@ -29,6 +29,8 @@ const initialState: State = {
   loading: false,
 };
 
+const isDarwin = navigator.userAgentData.platform === "macOS";
+
 export const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -144,7 +146,10 @@ export const App = () => {
   }, []);
 
   return (
-    <div className="container" onContextMenu={handleContextMenu}>
+    <div
+      className={isDarwin ? "container drag-region" : "container"}
+      onContextMenu={handleContextMenu}
+    >
       {!state.result ? (
         <Dropzone
           ico={state.ico}
