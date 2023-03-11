@@ -111,8 +111,8 @@ Thanks go to these wonderful people :slightly_smiling_face::
 
 ## :vertical_traffic_light: Privacy Policy
 
-- Elephicon and the developers do NOT collect any personal information or privacy-related information about the user.
-- Elephicon and the developers do NOT collect the information of files opened by Elephicon.
+- Elephicon and the developers do _NOT_ collect any personal information or privacy-related information about the user.
+- Elephicon and the developers do _NOT_ collect the information of files opened by Elephicon.
 
 ## :copyright: Copyright
 
