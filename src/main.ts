@@ -3,7 +3,6 @@ import {
   Menu,
   dialog,
   ipcMain,
-  session,
   nativeTheme,
   BrowserWindow,
 } from "electron";
@@ -11,6 +10,9 @@ import {
 import Store from "electron-store";
 import log from "electron-log";
 import { autoUpdater } from "electron-updater";
+import installExtension, {
+  REACT_DEVELOPER_TOOLS,
+} from "electron-devtools-assembler";
 
 import path from "node:path";
 import mime from "mime-types";
@@ -102,11 +104,6 @@ const createWindow = () => {
     menu.popup();
   });
 
-  if (isDevelop) {
-    const extPath = path.resolve(process.cwd(), "devtools");
-    session.defaultSession.loadExtension(extPath, { allowFileAccess: true });
-  }
-
   if (isDarwin || isLinux) {
     autoUpdater.logger = log;
     autoUpdater.autoDownload = false;
@@ -179,6 +176,10 @@ if (!gotTheLock && !isDarwin) {
     const locale = store.get("language") || app.getLocale();
     setLocales(locale);
     store.set("language", locale);
+
+    installExtension(REACT_DEVELOPER_TOOLS, {
+      loadExtensionOptions: { allowFileAccess: true },
+    });
 
     createWindow();
   });
