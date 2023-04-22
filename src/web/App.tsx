@@ -39,14 +39,14 @@ export const App = () => {
     e.stopPropagation();
   }, []);
 
-  const afterConvert = (result: Result) => {
+  const afterConvert = useCallback((result: Result) => {
     dispatch({
       result: "success",
       loading: false,
       log: result.log,
       desktop: result.desktop,
     });
-  };
+  }, []);
 
   const convert = useCallback(
     async (filepath: string) => {
@@ -70,45 +70,57 @@ export const App = () => {
         window.myAPI.mkIcns(filepath).then((result) => afterConvert(result));
       }
     },
-    [state.ico]
+    [state.ico, afterConvert]
   );
 
-  const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    window.myAPI.contextMenu();
-  };
+  const handleContextMenu = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      window.myAPI.contextMenu();
+    },
+    []
+  );
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    if (state.loading) return;
+  const handleDragOver = useCallback(
+    (e: React.DragEvent<HTMLDivElement>) => {
+      if (state.loading) return;
 
-    preventDefault(e);
-    dispatch({ drag: true });
-  };
+      preventDefault(e);
+      dispatch({ drag: true });
+    },
+    [state.loading, preventDefault]
+  );
 
-  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    preventDefault(e);
-    dispatch({ drag: false });
-  };
+  const handleDragLeave = useCallback(
+    (e: React.DragEvent<HTMLDivElement>) => {
+      preventDefault(e);
+      dispatch({ drag: false });
+    },
+    [preventDefault]
+  );
 
-  const hanleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    if (state.loading) return;
+  const hanleDrop = useCallback(
+    (e: React.DragEvent<HTMLDivElement>) => {
+      if (state.loading) return;
 
-    preventDefault(e);
-    dispatch({ drag: false });
+      preventDefault(e);
+      dispatch({ drag: false });
 
-    if (e.dataTransfer) {
-      dispatch({ loading: true });
-      const file = e.dataTransfer.files[0];
-      convert(file.path);
-    }
-  };
+      if (e.dataTransfer) {
+        dispatch({ loading: true });
+        const file = e.dataTransfer.files[0];
+        convert(file.path);
+      }
+    },
+    [state.loading, preventDefault, convert]
+  );
 
-  const handleClickOS = () => {
+  const handleClickOS = useCallback(() => {
     if (state.loading) return;
     dispatch({ ico: !state.ico });
-  };
+  }, [state.loading, state.ico]);
 
-  const handleClickOpen = async () => {
+  const handleClickOpen = useCallback(async () => {
     if (state.loading) return;
 
     const filepath = await window.myAPI.openDialog();
@@ -116,11 +128,11 @@ export const App = () => {
 
     dispatch({ loading: true });
     convert(filepath);
-  };
+  }, [state.loading, convert]);
 
-  const handleClickBack = () => {
+  const handleClickBack = useCallback(() => {
     dispatch({ drag: false, result: null, log: "" });
-  };
+  }, []);
 
   useEffect(() => {
     const unlistenFn = window.myAPI.menuOpen((_e, filepath) => {
