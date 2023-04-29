@@ -7,11 +7,7 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        platform: [macos-latest, ubuntu-latest]
-
-    runs-on: ${{ matrix.platform }}
+    runs-on: macos-latest
     steps:
       - name: Check out Git repositry
         uses: actions/checkout@master

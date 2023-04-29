@@ -36,7 +36,6 @@ const store = new Store<StoreType>({
   },
 });
 
-const isLinux = process.platform === "linux";
 const isDarwin = process.platform === "darwin";
 const isDevelop = process.env.NODE_ENV === "development";
 const gotTheLock = app.requestSingleInstanceLock();
@@ -56,9 +55,6 @@ const createWindow = () => {
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: isDarwin ? "hidden" : "default",
-    icon: isLinux
-      ? path.join(getResourceDirectory(), "images/icon.png")
-      : undefined,
     resizable: false,
     maximizable: false,
     fullscreenable: false,
@@ -107,7 +103,7 @@ const createWindow = () => {
     session.defaultSession.loadExtension(extPath, { allowFileAccess: true });
   }
 
-  if (isDarwin || isLinux) {
+  if (isDarwin) {
     autoUpdater.logger = log;
     autoUpdater.autoDownload = false;
 
