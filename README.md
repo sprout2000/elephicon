@@ -18,7 +18,7 @@
 
 ## :inbox_tray: Download
 
-### :computer: macOS & GNU/Linux
+### :computer: macOS
 
 You can download the latest version of _Elephicon_ from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
