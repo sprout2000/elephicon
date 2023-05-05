@@ -1,4 +1,9 @@
+import dotenv from "dotenv";
 import { build } from "electron-builder";
+
+const isDev = process.env.NODE_ENV === "development";
+
+dotenv.config();
 
 build({
   config: {
@@ -8,10 +13,6 @@ build({
     directories: {
       output: "release",
       buildResources: "assets",
-    },
-    publish: {
-      provider: "github",
-      releaseType: "release",
     },
     files: [
       "dist/**/*",
@@ -46,9 +47,43 @@ build({
       "!node_modules/webpack",
       "!node_modules/webpack-cli",
     ],
+    publish: {
+      provider: "github",
+      releaseType: "release",
+    },
+    linux: {
+      category: "Development",
+      icon: "assets/linux.icns",
+      asarUnpack: "dist/images/icon.png",
+      target: ["AppImage"],
+      mimeTypes: ["image/png"],
+    },
+    win: {
+      icon: "assets/icon.ico",
+      target: ["appx"],
+      publisherName: "sprout2000",
+      fileAssociations: [
+        {
+          ext: ["png"],
+          description: "PNG file",
+        },
+      ],
+      asarUnpack: "dist/images/icon.png",
+    },
+    appx: {
+      backgroundColor: "#1d3557",
+      displayName: "Elephicon",
+      showNameOnTiles: true,
+      languages: ["en-US", "ja-JP"],
+      publisherDisplayName: "sprout2000",
+      applicationId: "sprout2000.Elephicon",
+      publisher: process.env.PUBLISHER,
+      identityName: process.env.IDENTITY_NAME,
+    },
     mac: {
       appId: "jp.wassabie64.Elephicon",
       category: "public.app-category.developer-tools",
+      identity: isDev ? null : undefined,
       target: [
         {
           target: "default",
@@ -64,6 +99,6 @@ build({
         NSRequiresAquaSystemAppearance: false,
       },
     },
-    afterSign: "scripts/notarizer.ts",
+    afterSign: isDev ? undefined : "scripts/notarizer.ts",
   },
 });
