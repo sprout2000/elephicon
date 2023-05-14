@@ -82,6 +82,7 @@ build({
     mac: {
       appId: "jp.wassabie64.Elephicon",
       category: "public.app-category.developer-tools",
+      darkModeSupport: true,
       target: [
         {
           target: "default",
