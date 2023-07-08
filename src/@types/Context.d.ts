@@ -16,10 +16,10 @@ export interface IElectronAPI {
   openDialog: () => Promise<string | void>;
 
   menuOpen: (
-    listener: (_e: Electron.IpcRendererEvent, filepath: string) => void
+    listener: (_e: Electron.IpcRendererEvent, filepath: string) => void,
   ) => () => Electron.IpcRenderer;
 
   setDesktop: (
-    listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void
+    listener: (_e: Electron.IpcRendererEvent, arg: boolean) => void,
   ) => () => Electron.IpcRenderer;
 }

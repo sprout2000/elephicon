@@ -24,7 +24,7 @@ const errorMessage = (err: string, desktop: boolean): Result => {
 
 export const mkico = async (
   filepath: string,
-  store: Store<StoreType>
+  store: Store<StoreType>,
 ): Promise<Result> => {
   const isDesktop = store.get("desktop", true);
   const dirname = isDesktop ? app.getPath("desktop") : path.dirname(filepath);
@@ -60,7 +60,7 @@ export const mkico = async (
 
 export const mkicns = async (
   filepath: string,
-  store: Store<StoreType>
+  store: Store<StoreType>,
 ): Promise<Result> => {
   const isDesktop = store.get("desktop", true);
   const dirname = isDesktop ? app.getPath("desktop") : path.dirname(filepath);

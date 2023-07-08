@@ -70,7 +70,7 @@ export const App = () => {
         window.myAPI.mkIcns(filepath).then((result) => afterConvert(result));
       }
     },
-    [state.ico, afterConvert]
+    [state.ico, afterConvert],
   );
 
   const handleContextMenu = useCallback(
@@ -78,7 +78,7 @@ export const App = () => {
       e.preventDefault();
       window.myAPI.contextMenu();
     },
-    []
+    [],
   );
 
   const handleDragOver = useCallback(
@@ -88,7 +88,7 @@ export const App = () => {
       preventDefault(e);
       dispatch({ drag: true });
     },
-    [state.loading, preventDefault]
+    [state.loading, preventDefault],
   );
 
   const handleDragLeave = useCallback(
@@ -96,7 +96,7 @@ export const App = () => {
       preventDefault(e);
       dispatch({ drag: false });
     },
-    [preventDefault]
+    [preventDefault],
   );
 
   const hanleDrop = useCallback(
@@ -112,7 +112,7 @@ export const App = () => {
         convert(file.path);
       }
     },
-    [state.loading, preventDefault, convert]
+    [state.loading, preventDefault, convert],
   );
 
   const handleClickOS = useCallback(() => {
