@@ -33,6 +33,7 @@
     "typeface-roboto": "^1.1.13"
   },
   "devDependencies": {
+    "@electron/notarize": "^2.1.0",
     "@types/mime-types": "^2.1.1",
     "@types/node": "^18.16.19",
     "@types/react": "^18.2.15",

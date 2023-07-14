@@ -20,6 +20,7 @@ build({
     },
     files: [
       "dist/**/*",
+      "!node_modules/@electron/notarize",
       "!node_modules/@types/mime-types",
       "!node_modules/@types/node",
       "!node_modules/@types/react",
