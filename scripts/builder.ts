@@ -56,12 +56,6 @@ build({
       icon: "assets/icon.ico",
       target: ["appx"],
       publisherName: "sprout2000",
-      fileAssociations: [
-        {
-          ext: ["png"],
-          description: "PNG file",
-        },
-      ],
       asarUnpack: "dist/images/icon.png",
     },
     appx: {
