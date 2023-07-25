@@ -1,7 +1,5 @@
 import { build } from "electron-builder";
 
-const isDev = process.env.NODE_ENV === "development";
-
 build({
   config: {
     productName: "Elephicon",
@@ -17,7 +15,6 @@ build({
     },
     files: [
       "dist/**/*",
-      "!node_modules/@electron/notarize",
       "!node_modules/@types/mime-types",
       "!node_modules/@types/node",
       "!node_modules/@types/react",
@@ -95,8 +92,6 @@ build({
         CFBundlePackageType: "APPL",
         NSRequiresAquaSystemAppearance: false,
       },
-      identity: isDev ? null : undefined,
     },
-    afterSign: isDev ? undefined : "scripts/notarizer.ts",
   },
 });
