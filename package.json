@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@types/mime-types": "^2.1.1",
-    "@types/node": "^18.17.18",
+    "@types/node": "^18.17.19",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
@@ -46,7 +46,7 @@
     "electron": "^26.2.2",
     "electron-builder": "^24.6.5",
     "electronmon": "^2.0.2",
-    "eslint": "^8.49.0",
+    "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
