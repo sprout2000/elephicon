@@ -57,9 +57,18 @@ build({
     },
     win: {
       icon: "assets/icon.ico",
-      target: ["appx"],
+      target: ["nsis", "zip"],
       publisherName: "sprout2000",
       asarUnpack: "dist/images/icon.png",
+    },
+    nsis: {
+      oneClick: false,
+      perMachine: false,
+      createDesktopShortcut: false,
+      createStartMenuShortcut: true,
+      installerIcon: "assets/installer.ico",
+      artifactName:
+        "${productName}-${version}-${platform}-${arch}-installer.${ext}",
     },
     appx: {
       backgroundColor: "#1d3557",
