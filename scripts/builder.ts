@@ -99,7 +99,6 @@ build({
         NSRequiresAquaSystemAppearance: false,
       },
       notarize: {
-        appBundleId: "jp.wassabie64.Elephicon",
         teamId: "285FKU3L4F",
       },
     },
