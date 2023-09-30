@@ -112,7 +112,7 @@ const createWindow = () => {
     autoUpdater.on("update-available", () => {
       dialog
         .showMessageBox(mainWindow, {
-          message: "Found Updates",
+          message: "Update Notification",
           detail:
             "A new version is available.\nDo you want to download it now?",
           buttons: ["Not now", "OK"],
