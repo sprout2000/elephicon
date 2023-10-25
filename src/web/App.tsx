@@ -65,9 +65,19 @@ export const App = () => {
       }
 
       if (state.ico) {
-        window.myAPI.mkIco(filepath).then((result) => afterConvert(result));
+        window.myAPI
+          .mkIco(filepath)
+          .then((result) => afterConvert(result))
+          .catch((reason) => {
+            dispatch({ log: `${reason}`, result: "failed", loading: false });
+          });
       } else {
-        window.myAPI.mkIcns(filepath).then((result) => afterConvert(result));
+        window.myAPI
+          .mkIcns(filepath)
+          .then((result) => afterConvert(result))
+          .catch((reason) => {
+            dispatch({ log: `${reason}`, result: "failed", loading: false });
+          });
       }
     },
     [state.ico, afterConvert],

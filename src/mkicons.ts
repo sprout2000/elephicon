@@ -16,11 +16,11 @@ import {
 
 const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 
-const errorMessage = (err: string, desktop: boolean): Result => {
-  console.log(`Something went wrong: ${err}`);
-
-  return { type: "failed", log: err, desktop };
-};
+// const errorMessage = (err: string, desktop: boolean): Result => {
+//   console.log(`Something went wrong: ${err}`);
+//
+//   return { type: "failed", log: err, desktop };
+// };
 
 export const mkico = async (
   filepath: string,
@@ -55,7 +55,9 @@ export const mkico = async (
 
       return { type: "success", log: `${basename}.ico`, desktop: isDesktop };
     })
-    .catch((err) => errorMessage(err, isDesktop));
+    .catch((err) => {
+      throw err;
+    });
 };
 
 export const mkicns = async (
@@ -89,5 +91,7 @@ export const mkicns = async (
 
       return { type: "success", log: `${basename}.icns`, desktop: isDesktop };
     })
-    .catch((err) => errorMessage(err, isDesktop));
+    .catch((err) => {
+      throw err;
+    });
 };
