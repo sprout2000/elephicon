@@ -53,7 +53,7 @@ export const App = () => {
       const mime = await window.myAPI.mimecheck(filepath);
 
       if (!mime || !mime.match(/png/)) {
-        const format = mime ? mime : "Unknown";
+        const format = mime || "Unknown";
 
         dispatch({
           log: `Unsupported format: ${format}`,
