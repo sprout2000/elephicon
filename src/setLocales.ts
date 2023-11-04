@@ -2,6 +2,7 @@ import i18next from "i18next";
 
 import de from "./locales/de.json"; // https://github.com/sprout2000/elephicon/pull/108 by DrDeee
 import en from "./locales/en.json";
+import es from "./locales/es.json"; // https://github.com/sprout2000/elephicon/pull/240 by kant
 import it from "./locales/it.json"; // https://github.com/sprout2000/elephicon/pull/140 by LightwithoutLisonlyight
 import ja from "./locales/ja.json";
 import ml from "./locales/ml.json"; // https://github.com/sprout2000/elephicon/pull/163 by aerocyber
@@ -30,6 +31,19 @@ export const setLocales = (locale: string) => {
       "en-NZ": { translation: en },
       "en-US": { translation: en },
       "en-ZA": { translation: en },
+      es: { translation: es },
+      "es-419": { translation: es },
+      "es-AR": { translation: es },
+      "es-CL": { translation: es },
+      "es-CO": { translation: es },
+      "es-CR": { translation: es },
+      "es-ES": { translation: es },
+      "es-HN": { translation: es },
+      "es-MX": { translation: es },
+      "es-PE": { translation: es },
+      "es-US": { translation: es },
+      "es-UY": { translation: es },
+      "es-VE": { translation: es },
       it: { translation: it },
       "it-CH": { translation: it },
       "it-IT": { translation: it },

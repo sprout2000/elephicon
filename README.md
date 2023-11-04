@@ -46,6 +46,7 @@ You can download the latest version of _Elephicon_ from the releases page here:
 | :--------- | :-----: |
 | Deutsch    |  `de`   |
 | English    |  `en`   |
+| Español    |  `es`   |
 | Italiano   |  `it`   |
 | 日本語     |  `ja`   |
 | Malayalam  |  `ml`   |

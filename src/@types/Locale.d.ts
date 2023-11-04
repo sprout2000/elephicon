@@ -1,6 +1,7 @@
 type Code =
   | "de"
   | "en"
+  | "es"
   | "it"
   | "ja"
   | "ml"
