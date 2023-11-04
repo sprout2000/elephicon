@@ -20,6 +20,8 @@
 You can download the latest version of _Elephicon_ from the releases page here:  
 [https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
 
+_Note: No code signing has been done except for the macOS version._
+
 ## :rainbow: Embedded Sizes
 
 | Dimension  | ICO | ICNS |
