@@ -76,27 +76,7 @@ You can easily contribute to this repository by providing translation files.
   └── web
 ```
 
-2. Import the locale into `src/setLocales.ts` as follows:
-
-```diff
-  import en from './locales/en.json';
-  import ja from './locales/ja.json';
-+ import de from './locales/de.json';
-
-  export const setLocales = (locale: string): void => {
-    i18next.init({
-      lng: locale,
-      fallbackLng: 'en',
-      resources: {
-        en: { translation: en },
-        ja: { translation: ja },
-+       de: { translation: de },
-      },
-    });
-  };
-```
-
-3. And then please send a [pull request](https://github.com/sprout2000/elephicon/pulls) to this repository.
+2. And then please send a [pull request](https://github.com/sprout2000/elephicon/pulls) to this repository.
 
 ## :tada: Contributors
 
