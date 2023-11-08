@@ -72,7 +72,7 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
         accelerator: "Ctrl+I",
         click: () => app.showAboutPanel(),
       },
-      { type: "separator" }
+      { type: "separator" },
     );
   }
 
@@ -146,7 +146,7 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
           submenu: [
             {
               label: `${i18next.t(
-                "Use BMP format for the smaller icon sizes"
+                "Use BMP format for the smaller icon sizes",
               )}`,
               type: "radio",
               id: "bmp",
@@ -155,7 +155,7 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
             },
             {
               label: `${i18next.t(
-                "Use PNG for each icon in the created ICO file"
+                "Use PNG for each icon in the created ICO file",
               )}`,
               type: "radio",
               id: "png",
