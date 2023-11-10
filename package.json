@@ -24,7 +24,7 @@
     "electron-log": "^5.0.0",
     "electron-store": "^8.1.0",
     "electron-updater": "^6.1.7",
-    "i18next": "^23.6.0",
+    "i18next": "^23.7.2",
     "localforage": "^1.10.0",
     "mime-types": "^2.1.35",
     "png2icons": "^2.0.1",
