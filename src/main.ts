@@ -186,7 +186,7 @@ if (!gotTheLock && !isDarwin) {
       : `v${app.getVersion()} (${process.versions["electron"]})`,
     version: process.versions["electron"],
     iconPath: path.join(getResourceDirectory(), "images/icon.png"),
-    copyright: "© 2020 sprout2000 and other contributors",
+    copyright: "© 2020-2023 sprout2000 and other contributors",
   });
 
   app.once("window-all-closed", () => app.exit());
