@@ -2,7 +2,6 @@ import {
   app,
   Menu,
   dialog,
-  session,
   ipcMain,
   nativeTheme,
   BrowserWindow,
@@ -97,11 +96,6 @@ const createWindow = () => {
   ipcMain.handle("show-context-menu", () => {
     menu.popup();
   });
-
-  if (isDevelop) {
-    const extPath = path.resolve(process.cwd(), "../devtools");
-    session.defaultSession.loadExtension(extPath, { allowFileAccess: true });
-  }
 
   if (isDarwin) {
     autoUpdater.logger = log;

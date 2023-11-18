@@ -76,7 +76,7 @@ const renderer: Configuration = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       inject: "body",
-      template: "./src/web/index.ejs",
+      template: isDev ? "./src/web/index.dev.html" : "./src/web/index.html",
     }),
   ],
 };
