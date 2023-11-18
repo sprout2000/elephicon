@@ -30,8 +30,8 @@ export const Dropzone = memo((props: Props) => {
           props.drag
             ? "elephant ondrag"
             : props.loading
-            ? "elephant loading"
-            : "elephant"
+              ? "elephant loading"
+              : "elephant"
         }
       >
         <Elephant />
@@ -45,8 +45,8 @@ export const Dropzone = memo((props: Props) => {
             props.loading || props.drag
               ? "icon-container loading"
               : props.ico
-              ? "icon-container"
-              : "icon-container unchecked"
+                ? "icon-container"
+                : "icon-container unchecked"
           }
           onClick={props.onClickOS}
         >
@@ -60,8 +60,8 @@ export const Dropzone = memo((props: Props) => {
             props.loading || props.drag
               ? "icon-container loading"
               : props.ico
-              ? "icon-container unchecked"
-              : "icon-container"
+                ? "icon-container unchecked"
+                : "icon-container"
           }
           onClick={props.onClickOS}
         >
