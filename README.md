@@ -46,6 +46,7 @@ _Note: No code signing has been done except for the macOS version._
 
 | Language   |  Code   |
 | :--------- | :-----: |
+| Azərbaycan |  `az`   |
 | Deutsch    |  `de`   |
 | English    |  `en`   |
 | Español    |  `es`   |
