@@ -1,4 +1,5 @@
 type Code =
+  | "az"
   | "de"
   | "en"
   | "es"

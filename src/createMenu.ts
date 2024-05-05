@@ -10,6 +10,7 @@ import Store from "electron-store";
 import i18next from "i18next";
 
 const localeList: Locale[] = [
+  { code: "az", value: "Azərbaycan" },
   { code: "de", value: "Deutsch" },
   { code: "en", value: "English" },
   { code: "es", value: "Español" },

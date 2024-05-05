@@ -1,5 +1,6 @@
 import i18next from "i18next";
 
+import az from "./locales/az.json"; // https://github.com/sprout2000/elephicon/pull/241 by thepoladov13
 import de from "./locales/de.json"; // https://github.com/sprout2000/elephicon/pull/108 by DrDeee
 import en from "./locales/en.json";
 import es from "./locales/es.json"; // https://github.com/sprout2000/elephicon/pull/240 by kant
@@ -18,6 +19,7 @@ export const setLocales = (locale: string) => {
     fallbackLng: "en",
     // https://source.chromium.org/chromium/chromium/src/+/main:ui/base/l10n/l10n_util.cc
     resources: {
+      az: { translation: az },
       de: { translation: de },
       "de-AT": { translation: de },
       "de-CH": { translation: de },
