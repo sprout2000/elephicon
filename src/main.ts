@@ -7,8 +7,8 @@ import {
   BrowserWindow,
 } from "electron";
 
-import Store from "electron-store";
 import log from "electron-log";
+import { Conf } from "electron-conf/main";
 import { autoUpdater } from "electron-updater";
 
 import path from "node:path";
@@ -22,8 +22,7 @@ import { mkico, mkicns } from "./mkicons";
 console.log = log.log;
 log.info("App starting...");
 
-const store = new Store<StoreType>({
-  configFileMode: 0o666,
+const store = new Conf<StoreType>({
   defaults: {
     ico: true,
     desktop: true,

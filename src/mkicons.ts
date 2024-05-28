@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { app } from "electron";
-import Store from "electron-store";
+import { Conf } from "electron-conf/main";
 
 import {
   setLogger,
@@ -24,7 +24,7 @@ const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
 
 export const mkico = async (
   filepath: string,
-  store: Store<StoreType>,
+  store: Conf<StoreType>,
 ): Promise<Result> => {
   const isDesktop = store.get("desktop", true);
   const dirname = isDesktop ? app.getPath("desktop") : path.dirname(filepath);
@@ -62,7 +62,7 @@ export const mkico = async (
 
 export const mkicns = async (
   filepath: string,
-  store: Store<StoreType>,
+  store: Conf<StoreType>,
 ): Promise<Result> => {
   const isDesktop = store.get("desktop", true);
   const dirname = isDesktop ? app.getPath("desktop") : path.dirname(filepath);
