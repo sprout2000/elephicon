@@ -19,10 +19,10 @@
     "release": "ts-node scripts/builder.ts"
   },
   "dependencies": {
-    "electron-conf": "^1.1.0",
+    "electron-conf": "^1.2.0",
     "electron-log": "^5.1.7",
-    "electron-updater": "^6.3.2",
-    "i18next": "^23.12.2",
+    "electron-updater": "^6.3.3",
+    "i18next": "^23.12.3",
     "localforage": "^1.10.0",
     "mime-types": "^2.1.35",
     "png2icons": "^2.0.1",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@types/mime-types": "^2.1.4",
-    "@types/node": "^20.14.14",
+    "@types/node": "^20.14.15",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
