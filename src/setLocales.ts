@@ -8,8 +8,8 @@ import it from "./locales/it.json"; // https://github.com/sprout2000/elephicon/p
 import ja from "./locales/ja.json";
 import ml from "./locales/ml.json"; // https://github.com/sprout2000/elephicon/pull/163 by aerocyber
 import pt from "./locales/pt.json"; // https://github.com/sprout2000/elephicon/pull/136 by godrix
-import tr from "./locales/tr.json"; // https://github.com/sprout2000/elephicon/pull/159 by umitseyhan75
 import ru from "./locales/ru.json"; // https://github.com/sprout2000/elephicon/pull/135 by kitt3911
+import tr from "./locales/tr.json"; // https://github.com/sprout2000/elephicon/pull/159 by umitseyhan75
 import uk from "./locales/uk.json"; // https://github.com/sprout2000/elephicon/pull/223 by whitebear60
 import zh_CN from "./locales/zh_cn.json"; // https://github.com/sprout2000/elephicon/pull/151 by ArcherGu
 

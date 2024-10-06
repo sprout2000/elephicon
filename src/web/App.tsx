@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useReducer } from "react";
 
-import { Message } from "./Message";
 import { Dropzone } from "./Dropzone";
+import { Message } from "./Message";
 
 import "typeface-roboto";
 import "./App.scss";

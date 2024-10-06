@@ -1,12 +1,12 @@
 import {
+  type BrowserWindow,
+  Menu,
+  type MenuItemConstructorOptions,
   app,
   dialog,
-  BrowserWindow,
-  Menu,
-  MenuItemConstructorOptions,
   shell,
 } from "electron";
-import { Conf } from "electron-conf/main";
+import type { Conf } from "electron-conf/main";
 import i18next from "i18next";
 
 const localeList: Locale[] = [

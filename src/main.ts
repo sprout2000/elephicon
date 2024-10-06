@@ -1,23 +1,23 @@
 import {
-  app,
+  BrowserWindow,
   Menu,
+  app,
   dialog,
   ipcMain,
   nativeTheme,
-  BrowserWindow,
 } from "electron";
 
-import log from "electron-log";
 import { Conf } from "electron-conf/main";
+import log from "electron-log";
 import { autoUpdater } from "electron-updater";
 
 import path from "node:path";
-import mime from "mime-types";
 import i18next from "i18next";
+import mime from "mime-types";
 
 import { createMenu } from "./createMenu";
+import { mkicns, mkico } from "./mkicons";
 import { setLocales } from "./setLocales";
-import { mkico, mkicns } from "./mkicons";
 
 console.log = log.log;
 log.info("App starting...");

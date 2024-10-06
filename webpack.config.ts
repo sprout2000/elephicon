@@ -1,8 +1,8 @@
 import path from "node:path";
-import { Configuration } from "webpack";
-import HtmlWebpackPlugin from "html-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import type { Configuration } from "webpack";
 
 const isDev = process.env.NODE_ENV === "development";
 

@@ -2,16 +2,16 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { app } from "electron";
-import { Conf } from "electron-conf/main";
+import type { Conf } from "electron-conf/main";
 
 import {
-  setLogger,
-  createICO,
-  createICNS,
-  clearCache,
   BEZIER,
   BICUBIC,
   NEAREST_NEIGHBOR,
+  clearCache,
+  createICNS,
+  createICO,
+  setLogger,
 } from "png2icons";
 
 const qualities = [NEAREST_NEIGHBOR, BICUBIC, BEZIER];
