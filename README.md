@@ -11,7 +11,7 @@
 - The ideal input is a 24-bit PNG file with _1024x1024_ pixels and an alpha channel, but any other dimensions and most other PNG formats will do work.
 - If you only need to create ICO files, _256×256_ pixels will be enough.
 - It's also possible to create icon files from non-quadratic source PNGs.
-- Various settings are available from the context menu _(Windows/Linux)_.
+- Various settings are available from the context menu.
 
 <img width="50%" alt="animation" src="https://user-images.githubusercontent.com/52094761/144979888-d796c672-ee0a-44cc-bfa2-abce6513d192.gif" />
 
