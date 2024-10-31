@@ -6,7 +6,7 @@ import {
   dialog,
   shell,
 } from "electron";
-import type { Conf } from "electron-conf/main";
+import type Store from "electron-store";
 import i18next from "i18next";
 
 const localeList: Locale[] = [
@@ -24,7 +24,7 @@ const localeList: Locale[] = [
   { code: "zh-CN", value: "简体中文" },
 ];
 
-export const createMenu = (win: BrowserWindow, store: Conf<StoreType>) => {
+export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
   const isDarwin = process.platform === "darwin";
 
   const langSub: MenuItemConstructorOptions[] = [];

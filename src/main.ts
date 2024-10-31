@@ -7,8 +7,8 @@ import {
   nativeTheme,
 } from "electron";
 
-import { Conf } from "electron-conf/main";
 import log from "electron-log";
+import Store from "electron-store";
 import { autoUpdater } from "electron-updater";
 
 import path from "node:path";
@@ -22,7 +22,7 @@ import { setLocales } from "./setLocales";
 console.log = log.log;
 log.info("App starting...");
 
-const store = new Conf<StoreType>({
+const store = new Store<StoreType>({
   defaults: {
     ico: true,
     desktop: true,
