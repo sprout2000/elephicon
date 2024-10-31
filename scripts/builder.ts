@@ -17,13 +17,6 @@ build({
       releaseType: "release",
     },
     files: ["dist/**/*"],
-    linux: {
-      category: "Development",
-      icon: "assets/linux.icns",
-      asarUnpack: "dist/images/icon.png",
-      target: ["AppImage"],
-      mimeTypes: ["image/png"],
-    },
     win: {
       icon: "assets/icon.ico",
       target: ["nsis", "zip"],
@@ -38,16 +31,6 @@ build({
       installerIcon: "assets/installer.ico",
       artifactName:
         "${productName}-${version}-${platform}-${arch}-installer.${ext}",
-    },
-    appx: {
-      backgroundColor: "#1d3557",
-      displayName: "Elephicon",
-      showNameOnTiles: true,
-      languages: ["en-US", "ja-JP"],
-      publisherDisplayName: "sprout2000",
-      applicationId: "sprout2000.Elephicon",
-      publisher: process.env.PUBLISHER,
-      identityName: process.env.IDENTITY_NAME,
     },
     mac: {
       appId: "jp.wassabie64.Elephicon",
