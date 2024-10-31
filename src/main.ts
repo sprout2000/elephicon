@@ -49,10 +49,10 @@ const createWindow = () => {
     x: store.get("x"),
     y: store.get("y"),
     width: isDarwin ? 360 : 400,
-    height: isDarwin ? 320 : 340,
+    height: 340,
     show: false,
     autoHideMenuBar: true,
-    titleBarStyle: isDarwin ? "hidden" : "default",
+    // titleBarStyle: isDarwin ? "hidden" : "default",
     resizable: false,
     maximizable: false,
     fullscreenable: false,
@@ -92,11 +92,9 @@ const createWindow = () => {
   const menu = createMenu(mainWindow, store);
   Menu.setApplicationMenu(menu);
 
-  if (!isDarwin) {
-    ipcMain.handle("show-context-menu", () => {
-      menu.popup();
-    });
-  }
+  ipcMain.handle("show-context-menu", () => {
+    menu.popup();
+  });
 
   if (isDarwin) {
     autoUpdater.logger = log;
