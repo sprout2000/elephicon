@@ -118,8 +118,8 @@ export const App = () => {
 
       if (e.dataTransfer) {
         dispatch({ loading: true });
-        const file = e.dataTransfer.files[0];
-        convert(file.path);
+        const filepath = window.myAPI.getFilePath(e.dataTransfer.files[0]);
+        convert(filepath);
       }
     },
     [state.loading, preventDefault, convert],

@@ -92,9 +92,11 @@ const createWindow = () => {
   const menu = createMenu(mainWindow, store);
   Menu.setApplicationMenu(menu);
 
-  ipcMain.handle("show-context-menu", () => {
-    menu.popup();
-  });
+  if (!isDarwin) {
+    ipcMain.handle("show-context-menu", () => {
+      menu.popup();
+    });
+  }
 
   if (isDarwin) {
     autoUpdater.logger = log;

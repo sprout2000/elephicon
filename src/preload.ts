@@ -1,6 +1,8 @@
-import { contextBridge, ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer, webUtils } from "electron";
 
 contextBridge.exposeInMainWorld("myAPI", {
+  getFilePath: (file: File) => webUtils.getPathForFile(file),
+
   mimecheck: async (filepath: string): Promise<string | false> =>
     ipcRenderer.invoke("mime-check", filepath),
 
