@@ -13,7 +13,9 @@
   },
   "main": "dist/main.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=\"development\" webpack --progress && electron .",
+    "dev": "rimraf dist && run-p dev:webpack dev:electron",
+    "dev:webpack": "cross-env NODE_ENV=\"development\" webpack --progress",
+    "dev:electron": "wait-on ./dist/index.html ./dist/main.js && electronmon .",
     "build": "rimraf dist && cross-env NODE_ENV=\"production\" webpack --progress",
     "lint": "biome check --write .",
     "package": "ts-node scripts/builder.ts",
@@ -43,8 +45,10 @@
     "dotenv": "^16.4.5",
     "electron": "^29.4.6",
     "electron-builder": "^24.13.3",
+    "electronmon": "^2.0.3",
     "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.9.1",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
     "sass": "^1.79.4",
@@ -52,6 +56,7 @@
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "typescript": "~5.6.3",
+    "wait-on": "^8.0.1",
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4"
   }

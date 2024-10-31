@@ -35,6 +35,7 @@ const common: Configuration = {
       },
     ],
   },
+  watch: isDev,
   stats: "errors-only",
   devtool: isDev ? "source-map" : undefined,
 };
