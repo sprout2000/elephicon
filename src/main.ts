@@ -1,17 +1,17 @@
+import path from "node:path";
+
 import {
-  BrowserWindow,
-  Menu,
   app,
+  BrowserWindow,
   dialog,
   ipcMain,
+  Menu,
   nativeTheme,
 } from "electron";
 
 import log from "electron-log";
 import Store from "electron-store";
 import { autoUpdater } from "electron-updater";
-
-import path from "node:path";
 import i18next from "i18next";
 import mime from "mime-types";
 

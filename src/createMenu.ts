@@ -1,11 +1,12 @@
 import {
+  app,
   type BrowserWindow,
+  dialog,
   Menu,
   type MenuItemConstructorOptions,
-  app,
-  dialog,
   shell,
 } from "electron";
+
 import type Store from "electron-store";
 import i18next from "i18next";
 

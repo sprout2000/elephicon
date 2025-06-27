@@ -7,10 +7,10 @@ import type Store from "electron-store";
 import {
   BEZIER,
   BICUBIC,
-  NEAREST_NEIGHBOR,
   clearCache,
   createICNS,
   createICO,
+  NEAREST_NEIGHBOR,
   setLogger,
 } from "png2icons";
 
