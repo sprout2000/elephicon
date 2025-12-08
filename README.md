@@ -58,6 +58,7 @@ winget install sprout2000.Elephicon
 | Deutsch    |  `de`   |
 | English    |  `en`   |
 | Español    |  `es`   |
+| Français   |  `fr`   |
 | Italiano   |  `it`   |
 | 日本語     |  `ja`   |
 | Malayalam  |  `ml`   |
