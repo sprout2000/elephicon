@@ -4,6 +4,7 @@ import az from "./locales/az.json"; // https://github.com/sprout2000/elephicon/p
 import de from "./locales/de.json"; // https://github.com/sprout2000/elephicon/pull/108 by DrDeee
 import en from "./locales/en.json";
 import es from "./locales/es.json"; // https://github.com/sprout2000/elephicon/pull/240 by kant
+import fr from "./locales/fr.json"; // https://github.com/sprout2000/elephicon/issues/243 by logounet
 import it from "./locales/it.json"; // https://github.com/sprout2000/elephicon/pull/140 by LightwithoutLisonlyight
 import ja from "./locales/ja.json";
 import ml from "./locales/ml.json"; // https://github.com/sprout2000/elephicon/pull/163 by aerocyber
@@ -46,6 +47,10 @@ export const setLocales = (locale: string) => {
       "es-US": { translation: es },
       "es-UY": { translation: es },
       "es-VE": { translation: es },
+      fr: { translation: fr },
+      "fr-CA": { translation: fr },
+      "fr-CH": { translation: fr },
+      "fr-FR": { translation: fr },
       it: { translation: it },
       "it-CH": { translation: it },
       "it-IT": { translation: it },

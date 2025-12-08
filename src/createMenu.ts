@@ -15,6 +15,7 @@ const localeList: Locale[] = [
   { code: "de", value: "Deutsch" },
   { code: "en", value: "English" },
   { code: "es", value: "Español" },
+  { code: "fr", value: "Français" },
   { code: "it", value: "Italiano" },
   { code: "ja", value: "日本語" },
   { code: "ml", value: "Malayalam" },
