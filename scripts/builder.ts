@@ -7,7 +7,7 @@ build({
   config: {
     productName: "Elephicon",
     artifactName: "${productName}-${version}-${platform}-${arch}.${ext}",
-    copyright: "© 2020-2024 sprout2000",
+    copyright: "© 2020-2026 sprout2000",
     directories: {
       output: "release",
       buildResources: "assets",
