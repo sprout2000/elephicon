@@ -20,7 +20,6 @@ build({
     win: {
       icon: "assets/icon.ico",
       target: ["nsis", "zip"],
-      publisherName: "sprout2000",
       asarUnpack: "dist/images/icon.png",
     },
     nsis: {
@@ -49,9 +48,6 @@ build({
         CFBundleExecutable: "Elephicon",
         CFBundlePackageType: "APPL",
         NSRequiresAquaSystemAppearance: false,
-      },
-      notarize: {
-        teamId: "285FKU3L4F",
       },
     },
   },
