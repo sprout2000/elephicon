@@ -18,7 +18,7 @@
     "dev:electron": "wait-on ./dist/index.html ./dist/main.js && electronmon .",
     "build": "rimraf dist && rspack --node-env \"production\"",
     "lint": "biome check --write .",
-    "release": "ts-node scripts/builder.ts"
+    "publish": "ts-node scripts/builder.ts"
   },
   "dependencies": {
     "electron-log": "^5.4.3",
