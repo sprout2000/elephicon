@@ -24,20 +24,20 @@
     "electron-log": "^5.4.3",
     "electron-store": "^11.0.2",
     "electron-updater": "^6.8.3",
-    "i18next": "^26.0.3",
+    "i18next": "^26.0.4",
     "localforage": "^1.10.0",
     "mime-types": "^3.0.2",
     "png2icons": "^2.0.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "typeface-roboto": "^1.1.13"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.10",
+    "@biomejs/biome": "^2.4.11",
     "@rspack/cli": "^1.7.11",
     "@rspack/core": "^1.7.11",
     "@types/mime-types": "^3.0.1",
-    "@types/node": "^25.5.2",
+    "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "css-loader": "^7.1.4",
@@ -51,6 +51,6 @@
     "sass-loader": "^16.0.7",
     "ts-node": "^10.9.2",
     "typescript": "~6.0.2",
-    "wait-on": "^9.0.4"
+    "wait-on": "^9.0.5"
   }
 }
