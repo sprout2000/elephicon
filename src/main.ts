@@ -73,6 +73,7 @@ const createWindow = () => {
   ipcMain.handle("open-file-dialog", async () => {
     return dialog
       .showOpenDialog(mainWindow, {
+        defaultPath: app.getPath("pictures"),
         properties: ["openFile"],
         title: `${i18next.t("Select a PNG File")}`,
         filters: [
