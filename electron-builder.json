@@ -1,0 +1,37 @@
+{
+  "productName": "Elephicon",
+  "artifactName": "${productName}-${version}-${platform}-${arch}.${ext}",
+  "copyright": "© 2020-2026 sprout2000",
+  "directories": {
+    "output": "release",
+    "buildResources": "assets"
+  },
+  "files": ["dist/**/*"],
+  "win": {
+    "icon": "assets/icon.ico",
+    "target": ["nsis", "zip"],
+    "asarUnpack": "dist/images/icon.png"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "createDesktopShortcut": false,
+    "createStartMenuShortcut": true,
+    "installerIcon": "assets/installer.ico",
+    "artifactName": "${productName}-${version}-${platform}-${arch}-installer.${ext}"
+  },
+  "mac": {
+    "appId": "jp.wassabie64.Elephicon",
+    "category": "public.app-category.developer-tools",
+    "darkModeSupport": true,
+    "target": ["dmg", "zip"],
+    "icon": "assets/icon.icns",
+    "extendInfo": {
+      "CFBundleName": "Elephicon",
+      "CFBundleDisplayName": "Elephicon",
+      "CFBundleExecutable": "Elephicon",
+      "CFBundlePackageType": "APPL",
+      "NSRequiresAquaSystemAppearance": false
+    }
+  }
+}
