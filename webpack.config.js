@@ -33,9 +33,8 @@ const common = {
       },
     ],
   },
-  watch: isDev,
   stats: "errors-only",
-  devtool: null,
+  devtool: false,
 };
 
 /** @type import("webpack").Configuration */
