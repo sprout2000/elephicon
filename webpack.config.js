@@ -3,11 +3,9 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const isDev = process.env.NODE_ENV === "development";
-
 /** @type import("webpack").Configuration */
 const common = {
-  mode: isDev ? "development" : "production",
+  mode: "production",
   resolve: {
     extensions: [".js", ".ts", ".jsx", ".tsx", ".json"],
   },
@@ -37,7 +35,7 @@ const common = {
   },
   watch: isDev,
   stats: "errors-only",
-  devtool: isDev ? "source-map" : undefined,
+  devtool: null,
 };
 
 /** @type import("webpack").Configuration */
@@ -79,7 +77,7 @@ const renderer = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       inject: "body",
-      template: isDev ? "./src/web/index.dev.html" : "./src/web/index.html",
+      template: "./src/web/index.html",
     }),
   ],
 };
