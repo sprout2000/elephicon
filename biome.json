@@ -24,7 +24,6 @@
       },
       "suspicious": {
         "noConfusingVoidType": "off",
-        "noTemplateCurlyInString": "off",
         "useIterableCallbackReturn": "off"
       },
       "correctness": {
