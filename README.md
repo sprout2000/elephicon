@@ -96,4 +96,4 @@ MIT © [idesis GmbH](https://www.idesis.de), Rellinghauser Straße 334F, D-45136
 
 ### Elephicon
 
-Copyright(c) 2020-2026 sprout2000
+Copyright(c) 2020-present sprout2000
