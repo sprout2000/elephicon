@@ -9,11 +9,8 @@
   "files": ["dist/**/*"],
   "win": {
     "icon": "assets/icon.ico",
-    "target": ["nsis", "portable"],
+    "target": ["nsis", "zip"],
     "asarUnpack": "dist/images/icon.png"
-  },
-  "portable": {
-    "artifactName": "${productName}-${version}-${platform}-${arch}-portable.${ext}"
   },
   "nsis": {
     "oneClick": false,
