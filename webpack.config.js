@@ -35,6 +35,10 @@ const common = {
       },
     ],
   },
+  watch: isDev,
+  watchOptions: {
+    ignored: /node_modules/,
+  },
   stats: "errors-only",
   devtool: isDev ? "source-map" : undefined,
 };
@@ -78,17 +82,6 @@ const renderer = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       inject: "body",
-      meta: isDev
-        ? ""
-        : {
-            "Content-Security-Policy": {
-              "http-equiv": "Content-Security-Policy",
-              content: "default-src 'self'",
-            },
-          },
-      devtools: isDev
-        ? '<script src="http://localhost:8097"></script>'
-        : undefined,
       template: "./src/web/index.html",
     }),
   ],

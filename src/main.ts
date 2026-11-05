@@ -9,6 +9,11 @@ import {
   nativeTheme,
 } from "electron";
 
+import {
+  installExtension,
+  REACT_DEVELOPER_TOOLS,
+} from "electron-devtools-installer";
+
 import log from "electron-log";
 import Store from "electron-store";
 import { autoUpdater } from "electron-updater";
@@ -171,6 +176,12 @@ if (!gotTheLock && !isDarwin) {
     store.set("language", locale);
 
     createWindow();
+
+    if (isDevelop) {
+      installExtension(REACT_DEVELOPER_TOOLS, {
+        loadExtensionOptions: { allowFileAccess: true },
+      });
+    }
   });
 
   app.setAboutPanelOptions({
