@@ -3,8 +3,8 @@ import { contextBridge, ipcRenderer, webUtils } from "electron";
 contextBridge.exposeInMainWorld("myAPI", {
   getFilePath: (file: File) => webUtils.getPathForFile(file),
 
-  mimecheck: async (filepath: string): Promise<string | false> =>
-    ipcRenderer.invoke("mime-check", filepath),
+  pngcheck: async (filepath: string): Promise<string | null> =>
+    ipcRenderer.invoke("png-check", filepath),
 
   mkIco: async (filepath: string): Promise<Result> =>
     ipcRenderer.invoke("make-ico", filepath),

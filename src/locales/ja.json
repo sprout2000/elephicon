@@ -22,5 +22,8 @@
   "Hide Others": "他を隠す",
   "Show All": "すべてを表示",
   "Language": "言語",
-  "Warning": "言語を切り換えるには Elephicon を再起動してください。"
+  "Warning": "言語を切り換えるには Elephicon を再起動してください。",
+  "Not a real PNG": "拡張子は .png ですが、中身は PNG 画像ではありません。",
+  "Unsupported format": "対応していない形式です: {{format}}",
+  "Could not read the file": "ファイルを読み込めませんでした。"
 }

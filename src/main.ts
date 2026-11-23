@@ -18,8 +18,8 @@ import log from "electron-log";
 import Store from "electron-store";
 import { autoUpdater } from "electron-updater";
 import i18next from "i18next";
-import mime from "mime-types";
 
+import { checkPng } from "./checkPng";
 import { createMenu } from "./createMenu";
 import { mkicns, mkico } from "./mkicons";
 import { setLocales } from "./setLocales";
@@ -71,7 +71,7 @@ const createWindow = () => {
 
   nativeTheme.themeSource = nativeTheme.shouldUseDarkColors ? "dark" : "light";
 
-  ipcMain.handle("mime-check", (_e, filepath) => mime.lookup(filepath));
+  ipcMain.handle("png-check", (_e, filepath) => checkPng(filepath));
   ipcMain.handle("make-ico", (_e, filepath) => mkico(filepath, store));
   ipcMain.handle("make-icns", (_e, filepath) => mkicns(filepath, store));
 

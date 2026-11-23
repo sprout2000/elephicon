@@ -50,17 +50,12 @@ export const App = () => {
 
   const convert = useCallback(
     async (filepath: string) => {
-      const mime = await window.myAPI.mimecheck(filepath);
+      const error = await window.myAPI.pngcheck(filepath).catch(
+        (reason) => `${reason}`,
+      );
 
-      if (!mime || !mime.match(/png/)) {
-        const format = mime || "Unknown";
-
-        dispatch({
-          log: `Unsupported format: ${format}`,
-          result: "failed",
-          loading: false,
-        });
-
+      if (error) {
+        dispatch({ log: error, result: "failed", loading: false });
         return;
       }
 

@@ -7,7 +7,7 @@ declare global {
 export interface IElectronAPI {
   getFilePath: (file: File) => string;
 
-  mimecheck: (filepath: string) => Promise<string | false>;
+  pngcheck: (filepath: string) => Promise<string | null>;
 
   mkIco: (filepath: string) => Promise<Result>;
 

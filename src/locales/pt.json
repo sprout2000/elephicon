@@ -22,5 +22,8 @@
   "Hide Others": "Ocultar outros",
   "Show All": "Mostre tudo",
   "Language": "Língua",
-  "Warning": "To change the language, please restart Elephicon."
+  "Warning": "To change the language, please restart Elephicon.",
+  "Not a real PNG": "Este arquivo tem a extensão .png, mas não é uma imagem PNG.",
+  "Unsupported format": "Formato não suportado: {{format}}",
+  "Could not read the file": "Não foi possível ler o arquivo."
 }

@@ -22,5 +22,8 @@
   "Hide Others": "隐藏其他",
   "Show All": "显示全部",
   "Language": "语言",
-  "Warning": "To change the language, please restart Elephicon."
+  "Warning": "To change the language, please restart Elephicon.",
+  "Not a real PNG": "此文件的扩展名为 .png，但它不是 PNG 图像。",
+  "Unsupported format": "不支持的格式：{{format}}",
+  "Could not read the file": "无法读取文件。"
 }
