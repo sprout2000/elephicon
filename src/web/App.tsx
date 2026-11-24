@@ -50,9 +50,9 @@ export const App = () => {
 
   const convert = useCallback(
     async (filepath: string) => {
-      const error = await window.myAPI.pngcheck(filepath).catch(
-        (reason) => `${reason}`,
-      );
+      const error = await window.myAPI
+        .pngcheck(filepath)
+        .catch((reason) => `${reason}`);
 
       if (error) {
         dispatch({ log: error, result: "failed", loading: false });

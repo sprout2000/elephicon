@@ -22,8 +22,5 @@
   "Hide Others": "Başqalarını gizlət",
   "Show All": "Hamısını göstər",
   "Language": "Dil",
-  "Warning": "Dili dəyişmək üçün Elephicon-u yenidən başladın.",
-  "Not a real PNG": "Bu faylın uzantısı .png-dir, lakin o, PNG şəkli deyil.",
-  "Unsupported format": "Dəstəklənməyən format: {{format}}",
-  "Could not read the file": "Fayl oxuna bilmədi."
+  "Warning": "Dili dəyişmək üçün Elephicon-u yenidən başladın."
 }

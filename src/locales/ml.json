@@ -22,8 +22,5 @@
   "Hide Others": "മറ്റുള്ളവ മറയ്ക്കുക",
   "Show All": "എല്ലാം കാണിക്കൂ",
   "Language": "ഭാഷ",
-  "Warning": "ഭാഷ മാറ്റുവാൻ Elephicon പുനരാരംഭിക്കുക .",
-  "Not a real PNG": "ഈ ഫയലിന് .png എക്സ്റ്റൻഷൻ ഉണ്ട്, പക്ഷേ ഇതൊരു PNG ചിത്രമല്ല.",
-  "Unsupported format": "പിന്തുണയ്ക്കാത്ത ഫോർമാറ്റ്: {{format}}",
-  "Could not read the file": "ഫയൽ വായിക്കാൻ കഴിഞ്ഞില്ല."
+  "Warning": "ഭാഷ മാറ്റുവാൻ Elephicon പുനരാരംഭിക്കുക ."
 }

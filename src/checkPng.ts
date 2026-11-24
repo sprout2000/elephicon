@@ -1,6 +1,5 @@
 import fs from "node:fs";
 
-import i18next from "i18next";
 import mime from "mime-types";
 
 // すべての PNG ファイルの先頭に置かれる 8 バイトのシグネチャ
@@ -23,7 +22,7 @@ export const hasPngSignature = async (filepath: string): Promise<boolean> => {
 
 /**
  * ファイルの中身が PNG かどうかを調べる。
- * PNG なら null、そうでなければ表示用のエラーメッセージを返す。
+ * PNG なら null、そうでなければウィンドウに表示するエラーメッセージ（英語）を返す。
  */
 export const checkPng = async (filepath: string): Promise<string | null> => {
   let isPng: boolean;
@@ -32,7 +31,7 @@ export const checkPng = async (filepath: string): Promise<string | null> => {
     isPng = await hasPngSignature(filepath);
   } catch (err) {
     console.log(`Failed to read: ${filepath} (${err})`);
-    return i18next.t("Could not read the file");
+    return "Could not read the file.";
   }
 
   if (isPng) return null;
@@ -41,11 +40,8 @@ export const checkPng = async (filepath: string): Promise<string | null> => {
 
   if (byExtension === "image/png") {
     console.log(`Not a real PNG (spoofed extension): ${filepath}`);
-    return i18next.t("Not a real PNG");
+    return "This file has a .png extension, but it is not a PNG image.";
   }
 
-  return i18next.t("Unsupported format", {
-    format: byExtension || "Unknown",
-    interpolation: { escapeValue: false },
-  });
+  return `Unsupported format: ${byExtension || "Unknown"}`;
 };
