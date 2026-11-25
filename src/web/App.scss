@@ -53,6 +53,15 @@
   padding: 0;
 }
 
+// クリックできる要素を <button> にしたので、ブラウザ既定の見た目を消す
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+}
+
 .drag-region {
   -webkit-app-region: drag;
 }

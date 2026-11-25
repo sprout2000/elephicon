@@ -16,8 +16,9 @@ export const Message = memo((props: Props) => {
   };
 
   return (
-    <div
+    <section
       className="drop-message-zone"
+      aria-label="Result"
       onDrop={preventDefault}
       onDragOver={preventDefault}
       onDragEnter={preventDefault}
@@ -40,14 +41,18 @@ export const Message = memo((props: Props) => {
         </div>
       )}
       <div className="switch">
-        <div className="back-container" onClick={props.onClickBack}>
+        <button
+          type="button"
+          className="back-container"
+          onClick={props.onClickBack}
+        >
           <div className="icon undo">
             <ArrowUndo />
           </div>
           <div>Back</div>
-        </div>
+        </button>
       </div>
-    </div>
+    </section>
   );
 });
 

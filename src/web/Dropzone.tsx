@@ -17,14 +17,17 @@ type Props = {
 
 export const Dropzone = memo((props: Props) => {
   return (
-    <div
+    <section
       className="drop-message-zone"
+      aria-label="Drop zone"
       onDrop={props.onDrop}
       onDragEnter={props.onDragOver}
       onDragOver={props.onDragOver}
       onDragLeave={props.onDragLeave}
     >
-      <div
+      <button
+        type="button"
+        aria-label="Open a PNG file"
         onClick={props.onClickOpen}
         className={
           props.drag
@@ -35,12 +38,14 @@ export const Dropzone = memo((props: Props) => {
         }
       >
         <Elephant />
-      </div>
+      </button>
       <div className={props.drag || props.loading ? "text loading" : "text"}>
         Drop your PNGs here...
       </div>
       <div className="switch">
-        <div
+        <button
+          type="button"
+          aria-pressed={props.ico}
           className={
             props.loading || props.drag
               ? "icon-container loading"
@@ -54,8 +59,10 @@ export const Dropzone = memo((props: Props) => {
             <LogoWindows />
           </div>
           <div>ICO</div>
-        </div>
-        <div
+        </button>
+        <button
+          type="button"
+          aria-pressed={!props.ico}
           className={
             props.loading || props.drag
               ? "icon-container loading"
@@ -69,9 +76,9 @@ export const Dropzone = memo((props: Props) => {
             <LogoApple />
           </div>
           <div>ICNS</div>
-        </div>
+        </button>
       </div>
-    </div>
+    </section>
   );
 });
 

@@ -163,7 +163,7 @@ export const App = () => {
   }, []);
 
   return (
-    <div
+    <main
       className={isDarwin ? "container drag-region" : "container"}
       onContextMenu={handleContextMenu}
     >
@@ -186,6 +186,6 @@ export const App = () => {
           onClickBack={handleClickBack}
         />
       )}
-    </div>
+    </main>
   );
 };
