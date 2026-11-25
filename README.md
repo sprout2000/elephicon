@@ -75,7 +75,7 @@ You can easily contribute to this repository by providing a translation.
   ];
 ```
 
-3. Make sure `npm run lint` and `npm test` pass _(see [How to build?](#hammer_and_wrench-how-to-build))_.
+3. Make sure `npm run lint` and `npm test` pass _(see [Development](#wrench-development))_.
 4. Send a [pull request](https://github.com/sprout2000/elephicon/pulls) to this repository.
 
 ## :tada: Contributors
@@ -98,15 +98,29 @@ git clone https://github.com/sprout2000/elephicon.git
 cd elephicon
 npm install
 
-# (Optional) Check the code and run the tests
-npm run lint
-npm test
-
 # 3. Build the app and create an installer
 npm run build && npm run package
 ```
 
 And then, you will find the installer in the `release` directory.
+
+## :wrench: Development
+
+```sh
+# Start the app in development mode
+npm run dev
+
+# Lint and format the code with Biome
+npm run lint
+
+# Run the tests with Vitest
+npm test
+
+# Run the tests and show the coverage
+npm run test:coverage
+```
+
+The tests are in `src/__tests__/main` _(main process)_ and `src/__tests__/renderer` _(renderer process)_.
 
 ## :copyright: Copyright
 
