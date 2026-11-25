@@ -1,6 +1,6 @@
 # Elephicon
 
-[![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
+[![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/main/LICENSE.md)
 ![GitHub all releases](https://img.shields.io/github/downloads/sprout2000/elephicon/total)
 ![GitHub contributors](https://img.shields.io/github/contributors/sprout2000/elephicon)
 
