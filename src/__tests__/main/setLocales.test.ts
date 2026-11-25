@@ -1,18 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 
-import az from "../../locales/az.json";
-import de from "../../locales/de.json";
+import { languages } from "../../languages";
 import en from "../../locales/en.json";
-import es from "../../locales/es.json";
-import fr from "../../locales/fr.json";
-import it_ from "../../locales/it.json";
 import ja from "../../locales/ja.json";
-import ml from "../../locales/ml.json";
-import pt from "../../locales/pt.json";
-import ru from "../../locales/ru.json";
-import tr from "../../locales/tr.json";
-import uk from "../../locales/uk.json";
-import zh_CN from "../../locales/zh_cn.json";
 
 // i18next はシングルトンなので、テストごとに新しいモジュールとして読み込む
 const load = async (locale: string) => {
@@ -21,50 +11,36 @@ const load = async (locale: string) => {
   const { default: i18next } = await import("i18next");
   const { setLocales } = await import("../../setLocales");
 
-  setLocales(locale);
-  await vi.waitFor(() => expect(i18next.isInitialized).toBe(true));
+  await setLocales(locale);
 
   return i18next;
 };
 
 describe("setLocales", () => {
-  // createMenu.ts の言語メニューにある全コード
-  it.each([
-    ["az", az],
-    ["de", de],
-    ["en", en],
-    ["es", es],
-    ["fr", fr],
-    ["it", it_],
-    ["ja", ja],
-    ["ml", ml],
-    ["pt", pt],
-    ["ru", ru],
-    ["tr", tr],
-    ["uk", uk],
-    ["zh-CN", zh_CN],
-  ])("translates the menu for %s", async (code, translation) => {
+  it.each(
+    languages.map(({ code, translation }) => [code, translation] as const),
+  )("translates the menu for %s", async (code, translation) => {
     const i18next = await load(code);
 
     expect(i18next.t("File")).toBe(translation.File);
     expect(i18next.t("Warning")).toBe(translation.Warning);
   });
 
-  it.each([
-    ["de-AT", de],
-    ["en-GB", en],
-    ["es-419", es],
-    ["fr-CA", fr],
-    ["pt-BR", pt],
-    ["zh", zh_CN],
-  ])(
-    "maps the regional locale %s to its language",
-    async (code, translation) => {
-      const i18next = await load(code);
+  it.each(
+    languages.flatMap(({ aliases = [], translation }) =>
+      aliases.map((alias) => [alias, translation] as const),
+    ),
+  )("maps the regional code %s to its language", async (code, translation) => {
+    const i18next = await load(code);
 
-      expect(i18next.t("Settings")).toBe(translation.Settings);
-    },
-  );
+    expect(i18next.t("Settings")).toBe(translation.Settings);
+  });
+
+  it("falls back to the base language of an unlisted regional code", async () => {
+    const i18next = await load("ja-JP");
+
+    expect(i18next.t("Settings")).toBe(ja.Settings);
+  });
 
   it("falls back to English for unknown locales", async () => {
     const i18next = await load("xx");

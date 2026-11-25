@@ -15,6 +15,7 @@ import {
 } from "vitest";
 
 import { createMenu } from "../../createMenu";
+import { languages } from "../../languages";
 import en from "../../locales/en.json";
 
 const mocks = vi.hoisted(() => ({
@@ -169,13 +170,15 @@ describe("createMenu", () => {
     expect(findById(template, "language-en").checked).toBe(false);
   });
 
-  it("lists all 13 languages", () => {
+  it("lists every language in the order of languages.ts", () => {
     const { template } = build();
-    const languages = flatten(template).filter((item) =>
+    const items = flatten(template).filter((item) =>
       item.id?.startsWith("language-"),
     );
 
-    expect(languages).toHaveLength(13);
+    expect(items.map((item) => [item.id, item.label])).toEqual(
+      languages.map(({ code, label }) => [`language-${code}`, label]),
+    );
   });
 
   it("saves the quality and ICO format settings", () => {

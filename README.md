@@ -60,25 +60,23 @@ You can download the latest version of _Elephicon_ from the releases page here:
 
 ## :beers: Contributing
 
-You can easily contribute to this repository by providing translation files.
+You can easily contribute to this repository by providing a translation.
 
-1. Create `{your_LANG}.json` in `src/locales`.
+1. Create `{language_code}.json` _(e.g. `nl.json`)_ in `src/locales`, based on `en.json`. It must have the same keys as `en.json`.
+2. Import the file and add the language to `languages` in `src/languages.ts`.
 
 ```diff
-  src
-  ├── @types
-  ├── createMenu.ts
-  ├── locales
-+ │   ├── de.json
-  │   ├── en.json
-  │   └── ja.json
-  ├── main.ts
-  ├── preload.ts
-  ├── setLocales.ts
-  └── web
++ import nl from "./locales/nl.json";
+
+  export const languages: Language[] = [
+    ...
++   { code: "nl", label: "Nederlands", translation: nl },
+    ...
+  ];
 ```
 
-2. And then please send a [pull request](https://github.com/sprout2000/elephicon/pulls) to this repository.
+3. Make sure `npm run lint` and `npm test` pass _(see [How to build?](#hammer_and_wrench-how-to-build))_.
+4. Send a [pull request](https://github.com/sprout2000/elephicon/pulls) to this repository.
 
 ## :tada: Contributors
 
@@ -99,6 +97,10 @@ git clone https://github.com/sprout2000/elephicon.git
 # 2. Install dependencies
 cd elephicon
 npm install
+
+# (Optional) Check the code and run the tests
+npm run lint
+npm test
 
 # 3. Build the app and create an installer
 npm run build && npm run package
