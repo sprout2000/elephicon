@@ -18,8 +18,7 @@ use crate::settings::Settings;
 pub struct AppState {
     pub settings: Mutex<Settings>,
     pub settings_path: PathBuf,
-    /// The menu language, chosen at startup. A new language takes effect
-    /// after a restart.
+    /// Translates the menu into the system language.
     pub translator: Translator,
 }
 
@@ -45,20 +44,9 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             let settings_path = app.path().app_config_dir()?.join("settings.json");
-            let mut settings = Settings::load(&settings_path);
-
-            let locale = settings
-                .language
-                .clone()
-                .or_else(sys_locale::get_locale)
-                .unwrap_or_default();
-            let language = i18n::resolve(&locale);
-            settings.language = Some(language.code.to_string());
-            if let Err(err) = settings.save(&settings_path) {
-                eprintln!("Failed to save the settings: {err}");
-            }
-
-            let translator = Translator::new(language);
+            let settings = Settings::load(&settings_path);
+            let locale = sys_locale::get_locale().unwrap_or_default();
+            let translator = Translator::new(i18n::resolve(&locale));
             app.set_menu(menu::build(app.handle(), &settings, &translator)?)?;
             app.manage(AppState {
                 settings: Mutex::new(settings),

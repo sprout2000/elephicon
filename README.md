@@ -41,7 +41,7 @@ Download the latest version of _Elephicon_ from the [Releases page](https://gith
 
 ## :globe_with_meridians: Supported Languages
 
-The app menu is available in the following languages.
+The app menu is shown in the language of your system, if it is one of the following.
 
 | Language   |  Code   |
 | :--------- | :-----: |
@@ -71,7 +71,6 @@ You can easily contribute to this repository by providing a translation.
       ...
 +     Language {
 +         code: "nl",
-+         label: "Nederlands",
 +         json: locale!("nl.json"),
 +         aliases: &[],
 +     },

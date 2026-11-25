@@ -16,8 +16,6 @@ pub struct Settings {
     pub quality: Quality,
     /// Store the ICO images smaller than 256x256 as BMP.
     pub bmp: bool,
-    /// The language code of the menu, or `None` to follow the system.
-    pub language: Option<String>,
 }
 
 impl Default for Settings {
@@ -26,7 +24,6 @@ impl Default for Settings {
             desktop: true,
             quality: Quality::High,
             bmp: true,
-            language: None,
         }
     }
 }
@@ -62,7 +59,6 @@ mod tests {
         assert!(settings.desktop);
         assert_eq!(settings.quality, Quality::High);
         assert!(settings.bmp);
-        assert_eq!(settings.language, None);
     }
 
     #[test]
@@ -73,7 +69,6 @@ mod tests {
             desktop: false,
             quality: Quality::Low,
             bmp: false,
-            language: Some("ja".to_string()),
         };
 
         settings.save(&path).unwrap();
@@ -92,6 +87,21 @@ mod tests {
             Settings::default()
         );
         assert_eq!(Settings::load(&broken), Settings::default());
+    }
+
+    #[test]
+    fn ignores_the_language_saved_by_earlier_versions() {
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("settings.json");
+        fs::write(&path, r#"{ "bmp": false, "language": "ja" }"#).unwrap();
+
+        assert_eq!(
+            Settings::load(&path),
+            Settings {
+                bmp: false,
+                ..Settings::default()
+            }
+        );
     }
 
     #[test]

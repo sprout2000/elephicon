@@ -3,10 +3,8 @@
 use std::collections::HashMap;
 
 pub struct Language {
-    /// The language code saved in the settings.
+    /// The language code, such as "ja" or "zh-CN".
     pub code: &'static str,
-    /// The name shown in the Language menu.
-    pub label: &'static str,
     /// The contents of `locales/{code}.json`.
     pub json: &'static str,
     /// Regional codes that use the same translation (e.g. "de-AT"), following
@@ -20,27 +18,24 @@ macro_rules! locale {
     };
 }
 
-/// The languages Elephicon is translated into, in the order of the Language
-/// menu. To add a language, create locales/{code}.json and add it here.
+/// The languages the menu is translated into. The menu follows the system
+/// language. To add a language, create locales/{code}.json and add it here.
 /// Credits for each translation are kept next to it.
 pub const LANGUAGES: &[Language] = &[
     // https://github.com/sprout2000/elephicon/pull/241 by thepoladov13
     Language {
         code: "az",
-        label: "Azərbaycan",
         json: locale!("az.json"),
         aliases: &[],
     },
     // https://github.com/sprout2000/elephicon/pull/108 by DrDeee
     Language {
         code: "de",
-        label: "Deutsch",
         json: locale!("de.json"),
         aliases: &["de-AT", "de-CH", "de-DE", "de-LI"],
     },
     Language {
         code: "en",
-        label: "English",
         json: locale!("en.json"),
         aliases: &[
             "en-AU", "en-CA", "en-GB", "en-IN", "en-NZ", "en-US", "en-ZA",
@@ -49,7 +44,6 @@ pub const LANGUAGES: &[Language] = &[
     // https://github.com/sprout2000/elephicon/pull/240 by kant
     Language {
         code: "es",
-        label: "Español",
         json: locale!("es.json"),
         aliases: &[
             "es-419", "es-AR", "es-CL", "es-CO", "es-CR", "es-ES", "es-HN", "es-MX", "es-PE",
@@ -59,62 +53,53 @@ pub const LANGUAGES: &[Language] = &[
     // https://github.com/sprout2000/elephicon/issues/243 by logounet
     Language {
         code: "fr",
-        label: "Français",
         json: locale!("fr.json"),
         aliases: &["fr-CA", "fr-CH", "fr-FR"],
     },
     // https://github.com/sprout2000/elephicon/pull/140 by LightwithoutLisonlyight
     Language {
         code: "it",
-        label: "Italiano",
         json: locale!("it.json"),
         aliases: &["it-CH", "it-IT"],
     },
     Language {
         code: "ja",
-        label: "日本語",
         json: locale!("ja.json"),
         aliases: &[],
     },
     // https://github.com/sprout2000/elephicon/pull/163 by aerocyber
     Language {
         code: "ml",
-        label: "Malayalam",
         json: locale!("ml.json"),
         aliases: &[],
     },
     // https://github.com/sprout2000/elephicon/pull/136 by godrix
     Language {
         code: "pt",
-        label: "Português",
         json: locale!("pt.json"),
         aliases: &["pt-BR", "pt-PT"],
     },
     // https://github.com/sprout2000/elephicon/pull/135 by kitt3911
     Language {
         code: "ru",
-        label: "Русский",
         json: locale!("ru.json"),
         aliases: &[],
     },
     // https://github.com/sprout2000/elephicon/pull/159 by umitseyhan75
     Language {
         code: "tr",
-        label: "Türkçe",
         json: locale!("tr.json"),
         aliases: &[],
     },
     // https://github.com/sprout2000/elephicon/pull/223 by whitebear60
     Language {
         code: "uk",
-        label: "Українська",
         json: locale!("uk.json"),
         aliases: &[],
     },
     // https://github.com/sprout2000/elephicon/pull/151 by ArcherGu
     Language {
         code: "zh-CN",
-        label: "简体中文",
         json: locale!("zh_cn.json"),
         aliases: &["zh"],
     },
@@ -230,9 +215,8 @@ mod tests {
     }
 
     #[test]
-    fn every_translation_and_label_is_filled_in() {
+    fn every_translation_is_filled_in() {
         for language in LANGUAGES {
-            assert!(!language.label.trim().is_empty(), "{}", language.code);
             for (key, value) in parse(language.json) {
                 assert!(!value.trim().is_empty(), "{}: {key}", language.code);
             }

@@ -5,11 +5,11 @@ use tauri::menu::{
     SubmenuBuilder,
 };
 use tauri::{AppHandle, Emitter, Manager, Runtime};
-use tauri_plugin_dialog::{DialogExt, FileDialogBuilder, MessageDialogButtons, MessageDialogKind};
+use tauri_plugin_dialog::{DialogExt, FileDialogBuilder};
 use tauri_plugin_opener::OpenerExt;
 
 use crate::convert::Quality;
-use crate::i18n::{Translator, LANGUAGES};
+use crate::i18n::Translator;
 use crate::settings::Settings;
 use crate::AppState;
 
@@ -18,8 +18,6 @@ pub const SUPPORT_URL: &str = "https://github.com/sprout2000/elephicon/#readme";
 /// The event sent to the window with the path chosen from File > Open.
 pub const MENU_OPEN_EVENT: &str = "menu-open";
 
-const LANGUAGE_PREFIX: &str = "language-";
-
 /// What to do after a menu item is clicked.
 #[derive(Debug, PartialEq, Eq)]
 pub enum MenuAction {
@@ -27,8 +25,6 @@ pub enum MenuAction {
     Support,
     /// The settings were updated; save them and refresh the check marks.
     SettingsChanged,
-    /// The language was changed; also ask the user to restart.
-    LanguageChanged,
     Nothing,
 }
 
@@ -47,20 +43,7 @@ pub fn apply(id: &str, settings: &mut Settings) -> MenuAction {
         "png" => settings.bmp = false,
         "desktop" => settings.desktop = true,
         "current" => settings.desktop = false,
-        _ => {
-            let Some(language) = id
-                .strip_prefix(LANGUAGE_PREFIX)
-                .and_then(|code| LANGUAGES.iter().find(|language| language.code == code))
-            else {
-                return MenuAction::Nothing;
-            };
-
-            if settings.language.as_deref() == Some(language.code) {
-                return MenuAction::SettingsChanged;
-            }
-            settings.language = Some(language.code.to_string());
-            return MenuAction::LanguageChanged;
-        }
+        _ => return MenuAction::Nothing,
     }
 
     MenuAction::SettingsChanged
@@ -145,20 +128,10 @@ pub fn build<R: Runtime>(
             !settings.desktop,
         )?)
         .build()?;
-    let mut language = SubmenuBuilder::new(app, t.t("Language"));
-    for item in LANGUAGES {
-        language = language.item(&check(
-            &format!("{LANGUAGE_PREFIX}{}", item.code),
-            item.label.to_string(),
-            settings.language.as_deref() == Some(item.code),
-        )?);
-    }
-    let language = language.build()?;
     let settings_menu = SubmenuBuilder::new(app, t.t("Settings"))
         .item(&quality)
         .item(&ico)
         .item(&destination)
-        .item(&language)
         .build()?;
 
     let support = MenuItemBuilder::with_id("support", t.t("Support URL...")).build(app)?;
@@ -240,34 +213,13 @@ fn open_from_menu<R: Runtime>(app: &AppHandle<R>) {
     });
 }
 
-fn ask_restart<R: Runtime>(app: &AppHandle<R>) {
-    let state = app.state::<AppState>();
-    let handle = app.clone();
-
-    app.dialog()
-        .message(state.translator.t("Warning"))
-        .kind(MessageDialogKind::Info)
-        .buttons(MessageDialogButtons::OkCancelCustom(
-            "OK".to_string(),
-            "Later".to_string(),
-        ))
-        .show(move |ok| {
-            if ok {
-                handle.restart();
-            }
-        });
-}
-
 pub fn handle_event<R: Runtime>(app: &AppHandle<R>, id: &str) {
     let state = app.state::<AppState>();
     let action = {
         let mut settings = state.settings.lock().unwrap();
         let action = apply(id, &mut settings);
 
-        if matches!(
-            action,
-            MenuAction::SettingsChanged | MenuAction::LanguageChanged
-        ) {
+        if action == MenuAction::SettingsChanged {
             if let Err(err) = settings.save(&state.settings_path) {
                 eprintln!("Failed to save the settings: {err}");
             }
@@ -283,10 +235,6 @@ pub fn handle_event<R: Runtime>(app: &AppHandle<R>, id: &str) {
             }
         }
         MenuAction::SettingsChanged => refresh(app),
-        MenuAction::LanguageChanged => {
-            refresh(app);
-            ask_restart(app);
-        }
         MenuAction::Nothing => {}
     }
 }
@@ -346,54 +294,11 @@ mod tests {
     }
 
     #[test]
-    fn changes_the_language() {
-        let mut settings = Settings {
-            language: Some("en".to_string()),
-            ..Settings::default()
-        };
-
-        assert_eq!(
-            apply("language-de", &mut settings),
-            MenuAction::LanguageChanged
-        );
-        assert_eq!(settings.language.as_deref(), Some("de"));
-        assert_eq!(
-            apply("language-zh-CN", &mut settings),
-            MenuAction::LanguageChanged
-        );
-        assert_eq!(settings.language.as_deref(), Some("zh-CN"));
-    }
-
-    #[test]
-    fn does_not_ask_to_restart_for_the_current_language() {
-        let mut settings = Settings {
-            language: Some("ja".to_string()),
-            ..Settings::default()
-        };
-
-        assert_eq!(
-            apply("language-ja", &mut settings),
-            MenuAction::SettingsChanged
-        );
-        assert_eq!(settings.language.as_deref(), Some("ja"));
-    }
-
-    #[test]
     fn ignores_unknown_items() {
         let mut settings = Settings::default();
 
-        assert_eq!(apply("language-xx", &mut settings), MenuAction::Nothing);
+        assert_eq!(apply("language-ja", &mut settings), MenuAction::Nothing);
         assert_eq!(apply("unknown", &mut settings), MenuAction::Nothing);
         assert_eq!(settings, Settings::default());
-    }
-
-    #[test]
-    fn every_language_has_a_menu_item() {
-        for language in LANGUAGES {
-            let mut settings = Settings::default();
-            let id = format!("{LANGUAGE_PREFIX}{}", language.code);
-
-            assert_eq!(apply(&id, &mut settings), MenuAction::LanguageChanged);
-        }
     }
 }
