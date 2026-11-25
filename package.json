@@ -18,7 +18,9 @@
     "dev:electron": "wait-on ./dist/index.html ./dist/main.js && electronmon .",
     "build": "cross-env NODE_ENV=\"production\" webpack --progress",
     "package": "electron-builder --config.mac.identity=null",
-    "lint": "biome check --write ."
+    "lint": "biome check --write .",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "electron-log": "^5.4.4",
