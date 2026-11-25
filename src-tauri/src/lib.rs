@@ -1,0 +1,81 @@
+mod check;
+mod commands;
+mod convert;
+mod i18n;
+mod menu;
+mod settings;
+
+use std::path::PathBuf;
+use std::sync::Mutex;
+
+use tauri::Manager;
+use tauri_plugin_window_state::StateFlags;
+
+use crate::i18n::Translator;
+use crate::settings::Settings;
+
+/// The state shared by the menu and the commands.
+pub struct AppState {
+    pub settings: Mutex<Settings>,
+    pub settings_path: PathBuf,
+    /// The menu language, chosen at startup. A new language takes effect
+    /// after a restart.
+    pub translator: Translator,
+}
+
+pub fn run() {
+    let builder = tauri::Builder::default();
+
+    // Only one Elephicon runs at a time; macOS already does this for apps.
+    #[cfg(not(target_os = "macos"))]
+    let builder = builder.plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+        if let Some(window) = app.get_webview_window("main") {
+            let _ = window.unminimize();
+            let _ = window.set_focus();
+        }
+    }));
+
+    builder
+        .plugin(
+            tauri_plugin_window_state::Builder::default()
+                .with_state_flags(StateFlags::POSITION)
+                .build(),
+        )
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_opener::init())
+        .setup(|app| {
+            let settings_path = app.path().app_config_dir()?.join("settings.json");
+            let mut settings = Settings::load(&settings_path);
+
+            let locale = settings
+                .language
+                .clone()
+                .or_else(sys_locale::get_locale)
+                .unwrap_or_default();
+            let language = i18n::resolve(&locale);
+            settings.language = Some(language.code.to_string());
+            if let Err(err) = settings.save(&settings_path) {
+                eprintln!("Failed to save the settings: {err}");
+            }
+
+            let translator = Translator::new(language);
+            app.set_menu(menu::build(app.handle(), &settings, &translator)?)?;
+            app.manage(AppState {
+                settings: Mutex::new(settings),
+                settings_path,
+                translator,
+            });
+
+            Ok(())
+        })
+        .on_menu_event(|app, event| menu::handle_event(app, event.id().as_ref()))
+        .invoke_handler(tauri::generate_handler![
+            commands::check_png,
+            commands::make_ico,
+            commands::make_icns,
+            commands::open_file_dialog,
+            commands::show_context_menu,
+        ])
+        .run(tauri::generate_context!())
+        .expect("error while running Elephicon");
+}

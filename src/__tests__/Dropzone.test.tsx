@@ -2,15 +2,12 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import type { ComponentProps } from "react";
 import { describe, expect, it, vi } from "vitest";
 
-import { Dropzone } from "../../web/Dropzone";
+import { Dropzone } from "../web/Dropzone";
 
 const renderDropzone = (props: Partial<ComponentProps<typeof Dropzone>>) => {
   const handlers = {
     onClickOS: vi.fn(),
     onClickOpen: vi.fn(async () => {}),
-    onDrop: vi.fn(),
-    onDragOver: vi.fn(),
-    onDragLeave: vi.fn(),
   };
 
   render(
@@ -76,19 +73,5 @@ describe("Dropzone", () => {
     fireEvent.click(icoButton());
     fireEvent.click(icnsButton());
     expect(handlers.onClickOS).toHaveBeenCalledTimes(2);
-  });
-
-  it("forwards drag and drop events to the handlers", () => {
-    const handlers = renderDropzone({});
-    const zone = screen.getByRole("region", { name: "Drop zone" });
-
-    fireEvent.dragEnter(zone);
-    fireEvent.dragOver(zone);
-    fireEvent.dragLeave(zone);
-    fireEvent.drop(zone);
-
-    expect(handlers.onDragOver).toHaveBeenCalledTimes(2);
-    expect(handlers.onDragLeave).toHaveBeenCalledTimes(1);
-    expect(handlers.onDrop).toHaveBeenCalledTimes(1);
   });
 });

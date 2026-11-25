@@ -6,11 +6,9 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "strict": true
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true
   },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+  "include": ["src", "vite.config.mts", "vitest.config.mts"]
 }

@@ -62,10 +62,6 @@ button {
   text-align: inherit;
 }
 
-.drag-region {
-  -webkit-app-region: drag;
-}
-
 .container {
   background: linear-gradient(to top, #005bea 0%, #00c6fb 100%);
 
@@ -84,7 +80,6 @@ button {
       padding: 0;
 
       fill: #ffffff;
-      -webkit-app-region: no-drag;
 
       &:hover {
         opacity: 0.9;
@@ -146,7 +141,6 @@ button {
     .switch {
       margin: 20px;
       display: flex;
-      -webkit-app-region: no-drag;
 
       .icon-container {
         @include ICON_CONTAINER();

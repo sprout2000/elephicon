@@ -1,7 +1,12 @@
 import { act, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { installMockApi } from "./mockApi";
+import { resetMockApi } from "./mockApi";
+
+vi.mock("../web/api", async () => {
+  const { mockApi } = await import("./mockApi");
+  return { api: mockApi };
+});
 
 afterEach(() => {
   document.body.innerHTML = "";
@@ -12,10 +17,10 @@ describe("index", () => {
     const root = document.createElement("div");
     root.id = "root";
     document.body.appendChild(root);
-    installMockApi();
+    resetMockApi();
 
     await act(async () => {
-      await import("../../web/index");
+      await import("../web/index");
     });
 
     expect(root.contains(screen.getByText("Drop your PNGs here..."))).toBe(
@@ -24,9 +29,8 @@ describe("index", () => {
   });
 
   it("fails when #root is missing", async () => {
-    installMockApi();
     vi.resetModules();
 
-    await expect(import("../../web/index")).rejects.toThrow();
+    await expect(import("../web/index")).rejects.toThrow();
   });
 });

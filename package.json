@@ -4,6 +4,7 @@
   "description": "Elephicon generates Apple ICNS and Microsoft ICO files from PNG files.",
   "version": "4.3.1",
   "license": "MIT",
+  "private": true,
   "author": {
     "name": "sprout2000"
   },
@@ -11,26 +12,17 @@
     "type": "git",
     "url": "git@github.com:sprout2000/elephicon.git"
   },
-  "main": "dist/main.js",
   "scripts": {
-    "dev": "rimraf dist && run-p dev:webpack dev:electron",
-    "dev:webpack": "cross-env NODE_ENV=\"development\" webpack --progress",
-    "dev:electron": "wait-on ./dist/index.html ./dist/main.js && electronmon .",
-    "build": "cross-env NODE_ENV=\"production\" webpack --progress",
-    "package": "electron-builder --config.mac.identity=null",
+    "dev": "vite",
+    "build": "vite build",
+    "tauri": "tauri",
+    "typecheck": "tsc --noEmit",
     "lint": "biome check --write .",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "electron-log": "^5.4.4",
-    "electron-store": "^12.0.0",
-    "electron-updater": "^6.8.11",
-    "i18next": "^26.7.1",
-    "localforage": "^1.10.0",
-    "mime-types": "^3.0.2",
-    "png2icons": "^2.0.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "typeface-roboto": "^1.1.13"
@@ -39,30 +31,13 @@
     "@biomejs/biome": "^2.6.5",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/react": "^16.3.3",
-    "@types/mime-types": "^3.0.1",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitest/coverage-v8": "^5.1.1",
-    "copy-webpack-plugin": "^14.0.0",
-    "cross-env": "^10.1.0",
-    "css-loader": "^7.1.5",
-    "electron": "^45.2.3",
-    "electron-builder": "^26.18.0",
-    "electron-devtools-installer": "^4.0.0",
-    "electronmon": "^2.0.4",
-    "html-webpack-plugin": "^5.6.8",
     "jsdom": "^31.0.1",
-    "mini-css-extract-plugin": "^2.10.2",
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^6.1.4",
     "sass": "^1.107.1",
-    "sass-loader": "^17.1.0",
-    "ts-loader": "^9.6.2",
     "typescript": "~6.0.3",
-    "vitest": "^5.1.1",
-    "wait-on": "^9.5.1",
-    "webpack": "^5.112.2",
-    "webpack-cli": "^7.3.1"
+    "vitest": "^5.1.1"
   }
 }

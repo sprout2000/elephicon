@@ -4,7 +4,7 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/sprout2000/elephicon/total)
 ![GitHub contributors](https://img.shields.io/github/contributors/sprout2000/elephicon)
 
-**Elephicon**, a GUI wrapper for [png2icons](https://github.com/idesis-gmbh/png2icons), **generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](<https://en.wikipedia.org/wiki/ICO_(file_format)>) files from PNG files.**
+**Elephicon generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](<https://en.wikipedia.org/wiki/ICO_(file_format)>) files from PNG files.** It is built with [Tauri](https://tauri.app/).
 
 ## :green_book: Usage
 
@@ -63,20 +63,23 @@ The app menu is available in the following languages.
 
 You can easily contribute to this repository by providing a translation.
 
-1. Create `{language_code}.json` _(e.g. `nl.json`)_ in `src/locales`, based on `en.json`. It must have the same keys as `en.json`.
-2. Import the file and add the language to `languages` in `src/languages.ts`.
+1. Create `{language_code}.json` _(e.g. `nl.json`)_ in `src-tauri/locales`, based on `en.json`. It must have the same keys as `en.json`.
+2. Add the language to `LANGUAGES` in `src-tauri/src/i18n.rs`.
 
 ```diff
-+ import nl from "./locales/nl.json";
-
-  export const languages: Language[] = [
-    ...
-+   { code: "nl", label: "Nederlands", translation: nl },
-    ...
+  pub const LANGUAGES: &[Language] = &[
+      ...
++     Language {
++         code: "nl",
++         label: "Nederlands",
++         json: locale!("nl.json"),
++         aliases: &[],
++     },
+      ...
   ];
 ```
 
-3. Make sure `npm run lint` and `npm test` pass _(see [Development](#wrench-development))_.
+3. Make sure `npm run lint`, `npm test` and `cargo test` pass _(see [Development](#wrench-development))_.
 4. Send a [pull request](https://github.com/sprout2000/elephicon/pulls) to this repository.
 
 ## :tada: Contributors
@@ -89,7 +92,7 @@ Thanks to these wonderful people :slightly_smiling_face:
 
 ## :hammer_and_wrench: Building from Source
 
-You will need to have [Node.js](https://nodejs.org/) and [Git](https://git-scm.com/) installed.
+You will need [Node.js](https://nodejs.org/), [Git](https://git-scm.com/) and the [Tauri prerequisites](https://v2.tauri.app/start/prerequisites/) _(Rust and the system dependencies)_.
 
 ```sh
 # 1. Clone this repo
@@ -100,35 +103,35 @@ cd elephicon
 npm install
 
 # 3. Build the app and create an installer
-npm run build && npm run package
+npm run tauri build
 ```
 
-The installer is created in the `release` directory.
+The installer is created in `src-tauri/target/release/bundle`.
 
 ## :wrench: Development
 
 ```sh
 # Start the app in development mode
-npm run dev
+npm run tauri dev
 
 # Lint and format the code with Biome
 npm run lint
 
-# Run the tests with Vitest
+# Check the types of the frontend
+npm run typecheck
+
+# Run the frontend tests with Vitest
 npm test
 
-# Run the tests and show the coverage
+# Run the frontend tests and show the coverage
 npm run test:coverage
+
+# Run the Rust tests
+cd src-tauri && cargo test
 ```
 
-The tests are in `src/__tests__/main` _(main process)_ and `src/__tests__/renderer` _(renderer process)_.
+The frontend _(React)_ is in `src/web` and its tests are in `src/__tests__`. The Rust side _(conversion, menu and settings)_ is in `src-tauri/src`, with the tests next to the code.
 
 ## :copyright: Copyright
-
-### [png2icons](https://github.com/idesis-gmbh/png2icons)
-
-MIT © [idesis GmbH](https://www.idesis.de), Rellinghauser Straße 334F, D-45136 Essen
-
-### Elephicon
 
 Copyright (c) 2020-present sprout2000
