@@ -21,16 +21,23 @@ vi.mock("electron", () => ({
 }));
 
 let api: IElectronAPI;
+let exposedName: unknown;
+let exposedTimes: number;
 
+// 各テストの前にモックの呼び出し記録が消されるので、読み込み直後の値を取っておく
 beforeAll(async () => {
   await import("../../preload");
-  api = mocks.exposeInMainWorld.mock.calls[0][1] as IElectronAPI;
+
+  const { calls } = mocks.exposeInMainWorld.mock;
+  exposedTimes = calls.length;
+  exposedName = calls[0][0];
+  api = calls[0][1] as IElectronAPI;
 });
 
 describe("preload", () => {
   it("exposes the API as window.myAPI", () => {
-    expect(mocks.exposeInMainWorld).toHaveBeenCalledTimes(1);
-    expect(mocks.exposeInMainWorld.mock.calls[0][0]).toBe("myAPI");
+    expect(exposedTimes).toBe(1);
+    expect(exposedName).toBe("myAPI");
   });
 
   it.each([
