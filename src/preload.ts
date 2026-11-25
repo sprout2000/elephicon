@@ -14,7 +14,7 @@ contextBridge.exposeInMainWorld("myAPI", {
 
   contextMenu: (): Promise<void> => ipcRenderer.invoke("show-context-menu"),
 
-  openDialog: async (): Promise<string | void> =>
+  openDialog: async (): Promise<string | undefined> =>
     ipcRenderer.invoke("open-file-dialog"),
 
   menuOpen: (

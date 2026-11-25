@@ -30,7 +30,7 @@ export const createMenu = (win: BrowserWindow, store: Store<StoreType>) => {
   const isDarwin = process.platform === "darwin";
 
   const langSub: MenuItemConstructorOptions[] = [];
-  localeList.map((locale) => {
+  localeList.forEach((locale) => {
     langSub.push({
       label: locale.value,
       type: "radio",
