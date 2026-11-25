@@ -9,11 +9,10 @@ vi.mock("../web/api", async () => {
   return { api: mockApi };
 });
 
-const openButton = () =>
-  screen.getByRole("button", { name: "Open a PNG file" });
+const openButton = () => screen.getByRole("button", { name: "Open an image" });
 const icoButton = () => screen.getByRole("button", { name: /ICO$/ });
 const icnsButton = () => screen.getByRole("button", { name: /ICNS$/ });
-const dropMessage = "Drop your PNGs here...";
+const dropMessage = "Drop your images here...";
 
 // Tauri のイベントを送り、それで始まった変換が終わるまで act の中で待つ
 const dragEnter = () =>
@@ -87,7 +86,7 @@ describe("App", () => {
     await drop();
 
     expect(await screen.findByText("Successfully Completed!")).toBeDefined();
-    expect(mockApi.checkPng).toHaveBeenCalledWith("/Users/me/icon.png");
+    expect(mockApi.checkImage).toHaveBeenCalledWith("/Users/me/icon.png");
     expect(mockApi.makeIco).toHaveBeenCalledWith("/Users/me/icon.png");
     expect(mockApi.makeIcns).not.toHaveBeenCalled();
     expect(screen.getByText("icon.ico")).toBeDefined();
@@ -119,8 +118,8 @@ describe("App", () => {
     expect(document.body.textContent).toContain("in the current folder");
   });
 
-  it("shows the message from the PNG check and does not convert", async () => {
-    mockApi.checkPng.mockResolvedValueOnce(
+  it("shows the message from the image check and does not convert", async () => {
+    mockApi.checkImage.mockResolvedValueOnce(
       "This file has a .png extension, but it is not a PNG image.",
     );
     render(<App />);
@@ -136,14 +135,14 @@ describe("App", () => {
     expect(mockApi.makeIco).not.toHaveBeenCalled();
   });
 
-  it("shows the error when the PNG check itself fails", async () => {
-    mockApi.checkPng.mockRejectedValueOnce("command check_png not found");
+  it("shows the error when the image check itself fails", async () => {
+    mockApi.checkImage.mockRejectedValueOnce("command check_image not found");
     render(<App />);
 
     await drop();
 
     expect(
-      await screen.findByText("command check_png not found"),
+      await screen.findByText("command check_image not found"),
     ).toBeDefined();
     expect(mockApi.makeIco).not.toHaveBeenCalled();
   });
@@ -168,7 +167,7 @@ describe("App", () => {
   });
 
   it("goes back to the drop zone with the Back button", async () => {
-    mockApi.checkPng.mockResolvedValueOnce("Could not read the file.");
+    mockApi.checkImage.mockResolvedValueOnce("Could not read the file.");
     render(<App />);
 
     await drop();
@@ -193,7 +192,7 @@ describe("App", () => {
     fireEvent.click(openButton());
 
     await vi.waitFor(() => expect(mockApi.openDialog).toHaveBeenCalled());
-    expect(mockApi.checkPng).not.toHaveBeenCalled();
+    expect(mockApi.checkImage).not.toHaveBeenCalled();
     expect(screen.getByText(dropMessage)).toBeDefined();
   });
 
@@ -226,7 +225,7 @@ describe("App", () => {
 
     await openFromMenu("");
 
-    expect(mockApi.checkPng).not.toHaveBeenCalled();
+    expect(mockApi.checkImage).not.toHaveBeenCalled();
   });
 
   it("opens the context menu on right click", () => {
@@ -255,7 +254,7 @@ describe("App", () => {
     await dragEnter();
     await drop("/Users/me/second.png");
 
-    expect(mockApi.checkPng).toHaveBeenCalledTimes(1);
+    expect(mockApi.checkImage).toHaveBeenCalledTimes(1);
     fireEvent.click(screen.getByRole("button", { name: /Back/ }));
     expect(openButton().className).toBe("elephant");
   });
@@ -276,7 +275,7 @@ describe("App", () => {
     fireEvent.click(openButton());
     fireEvent.click(icnsButton());
 
-    expect(mockApi.checkPng).toHaveBeenCalledTimes(1);
+    expect(mockApi.checkImage).toHaveBeenCalledTimes(1);
     expect(mockApi.openDialog).not.toHaveBeenCalled();
     expect(icoButton().getAttribute("aria-pressed")).toBe("true");
 

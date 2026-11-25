@@ -1,7 +1,7 @@
 {
   "File": "File",
   "Open...": "Open...",
-  "Select a PNG File": "Select a PNG File",
+  "Select an Image": "Select an Image",
   "Close": "Close",
   "Quit Elephicon": "Quit Elephicon",
   "Settings": "Settings",
@@ -13,7 +13,7 @@
   "Use PNG for each icon in the created ICO file": "Use PNG for each icon in the created ICO file",
   "Destination": "Destination",
   "Desktop": "Desktop",
-  "Same folder as the input PNGs": "Same folder as the input PNGs",
+  "Same folder as the input images": "Same folder as the input images",
   "Help": "Help",
   "Support URL...": "Support URL...",
   "About Elephicon": "About Elephicon",

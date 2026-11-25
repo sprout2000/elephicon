@@ -31,7 +31,7 @@
     "targets": "all",
     "category": "DeveloperTool",
     "copyright": "© 2020-present sprout2000",
-    "shortDescription": "Elephicon generates Apple ICNS and Microsoft ICO files from PNG files.",
+    "shortDescription": "Elephicon generates Apple ICNS and Microsoft ICO files from PNG, SVG and other images.",
     "icon": ["icons/icon.png", "icons/icon.icns", "icons/icon.ico"],
     "windows": {
       "nsis": {

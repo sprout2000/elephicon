@@ -23,11 +23,10 @@ const renderDropzone = (props: Partial<ComponentProps<typeof Dropzone>>) => {
   return handlers;
 };
 
-const openButton = () =>
-  screen.getByRole("button", { name: "Open a PNG file" });
+const openButton = () => screen.getByRole("button", { name: "Open an image" });
 const icoButton = () => screen.getByRole("button", { name: /ICO$/ });
 const icnsButton = () => screen.getByRole("button", { name: /ICNS$/ });
-const message = () => screen.getByText("Drop your PNGs here...");
+const message = () => screen.getByText("Drop your images here...");
 
 describe("Dropzone", () => {
   it("marks ICO as selected", () => {

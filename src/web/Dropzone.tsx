@@ -22,7 +22,7 @@ export const Dropzone = memo((props: Props) => {
     >
       <button
         type="button"
-        aria-label="Open a PNG file"
+        aria-label="Open an image"
         onClick={props.onClickOpen}
         className={
           props.drag
@@ -38,7 +38,7 @@ export const Dropzone = memo((props: Props) => {
         className={props.drag || props.loading ? "text loading" : "text"}
         {...dragRegion}
       >
-        Drop your PNGs here...
+        Drop your images here...
       </div>
       <div className="switch">
         <button

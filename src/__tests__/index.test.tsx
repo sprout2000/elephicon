@@ -23,7 +23,7 @@ describe("index", () => {
       await import("../web/index");
     });
 
-    expect(root.contains(screen.getByText("Drop your PNGs here..."))).toBe(
+    expect(root.contains(screen.getByText("Drop your images here..."))).toBe(
       true,
     );
   });

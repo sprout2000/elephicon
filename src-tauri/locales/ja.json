@@ -1,7 +1,7 @@
 {
   "File": "ファイル",
   "Open...": "開く...",
-  "Select a PNG File": "PNG ファイルを選択",
+  "Select an Image": "画像を選択",
   "Close": "閉じる",
   "Quit Elephicon": "Elephicon を終了",
   "Settings": "設定",
@@ -13,7 +13,7 @@
   "Use PNG for each icon in the created ICO file": "すべてのアイコンに PNG 形式を使う",
   "Destination": "出力先",
   "Desktop": "デスクトップ",
-  "Same folder as the input PNGs": "入力ファイルと同じフォルダ",
+  "Same folder as the input images": "入力ファイルと同じフォルダ",
   "Help": "ヘルプ",
   "Support URL...": "サポート URL...",
   "About Elephicon": "Elephicon について",

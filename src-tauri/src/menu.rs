@@ -9,6 +9,7 @@ use tauri_plugin_dialog::{DialogExt, FileDialogBuilder};
 use tauri_plugin_opener::OpenerExt;
 
 use crate::convert::Quality;
+use crate::format::InputFormat;
 use crate::i18n::Translator;
 use crate::settings::Settings;
 use crate::AppState;
@@ -124,7 +125,7 @@ pub fn build<R: Runtime>(
         .item(&check("desktop", t.t("Desktop"), settings.desktop)?)
         .item(&check(
             "current",
-            t.t("Same folder as the input PNGs"),
+            t.t("Same folder as the input images"),
             !settings.desktop,
         )?)
         .build()?;
@@ -185,14 +186,14 @@ pub fn refresh<R: Runtime>(app: &AppHandle<R>) {
     }
 }
 
-/// The dialog for choosing a PNG file, opened in the Pictures folder.
+/// The dialog for choosing an image, opened in the Pictures folder.
 pub fn file_dialog<R: Runtime>(app: &AppHandle<R>) -> FileDialogBuilder<R> {
     let state = app.state::<AppState>();
     let dialog = app
         .dialog()
         .file()
-        .set_title(state.translator.t("Select a PNG File"))
-        .add_filter("PNG File", &["png"]);
+        .set_title(state.translator.t("Select an Image"))
+        .add_filter("Images", &InputFormat::all_extensions());
 
     match app.path().picture_dir() {
         Ok(dir) => dialog.set_directory(dir),

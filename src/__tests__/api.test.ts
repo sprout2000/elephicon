@@ -43,7 +43,7 @@ beforeEach(() => {
 
 describe("api commands", () => {
   it.each([
-    ["checkPng", "check_png"],
+    ["checkImage", "check_image"],
     ["makeIco", "make_ico"],
     ["makeIcns", "make_icns"],
   ] as const)("%s invokes %s with the path", async (name, command) => {

@@ -1,7 +1,7 @@
 {
   "File": "Файл",
   "Open...": "Відкрити...",
-  "Select a PNG File": "Вибрати файл PNG",
+  "Select an Image": "Вибрати зображення",
   "Close": "Закрити",
   "Quit Elephicon": "Вийти з Elephicon",
   "Settings": "Налаштування",
@@ -13,7 +13,7 @@
   "Use PNG for each icon in the created ICO file": "Використовувати PNG для кожної іконки у створеному файлі ICO",
   "Destination": "Папка призначення",
   "Desktop": "Робочий стіл",
-  "Same folder as the input PNGs": "Папка з початковими файлами PNG",
+  "Same folder as the input images": "Папка з початковими зображеннями",
   "Help": "Допомога",
   "Support URL...": "URL служби підтримки...",
   "About Elephicon": "Про Elephicon",

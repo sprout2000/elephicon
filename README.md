@@ -4,13 +4,15 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/sprout2000/elephicon/total)
 ![GitHub contributors](https://img.shields.io/github/contributors/sprout2000/elephicon)
 
-**Elephicon generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](<https://en.wikipedia.org/wiki/ICO_(file_format)>) files from PNG files.** It is built with [Tauri](https://tauri.app/).
+**Elephicon generates [Apple ICNS](https://en.wikipedia.org/wiki/Apple_Icon_Image_format) and [Microsoft ICO](<https://en.wikipedia.org/wiki/ICO_(file_format)>) files from PNG, SVG and other images.** It is built with [Tauri](https://tauri.app/).
 
 ## :green_book: Usage
 
-- The ideal input is a 24-bit PNG file with _1024x1024_ pixels and an alpha channel, but other sizes and most other PNG formats will also work.
+- Supported input formats: **PNG**, **SVG**, **JPEG**, **WebP**, **BMP**, **GIF** _(the first frame)_ and **TIFF**.
+- The ideal input is an SVG file, or a PNG file with _1024x1024_ pixels and an alpha channel. Other sizes will also work.
+- SVG files are drawn directly at each icon size, so small icons stay sharp. Text in an SVG file uses the fonts installed on your system.
 - If you only need ICO files, _256x256_ pixels is enough.
-- You can also create icons from PNG files that are not square.
+- You can also create icons from images that are not square. They are centered on a transparent background.
 - You can change the settings from the context menu.
 
 <img width="50%" alt="animation" src="https://user-images.githubusercontent.com/52094761/144979888-d796c672-ee0a-44cc-bfa2-abce6513d192.gif" />

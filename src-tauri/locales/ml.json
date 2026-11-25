@@ -1,7 +1,7 @@
 {
   "File": "ഫയൽ",
   "Open...": "തുറക്കുക...",
-  "Select a PNG File": "ഒരു PNG ഫയൽ തിരഞ്ഞെടുക്കുക",
+  "Select an Image": "ഒരു ചിത്രം തിരഞ്ഞെടുക്കുക",
   "Close": "അടയ്‌ക്കുക",
   "Quit Elephicon": "ഉപേക്ഷിക്കുക",
   "Settings": "ക്രമീകരണങ്ങൾ",
@@ -13,7 +13,7 @@
   "Use PNG for each icon in the created ICO file": "സൃഷ്ടിച്ച ICO ഫയലിലെ ഓരോ ഐക്കണിനും PNG ഉപയോഗിക്കുക",
   "Destination": "ലക്ഷ്യസ്ഥാനം",
   "Desktop": "Desktop",
-  "Same folder as the input PNGs": "നിക്ഷേപിച്ച PNG-കളുടെ അതേ ഫോൾ‌ഡർ‌",
+  "Same folder as the input images": "ഇൻപുട്ട് ചിത്രങ്ങളുടെ അതേ ഫോൾഡർ",
   "Help": "സഹായം",
   "Support URL...": "പിന്തുണയ്ക്കുവേണ്ടിയുള്ള URL ...",
   "About Elephicon": "Elephicon-നെക്കുറിച്ച്",

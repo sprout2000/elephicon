@@ -4,15 +4,15 @@ use std::path::Path;
 
 use tauri::{AppHandle, Manager, State, Window};
 
-use crate::check;
 use crate::convert::{convert_file, ConvertOptions, ConvertResult, IconKind};
+use crate::format;
 use crate::menu;
 use crate::AppState;
 
-/// Returns `None` for a real PNG file, or the error message to show.
+/// Returns `None` for a supported image, or the error message to show.
 #[tauri::command]
-pub fn check_png(path: String) -> Option<String> {
-    check::check_png(Path::new(&path))
+pub fn check_image(path: String) -> Option<String> {
+    format::check_image(Path::new(&path))
 }
 
 async fn convert(

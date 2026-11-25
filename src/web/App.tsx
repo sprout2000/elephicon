@@ -42,7 +42,7 @@ export const App = () => {
   const convert = useCallback(async (filepath: string) => {
     dispatch({ loading: true, drag: false });
 
-    const error = await api.checkPng(filepath).catch((reason) => `${reason}`);
+    const error = await api.checkImage(filepath).catch((reason) => `${reason}`);
     if (error) {
       dispatch({ log: error, result: "failed", loading: false });
       return;

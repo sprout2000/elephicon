@@ -4,11 +4,15 @@ use std::fmt;
 use std::fs;
 use std::io;
 use std::path::Path;
+use std::sync::{Arc, OnceLock};
 
 use icns::{IconFamily, IconType};
 use image::imageops::{self, FilterType};
-use image::{ImageFormat, RgbaImage};
+use image::RgbaImage;
+use resvg::{tiny_skia, usvg};
 use serde::{Deserialize, Serialize};
+
+use crate::format::InputFormat;
 
 /// The sizes embedded in an ICO file.
 pub const ICO_SIZES: [u32; 9] = [16, 24, 32, 48, 64, 72, 96, 128, 256];
@@ -68,14 +72,19 @@ impl IconKind {
 
 #[derive(Debug)]
 pub enum ConvertError {
+    /// The data is not in a supported image format.
+    Unsupported,
     Decode(image::ImageError),
+    Svg(usvg::Error),
     Encode(io::Error),
 }
 
 impl fmt::Display for ConvertError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            ConvertError::Decode(err) => write!(f, "Could not read the PNG image: {err}"),
+            ConvertError::Unsupported => write!(f, "Unsupported format: Unknown"),
+            ConvertError::Decode(err) => write!(f, "Could not read the image: {err}"),
+            ConvertError::Svg(err) => write!(f, "Could not read the SVG image: {err}"),
             ConvertError::Encode(err) => write!(f, "Could not create the icon: {err}"),
         }
     }
@@ -83,16 +92,70 @@ impl fmt::Display for ConvertError {
 
 impl std::error::Error for ConvertError {}
 
-/// Decodes the PNG data and centers it on a transparent square canvas, so
-/// that icons can also be made from images that are not square.
-fn to_square(png: &[u8]) -> Result<RgbaImage, ConvertError> {
-    let image = image::load_from_memory_with_format(png, ImageFormat::Png)
-        .map_err(ConvertError::Decode)?
-        .to_rgba8();
+/// The system fonts, loaded once for the text in SVG files.
+fn fonts() -> Arc<usvg::fontdb::Database> {
+    static FONTS: OnceLock<Arc<usvg::fontdb::Database>> = OnceLock::new();
+
+    FONTS
+        .get_or_init(|| {
+            let mut fonts = usvg::fontdb::Database::new();
+            fonts.load_system_fonts();
+            Arc::new(fonts)
+        })
+        .clone()
+}
+
+/// An image read from an input file, ready to be drawn at each icon size.
+pub enum Source {
+    /// A raster image, centered on a transparent square canvas so that icons
+    /// can also be made from images that are not square.
+    Raster(RgbaImage),
+    /// An SVG image, drawn directly at each size instead of being resized.
+    Svg(usvg::Tree),
+}
+
+impl Source {
+    /// Reads the image. `resources_dir` is where an SVG file looks for the
+    /// images it links to.
+    pub fn load(data: &[u8], resources_dir: Option<&Path>) -> Result<Self, ConvertError> {
+        let format = InputFormat::detect(data).ok_or(ConvertError::Unsupported)?;
+
+        match format.image_format() {
+            Some(image_format) => {
+                let image = image::load_from_memory_with_format(data, image_format)
+                    .map_err(ConvertError::Decode)?
+                    .to_rgba8();
+
+                Ok(Source::Raster(to_square(image)))
+            }
+            None => {
+                let options = usvg::Options {
+                    resources_dir: resources_dir.map(Path::to_path_buf),
+                    fontdb: fonts(),
+                    ..usvg::Options::default()
+                };
+                let tree = usvg::Tree::from_data(data, &options).map_err(ConvertError::Svg)?;
+
+                Ok(Source::Svg(tree))
+            }
+        }
+    }
+
+    /// Draws the image as a `size` x `size` icon.
+    pub fn render(&self, size: u32, quality: Quality) -> RgbaImage {
+        match self {
+            Source::Raster(square) if square.width() == size => square.clone(),
+            Source::Raster(square) => imageops::resize(square, size, size, quality.filter()),
+            Source::Svg(tree) => render_svg(tree, size),
+        }
+    }
+}
+
+fn to_square(image: RgbaImage) -> RgbaImage {
     let (width, height) = image.dimensions();
 
     if width == height {
-        return Ok(image);
+        return image;
     }
 
     let side = width.max(height);
@@ -104,26 +167,48 @@ fn to_square(png: &[u8]) -> Result<RgbaImage, ConvertError> {
         i64::from((side - height) / 2),
     );
 
-    Ok(canvas)
+    canvas
 }
 
-fn resized(square: &RgbaImage, size: u32, quality: Quality) -> RgbaImage {
-    if square.width() == size {
-        return square.clone();
-    }
+/// Draws the SVG centered on a transparent square, keeping its aspect ratio.
+fn render_svg(tree: &usvg::Tree, size: u32) -> RgbaImage {
+    let svg_size = tree.size();
+    let (width, height) = (svg_size.width(), svg_size.height());
+    let side = size as f32;
+    let scale = side / width.max(height);
+    let transform = tiny_skia::Transform::from_row(
+        scale,
+        0.0,
+        0.0,
+        scale,
+        (side - width * scale) / 2.0,
+        (side - height * scale) / 2.0,
+    );
 
-    imageops::resize(square, size, size, quality.filter())
+    let mut pixmap = tiny_skia::Pixmap::new(size, size).expect("icon sizes are not zero");
+    resvg::render(tree, transform, &mut pixmap.as_mut());
+
+    // tiny-skia keeps premultiplied colors, while icons need straight alpha
+    let data = pixmap
+        .pixels()
+        .iter()
+        .flat_map(|pixel| {
+            let color = pixel.demultiply();
+            [color.red(), color.green(), color.blue(), color.alpha()]
+        })
+        .collect();
+
+    RgbaImage::from_raw(size, size, data).expect("the pixmap has size x size pixels")
 }
 
 /// Creates an ICO file. With `bmp`, the images smaller than 256x256 are
 /// stored as BMP and the rest as PNG; otherwise every image is PNG.
-pub fn make_ico(png: &[u8], quality: Quality, bmp: bool) -> Result<Vec<u8>, ConvertError> {
-    let square = to_square(png)?;
+pub fn make_ico(source: &Source, quality: Quality, bmp: bool) -> Result<Vec<u8>, ConvertError> {
     let mut dir = ico::IconDir::new(ico::ResourceType::Icon);
 
     for size in ICO_SIZES {
         let image =
-            ico::IconImage::from_rgba_data(size, size, resized(&square, size, quality).into_raw());
+            ico::IconImage::from_rgba_data(size, size, source.render(size, quality).into_raw());
         let entry = if bmp && size < PNG_ONLY_SIZE {
             ico::IconDirEntry::encode_as_bmp(&image)
         } else {
@@ -141,8 +226,7 @@ pub fn make_ico(png: &[u8], quality: Quality, bmp: bool) -> Result<Vec<u8>, Conv
 }
 
 /// Creates an ICNS file.
-pub fn make_icns(png: &[u8], quality: Quality) -> Result<Vec<u8>, ConvertError> {
-    let square = to_square(png)?;
+pub fn make_icns(source: &Source, quality: Quality) -> Result<Vec<u8>, ConvertError> {
     let mut family = IconFamily::new();
 
     for icon_type in ICNS_TYPES {
@@ -151,7 +235,7 @@ pub fn make_icns(png: &[u8], quality: Quality) -> Result<Vec<u8>, ConvertError> 
             icns::PixelFormat::RGBA,
             size,
             size,
-            resized(&square, size, quality).into_raw(),
+            source.render(size, quality).into_raw(),
         )
         .map_err(ConvertError::Encode)?;
 
@@ -186,13 +270,14 @@ pub struct ConvertOptions<'a> {
     pub output_dir: Option<&'a Path>,
 }
 
-/// Reads the PNG file, creates the icon and writes it next to the input
+/// Reads the image file, creates the icon and writes it next to the input
 /// file or into `output_dir`, with the same name as the input.
 pub fn convert_file(input: &Path, options: &ConvertOptions) -> Result<ConvertResult, String> {
-    let png = fs::read(input).map_err(|err| format!("Could not read the file: {err}"))?;
+    let data = fs::read(input).map_err(|err| format!("Could not read the file: {err}"))?;
+    let source = Source::load(&data, input.parent()).map_err(|err| err.to_string())?;
     let icon = match options.kind {
-        IconKind::Ico => make_ico(&png, options.quality, options.bmp),
-        IconKind::Icns => make_icns(&png, options.quality),
+        IconKind::Ico => make_ico(&source, options.quality, options.bmp),
+        IconKind::Icns => make_icns(&source, options.quality),
     }
     .map_err(|err| err.to_string())?;
 
@@ -222,20 +307,48 @@ mod tests {
     use super::*;
     use std::io::Cursor;
 
-    use image::{DynamicImage, Rgba};
+    use image::{DynamicImage, ImageFormat, Rgba};
 
-    /// Creates PNG data filled with opaque red.
-    fn png(width: u32, height: u32) -> Vec<u8> {
+    /// Encodes an image filled with opaque red in the given format.
+    fn encode(width: u32, height: u32, format: ImageFormat) -> Vec<u8> {
         let image = RgbaImage::from_pixel(width, height, Rgba([255, 0, 0, 255]));
+        let image = match format {
+            // JPEG has no alpha channel
+            ImageFormat::Jpeg => DynamicImage::ImageRgb8(DynamicImage::ImageRgba8(image).to_rgb8()),
+            _ => DynamicImage::ImageRgba8(image),
+        };
         let mut data = Vec::new();
-        DynamicImage::ImageRgba8(image)
-            .write_to(&mut Cursor::new(&mut data), ImageFormat::Png)
-            .unwrap();
+        image.write_to(&mut Cursor::new(&mut data), format).unwrap();
         data
+    }
+
+    fn png(width: u32, height: u32) -> Vec<u8> {
+        encode(width, height, ImageFormat::Png)
+    }
+
+    /// A red rectangle of `width` x `height`.
+    fn svg(width: u32, height: u32) -> Vec<u8> {
+        format!(
+            r#"<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"><rect width="{width}" height="{height}" fill="red"/></svg>"#
+        )
+        .into_bytes()
+    }
+
+    fn load(data: &[u8]) -> Source {
+        Source::load(data, None).unwrap()
     }
 
     fn read_ico(data: &[u8]) -> ico::IconDir {
         ico::IconDir::read(Cursor::new(data)).unwrap()
+    }
+
+    /// The alpha value of a pixel in the 16x16 image of an ICO file.
+    fn alpha_16(ico_data: &[u8], x: u32, y: u32) -> u8 {
+        let dir = read_ico(ico_data);
+        let entry = dir.entries().iter().find(|e| e.width() == 16).unwrap();
+        let image = entry.decode().unwrap();
+        let i = ((y * image.width() + x) * 4) as usize;
+        image.rgba_data()[i + 3]
     }
 
     #[test]
@@ -248,7 +361,7 @@ mod tests {
 
     #[test]
     fn ico_has_every_size() {
-        let dir = read_ico(&make_ico(&png(512, 512), Quality::High, true).unwrap());
+        let dir = read_ico(&make_ico(&load(&png(512, 512)), Quality::High, true).unwrap());
         let sizes: Vec<u32> = dir.entries().iter().map(|entry| entry.width()).collect();
 
         assert_eq!(sizes, ICO_SIZES);
@@ -259,7 +372,7 @@ mod tests {
 
     #[test]
     fn ico_uses_bmp_for_small_sizes_when_bmp_is_on() {
-        let dir = read_ico(&make_ico(&png(256, 256), Quality::Medium, true).unwrap());
+        let dir = read_ico(&make_ico(&load(&png(256, 256)), Quality::Medium, true).unwrap());
 
         for entry in dir.entries() {
             assert_eq!(entry.is_png(), entry.width() >= 256, "{}", entry.width());
@@ -268,14 +381,14 @@ mod tests {
 
     #[test]
     fn ico_uses_png_for_every_size_when_bmp_is_off() {
-        let dir = read_ico(&make_ico(&png(256, 256), Quality::Low, false).unwrap());
+        let dir = read_ico(&make_ico(&load(&png(256, 256)), Quality::Low, false).unwrap());
 
         assert!(dir.entries().iter().all(|entry| entry.is_png()));
     }
 
     #[test]
     fn icns_has_every_icon() {
-        let data = make_icns(&png(1024, 1024), Quality::High).unwrap();
+        let data = make_icns(&load(&png(1024, 1024)), Quality::High).unwrap();
         let family = IconFamily::read(Cursor::new(data)).unwrap();
         let available = family.available_icons();
 
@@ -287,26 +400,74 @@ mod tests {
     #[test]
     fn centers_images_that_are_not_square() {
         // 200x100: the top and bottom quarters become transparent
-        let dir = read_ico(&make_ico(&png(200, 100), Quality::Low, false).unwrap());
-        let entry = dir.entries().iter().find(|e| e.width() == 16).unwrap();
-        let image = entry.decode().unwrap();
-        let pixel = |x: u32, y: u32| {
-            let i = ((y * image.width() + x) * 4) as usize;
-            image.rgba_data()[i + 3]
-        };
+        let data = make_ico(&load(&png(200, 100)), Quality::Low, false).unwrap();
 
-        assert_eq!(pixel(8, 0), 0, "top edge is transparent");
-        assert_eq!(pixel(8, 8), 255, "center is opaque");
-        assert_eq!(pixel(8, 15), 0, "bottom edge is transparent");
+        assert_eq!(alpha_16(&data, 8, 0), 0, "top edge is transparent");
+        assert_eq!(alpha_16(&data, 8, 8), 255, "center is opaque");
+        assert_eq!(alpha_16(&data, 8, 15), 0, "bottom edge is transparent");
     }
 
     #[test]
-    fn fails_for_data_that_is_not_png() {
+    fn reads_every_raster_format() {
+        for format in [
+            ImageFormat::Png,
+            ImageFormat::Jpeg,
+            ImageFormat::WebP,
+            ImageFormat::Bmp,
+            ImageFormat::Gif,
+            ImageFormat::Tiff,
+        ] {
+            let source = load(&encode(64, 64, format));
+            let dir = read_ico(&make_ico(&source, Quality::High, true).unwrap());
+
+            assert_eq!(dir.entries().len(), ICO_SIZES.len(), "{format:?}");
+            assert!(make_icns(&source, Quality::High).is_ok(), "{format:?}");
+        }
+    }
+
+    #[test]
+    fn draws_svg_at_each_size() {
+        let source = load(&svg(64, 64));
+
+        assert!(matches!(source, Source::Svg(_)));
+        for size in [16, 256, 1024] {
+            let image = source.render(size, Quality::Low);
+            assert_eq!(image.dimensions(), (size, size));
+            assert_eq!(image.get_pixel(size / 2, size / 2).0, [255, 0, 0, 255]);
+        }
+    }
+
+    #[test]
+    fn centers_svg_that_is_not_square() {
+        let data = make_ico(&load(&svg(200, 100)), Quality::High, true).unwrap();
+
+        assert_eq!(alpha_16(&data, 8, 0), 0, "top edge is transparent");
+        assert_eq!(alpha_16(&data, 8, 8), 255, "center is opaque");
+        assert_eq!(alpha_16(&data, 8, 15), 0, "bottom edge is transparent");
+    }
+
+    #[test]
+    fn makes_icns_from_svg() {
+        let data = make_icns(&load(&svg(32, 32)), Quality::High).unwrap();
+        let family = IconFamily::read(Cursor::new(data)).unwrap();
+
+        assert_eq!(family.available_icons().len(), ICNS_TYPES.len());
+    }
+
+    #[test]
+    fn fails_for_unsupported_or_broken_data() {
         assert!(matches!(
-            make_ico(b"not a png", Quality::High, true),
+            Source::load(b"not an image", None),
+            Err(ConvertError::Unsupported)
+        ));
+        assert!(matches!(
+            Source::load(b"\x89PNG\r\n\x1a\nbroken", None),
             Err(ConvertError::Decode(_))
         ));
-        assert!(make_icns(b"not a png", Quality::High).is_err());
+        assert!(matches!(
+            Source::load(b"<svg xmlns=\"http://www.w3.org/2000/svg\"><rect", None),
+            Err(ConvertError::Svg(_))
+        ));
     }
 
     #[test]
@@ -382,8 +543,29 @@ mod tests {
         let broken = dir.path().join("broken.png");
         fs::write(&broken, b"not a png").unwrap();
         let error = convert_file(&broken, &options).unwrap_err();
-        assert!(error.starts_with("Could not read the PNG image"), "{error}");
+        assert_eq!(error, "Unsupported format: Unknown");
         assert!(!dir.path().join("broken.ico").exists());
+    }
+
+    #[test]
+    fn converts_an_svg_file() {
+        let dir = tempfile::tempdir().unwrap();
+        let input = dir.path().join("logo.svg");
+        fs::write(&input, svg(48, 48)).unwrap();
+
+        let result = convert_file(
+            &input,
+            &ConvertOptions {
+                kind: IconKind::Ico,
+                quality: Quality::High,
+                bmp: false,
+                output_dir: None,
+            },
+        )
+        .unwrap();
+
+        assert_eq!(result.log, "logo.ico");
+        assert!(dir.path().join("logo.ico").exists());
     }
 
     #[test]

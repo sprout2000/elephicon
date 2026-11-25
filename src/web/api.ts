@@ -13,8 +13,8 @@ export type DragDropHandlers = {
 
 /** The commands and events of the Rust side (src-tauri/src). */
 export const api = {
-  /** Returns null for a real PNG file, or the error message to show. */
-  checkPng: (path: string) => invoke<string | null>("check_png", { path }),
+  /** Returns null for a supported image, or the error message to show. */
+  checkImage: (path: string) => invoke<string | null>("check_image", { path }),
 
   makeIco: (path: string) => invoke<Result>("make_ico", { path }),
 

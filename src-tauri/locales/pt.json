@@ -1,7 +1,7 @@
 {
   "File": "Arquivo",
   "Open...": "Abrir...",
-  "Select a PNG File": "Selecione um arquivo .Use PNG for each icon in the created ICO file",
+  "Select an Image": "Selecione uma imagem",
   "Close": "Fechar",
   "Quit Elephicon": "Sair",
   "Settings": "Configurações",
@@ -13,7 +13,7 @@
   "Use PNG for each icon in the created ICO file": "Use PNG para cada ícone no arquivo ICO criado",
   "Destination": "Destino",
   "Desktop": "Área de Trabalho",
-  "Same folder as the input PNGs": "Mesma pasta dos arquivos .Use PNG for each icon in the created ICO file selecionados",
+  "Same folder as the input images": "Mesma pasta das imagens de entrada",
   "Help": "Ajuda",
   "Support URL...": "URL de suporte...",
   "About Elephicon": "Sobre Elephicon",

@@ -15,7 +15,7 @@ export const unlisten = {
 
 /** Replaces `api` from src/web/api.ts in the tests. */
 export const mockApi = {
-  checkPng: vi.fn<(path: string) => Promise<string | null>>(),
+  checkImage: vi.fn<(path: string) => Promise<string | null>>(),
   makeIco: vi.fn<(path: string) => Promise<Result>>(),
   makeIcns: vi.fn<(path: string) => Promise<Result>>(),
   openDialog: vi.fn<() => Promise<string | null>>(),
@@ -30,12 +30,12 @@ export const mockApi = {
   }),
 };
 
-/** Sets the default answers: a real PNG that converts without errors. */
+/** Sets the default answers: a supported image that converts without errors. */
 export const resetMockApi = () => {
   listeners.menuOpen = undefined;
   listeners.dragDrop = undefined;
 
-  mockApi.checkPng.mockResolvedValue(null);
+  mockApi.checkImage.mockResolvedValue(null);
   mockApi.makeIco.mockResolvedValue({
     type: "success",
     log: "icon.ico",

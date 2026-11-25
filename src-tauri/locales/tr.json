@@ -1,7 +1,7 @@
 {
   "File": "Dosya",
   "Open...": "Aç...",
-  "Select a PNG File": "Bir PNG Dosyası Seç",
+  "Select an Image": "Bir Görüntü Seç",
   "Close": "Kapat",
   "Quit Elephicon": "Elephicon'dan Çık",
   "Settings": "Ayarlar",
@@ -13,7 +13,7 @@
   "Use PNG for each icon in the created ICO file": "Oluşturulan ICO dosyasındaki her bir ikon için PNG kullan",
   "Destination": "Hedef",
   "Desktop": "Masaüstü",
-  "Same folder as the input PNGs": "Kaynak PNG'ler ile aynı klasör",
+  "Same folder as the input images": "Kaynak görüntülerle aynı klasör",
   "Help": "Yardım",
   "Support URL...": "Destek URL...",
   "About Elephicon": "Elephicon Hakkında",
