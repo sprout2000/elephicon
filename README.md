@@ -80,7 +80,7 @@ You can easily contribute to this repository by providing a translation.
   ];
 ```
 
-3. Make sure `npm run lint`, `npm test` and `cargo test` pass _(see [Development](#wrench-development))_.
+3. Make sure `npm run lint`, `npm test` and `npm run test:rust` pass _(see [Development](#wrench-development))_.
 4. Send a [pull request](https://github.com/sprout2000/elephicon/pulls) to this repository.
 
 ## :tada: Contributors
@@ -128,7 +128,7 @@ npm test
 npm run test:coverage
 
 # Run the Rust tests
-cd src-tauri && cargo test
+npm run test:rust
 ```
 
 The frontend _(React)_ is in `src/web` and its tests are in `src/__tests__`. The Rust side _(conversion, menu and settings)_ is in `src-tauri/src`, with the tests next to the code.
