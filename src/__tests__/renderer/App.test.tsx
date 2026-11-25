@@ -102,6 +102,26 @@ describe("App", () => {
     expect(mock.api.mkIco).not.toHaveBeenCalled();
   });
 
+  it("shows the error when the PNG check itself fails", async () => {
+    mock.api.pngcheck.mockRejectedValueOnce(new Error("IPC failed"));
+    render(<App />);
+
+    dropFile();
+
+    expect(await screen.findByText("Error: IPC failed")).toBeDefined();
+    expect(mock.api.mkIco).not.toHaveBeenCalled();
+  });
+
+  it("shows the error when the ICNS conversion fails", async () => {
+    mock.api.mkIcns.mockRejectedValueOnce(new Error("icns failed"));
+    render(<App />);
+
+    fireEvent.click(icnsButton());
+    dropFile();
+
+    expect(await screen.findByText("Error: icns failed")).toBeDefined();
+  });
+
   it("shows the error when the conversion fails", async () => {
     mock.api.mkIco.mockRejectedValueOnce(new Error("boom"));
     render(<App />);
@@ -141,6 +161,27 @@ describe("App", () => {
     expect(screen.getByText("Drop your PNGs here...")).toBeDefined();
   });
 
+  it("ignores a drop without file data", () => {
+    render(<App />);
+
+    fireEvent.drop(dropZone());
+
+    expect(mock.api.getFilePath).not.toHaveBeenCalled();
+    expect(mock.api.pngcheck).not.toHaveBeenCalled();
+    expect(openButton().className).toBe("elephant");
+  });
+
+  it("ignores an empty path from the menu", () => {
+    render(<App />);
+
+    act(() => {
+      mock.listeners.menuOpen?.(ipcEvent, "");
+    });
+
+    expect(mock.api.pngcheck).not.toHaveBeenCalled();
+    expect(openButton().className).toBe("elephant");
+  });
+
   it("converts the file opened from the menu", async () => {
     render(<App />);
 
@@ -150,6 +191,19 @@ describe("App", () => {
 
     expect(await screen.findByText("Successfully Completed!")).toBeDefined();
     expect(mock.api.mkIco).toHaveBeenCalledWith("/Users/me/menu.png");
+  });
+
+  it("accepts destination changes from the menu", () => {
+    render(<App />);
+
+    // 出力先は結果画面で mkIco / mkIcns の戻り値から表示されるため、
+    // ここでは受け取っても画面が壊れないことだけを確かめる
+    act(() => {
+      mock.listeners.setDesktop?.(ipcEvent, false);
+    });
+
+    expect(mock.api.setDesktop).toHaveBeenCalledTimes(1);
+    expect(screen.getByText("Drop your PNGs here...")).toBeDefined();
   });
 
   it("opens the context menu on right click", () => {
@@ -190,6 +244,33 @@ describe("App", () => {
       finish({ type: "success", log: "icon.ico", desktop: true });
     });
     expect(screen.getByText("Successfully Completed!")).toBeDefined();
+  });
+
+  it("ignores new files and the open button while converting", async () => {
+    let finish: (result: Result) => void = () => {};
+    mock.api.mkIco.mockReturnValueOnce(
+      new Promise<Result>((resolve) => {
+        finish = resolve;
+      }),
+    );
+    render(<App />);
+
+    dropFile();
+    await vi.waitFor(() => expect(mock.api.mkIco).toHaveBeenCalled());
+
+    fireEvent.dragOver(dropZone());
+    expect(openButton().className).toBe("elephant loading");
+
+    dropFile("second.png");
+    expect(mock.api.getFilePath).toHaveBeenCalledTimes(1);
+
+    fireEvent.click(openButton());
+    expect(mock.api.openDialog).not.toHaveBeenCalled();
+
+    await act(async () => {
+      finish({ type: "success", log: "icon.ico", desktop: true });
+    });
+    expect(mock.api.pngcheck).toHaveBeenCalledTimes(1);
   });
 
   it("stops listening to the main process on unmount", () => {

@@ -129,6 +129,14 @@ describe("createMenu", () => {
     expect(findByLabel(template, "Quit Elephicon").role).toBe("quit");
   });
 
+  it("shows the about panel from the Help menu on Windows and Linux", () => {
+    const { template } = build();
+
+    click(findByLabel(template, "About Elephicon"));
+
+    expect(mocks.showAboutPanel).toHaveBeenCalled();
+  });
+
   it("adds the app menu on macOS", () => {
     setPlatform("darwin");
     const { template } = build();
@@ -176,11 +184,17 @@ describe("createMenu", () => {
     click(findById(template, "low"));
     expect(set).toHaveBeenLastCalledWith("quality", 0);
 
+    click(findById(template, "mid"));
+    expect(set).toHaveBeenLastCalledWith("quality", 1);
+
     click(findById(template, "high"));
     expect(set).toHaveBeenLastCalledWith("quality", 2);
 
     click(findById(template, "png"));
     expect(set).toHaveBeenLastCalledWith("bmp", false);
+
+    click(findById(template, "bmp"));
+    expect(set).toHaveBeenLastCalledWith("bmp", true);
   });
 
   it("saves the destination and notifies the renderer", () => {
@@ -249,6 +263,17 @@ describe("createMenu", () => {
 
     await click(findByLabel(template, "Open..."));
 
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it("logs the error when the open dialog fails", async () => {
+    const error = new Error("dialog failed");
+    mocks.showOpenDialog.mockRejectedValue(error);
+    const { template } = build();
+
+    await click(findByLabel(template, "Open..."));
+
+    expect(console.log).toHaveBeenCalledWith(error);
     expect(send).not.toHaveBeenCalled();
   });
 
