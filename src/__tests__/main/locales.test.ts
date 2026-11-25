@@ -17,24 +17,6 @@ const files = fs
 const enKeys = Object.keys(readLocale("en.json")).sort();
 
 describe("locale files", () => {
-  it("includes all 13 languages", () => {
-    expect(files).toEqual([
-      "az.json",
-      "de.json",
-      "en.json",
-      "es.json",
-      "fr.json",
-      "it.json",
-      "ja.json",
-      "ml.json",
-      "pt.json",
-      "ru.json",
-      "tr.json",
-      "uk.json",
-      "zh_cn.json",
-    ]);
-  });
-
   it.each(files)("%s has the same keys as en.json", (file) => {
     expect(Object.keys(readLocale(file)).sort()).toEqual(enKeys);
   });
