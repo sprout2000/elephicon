@@ -15,14 +15,24 @@ const icoButton = () => screen.getByRole("button", { name: /ICO$/ });
 const icnsButton = () => screen.getByRole("button", { name: /ICNS$/ });
 const dropMessage = "Drop your PNGs here...";
 
-const dragEnter = () => act(() => listeners.dragDrop?.onEnter());
-const dragLeave = () => act(() => listeners.dragDrop?.onLeave());
+// Tauri のイベントを送り、それで始まった変換が終わるまで act の中で待つ
+const dragEnter = () =>
+  act(async () => {
+    listeners.dragDrop?.onEnter();
+  });
+const dragLeave = () =>
+  act(async () => {
+    listeners.dragDrop?.onLeave();
+  });
 const drop = (path = "/Users/me/icon.png") =>
-  act(() => {
+  act(async () => {
     listeners.dragDrop?.onLeave();
     listeners.dragDrop?.onDrop(path);
   });
-const openFromMenu = (path: string) => act(() => listeners.menuOpen?.(path));
+const openFromMenu = (path: string) =>
+  act(async () => {
+    listeners.menuOpen?.(path);
+  });
 
 /** Makes makeIco wait until the returned function is called. */
 const pendingIco = () => {
