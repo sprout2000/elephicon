@@ -1,6 +1,7 @@
 node_modules
 release
 dist
+coverage
 npm-*.log
 yarn-*.log
 .DS_Store
