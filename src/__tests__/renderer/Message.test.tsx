@@ -49,6 +49,24 @@ describe("Message", () => {
     expect(document.body.textContent).not.toContain("was created");
   });
 
+  it("ignores files dragged onto the result screen", () => {
+    render(
+      <Message
+        log="icon.ico"
+        result="success"
+        desktop={true}
+        onClickBack={() => {}}
+      />,
+    );
+    const zone = screen.getByRole("region", { name: "Result" });
+
+    // preventDefault が呼ばれると fireEvent は false を返す
+    // （dragleave は取り消せないイベントなので確かめられない）
+    expect(fireEvent.dragEnter(zone)).toBe(false);
+    expect(fireEvent.dragOver(zone)).toBe(false);
+    expect(fireEvent.drop(zone)).toBe(false);
+  });
+
   it("calls onClickBack when Back is clicked", () => {
     const onClickBack = vi.fn();
     render(

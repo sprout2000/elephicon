@@ -102,6 +102,26 @@ describe("App", () => {
     expect(mock.api.mkIco).not.toHaveBeenCalled();
   });
 
+  it("shows the error when the PNG check itself fails", async () => {
+    mock.api.pngcheck.mockRejectedValueOnce(new Error("IPC failed"));
+    render(<App />);
+
+    dropFile();
+
+    expect(await screen.findByText("Error: IPC failed")).toBeDefined();
+    expect(mock.api.mkIco).not.toHaveBeenCalled();
+  });
+
+  it("shows the error when the ICNS conversion fails", async () => {
+    mock.api.mkIcns.mockRejectedValueOnce(new Error("icns failed"));
+    render(<App />);
+
+    fireEvent.click(icnsButton());
+    dropFile();
+
+    expect(await screen.findByText("Error: icns failed")).toBeDefined();
+  });
+
   it("shows the error when the conversion fails", async () => {
     mock.api.mkIco.mockRejectedValueOnce(new Error("boom"));
     render(<App />);
@@ -150,6 +170,19 @@ describe("App", () => {
 
     expect(await screen.findByText("Successfully Completed!")).toBeDefined();
     expect(mock.api.mkIco).toHaveBeenCalledWith("/Users/me/menu.png");
+  });
+
+  it("accepts destination changes from the menu", () => {
+    render(<App />);
+
+    // 出力先は結果画面で mkIco / mkIcns の戻り値から表示されるため、
+    // ここでは受け取っても画面が壊れないことだけを確かめる
+    act(() => {
+      mock.listeners.setDesktop?.(ipcEvent, false);
+    });
+
+    expect(mock.api.setDesktop).toHaveBeenCalledTimes(1);
+    expect(screen.getByText("Drop your PNGs here...")).toBeDefined();
   });
 
   it("opens the context menu on right click", () => {
