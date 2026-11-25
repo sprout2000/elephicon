@@ -161,6 +161,27 @@ describe("App", () => {
     expect(screen.getByText("Drop your PNGs here...")).toBeDefined();
   });
 
+  it("ignores a drop without file data", () => {
+    render(<App />);
+
+    fireEvent.drop(dropZone());
+
+    expect(mock.api.getFilePath).not.toHaveBeenCalled();
+    expect(mock.api.pngcheck).not.toHaveBeenCalled();
+    expect(openButton().className).toBe("elephant");
+  });
+
+  it("ignores an empty path from the menu", () => {
+    render(<App />);
+
+    act(() => {
+      mock.listeners.menuOpen?.(ipcEvent, "");
+    });
+
+    expect(mock.api.pngcheck).not.toHaveBeenCalled();
+    expect(openButton().className).toBe("elephant");
+  });
+
   it("converts the file opened from the menu", async () => {
     render(<App />);
 
@@ -223,6 +244,33 @@ describe("App", () => {
       finish({ type: "success", log: "icon.ico", desktop: true });
     });
     expect(screen.getByText("Successfully Completed!")).toBeDefined();
+  });
+
+  it("ignores new files and the open button while converting", async () => {
+    let finish: (result: Result) => void = () => {};
+    mock.api.mkIco.mockReturnValueOnce(
+      new Promise<Result>((resolve) => {
+        finish = resolve;
+      }),
+    );
+    render(<App />);
+
+    dropFile();
+    await vi.waitFor(() => expect(mock.api.mkIco).toHaveBeenCalled());
+
+    fireEvent.dragOver(dropZone());
+    expect(openButton().className).toBe("elephant loading");
+
+    dropFile("second.png");
+    expect(mock.api.getFilePath).toHaveBeenCalledTimes(1);
+
+    fireEvent.click(openButton());
+    expect(mock.api.openDialog).not.toHaveBeenCalled();
+
+    await act(async () => {
+      finish({ type: "success", log: "icon.ico", desktop: true });
+    });
+    expect(mock.api.pngcheck).toHaveBeenCalledTimes(1);
   });
 
   it("stops listening to the main process on unmount", () => {
