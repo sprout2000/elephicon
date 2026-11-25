@@ -1,6 +1,6 @@
 # Elephicon
 
-[![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/master/LICENSE.md)
+[![GitHub license](https://img.shields.io/github/license/sprout2000/elephicon)](https://github.com/sprout2000/elephicon/blob/main/LICENSE.md)
 ![GitHub all releases](https://img.shields.io/github/downloads/sprout2000/elephicon/total)
 ![GitHub contributors](https://img.shields.io/github/contributors/sprout2000/elephicon)
 
@@ -8,17 +8,16 @@
 
 ## :green_book: Usage
 
-- The ideal input is a 24-bit PNG file with _1024x1024_ pixels and an alpha channel, but any other dimensions and most other PNG formats will do work.
-- If you only need to create ICO files, _256×256_ pixels will be enough.
-- It's also possible to create icon files from non-quadratic source PNGs.
-- Various settings are available from the context menu.
+- The ideal input is a 24-bit PNG file with _1024x1024_ pixels and an alpha channel, but other sizes and most other PNG formats will also work.
+- If you only need ICO files, _256x256_ pixels is enough.
+- You can also create icons from PNG files that are not square.
+- You can change the settings from the context menu.
 
 <img width="50%" alt="animation" src="https://user-images.githubusercontent.com/52094761/144979888-d796c672-ee0a-44cc-bfa2-abce6513d192.gif" />
 
 ## :inbox_tray: Download
 
-You can download the latest version of _Elephicon_ from the releases page here:  
-[https://github.com/sprout2000/elephicon/releases](https://github.com/sprout2000/elephicon/releases)
+Download the latest version of _Elephicon_ from the [Releases page](https://github.com/sprout2000/elephicon/releases).
 
 ## :rainbow: Embedded Sizes
 
@@ -40,7 +39,9 @@ You can download the latest version of _Elephicon_ from the releases page here:
 | 512x512    |     |  ✅  |
 | 512x512@2x |     |  ✅  |
 
-## :globe_with_meridians: Supported Languages (App Menu)
+## :globe_with_meridians: Supported Languages
+
+The app menu is available in the following languages.
 
 | Language   |  Code   |
 | :--------- | :-----: |
@@ -56,7 +57,7 @@ You can download the latest version of _Elephicon_ from the releases page here:
 | Русский    |  `ru`   |
 | Türkçe     |  `tr`   |
 | Українська |  `uk`   |
-| 简体中文   | `zh_CN` |
+| 简体中文   | `zh-CN` |
 
 ## :beers: Contributing
 
@@ -80,18 +81,18 @@ You can easily contribute to this repository by providing a translation.
 
 ## :tada: Contributors
 
-Thanks go to these wonderful people :slightly_smiling_face::
+Thanks to these wonderful people :slightly_smiling_face:
 
 <a href="https://github.com/sprout2000/elephicon/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=sprout2000/elephicon" />
 </a>
 
-## :hammer_and_wrench: How to build?
+## :hammer_and_wrench: Building from Source
 
 You will need to have [Node.js](https://nodejs.org/) and [Git](https://git-scm.com/) installed.
 
 ```sh
-# 1. Clone this repo.
+# 1. Clone this repo
 git clone https://github.com/sprout2000/elephicon.git
 
 # 2. Install dependencies
@@ -102,7 +103,7 @@ npm install
 npm run build && npm run package
 ```
 
-And then, you will find the installer in the `release` directory.
+The installer is created in the `release` directory.
 
 ## :wrench: Development
 
@@ -130,4 +131,4 @@ MIT © [idesis GmbH](https://www.idesis.de), Rellinghauser Straße 334F, D-45136
 
 ### Elephicon
 
-Copyright(c) 2020-present sprout2000
+Copyright (c) 2020-present sprout2000
