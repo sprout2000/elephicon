@@ -2,6 +2,13 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
+    coverage: {
+      provider: "v8",
+      // テストのないファイルも 0% として表に出す
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: ["src/__tests__/**", "src/@types/**"],
+      reporter: ["text", "html"],
+    },
     projects: [
       {
         test: {
