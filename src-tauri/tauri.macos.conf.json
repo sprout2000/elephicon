@@ -1,4 +1,6 @@
 {
+  "$schema": "https://schema.tauri.app/config/2",
+  "identifier": "jp.wassabie64.Elephicon",
   "app": {
     "windows": [
       {
