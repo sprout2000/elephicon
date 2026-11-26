@@ -1,6 +1,6 @@
 [package]
 name = "elephicon"
-version = "4.3.1"
+version = "5.0.0"
 description = "Elephicon generates Apple ICNS and Microsoft ICO files from PNG, SVG and other images."
 authors = ["sprout2000"]
 license = "MIT"

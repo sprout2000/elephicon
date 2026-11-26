@@ -19,7 +19,7 @@ const PRODUCT_NAME = "Elephicon";
 /** The same architecture names as the Tauri bundles (x64, aarch64). */
 export const archName = (arch) => (arch === "arm64" ? "aarch64" : arch);
 
-/** e.g. Elephicon_4.3.1_windows_x64.zip */
+/** e.g. Elephicon_5.0.0_windows_x64.zip */
 export const zipName = ({ version, platform, arch }) => {
   const os = { win32: "windows", darwin: "macos" }[platform];
   if (!os)
