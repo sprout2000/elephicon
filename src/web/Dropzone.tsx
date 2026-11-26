@@ -3,6 +3,7 @@ import { memo } from "react";
 import { Elephant } from "./Elephant";
 import { LogoApple } from "./LogoApple";
 import { LogoWindows } from "./LogoWindows";
+import { dragRegion } from "./platform";
 
 type Props = {
   ico: boolean;
@@ -10,9 +11,6 @@ type Props = {
   loading: boolean;
   onClickOS: () => void;
   onClickOpen: () => Promise<void>;
-  onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
 };
 
 export const Dropzone = memo((props: Props) => {
@@ -20,14 +18,11 @@ export const Dropzone = memo((props: Props) => {
     <section
       className="drop-message-zone"
       aria-label="Drop zone"
-      onDrop={props.onDrop}
-      onDragEnter={props.onDragOver}
-      onDragOver={props.onDragOver}
-      onDragLeave={props.onDragLeave}
+      {...dragRegion}
     >
       <button
         type="button"
-        aria-label="Open a PNG file"
+        aria-label="Open an image"
         onClick={props.onClickOpen}
         className={
           props.drag
@@ -39,8 +34,11 @@ export const Dropzone = memo((props: Props) => {
       >
         <Elephant />
       </button>
-      <div className={props.drag || props.loading ? "text loading" : "text"}>
-        Drop your PNGs here...
+      <div
+        className={props.drag || props.loading ? "text loading" : "text"}
+        {...dragRegion}
+      >
+        Drop your images here...
       </div>
       <div className="switch">
         <button

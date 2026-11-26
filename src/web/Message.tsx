@@ -1,6 +1,7 @@
 import { memo } from "react";
 
 import { ArrowUndo } from "./ArrowUndo";
+import { dragRegion } from "./platform";
 
 type Props = {
   log: string;
@@ -10,33 +11,21 @@ type Props = {
 };
 
 export const Message = memo((props: Props) => {
-  const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
   return (
-    <section
-      className="drop-message-zone"
-      aria-label="Result"
-      onDrop={preventDefault}
-      onDragOver={preventDefault}
-      onDragEnter={preventDefault}
-      onDragLeave={preventDefault}
-    >
-      <div className="text">
+    <section className="drop-message-zone" aria-label="Result" {...dragRegion}>
+      <div className="text" {...dragRegion}>
         {props.result === "success"
           ? "Successfully Completed!"
           : "Something went wrong..."}
       </div>
       {props.result === "success" ? (
-        <div className="result">
+        <div className="result" {...dragRegion}>
           <div className="filename">{props.log}</div>
           was created
           {props.desktop ? " on your desktop" : " in the current folder"}.
         </div>
       ) : (
-        <div className="result">
+        <div className="result" {...dragRegion}>
           <div className="error">{props.log}</div>
         </div>
       )}

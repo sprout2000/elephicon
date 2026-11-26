@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Elephicon",
+  "version": "../package.json",
+  "identifier": "jp.sprout2000.Elephicon",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Elephicon",
+        "width": 400,
+        "height": 340,
+        "resizable": false,
+        "maximizable": false,
+        "center": true,
+        "visible": false,
+        "backgroundColor": "#005bea"
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "DeveloperTool",
+    "copyright": "© 2020-present sprout2000",
+    "shortDescription": "Elephicon generates Apple ICNS and Microsoft ICO files from PNG, SVG and other images.",
+    "icon": ["icons/icon.png", "icons/icon.icns", "icons/icon.ico"],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "installerIcon": "icons/installer.ico"
+      }
+    }
+  }
+}

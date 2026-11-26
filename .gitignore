@@ -2,6 +2,8 @@ node_modules
 release
 dist
 coverage
+src-tauri/target
+src-tauri/gen/schemas
 npm-*.log
 yarn-*.log
 .DS_Store

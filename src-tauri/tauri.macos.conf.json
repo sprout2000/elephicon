@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "identifier": "jp.sprout2000.Elephicon",
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Elephicon",
+        "width": 360,
+        "height": 320,
+        "resizable": false,
+        "maximizable": false,
+        "center": true,
+        "backgroundColor": "#005bea",
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true
+      }
+    ]
+  }
+}
