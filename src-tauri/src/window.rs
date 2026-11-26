@@ -1,5 +1,4 @@
-//! Sizes the main window on Windows and Linux, and picks the GTK backend on
-//! Linux.
+//! Sizes the main window on Windows.
 
 use tauri::{AppHandle, LogicalSize, Manager, WebviewWindow};
 
@@ -48,44 +47,9 @@ pub fn fit_and_show(app: &AppHandle) -> tauri::Result<()> {
     fitted
 }
 
-/// Whether to run GTK on X11 (XWayland). On Wayland, GTK cannot place the
-/// context menu (it is not shown and the app waits for it to close), so X11
-/// is used unless the user chose a backend with `GDK_BACKEND`.
-pub fn should_use_x11(gdk_backend: Option<&str>, wayland_display: Option<&str>) -> bool {
-    gdk_backend.is_none() && wayland_display.is_some_and(|display| !display.is_empty())
-}
-
-/// Sets `GDK_BACKEND=x11` on Wayland. Call it before Tauri starts GTK.
-#[cfg(target_os = "linux")]
-pub fn prefer_x11() {
-    let gdk_backend = std::env::var("GDK_BACKEND").ok();
-    let wayland_display = std::env::var("WAYLAND_DISPLAY").ok();
-
-    if should_use_x11(gdk_backend.as_deref(), wayland_display.as_deref()) {
-        std::env::set_var("GDK_BACKEND", "x11");
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn uses_x11_on_wayland() {
-        assert!(should_use_x11(None, Some("wayland-0")));
-    }
-
-    #[test]
-    fn keeps_the_backend_chosen_by_the_user() {
-        assert!(!should_use_x11(Some("wayland"), Some("wayland-0")));
-        assert!(!should_use_x11(Some("x11"), Some("wayland-0")));
-    }
-
-    #[test]
-    fn does_nothing_outside_wayland() {
-        assert!(!should_use_x11(None, None));
-        assert!(!should_use_x11(None, Some("")));
-    }
 
     #[test]
     fn subtracts_the_frame_and_the_title_bar() {

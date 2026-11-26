@@ -29,11 +29,10 @@ describe("platform", () => {
     expect(platform.dragRegion).toEqual({ "data-tauri-drag-region": true });
   });
 
-  it.each([
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Edg/131.0",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/605.1.15",
-  ])("does not use a drag region on %s", async (userAgent) => {
-    const platform = await load(userAgent);
+  it("does not use a drag region on Windows", async () => {
+    const platform = await load(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Edg/131.0",
+    );
 
     expect(platform.isDarwin).toBe(false);
     expect(platform.dragRegion).toEqual({});

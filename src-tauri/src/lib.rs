@@ -4,9 +4,8 @@ mod format;
 mod i18n;
 mod menu;
 mod settings;
-// Parts are used only on Windows or Linux, but the module is compiled
-// everywhere so that its tests run
-#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
+// Used only on Windows, but compiled everywhere so that its tests run
+#[cfg_attr(not(target_os = "windows"), allow(dead_code))]
 mod window;
 
 use std::path::PathBuf;
@@ -33,14 +32,10 @@ pub struct AppState {
 }
 
 pub fn run() {
-    // Before GTK starts; see window::should_use_x11
-    #[cfg(target_os = "linux")]
-    window::prefer_x11();
-
     let builder = tauri::Builder::default();
 
     // Only one Elephicon runs at a time; macOS already does this for apps.
-    #[cfg(not(target_os = "macos"))]
+    #[cfg(target_os = "windows")]
     let builder = builder.plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
         if let Some(window) = app.get_webview_window("main") {
             let _ = window.unminimize();
@@ -71,8 +66,8 @@ pub fn run() {
             });
             menu::install(app.handle(), menu)?;
 
-            // The window starts hidden on Windows and Linux (tauri.conf.json)
-            #[cfg(not(target_os = "macos"))]
+            // The window starts hidden on Windows (tauri.conf.json)
+            #[cfg(target_os = "windows")]
             window::fit_and_show(app.handle())?;
 
             Ok(())

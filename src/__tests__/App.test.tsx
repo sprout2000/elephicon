@@ -228,7 +228,7 @@ describe("App", () => {
     expect(mockApi.checkImage).not.toHaveBeenCalled();
   });
 
-  it("opens a file with Ctrl+O on Windows and Linux", async () => {
+  it("opens a file with Ctrl+O on Windows", async () => {
     mockApi.openDialog.mockResolvedValueOnce("/Users/me/shortcut.png");
     render(<App />);
 

@@ -116,7 +116,7 @@ export const App = () => {
   }, [convert]);
 
   useEffect(() => {
-    // Windows and Linux have no menu bar, so Ctrl+O is handled here. On macOS
+    // Windows has no menu bar, so Ctrl+O is handled here. On macOS
     // the app menu handles Cmd+O.
     if (isDarwin) return;
 

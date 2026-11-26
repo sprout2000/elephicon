@@ -80,8 +80,7 @@ pub async fn open_file_dialog(app: AppHandle) -> Option<String> {
 }
 
 /// Shows the menu as the context menu at `x`, `y` (the position of the
-/// click in the window, in CSS pixels). The menu is placed at the position
-/// instead of "at the pointer", which GTK cannot find during a command.
+/// click in the window, in CSS pixels).
 #[tauri::command]
 pub fn show_context_menu(
     state: State<'_, AppState>,
@@ -89,18 +88,17 @@ pub fn show_context_menu(
     x: f64,
     y: f64,
 ) -> Result<(), String> {
-    // On Linux the menu runs its own event loop until it closes, so another
-    // right click can call this command again while the menu is still in
-    // use, which makes muda panic. Such clicks are ignored.
+    // Showing the menu waits until it closes, so another right click could
+    // call this command again while the menu is still in use, which makes
+    // muda panic. Such clicks are ignored.
     let Some(_open) = MenuOpen::begin(&state.context_menu_open) else {
         return Ok(());
     };
     let menu = state.menu.lock().map_err(|err| err.to_string())?.clone();
 
     if let Some(menu) = menu {
-        let (offset_x, offset_y) = content_offset(&window);
         window
-            .popup_menu_at(&menu, LogicalPosition::new(x + offset_x, y + offset_y))
+            .popup_menu_at(&menu, LogicalPosition::new(x, y))
             .map_err(|err| err.to_string())?;
     }
 
@@ -125,29 +123,6 @@ impl Drop for MenuOpen<'_> {
     fn drop(&mut self) {
         self.0.store(false, Ordering::SeqCst);
     }
-}
-
-/// Where the contents start in the window. On Linux, GTK draws the title bar
-/// (and the shadow) inside the window, and the menu is placed from the
-/// window's corner, so the click position is moved by this much.
-#[cfg(target_os = "linux")]
-fn content_offset(window: &Window) -> (f64, f64) {
-    use gtk::prelude::WidgetExt;
-
-    let (Ok(gtk_window), Ok(contents)) = (window.gtk_window(), window.default_vbox()) else {
-        return (0.0, 0.0);
-    };
-
-    contents
-        .translate_coordinates(&gtk_window, 0, 0)
-        .map(|(x, y)| (f64::from(x), f64::from(y)))
-        .unwrap_or((0.0, 0.0))
-}
-
-/// On macOS and Windows the position is already relative to the contents.
-#[cfg(not(target_os = "linux"))]
-fn content_offset(_window: &Window) -> (f64, f64) {
-    (0.0, 0.0)
 }
 
 #[cfg(test)]

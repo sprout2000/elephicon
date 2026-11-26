@@ -1,6 +1,6 @@
-//! The menu. On macOS it is the app menu; on Windows and Linux the window has
-//! no menu bar (as in the Electron version) and the menu is only shown as the
-//! context menu. It is the context menu on macOS too.
+//! The menu. On macOS it is the app menu; on Windows the window has no menu
+//! bar (as in the Electron version) and the menu is only shown as the context
+//! menu. It is the context menu on macOS too.
 
 use tauri::menu::{
     AboutMetadata, CheckMenuItemBuilder, Menu, MenuBuilder, MenuItemBuilder, PredefinedMenuItem,
@@ -25,7 +25,7 @@ pub const MENU_OPEN_EVENT: &str = "menu-open";
 #[derive(Debug, PartialEq, Eq)]
 pub enum MenuAction {
     Open,
-    /// Quit on Windows and Linux, by closing the window.
+    /// Quit on Windows, by closing the window.
     Quit,
     Support,
     /// The settings were updated; save them and refresh the check marks.

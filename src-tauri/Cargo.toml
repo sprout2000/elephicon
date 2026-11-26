@@ -36,12 +36,8 @@ icns = "0.3"
 mime_guess = "2"
 sys-locale = "0.3"
 
-[target.'cfg(not(target_os = "macos"))'.dependencies]
+[target.'cfg(target_os = "windows")'.dependencies]
 tauri-plugin-single-instance = "2"
-
-# The same GTK version as Tauri, to find where the contents start in the window
-[target.'cfg(target_os = "linux")'.dependencies]
-gtk = "0.18"
 
 [dev-dependencies]
 tempfile = "3"
