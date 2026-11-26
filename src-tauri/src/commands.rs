@@ -1,6 +1,7 @@
 //! The commands called from the window.
 
 use std::path::Path;
+use std::sync::atomic::{AtomicBool, Ordering};
 
 use tauri::{AppHandle, LogicalPosition, Manager, State, Window};
 
@@ -88,6 +89,12 @@ pub fn show_context_menu(
     x: f64,
     y: f64,
 ) -> Result<(), String> {
+    // On Linux the menu runs its own event loop until it closes, so another
+    // right click can call this command again while the menu is still in
+    // use, which makes muda panic. Such clicks are ignored.
+    let Some(_open) = MenuOpen::begin(&state.context_menu_open) else {
+        return Ok(());
+    };
     let menu = state.menu.lock().map_err(|err| err.to_string())?.clone();
 
     if let Some(menu) = menu {
@@ -98,6 +105,26 @@ pub fn show_context_menu(
     }
 
     Ok(())
+}
+
+/// Marks the context menu as open until it is dropped.
+struct MenuOpen<'a>(&'a AtomicBool);
+
+impl<'a> MenuOpen<'a> {
+    /// Returns `None` when the menu is already open.
+    fn begin(flag: &'a AtomicBool) -> Option<Self> {
+        if flag.swap(true, Ordering::SeqCst) {
+            None
+        } else {
+            Some(Self(flag))
+        }
+    }
+}
+
+impl Drop for MenuOpen<'_> {
+    fn drop(&mut self) {
+        self.0.store(false, Ordering::SeqCst);
+    }
 }
 
 /// Where the contents start in the window. On Linux, GTK draws the title bar
@@ -121,4 +148,22 @@ fn content_offset(window: &Window) -> (f64, f64) {
 #[cfg(not(target_os = "linux"))]
 fn content_offset(_window: &Window) -> (f64, f64) {
     (0.0, 0.0)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ignores_the_context_menu_while_it_is_open() {
+        let flag = AtomicBool::new(false);
+
+        let open = MenuOpen::begin(&flag);
+        assert!(open.is_some());
+        assert!(MenuOpen::begin(&flag).is_none());
+
+        drop(open);
+        assert!(!flag.load(Ordering::SeqCst));
+        assert!(MenuOpen::begin(&flag).is_some());
+    }
 }

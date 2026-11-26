@@ -9,6 +9,7 @@ mod settings;
 mod window;
 
 use std::path::PathBuf;
+use std::sync::atomic::AtomicBool;
 use std::sync::Mutex;
 
 use tauri::menu::Menu;
@@ -26,6 +27,8 @@ pub struct AppState {
     pub translator: Translator,
     /// The menu shown as the context menu (and as the app menu on macOS).
     pub menu: Mutex<Option<Menu<Wry>>>,
+    /// Whether the context menu is being shown.
+    pub context_menu_open: AtomicBool,
 }
 
 pub fn run() {
@@ -59,6 +62,7 @@ pub fn run() {
                 settings_path,
                 translator,
                 menu: Mutex::new(None),
+                context_menu_open: AtomicBool::new(false),
             });
             menu::install(app.handle(), menu)?;
 
