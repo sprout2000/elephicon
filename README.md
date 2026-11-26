@@ -131,6 +131,8 @@ npm run test:coverage
 npm run test:rust
 ```
 
+On Linux, Elephicon runs GTK on X11 _(XWayland)_ even in a Wayland session, because GTK cannot show its context menu there. Set `GDK_BACKEND=wayland` to use Wayland anyway.
+
 The frontend _(React)_ is in `src/web` and its tests are in `src/__tests__`. The Rust side _(conversion, menu and settings)_ is in `src-tauri/src`, with the tests next to the code.
 
 ## :copyright: Copyright

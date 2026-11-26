@@ -4,8 +4,9 @@ mod format;
 mod i18n;
 mod menu;
 mod settings;
-// Used only on Windows and Linux, but compiled everywhere so that its tests run
-#[cfg_attr(target_os = "macos", allow(dead_code))]
+// Parts are used only on Windows or Linux, but the module is compiled
+// everywhere so that its tests run
+#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 mod window;
 
 use std::path::PathBuf;
@@ -32,6 +33,10 @@ pub struct AppState {
 }
 
 pub fn run() {
+    // Before GTK starts; see window::should_use_x11
+    #[cfg(target_os = "linux")]
+    window::prefer_x11();
+
     let builder = tauri::Builder::default();
 
     // Only one Elephicon runs at a time; macOS already does this for apps.

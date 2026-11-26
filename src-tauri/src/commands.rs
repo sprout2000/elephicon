@@ -80,8 +80,8 @@ pub async fn open_file_dialog(app: AppHandle) -> Option<String> {
 }
 
 /// Shows the menu as the context menu at `x`, `y` (the position of the
-/// click in the window, in CSS pixels). Wayland needs the position and the
-/// parent window, so the menu is not shown just "at the pointer".
+/// click in the window, in CSS pixels). The menu is placed at the position
+/// instead of "at the pointer", which GTK cannot find during a command.
 #[tauri::command]
 pub fn show_context_menu(
     state: State<'_, AppState>,
