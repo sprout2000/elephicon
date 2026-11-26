@@ -258,12 +258,15 @@ describe("App", () => {
     expect(mockApi.openDialog).not.toHaveBeenCalled();
   });
 
-  it("opens the context menu on right click", () => {
+  it("opens the context menu at the clicked position", () => {
     render(<App />);
 
-    fireEvent.contextMenu(screen.getByRole("main"));
+    fireEvent.contextMenu(screen.getByRole("main"), {
+      clientX: 120,
+      clientY: 80,
+    });
 
-    expect(mockApi.contextMenu).toHaveBeenCalled();
+    expect(mockApi.contextMenu).toHaveBeenCalledWith(120, 80);
   });
 
   it("highlights the drop zone while dragging", async () => {

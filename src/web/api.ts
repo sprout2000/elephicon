@@ -23,7 +23,9 @@ export const api = {
   /** Returns the chosen path, or null when the dialog is canceled. */
   openDialog: () => invoke<string | null>("open_file_dialog"),
 
-  contextMenu: () => invoke<void>("show_context_menu"),
+  /** Shows the menu at the clicked position in the window (CSS pixels). */
+  contextMenu: (x: number, y: number) =>
+    invoke<void>("show_context_menu", { x, y }),
 
   /** Listens for files chosen from File > Open. */
   onMenuOpen: (listener: (path: string) => void): Promise<UnlistenFn> =>

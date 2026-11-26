@@ -62,12 +62,15 @@ describe("api commands", () => {
     expect(mocks.invoke).toHaveBeenCalledWith("open_file_dialog");
   });
 
-  it("contextMenu invokes show_context_menu", async () => {
+  it("contextMenu invokes show_context_menu with the position", async () => {
     mocks.invoke.mockResolvedValueOnce(undefined);
 
-    await api.contextMenu();
+    await api.contextMenu(120, 80);
 
-    expect(mocks.invoke).toHaveBeenCalledWith("show_context_menu");
+    expect(mocks.invoke).toHaveBeenCalledWith("show_context_menu", {
+      x: 120,
+      y: 80,
+    });
   });
 });
 

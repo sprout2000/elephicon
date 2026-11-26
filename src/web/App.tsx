@@ -66,7 +66,7 @@ export const App = () => {
 
   const handleContextMenu = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    api.contextMenu();
+    api.contextMenu(e.clientX, e.clientY);
   }, []);
 
   const handleClickOS = useCallback(() => {

@@ -2,7 +2,7 @@
 
 use std::path::Path;
 
-use tauri::{AppHandle, Manager, State, Window};
+use tauri::{AppHandle, LogicalPosition, Manager, State, Window};
 
 use crate::convert::{convert_file, ConvertOptions, ConvertResult, IconKind};
 use crate::format;
@@ -78,13 +78,22 @@ pub async fn open_file_dialog(app: AppHandle) -> Option<String> {
         .map(|path| path.to_string_lossy().into_owned())
 }
 
-/// Shows the menu as the context menu.
+/// Shows the menu as the context menu at `x`, `y` (the position of the
+/// click in the window, in CSS pixels). Wayland needs the position and the
+/// parent window, so the menu is not shown just "at the pointer".
 #[tauri::command]
-pub fn show_context_menu(state: State<'_, AppState>, window: Window) -> Result<(), String> {
+pub fn show_context_menu(
+    state: State<'_, AppState>,
+    window: Window,
+    x: f64,
+    y: f64,
+) -> Result<(), String> {
     let menu = state.menu.lock().map_err(|err| err.to_string())?.clone();
 
     if let Some(menu) = menu {
-        window.popup_menu(&menu).map_err(|err| err.to_string())?;
+        window
+            .popup_menu_at(&menu, LogicalPosition::new(x, y))
+            .map_err(|err| err.to_string())?;
     }
 
     Ok(())

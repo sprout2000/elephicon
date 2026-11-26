@@ -19,7 +19,7 @@ export const mockApi = {
   makeIco: vi.fn<(path: string) => Promise<Result>>(),
   makeIcns: vi.fn<(path: string) => Promise<Result>>(),
   openDialog: vi.fn<() => Promise<string | null>>(),
-  contextMenu: vi.fn<() => Promise<void>>(),
+  contextMenu: vi.fn<(x: number, y: number) => Promise<void>>(),
   onMenuOpen: vi.fn((listener: (path: string) => void) => {
     listeners.menuOpen = listener;
     return Promise.resolve(unlisten.menuOpen);
