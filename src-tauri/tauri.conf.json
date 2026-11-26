@@ -19,6 +19,7 @@
         "resizable": false,
         "maximizable": false,
         "center": true,
+        "visible": false,
         "backgroundColor": "#005bea"
       }
     ],

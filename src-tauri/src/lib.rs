@@ -4,6 +4,9 @@ mod format;
 mod i18n;
 mod menu;
 mod settings;
+// Used only on Windows and Linux, but compiled everywhere so that its tests run
+#[cfg_attr(target_os = "macos", allow(dead_code))]
+mod window;
 
 use std::path::PathBuf;
 use std::sync::Mutex;
@@ -58,6 +61,10 @@ pub fn run() {
                 menu: Mutex::new(None),
             });
             menu::install(app.handle(), menu)?;
+
+            // The window starts hidden on Windows and Linux (tauri.conf.json)
+            #[cfg(not(target_os = "macos"))]
+            window::fit_and_show(app.handle())?;
 
             Ok(())
         })
