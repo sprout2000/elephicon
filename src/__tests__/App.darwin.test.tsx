@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
 import type { App as AppComponent } from "../web/App";
-import { resetMockApi } from "./mockApi";
+import { mockApi, resetMockApi } from "./mockApi";
 
 vi.mock("../web/api", async () => {
   const { mockApi } = await import("./mockApi");
@@ -35,5 +35,13 @@ describe("App on macOS", () => {
         .getByRole("region", { name: "Drop zone" })
         .hasAttribute("data-tauri-drag-region"),
     ).toBe(true);
+  });
+
+  it("leaves Cmd+O to the app menu", () => {
+    render(<App />);
+
+    fireEvent.keyDown(window, { key: "o", ctrlKey: true });
+
+    expect(mockApi.openDialog).not.toHaveBeenCalled();
   });
 });

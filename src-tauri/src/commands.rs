@@ -78,10 +78,12 @@ pub async fn open_file_dialog(app: AppHandle) -> Option<String> {
         .map(|path| path.to_string_lossy().into_owned())
 }
 
-/// Shows the app menu as the context menu.
+/// Shows the menu as the context menu.
 #[tauri::command]
-pub fn show_context_menu(app: AppHandle, window: Window) -> Result<(), String> {
-    if let Some(menu) = app.menu() {
+pub fn show_context_menu(state: State<'_, AppState>, window: Window) -> Result<(), String> {
+    let menu = state.menu.lock().map_err(|err| err.to_string())?.clone();
+
+    if let Some(menu) = menu {
         window.popup_menu(&menu).map_err(|err| err.to_string())?;
     }
 

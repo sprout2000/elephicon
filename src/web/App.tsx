@@ -3,7 +3,7 @@ import { useCallback, useEffect, useReducer, useRef } from "react";
 import { api } from "./api";
 import { Dropzone } from "./Dropzone";
 import { Message } from "./Message";
-import { dragRegion } from "./platform";
+import { dragRegion, isDarwin } from "./platform";
 
 import "typeface-roboto";
 import "./App.scss";
@@ -74,14 +74,14 @@ export const App = () => {
     dispatch({ ico: !state.ico });
   }, [state.loading, state.ico]);
 
-  const handleClickOpen = useCallback(async () => {
-    if (state.loading) return;
+  const openFile = useCallback(async () => {
+    if (stateRef.current.loading) return;
 
     const filepath = await api.openDialog();
     if (!filepath) return;
 
     convert(filepath);
-  }, [state.loading, convert]);
+  }, [convert]);
 
   const handleClickBack = useCallback(() => {
     dispatch({ drag: false, result: null, log: "" });
@@ -115,6 +115,27 @@ export const App = () => {
     };
   }, [convert]);
 
+  useEffect(() => {
+    // Windows and Linux have no menu bar, so Ctrl+O is handled here. On macOS
+    // the app menu handles Cmd+O.
+    if (isDarwin) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.ctrlKey &&
+        !e.altKey &&
+        !e.shiftKey &&
+        e.key.toLowerCase() === "o"
+      ) {
+        e.preventDefault();
+        openFile();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [openFile]);
+
   return (
     <main
       className="container"
@@ -127,7 +148,7 @@ export const App = () => {
           drag={state.drag}
           loading={state.loading}
           onClickOS={handleClickOS}
-          onClickOpen={handleClickOpen}
+          onClickOpen={openFile}
         />
       ) : (
         <Message

@@ -228,6 +228,36 @@ describe("App", () => {
     expect(mockApi.checkImage).not.toHaveBeenCalled();
   });
 
+  it("opens a file with Ctrl+O on Windows and Linux", async () => {
+    mockApi.openDialog.mockResolvedValueOnce("/Users/me/shortcut.png");
+    render(<App />);
+
+    fireEvent.keyDown(window, { key: "o", ctrlKey: true });
+
+    expect(await screen.findByText("Successfully Completed!")).toBeDefined();
+    expect(mockApi.makeIco).toHaveBeenCalledWith("/Users/me/shortcut.png");
+  });
+
+  it("ignores other keys and Ctrl+O with other modifiers", () => {
+    render(<App />);
+
+    fireEvent.keyDown(window, { key: "o" });
+    fireEvent.keyDown(window, { key: "p", ctrlKey: true });
+    fireEvent.keyDown(window, { key: "O", ctrlKey: true, shiftKey: true });
+    fireEvent.keyDown(window, { key: "o", ctrlKey: true, altKey: true });
+
+    expect(mockApi.openDialog).not.toHaveBeenCalled();
+  });
+
+  it("stops handling Ctrl+O on unmount", () => {
+    const { unmount } = render(<App />);
+
+    unmount();
+    fireEvent.keyDown(window, { key: "o", ctrlKey: true });
+
+    expect(mockApi.openDialog).not.toHaveBeenCalled();
+  });
+
   it("opens the context menu on right click", () => {
     render(<App />);
 

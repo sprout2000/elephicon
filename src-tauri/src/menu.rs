@@ -1,10 +1,12 @@
-//! The app menu, which is also shown as the context menu.
+//! The menu. On macOS it is the app menu; on Windows and Linux the window has
+//! no menu bar (as in the Electron version) and the menu is only shown as the
+//! context menu. It is the context menu on macOS too.
 
 use tauri::menu::{
     AboutMetadata, CheckMenuItemBuilder, Menu, MenuBuilder, MenuItemBuilder, PredefinedMenuItem,
     SubmenuBuilder,
 };
-use tauri::{AppHandle, Emitter, Manager, Runtime};
+use tauri::{AppHandle, Emitter, Manager, Runtime, Wry};
 use tauri_plugin_dialog::{DialogExt, FileDialogBuilder};
 use tauri_plugin_opener::OpenerExt;
 
@@ -23,6 +25,8 @@ pub const MENU_OPEN_EVENT: &str = "menu-open";
 #[derive(Debug, PartialEq, Eq)]
 pub enum MenuAction {
     Open,
+    /// Quit on Windows and Linux, by closing the window.
+    Quit,
     Support,
     /// The settings were updated; save them and refresh the check marks.
     SettingsChanged,
@@ -36,6 +40,7 @@ pub enum MenuAction {
 pub fn apply(id: &str, settings: &mut Settings) -> MenuAction {
     match id {
         "open" => return MenuAction::Open,
+        "quit" => return MenuAction::Quit,
         "support" => return MenuAction::Support,
         "quality-low" => settings.quality = Quality::Low,
         "quality-medium" => settings.quality = Quality::Medium,
@@ -81,16 +86,19 @@ pub fn build<R: Runtime>(
     let open = MenuItemBuilder::with_id("open", t.t("Open..."))
         .accelerator("CmdOrCtrl+O")
         .build(app)?;
-    let close = if is_mac {
-        PredefinedMenuItem::close_window(app, Some(t.t("Close").as_str()))?
-    } else {
-        PredefinedMenuItem::quit(app, Some(t.t("Quit Elephicon").as_str()))?
-    };
     let file = SubmenuBuilder::new(app, t.t("File"))
         .item(&open)
-        .separator()
-        .item(&close)
-        .build()?;
+        .separator();
+    let file = if is_mac {
+        file.item(&PredefinedMenuItem::close_window(
+            app,
+            Some(t.t("Close").as_str()),
+        )?)
+    } else {
+        // Closing the window lets WebView2 shut down before the app exits
+        file.item(&MenuItemBuilder::with_id("quit", t.t("Quit Elephicon")).build(app)?)
+    }
+    .build()?;
 
     let quality = SubmenuBuilder::new(app, t.t("Quality"))
         .item(&check(
@@ -171,18 +179,24 @@ pub fn build<R: Runtime>(
     menu.item(&file).item(&settings_menu).item(&help).build()
 }
 
+/// Keeps the menu for the context menu, and on macOS sets it as the app menu.
+pub fn install(app: &AppHandle, menu: Menu<Wry>) -> tauri::Result<()> {
+    if cfg!(target_os = "macos") {
+        app.set_menu(menu.clone())?;
+    }
+    *app.state::<AppState>().menu.lock().unwrap() = Some(menu);
+
+    Ok(())
+}
+
 /// Rebuilds the menu so that the check marks match the saved settings.
-pub fn refresh<R: Runtime>(app: &AppHandle<R>) {
+pub fn refresh(app: &AppHandle) {
     let state = app.state::<AppState>();
     let settings = state.settings.lock().unwrap().clone();
+    let menu = build(app, &settings, &state.translator);
 
-    match build(app, &settings, &state.translator) {
-        Ok(menu) => {
-            if let Err(err) = app.set_menu(menu) {
-                eprintln!("Failed to set the menu: {err}");
-            }
-        }
-        Err(err) => eprintln!("Failed to build the menu: {err}"),
+    if let Err(err) = menu.and_then(|menu| install(app, menu)) {
+        eprintln!("Failed to update the menu: {err}");
     }
 }
 
@@ -214,7 +228,7 @@ fn open_from_menu<R: Runtime>(app: &AppHandle<R>) {
     });
 }
 
-pub fn handle_event<R: Runtime>(app: &AppHandle<R>, id: &str) {
+pub fn handle_event(app: &AppHandle, id: &str) {
     let state = app.state::<AppState>();
     let action = {
         let mut settings = state.settings.lock().unwrap();
@@ -230,6 +244,13 @@ pub fn handle_event<R: Runtime>(app: &AppHandle<R>, id: &str) {
 
     match action {
         MenuAction::Open => open_from_menu(app),
+        MenuAction::Quit => {
+            if let Some(window) = app.get_webview_window("main") {
+                if let Err(err) = window.close() {
+                    eprintln!("Failed to close the window: {err}");
+                }
+            }
+        }
         MenuAction::Support => {
             if let Err(err) = app.opener().open_url(SUPPORT_URL, None::<&str>) {
                 eprintln!("Failed to open the support page: {err}");
@@ -245,10 +266,11 @@ mod tests {
     use super::*;
 
     #[test]
-    fn open_and_support_do_not_change_the_settings() {
+    fn open_quit_and_support_do_not_change_the_settings() {
         let mut settings = Settings::default();
 
         assert_eq!(apply("open", &mut settings), MenuAction::Open);
+        assert_eq!(apply("quit", &mut settings), MenuAction::Quit);
         assert_eq!(apply("support", &mut settings), MenuAction::Support);
         assert_eq!(settings, Settings::default());
     }

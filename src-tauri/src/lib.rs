@@ -8,7 +8,8 @@ mod settings;
 use std::path::PathBuf;
 use std::sync::Mutex;
 
-use tauri::Manager;
+use tauri::menu::Menu;
+use tauri::{Manager, Wry};
 use tauri_plugin_window_state::StateFlags;
 
 use crate::i18n::Translator;
@@ -20,6 +21,8 @@ pub struct AppState {
     pub settings_path: PathBuf,
     /// Translates the menu into the system language.
     pub translator: Translator,
+    /// The menu shown as the context menu (and as the app menu on macOS).
+    pub menu: Mutex<Option<Menu<Wry>>>,
 }
 
 pub fn run() {
@@ -47,12 +50,14 @@ pub fn run() {
             let settings = Settings::load(&settings_path);
             let locale = sys_locale::get_locale().unwrap_or_default();
             let translator = Translator::new(i18n::resolve(&locale));
-            app.set_menu(menu::build(app.handle(), &settings, &translator)?)?;
+            let menu = menu::build(app.handle(), &settings, &translator)?;
             app.manage(AppState {
                 settings: Mutex::new(settings),
                 settings_path,
                 translator,
+                menu: Mutex::new(None),
             });
+            menu::install(app.handle(), menu)?;
 
             Ok(())
         })
