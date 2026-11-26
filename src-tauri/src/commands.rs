@@ -91,10 +91,34 @@ pub fn show_context_menu(
     let menu = state.menu.lock().map_err(|err| err.to_string())?.clone();
 
     if let Some(menu) = menu {
+        let (offset_x, offset_y) = content_offset(&window);
         window
-            .popup_menu_at(&menu, LogicalPosition::new(x, y))
+            .popup_menu_at(&menu, LogicalPosition::new(x + offset_x, y + offset_y))
             .map_err(|err| err.to_string())?;
     }
 
     Ok(())
+}
+
+/// Where the contents start in the window. On Linux, GTK draws the title bar
+/// (and the shadow) inside the window, and the menu is placed from the
+/// window's corner, so the click position is moved by this much.
+#[cfg(target_os = "linux")]
+fn content_offset(window: &Window) -> (f64, f64) {
+    use gtk::prelude::WidgetExt;
+
+    let (Ok(gtk_window), Ok(contents)) = (window.gtk_window(), window.default_vbox()) else {
+        return (0.0, 0.0);
+    };
+
+    contents
+        .translate_coordinates(&gtk_window, 0, 0)
+        .map(|(x, y)| (f64::from(x), f64::from(y)))
+        .unwrap_or((0.0, 0.0))
+}
+
+/// On macOS and Windows the position is already relative to the contents.
+#[cfg(not(target_os = "linux"))]
+fn content_offset(_window: &Window) -> (f64, f64) {
+    (0.0, 0.0)
 }
