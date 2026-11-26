@@ -103,11 +103,16 @@ git clone https://github.com/sprout2000/elephicon.git
 cd elephicon
 npm install
 
-# 3. Build the app and create an installer
-npm run tauri build
+# 3. Build the app and create an installer and a zip file
+npm run release
 ```
 
-The installer is created in `src-tauri/target/release/bundle`.
+The installers are created in `src-tauri/target/release/bundle`, and the zip file in its `zip` folder:
+
+- Windows: `Elephicon_{version}_windows_x64.zip`, with `Elephicon.exe` that runs without installing _(it needs WebView2, which comes with Windows 10 and 11)_
+- macOS: `Elephicon_{version}_macos_aarch64.zip` _(or `x64`)_, with `Elephicon.app`
+
+To build only the installers, run `npm run tauri build`. To make the zip file again from the last build, run `npm run zip`.
 
 ## :wrench: Development
 

@@ -16,6 +16,8 @@
     "dev": "vite",
     "build": "vite build",
     "tauri": "tauri",
+    "release": "tauri build && node scripts/zip.mjs",
+    "zip": "node scripts/zip.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "biome check --write .",
     "test": "vitest run",
