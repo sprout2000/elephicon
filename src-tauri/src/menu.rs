@@ -5,8 +5,8 @@
 //! from a command on Wayland.
 
 use tauri::menu::{
-    AboutMetadata, CheckMenuItemBuilder, Menu, MenuBuilder, MenuItemBuilder, PredefinedMenuItem,
-    SubmenuBuilder,
+    AboutMetadata, CheckMenuItem, CheckMenuItemBuilder, Menu, MenuBuilder, MenuItemBuilder,
+    PredefinedMenuItem, SubmenuBuilder,
 };
 use tauri::{AppHandle, Emitter, Manager, Runtime, Wry};
 use tauri_plugin_dialog::{DialogExt, FileDialogBuilder};
@@ -67,17 +67,41 @@ fn about_metadata<R: Runtime>(app: &AppHandle<R>) -> AboutMetadata<'static> {
     }
 }
 
+/// Whether the check item `id` is checked for the settings, or `None` when
+/// `id` is not a check item.
+pub fn is_checked(id: &str, settings: &Settings) -> Option<bool> {
+    match id {
+        "quality-low" => Some(settings.quality == Quality::Low),
+        "quality-medium" => Some(settings.quality == Quality::Medium),
+        "quality-high" => Some(settings.quality == Quality::High),
+        "bmp" => Some(settings.bmp),
+        "png" => Some(!settings.bmp),
+        "desktop" => Some(settings.desktop),
+        "current" => Some(!settings.desktop),
+        _ => None,
+    }
+}
+
+/// The menu and its check items, kept to update the check marks.
+pub struct BuiltMenu<R: Runtime> {
+    pub menu: Menu<R>,
+    pub checks: Vec<CheckMenuItem<R>>,
+}
+
 /// Builds the menu with check marks that match the settings.
 pub fn build<R: Runtime>(
     app: &AppHandle<R>,
     settings: &Settings,
     t: &Translator,
-) -> tauri::Result<Menu<R>> {
+) -> tauri::Result<BuiltMenu<R>> {
     let is_mac = cfg!(target_os = "macos");
-    let check = |id: &str, label: String, checked: bool| {
-        CheckMenuItemBuilder::with_id(id, label)
-            .checked(checked)
-            .build(app)
+    let mut checks = Vec::new();
+    let mut check = |id: &str, label: String| -> tauri::Result<CheckMenuItem<R>> {
+        let item = CheckMenuItemBuilder::with_id(id, label)
+            .checked(is_checked(id, settings).unwrap_or(false))
+            .build(app)?;
+        checks.push(item.clone());
+        Ok(item)
     };
     let about = PredefinedMenuItem::about(
         app,
@@ -103,41 +127,23 @@ pub fn build<R: Runtime>(
     .build()?;
 
     let quality = SubmenuBuilder::new(app, t.t("Quality"))
-        .item(&check(
-            "quality-low",
-            t.t("Low"),
-            settings.quality == Quality::Low,
-        )?)
-        .item(&check(
-            "quality-medium",
-            t.t("Medium"),
-            settings.quality == Quality::Medium,
-        )?)
-        .item(&check(
-            "quality-high",
-            t.t("High"),
-            settings.quality == Quality::High,
-        )?)
+        .item(&check("quality-low", t.t("Low"))?)
+        .item(&check("quality-medium", t.t("Medium"))?)
+        .item(&check("quality-high", t.t("High"))?)
         .build()?;
     let ico = SubmenuBuilder::new(app, "ICO")
         .item(&check(
             "bmp",
             t.t("Use BMP format for the smaller icon sizes"),
-            settings.bmp,
         )?)
         .item(&check(
             "png",
             t.t("Use PNG for each icon in the created ICO file"),
-            !settings.bmp,
         )?)
         .build()?;
     let destination = SubmenuBuilder::new(app, t.t("Destination"))
-        .item(&check("desktop", t.t("Desktop"), settings.desktop)?)
-        .item(&check(
-            "current",
-            t.t("Same folder as the input images"),
-            !settings.desktop,
-        )?)
+        .item(&check("desktop", t.t("Desktop"))?)
+        .item(&check("current", t.t("Same folder as the input images"))?)
         .build()?;
     let settings_menu = SubmenuBuilder::new(app, t.t("Settings"))
         .item(&quality)
@@ -178,28 +184,37 @@ pub fn build<R: Runtime>(
         menu = menu.item(&app_menu);
     }
 
-    menu.item(&file).item(&settings_menu).item(&help).build()
+    let menu = menu.item(&file).item(&settings_menu).item(&help).build()?;
+
+    Ok(BuiltMenu { menu, checks })
 }
 
 /// Keeps the menu for the context menu, and on macOS and Linux sets it as
 /// the app menu (the menu bar of the window on Linux).
-pub fn install(app: &AppHandle, menu: Menu<Wry>) -> tauri::Result<()> {
+pub fn install(app: &AppHandle, built: BuiltMenu<Wry>) -> tauri::Result<()> {
     if cfg!(any(target_os = "macos", target_os = "linux")) {
-        app.set_menu(menu.clone())?;
+        app.set_menu(built.menu.clone())?;
     }
-    *app.state::<AppState>().menu.lock().unwrap() = Some(menu);
+    let state = app.state::<AppState>();
+    *state.menu.lock().unwrap() = Some(built.menu);
+    *state.checks.lock().unwrap() = built.checks;
 
     Ok(())
 }
 
-/// Rebuilds the menu so that the check marks match the saved settings.
+/// Updates the check marks to match the saved settings. The menu is not
+/// built again, which would also reinstall its keyboard shortcuts.
 pub fn refresh(app: &AppHandle) {
     let state = app.state::<AppState>();
     let settings = state.settings.lock().unwrap().clone();
-    let menu = build(app, &settings, &state.translator);
 
-    if let Err(err) = menu.and_then(|menu| install(app, menu)) {
-        eprintln!("Failed to update the menu: {err}");
+    for item in state.checks.lock().unwrap().iter() {
+        let Some(checked) = is_checked(item.id().as_ref(), &settings) else {
+            continue;
+        };
+        if let Err(err) = item.set_checked(checked) {
+            eprintln!("Failed to update the check mark: {err}");
+        }
     }
 }
 
@@ -326,5 +341,77 @@ mod tests {
         assert_eq!(apply("language-ja", &mut settings), MenuAction::Nothing);
         assert_eq!(apply("unknown", &mut settings), MenuAction::Nothing);
         assert_eq!(settings, Settings::default());
+    }
+
+    #[test]
+    fn checks_the_items_that_match_the_settings() {
+        let settings = Settings {
+            desktop: false,
+            quality: Quality::Medium,
+            bmp: false,
+        };
+        let checked: Vec<&str> = [
+            "quality-low",
+            "quality-medium",
+            "quality-high",
+            "bmp",
+            "png",
+            "desktop",
+            "current",
+        ]
+        .into_iter()
+        .filter(|id| is_checked(id, &settings) == Some(true))
+        .collect();
+
+        assert_eq!(checked, ["quality-medium", "png", "current"]);
+    }
+
+    #[test]
+    fn checks_one_item_in_each_group() {
+        for settings in [
+            Settings::default(),
+            Settings {
+                desktop: false,
+                quality: Quality::Low,
+                bmp: false,
+            },
+        ] {
+            for group in [
+                &["quality-low", "quality-medium", "quality-high"][..],
+                &["bmp", "png"],
+                &["desktop", "current"],
+            ] {
+                let count = group
+                    .iter()
+                    .filter(|id| is_checked(id, &settings) == Some(true))
+                    .count();
+                assert_eq!(count, 1, "{group:?}");
+            }
+        }
+    }
+
+    #[test]
+    fn is_checked_ignores_other_items() {
+        for id in ["open", "quit", "support", "unknown"] {
+            assert_eq!(is_checked(id, &Settings::default()), None, "{id}");
+        }
+    }
+
+    #[test]
+    fn every_check_item_changes_the_settings() {
+        for id in [
+            "quality-low",
+            "quality-medium",
+            "quality-high",
+            "bmp",
+            "png",
+            "desktop",
+            "current",
+        ] {
+            let mut settings = Settings::default();
+
+            assert_eq!(apply(id, &mut settings), MenuAction::SettingsChanged);
+            assert_eq!(is_checked(id, &settings), Some(true), "{id}");
+        }
     }
 }

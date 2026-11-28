@@ -11,7 +11,7 @@ use std::path::PathBuf;
 use std::sync::atomic::AtomicBool;
 use std::sync::Mutex;
 
-use tauri::menu::Menu;
+use tauri::menu::{CheckMenuItem, Menu};
 use tauri::{Manager, Wry};
 use tauri_plugin_window_state::StateFlags;
 
@@ -26,6 +26,8 @@ pub struct AppState {
     pub translator: Translator,
     /// The menu shown as the context menu (and as the app menu on macOS).
     pub menu: Mutex<Option<Menu<Wry>>>,
+    /// The check items of the menu, to update their check marks.
+    pub checks: Mutex<Vec<CheckMenuItem<Wry>>>,
     /// Whether the context menu is being shown.
     pub context_menu_open: AtomicBool,
 }
@@ -61,6 +63,7 @@ pub fn run() {
                 settings_path,
                 translator,
                 menu: Mutex::new(None),
+                checks: Mutex::new(Vec::new()),
                 context_menu_open: AtomicBool::new(false),
             });
             menu::install(app.handle(), menu)?;
