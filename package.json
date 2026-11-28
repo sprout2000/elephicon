@@ -2,7 +2,7 @@
   "name": "elephicon",
   "productName": "Elephicon",
   "description": "Elephicon generates Apple ICNS and Microsoft ICO files from PNG, SVG and other images.",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "license": "MIT",
   "private": true,
   "author": {
