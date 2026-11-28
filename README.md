@@ -8,12 +8,13 @@
 
 ## :green_book: Usage
 
+- Supported platforms: **Windows**, **macOS** and **Linux** _(Ubuntu on Wayland; WSL is not supported)_.
 - Supported input formats: **PNG**, **SVG**, **JPEG**, **WebP**, **BMP**, **GIF** _(the first frame)_ and **TIFF**.
 - The ideal input is an SVG file, or a PNG file with _1024x1024_ pixels and an alpha channel. Other sizes will also work.
 - SVG files are drawn directly at each icon size, so small icons stay sharp. Text in an SVG file uses the fonts installed on your system.
 - If you only need ICO files, _256x256_ pixels is enough.
 - You can also create icons from images that are not square. They are centered on a transparent background.
-- You can change the settings from the context menu.
+- You can change the settings from the context menu _(the menu bar on Linux)_.
 
 <img width="50%" alt="animation" src="https://user-images.githubusercontent.com/52094761/144979888-d796c672-ee0a-44cc-bfa2-abce6513d192.gif" />
 
@@ -111,6 +112,7 @@ The installers are created in `src-tauri/target/release/bundle`, and the zip fil
 
 - Windows: `Elephicon_{version}_windows_x64.zip`, with `Elephicon.exe` that runs without installing _(it needs WebView2, which comes with Windows 10 and 11)_
 - macOS: `Elephicon_{version}_macos_aarch64.zip` _(or `x64`)_, with `Elephicon.app`
+- Linux: no zip file; use the `deb`, `rpm` or `AppImage` package
 
 To build only the installers, run `npm run tauri build`. To make the zip file again from the last build, run `npm run zip`.
 

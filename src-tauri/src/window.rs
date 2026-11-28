@@ -1,10 +1,14 @@
-//! Sizes the main window on Windows.
+//! Shows the main window on Windows and Linux, which starts hidden. On
+//! Windows the whole window is sized like the Electron version; on Linux the
+//! menu bar is added above the contents, which keep the size in
+//! tauri.conf.json.
 
 use tauri::{AppHandle, LogicalSize, Manager, WebviewWindow};
 
 /// The size of the whole window, including the frame and the title bar, as
 /// in the Electron version. The window in tauri.conf.json sets the size of
 /// the contents instead, so it is adjusted at startup.
+#[cfg_attr(not(target_os = "windows"), allow(dead_code))]
 pub const OUTER_SIZE: LogicalSize<f64> = LogicalSize {
     width: 400.0,
     height: 340.0,
@@ -13,6 +17,7 @@ pub const OUTER_SIZE: LogicalSize<f64> = LogicalSize {
 /// The size of the contents that makes the whole window `outer`, given the
 /// current outer and inner sizes of the window (their difference is the
 /// frame and the title bar).
+#[cfg_attr(not(target_os = "windows"), allow(dead_code))]
 pub fn inner_size_for(
     outer: LogicalSize<f64>,
     current_outer: LogicalSize<f64>,
@@ -27,6 +32,7 @@ pub fn inner_size_for(
     )
 }
 
+#[cfg_attr(not(target_os = "windows"), allow(dead_code))]
 fn fit(window: &WebviewWindow) -> tauri::Result<()> {
     let scale = window.scale_factor()?;
     let outer = window.outer_size()?.to_logical::<f64>(scale);
@@ -35,7 +41,8 @@ fn fit(window: &WebviewWindow) -> tauri::Result<()> {
     window.set_size(inner_size_for(OUTER_SIZE, outer, inner))
 }
 
-/// Resizes the main window, which starts hidden, and then shows it.
+/// Resizes the main window, which starts hidden, and then shows it (Windows).
+#[cfg_attr(not(target_os = "windows"), allow(dead_code))]
 pub fn fit_and_show(app: &AppHandle) -> tauri::Result<()> {
     let Some(window) = app.get_webview_window("main") else {
         return Ok(());
@@ -45,6 +52,49 @@ pub fn fit_and_show(app: &AppHandle) -> tauri::Result<()> {
     // show the window even if resizing failed
     window.show()?;
     fitted
+}
+
+/// The menu bar showed the blue background of the window, so it is given the
+/// colors of the GTK theme.
+#[cfg(target_os = "linux")]
+const MENU_BAR_CSS: &str = "
+menubar {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+menubar > menuitem {
+    color: @theme_fg_color;
+}
+";
+
+/// Gives the menu bar the colors of the GTK theme (Linux).
+#[cfg(target_os = "linux")]
+pub fn style_menu_bar() {
+    use gtk::prelude::CssProviderExt;
+
+    let provider = gtk::CssProvider::new();
+    if let Err(err) = provider.load_from_data(MENU_BAR_CSS.as_bytes()) {
+        eprintln!("Failed to load the menu bar style: {err}");
+        return;
+    }
+    match gtk::gdk::Screen::default() {
+        Some(screen) => gtk::StyleContext::add_provider_for_screen(
+            &screen,
+            &provider,
+            gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
+        ),
+        None => eprintln!("Failed to style the menu bar: no screen"),
+    }
+}
+
+/// Shows the main window without resizing it (Linux).
+#[cfg_attr(not(target_os = "linux"), allow(dead_code))]
+pub fn show(app: &AppHandle) -> tauri::Result<()> {
+    match app.get_webview_window("main") {
+        Some(window) => window.show(),
+        None => Ok(()),
+    }
 }
 
 #[cfg(test)]

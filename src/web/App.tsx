@@ -3,7 +3,7 @@ import { useCallback, useEffect, useReducer, useRef } from "react";
 import { api } from "./api";
 import { Dropzone } from "./Dropzone";
 import { Message } from "./Message";
-import { dragRegion, isDarwin } from "./platform";
+import { dragRegion, isDarwin, isLinux } from "./platform";
 
 import "typeface-roboto";
 import "./App.scss";
@@ -65,7 +65,11 @@ export const App = () => {
   }, []);
 
   const handleContextMenu = useCallback((e: React.MouseEvent) => {
+    // Also hides the default menu of the web view
     e.preventDefault();
+
+    // Linux uses the menu bar instead of a context menu
+    if (isLinux) return;
     api.contextMenu(e.clientX, e.clientY);
   }, []);
 
@@ -116,9 +120,9 @@ export const App = () => {
   }, [convert]);
 
   useEffect(() => {
-    // Windows has no menu bar, so Ctrl+O is handled here. On macOS
-    // the app menu handles Cmd+O.
-    if (isDarwin) return;
+    // Windows has no menu bar, so Ctrl+O is handled here. On macOS and
+    // Linux the menu handles Cmd+O and Ctrl+O.
+    if (isDarwin || isLinux) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (

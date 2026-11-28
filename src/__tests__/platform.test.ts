@@ -29,6 +29,23 @@ describe("platform", () => {
     expect(platform.dragRegion).toEqual({ "data-tauri-drag-region": true });
   });
 
+  it.each([
+    ["Linux", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/605.1.15"],
+    [
+      "Windows",
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Edg/131.0",
+    ],
+    [
+      "macOS",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15",
+    ],
+    ["Android", "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36"],
+  ])("detects Linux (%s)", async (os, userAgent) => {
+    const platform = await load(userAgent);
+
+    expect(platform.isLinux).toBe(os === "Linux");
+  });
+
   it("does not use a drag region on Windows", async () => {
     const platform = await load(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Edg/131.0",

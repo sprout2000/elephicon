@@ -4,15 +4,14 @@ mod format;
 mod i18n;
 mod menu;
 mod settings;
-// Used only on Windows, but compiled everywhere so that its tests run
-#[cfg_attr(not(target_os = "windows"), allow(dead_code))]
+// Compiled everywhere so that its tests run; each item says where it is used
 mod window;
 
 use std::path::PathBuf;
 use std::sync::atomic::AtomicBool;
 use std::sync::Mutex;
 
-use tauri::menu::Menu;
+use tauri::menu::{CheckMenuItem, Menu};
 use tauri::{Manager, Wry};
 use tauri_plugin_window_state::StateFlags;
 
@@ -27,6 +26,8 @@ pub struct AppState {
     pub translator: Translator,
     /// The menu shown as the context menu (and as the app menu on macOS).
     pub menu: Mutex<Option<Menu<Wry>>>,
+    /// The check items of the menu, to update their check marks.
+    pub checks: Mutex<Vec<CheckMenuItem<Wry>>>,
     /// Whether the context menu is being shown.
     pub context_menu_open: AtomicBool,
 }
@@ -35,7 +36,7 @@ pub fn run() {
     let builder = tauri::Builder::default();
 
     // Only one Elephicon runs at a time; macOS already does this for apps.
-    #[cfg(target_os = "windows")]
+    #[cfg(not(target_os = "macos"))]
     let builder = builder.plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
         if let Some(window) = app.get_webview_window("main") {
             let _ = window.unminimize();
@@ -62,13 +63,19 @@ pub fn run() {
                 settings_path,
                 translator,
                 menu: Mutex::new(None),
+                checks: Mutex::new(Vec::new()),
                 context_menu_open: AtomicBool::new(false),
             });
             menu::install(app.handle(), menu)?;
 
-            // The window starts hidden on Windows (tauri.conf.json)
+            // The window starts hidden on Windows and Linux (tauri.conf.json)
             #[cfg(target_os = "windows")]
             window::fit_and_show(app.handle())?;
+            #[cfg(target_os = "linux")]
+            {
+                window::style_menu_bar();
+                window::show(app.handle())?;
+            }
 
             Ok(())
         })
