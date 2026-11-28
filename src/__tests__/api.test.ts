@@ -74,26 +74,6 @@ describe("api commands", () => {
   });
 });
 
-describe("api context menu for Linux", () => {
-  it("getContextMenu invokes get_context_menu", async () => {
-    const model = [{ type: "separator" }];
-    mocks.invoke.mockResolvedValueOnce(model);
-
-    await expect(api.getContextMenu()).resolves.toBe(model);
-    expect(mocks.invoke).toHaveBeenCalledWith("get_context_menu");
-  });
-
-  it("runMenuAction invokes run_menu_action with the id", async () => {
-    mocks.invoke.mockResolvedValueOnce(undefined);
-
-    await api.runMenuAction("quality-low");
-
-    expect(mocks.invoke).toHaveBeenCalledWith("run_menu_action", {
-      id: "quality-low",
-    });
-  });
-});
-
 describe("api events", () => {
   it("onMenuOpen listens to menu-open and passes the path", async () => {
     const stop = vi.fn();

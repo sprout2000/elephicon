@@ -67,8 +67,10 @@ pub fn run() {
             menu::install(app.handle(), menu)?;
 
             // The window starts hidden on Windows and Linux (tauri.conf.json)
-            #[cfg(not(target_os = "macos"))]
+            #[cfg(target_os = "windows")]
             window::fit_and_show(app.handle())?;
+            #[cfg(target_os = "linux")]
+            window::show(app.handle())?;
 
             Ok(())
         })
@@ -79,8 +81,6 @@ pub fn run() {
             commands::make_icns,
             commands::open_file_dialog,
             commands::show_context_menu,
-            commands::get_context_menu,
-            commands::run_menu_action,
         ])
         .run(tauri::generate_context!())
         .expect("error while running Elephicon");

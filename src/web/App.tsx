@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef } from "react";
 
-import { api, type MenuNode } from "./api";
-import { ContextMenu } from "./ContextMenu";
+import { api } from "./api";
 import { Dropzone } from "./Dropzone";
 import { Message } from "./Message";
 import { dragRegion, isDarwin, isLinux } from "./platform";
@@ -32,12 +31,8 @@ const initialState: State = {
   loading: false,
 };
 
-type OpenMenu = { items: MenuNode[]; x: number; y: number };
-
 export const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // The context menu drawn in the window on Linux
-  const [menu, setMenu] = useState<OpenMenu | null>(null);
 
   // The Tauri listeners are registered once, so they read the latest state
   // from this ref.
@@ -70,25 +65,12 @@ export const App = () => {
   }, []);
 
   const handleContextMenu = useCallback((e: React.MouseEvent) => {
+    // Also hides the default menu of the web view
     e.preventDefault();
 
-    const { clientX: x, clientY: y } = e;
-    if (!isLinux) {
-      api.contextMenu(x, y);
-      return;
-    }
-
-    api
-      .getContextMenu()
-      .then((items) => setMenu({ items, x, y }))
-      .catch(() => setMenu(null));
-  }, []);
-
-  const closeMenu = useCallback(() => setMenu(null), []);
-
-  const selectMenuItem = useCallback((id: string) => {
-    setMenu(null);
-    api.runMenuAction(id);
+    // Linux uses the menu bar instead of a context menu
+    if (isLinux) return;
+    api.contextMenu(e.clientX, e.clientY);
   }, []);
 
   const handleClickOS = useCallback(() => {
@@ -138,9 +120,9 @@ export const App = () => {
   }, [convert]);
 
   useEffect(() => {
-    // Windows and Linux have no menu bar, so Ctrl+O is handled here. On macOS
-    // the app menu handles Cmd+O.
-    if (isDarwin) return;
+    // Windows has no menu bar, so Ctrl+O is handled here. On macOS and
+    // Linux the menu handles Cmd+O and Ctrl+O.
+    if (isDarwin || isLinux) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (
@@ -178,15 +160,6 @@ export const App = () => {
           result={state.result}
           desktop={state.desktop}
           onClickBack={handleClickBack}
-        />
-      )}
-      {menu && (
-        <ContextMenu
-          items={menu.items}
-          x={menu.x}
-          y={menu.y}
-          onSelect={selectMenuItem}
-          onClose={closeMenu}
         />
       )}
     </main>

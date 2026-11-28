@@ -1,8 +1,7 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { App as AppComponent } from "../web/App";
-import { menuModel } from "./menuModel";
 import { mockApi, resetMockApi } from "./mockApi";
 
 vi.mock("../web/api", async () => {
@@ -24,66 +23,28 @@ beforeAll(async () => {
 
 beforeEach(() => {
   resetMockApi();
-  mockApi.getContextMenu.mockResolvedValue(menuModel);
 });
 
-const rightClick = () =>
-  act(async () => {
-    fireEvent.contextMenu(screen.getByRole("main"), {
+describe("App on Linux", () => {
+  it("has no context menu, not even the default one", () => {
+    render(<App />);
+
+    const event = fireEvent.contextMenu(screen.getByRole("main"), {
       clientX: 30,
       clientY: 40,
     });
-  });
 
-describe("App on Linux", () => {
-  it("draws the context menu in the window", async () => {
-    render(<App />);
-
-    await rightClick();
-
-    const menu = screen.getByRole("menu", { name: "Menu" });
-    expect(menu.style.left).toBe("30px");
-    expect(menu.style.top).toBe("40px");
+    // fireEvent returns false when preventDefault was called
+    expect(event).toBe(false);
     expect(mockApi.contextMenu).not.toHaveBeenCalled();
   });
 
-  it("runs the chosen item and closes the menu", async () => {
-    render(<App />);
-
-    await rightClick();
-    fireEvent.click(screen.getByRole("menuitem", { name: /Settings/ }));
-    fireEvent.click(screen.getByRole("menuitem", { name: /Quality/ }));
-    fireEvent.click(screen.getByRole("menuitemcheckbox", { name: /Low/ }));
-
-    expect(mockApi.runMenuAction).toHaveBeenCalledWith("quality-low");
-    expect(screen.queryByRole("menu")).toBeNull();
-  });
-
-  it("closes the menu with Escape", async () => {
-    render(<App />);
-
-    await rightClick();
-    fireEvent.keyDown(window, { key: "Escape" });
-
-    expect(screen.queryByRole("menu")).toBeNull();
-    expect(mockApi.runMenuAction).not.toHaveBeenCalled();
-  });
-
-  it("shows no menu when it cannot be loaded", async () => {
-    mockApi.getContextMenu.mockRejectedValueOnce("failed");
-    render(<App />);
-
-    await rightClick();
-
-    expect(screen.queryByRole("menu")).toBeNull();
-  });
-
-  it("opens a file with Ctrl+O", async () => {
+  it("leaves Ctrl+O to the menu bar", () => {
     render(<App />);
 
     fireEvent.keyDown(window, { key: "o", ctrlKey: true });
 
-    await vi.waitFor(() => expect(mockApi.openDialog).toHaveBeenCalled());
+    expect(mockApi.openDialog).not.toHaveBeenCalled();
   });
 
   it("does not use a drag region", () => {

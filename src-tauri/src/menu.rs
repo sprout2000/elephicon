@@ -1,18 +1,15 @@
-//! The menu. On macOS it is the app menu; on Windows the window has no menu
-//! bar (as in the Electron version) and the menu is only shown as the context
-//! menu. It is the context menu on macOS too.
-//!
-//! On Linux (Wayland), GTK cannot place a native context menu opened from a
-//! command, so the window draws the context menu itself from
-//! [`context_menu_model`] and runs the chosen item with [`handle_event`].
+//! The menu. On macOS it is the app menu and on Linux the menu bar of the
+//! window. On Windows the window has no menu bar (as in the Electron version)
+//! and the menu is only shown as the context menu. It is the context menu on
+//! macOS too; Linux has no context menu, since GTK cannot place one opened
+//! from a command on Wayland.
 
-use serde::Serialize;
 use tauri::menu::{
     AboutMetadata, CheckMenuItemBuilder, Menu, MenuBuilder, MenuItemBuilder, PredefinedMenuItem,
     SubmenuBuilder,
 };
 use tauri::{AppHandle, Emitter, Manager, Runtime, Wry};
-use tauri_plugin_dialog::{DialogExt, FileDialogBuilder, MessageDialogKind};
+use tauri_plugin_dialog::{DialogExt, FileDialogBuilder};
 use tauri_plugin_opener::OpenerExt;
 
 use crate::convert::Quality;
@@ -30,8 +27,6 @@ pub const MENU_OPEN_EVENT: &str = "menu-open";
 #[derive(Debug, PartialEq, Eq)]
 pub enum MenuAction {
     Open,
-    /// Show the about dialog (Linux, where the menu is drawn by the window).
-    About,
     /// Quit on Windows, by closing the window.
     Quit,
     Support,
@@ -47,7 +42,6 @@ pub enum MenuAction {
 pub fn apply(id: &str, settings: &mut Settings) -> MenuAction {
     match id {
         "open" => return MenuAction::Open,
-        "about" => return MenuAction::About,
         "quit" => return MenuAction::Quit,
         "support" => return MenuAction::Support,
         "quality-low" => settings.quality = Quality::Low,
@@ -187,114 +181,10 @@ pub fn build<R: Runtime>(
     menu.item(&file).item(&settings_menu).item(&help).build()
 }
 
-/// An entry of the context menu drawn by the window on Linux.
-#[derive(Clone, Debug, PartialEq, Eq, Serialize)]
-#[serde(tag = "type", rename_all = "camelCase")]
-pub enum MenuNode {
-    Submenu {
-        label: String,
-        items: Vec<MenuNode>,
-    },
-    Item {
-        id: String,
-        label: String,
-    },
-    Check {
-        id: String,
-        label: String,
-        checked: bool,
-    },
-    Separator,
-}
-
-fn item(id: &str, label: String) -> MenuNode {
-    MenuNode::Item {
-        id: id.to_string(),
-        label,
-    }
-}
-
-fn check(id: &str, label: String, checked: bool) -> MenuNode {
-    MenuNode::Check {
-        id: id.to_string(),
-        label,
-        checked,
-    }
-}
-
-/// The same items as the native context menu on Windows, with check marks
-/// that match the settings. The ids are handled by [`apply`].
-pub fn context_menu_model(settings: &Settings, t: &Translator) -> Vec<MenuNode> {
-    vec![
-        MenuNode::Submenu {
-            label: t.t("File"),
-            items: vec![
-                item("open", t.t("Open...")),
-                MenuNode::Separator,
-                item("quit", t.t("Quit Elephicon")),
-            ],
-        },
-        MenuNode::Submenu {
-            label: t.t("Settings"),
-            items: vec![
-                MenuNode::Submenu {
-                    label: t.t("Quality"),
-                    items: vec![
-                        check("quality-low", t.t("Low"), settings.quality == Quality::Low),
-                        check(
-                            "quality-medium",
-                            t.t("Medium"),
-                            settings.quality == Quality::Medium,
-                        ),
-                        check(
-                            "quality-high",
-                            t.t("High"),
-                            settings.quality == Quality::High,
-                        ),
-                    ],
-                },
-                MenuNode::Submenu {
-                    label: "ICO".to_string(),
-                    items: vec![
-                        check(
-                            "bmp",
-                            t.t("Use BMP format for the smaller icon sizes"),
-                            settings.bmp,
-                        ),
-                        check(
-                            "png",
-                            t.t("Use PNG for each icon in the created ICO file"),
-                            !settings.bmp,
-                        ),
-                    ],
-                },
-                MenuNode::Submenu {
-                    label: t.t("Destination"),
-                    items: vec![
-                        check("desktop", t.t("Desktop"), settings.desktop),
-                        check(
-                            "current",
-                            t.t("Same folder as the input images"),
-                            !settings.desktop,
-                        ),
-                    ],
-                },
-            ],
-        },
-        MenuNode::Submenu {
-            label: t.t("Help"),
-            items: vec![
-                item("about", t.t("About Elephicon")),
-                MenuNode::Separator,
-                item("support", t.t("Support URL...")),
-            ],
-        },
-    ]
-}
-
-/// Keeps the menu for the context menu, and on macOS sets it as the app menu.
+/// Keeps the menu for the context menu, and on macOS and Linux sets it as
+/// the app menu (the menu bar of the window on Linux).
 pub fn install(app: &AppHandle, menu: Menu<Wry>) -> tauri::Result<()> {
-    if cfg!(target_os = "macos") {
+    if cfg!(any(target_os = "macos", target_os = "linux")) {
         app.set_menu(menu.clone())?;
     }
     *app.state::<AppState>().menu.lock().unwrap() = Some(menu);
@@ -341,18 +231,6 @@ fn open_from_menu<R: Runtime>(app: &AppHandle<R>) {
     });
 }
 
-fn show_about(app: &AppHandle) {
-    let version = app.package_info().version.to_string();
-
-    app.dialog()
-        .message(format!(
-            "Elephicon v{version}\n© 2020-present sprout2000\n{SUPPORT_URL}"
-        ))
-        .title("Elephicon")
-        .kind(MessageDialogKind::Info)
-        .show(|_| {});
-}
-
 pub fn handle_event(app: &AppHandle, id: &str) {
     let state = app.state::<AppState>();
     let action = {
@@ -369,7 +247,6 @@ pub fn handle_event(app: &AppHandle, id: &str) {
 
     match action {
         MenuAction::Open => open_from_menu(app),
-        MenuAction::About => show_about(app),
         MenuAction::Quit => {
             if let Some(window) = app.get_webview_window("main") {
                 if let Err(err) = window.close() {
@@ -392,11 +269,10 @@ mod tests {
     use super::*;
 
     #[test]
-    fn open_about_quit_and_support_do_not_change_the_settings() {
+    fn open_quit_and_support_do_not_change_the_settings() {
         let mut settings = Settings::default();
 
         assert_eq!(apply("open", &mut settings), MenuAction::Open);
-        assert_eq!(apply("about", &mut settings), MenuAction::About);
         assert_eq!(apply("quit", &mut settings), MenuAction::Quit);
         assert_eq!(apply("support", &mut settings), MenuAction::Support);
         assert_eq!(settings, Settings::default());
@@ -450,111 +326,5 @@ mod tests {
         assert_eq!(apply("language-ja", &mut settings), MenuAction::Nothing);
         assert_eq!(apply("unknown", &mut settings), MenuAction::Nothing);
         assert_eq!(settings, Settings::default());
-    }
-
-    fn ids(nodes: &[MenuNode]) -> Vec<String> {
-        nodes
-            .iter()
-            .flat_map(|node| match node {
-                MenuNode::Submenu { items, .. } => ids(items),
-                MenuNode::Item { id, .. } | MenuNode::Check { id, .. } => vec![id.clone()],
-                MenuNode::Separator => vec![],
-            })
-            .collect()
-    }
-
-    fn checked(nodes: &[MenuNode]) -> Vec<String> {
-        nodes
-            .iter()
-            .flat_map(|node| match node {
-                MenuNode::Submenu { items, .. } => checked(items),
-                MenuNode::Check {
-                    id, checked: true, ..
-                } => vec![id.clone()],
-                _ => vec![],
-            })
-            .collect()
-    }
-
-    fn english() -> Translator {
-        Translator::new(crate::i18n::resolve("en"))
-    }
-
-    #[test]
-    fn the_model_has_every_item_of_the_native_menu() {
-        let model = context_menu_model(&Settings::default(), &english());
-
-        assert_eq!(
-            ids(&model),
-            [
-                "open",
-                "quit",
-                "quality-low",
-                "quality-medium",
-                "quality-high",
-                "bmp",
-                "png",
-                "desktop",
-                "current",
-                "about",
-                "support",
-            ]
-        );
-    }
-
-    #[test]
-    fn every_item_of_the_model_is_handled() {
-        for id in ids(&context_menu_model(&Settings::default(), &english())) {
-            let mut settings = Settings::default();
-
-            assert_ne!(apply(&id, &mut settings), MenuAction::Nothing, "{id}");
-        }
-    }
-
-    #[test]
-    fn the_model_checks_the_current_settings() {
-        let settings = Settings {
-            desktop: false,
-            quality: Quality::Medium,
-            bmp: false,
-        };
-
-        assert_eq!(
-            checked(&context_menu_model(&settings, &english())),
-            ["quality-medium", "png", "current"]
-        );
-        assert_eq!(
-            checked(&context_menu_model(&Settings::default(), &english())),
-            ["quality-high", "bmp", "desktop"]
-        );
-    }
-
-    #[test]
-    fn the_model_is_translated() {
-        let japanese = Translator::new(crate::i18n::resolve("ja"));
-        let model = context_menu_model(&Settings::default(), &japanese);
-
-        let MenuNode::Submenu { label, .. } = &model[0] else {
-            panic!("the first entry is the File menu");
-        };
-        assert_eq!(label, "ファイル");
-    }
-
-    #[test]
-    fn the_model_is_serialized_with_a_type() {
-        let json =
-            serde_json::to_value(context_menu_model(&Settings::default(), &english())).unwrap();
-
-        assert_eq!(json[0]["type"], "submenu");
-        assert_eq!(json[0]["label"], "File");
-        assert_eq!(
-            json[0]["items"][0],
-            serde_json::json!({ "type": "item", "id": "open", "label": "Open..." })
-        );
-        assert_eq!(
-            json[0]["items"][1],
-            serde_json::json!({ "type": "separator" })
-        );
-        assert_eq!(json[1]["items"][0]["items"][2]["checked"], true);
     }
 }

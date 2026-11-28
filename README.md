@@ -14,7 +14,7 @@
 - SVG files are drawn directly at each icon size, so small icons stay sharp. Text in an SVG file uses the fonts installed on your system.
 - If you only need ICO files, _256x256_ pixels is enough.
 - You can also create icons from images that are not square. They are centered on a transparent background.
-- You can change the settings from the context menu.
+- You can change the settings from the context menu _(the menu bar on Linux)_.
 
 <img width="50%" alt="animation" src="https://user-images.githubusercontent.com/52094761/144979888-d796c672-ee0a-44cc-bfa2-abce6513d192.gif" />
 
@@ -137,8 +137,6 @@ npm run test:coverage
 # Run the Rust tests
 npm run test:rust
 ```
-
-On Linux, the window draws the context menu itself _(`src/web/ContextMenu.tsx`)_, because GTK cannot place a native context menu on Wayland.
 
 The frontend _(React)_ is in `src/web` and its tests are in `src/__tests__`. The Rust side _(conversion, menu and settings)_ is in `src-tauri/src`, with the tests next to the code.
 

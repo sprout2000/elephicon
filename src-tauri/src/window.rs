@@ -1,4 +1,7 @@
-//! Sizes the main window on Windows and Linux.
+//! Shows the main window on Windows and Linux, which starts hidden. On
+//! Windows the whole window is sized like the Electron version; on Linux the
+//! menu bar is added above the contents, which keep the size in
+//! tauri.conf.json.
 
 use tauri::{AppHandle, LogicalSize, Manager, WebviewWindow};
 
@@ -45,6 +48,14 @@ pub fn fit_and_show(app: &AppHandle) -> tauri::Result<()> {
     // show the window even if resizing failed
     window.show()?;
     fitted
+}
+
+/// Shows the main window without resizing it (Linux).
+pub fn show(app: &AppHandle) -> tauri::Result<()> {
+    match app.get_webview_window("main") {
+        Some(window) => window.show(),
+        None => Ok(()),
+    }
 }
 
 #[cfg(test)]
