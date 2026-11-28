@@ -54,6 +54,40 @@ pub fn fit_and_show(app: &AppHandle) -> tauri::Result<()> {
     fitted
 }
 
+/// The menu bar showed the blue background of the window, so it is given the
+/// colors of the GTK theme.
+#[cfg(target_os = "linux")]
+const MENU_BAR_CSS: &str = "
+menubar {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+menubar > menuitem {
+    color: @theme_fg_color;
+}
+";
+
+/// Gives the menu bar the colors of the GTK theme (Linux).
+#[cfg(target_os = "linux")]
+pub fn style_menu_bar() {
+    use gtk::prelude::CssProviderExt;
+
+    let provider = gtk::CssProvider::new();
+    if let Err(err) = provider.load_from_data(MENU_BAR_CSS.as_bytes()) {
+        eprintln!("Failed to load the menu bar style: {err}");
+        return;
+    }
+    match gtk::gdk::Screen::default() {
+        Some(screen) => gtk::StyleContext::add_provider_for_screen(
+            &screen,
+            &provider,
+            gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
+        ),
+        None => eprintln!("Failed to style the menu bar: no screen"),
+    }
+}
+
 /// Shows the main window without resizing it (Linux).
 #[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 pub fn show(app: &AppHandle) -> tauri::Result<()> {

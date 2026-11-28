@@ -69,7 +69,10 @@ pub fn run() {
             #[cfg(target_os = "windows")]
             window::fit_and_show(app.handle())?;
             #[cfg(target_os = "linux")]
-            window::show(app.handle())?;
+            {
+                window::style_menu_bar();
+                window::show(app.handle())?;
+            }
 
             Ok(())
         })
