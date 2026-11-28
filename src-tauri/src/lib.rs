@@ -4,8 +4,7 @@ mod format;
 mod i18n;
 mod menu;
 mod settings;
-// Used only on Windows and Linux, but compiled everywhere so that its tests run
-#[cfg_attr(target_os = "macos", allow(dead_code))]
+// Compiled everywhere so that its tests run; each item says where it is used
 mod window;
 
 use std::path::PathBuf;
