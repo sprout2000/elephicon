@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useReducer, useRef } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 
-import { api } from "./api";
+import { api, type MenuNode } from "./api";
+import { ContextMenu } from "./ContextMenu";
 import { Dropzone } from "./Dropzone";
 import { Message } from "./Message";
-import { dragRegion, isDarwin } from "./platform";
+import { dragRegion, isDarwin, isLinux } from "./platform";
 
 import "typeface-roboto";
 import "./App.scss";
@@ -31,8 +32,12 @@ const initialState: State = {
   loading: false,
 };
 
+type OpenMenu = { items: MenuNode[]; x: number; y: number };
+
 export const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  // The context menu drawn in the window on Linux
+  const [menu, setMenu] = useState<OpenMenu | null>(null);
 
   // The Tauri listeners are registered once, so they read the latest state
   // from this ref.
@@ -66,7 +71,24 @@ export const App = () => {
 
   const handleContextMenu = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    api.contextMenu(e.clientX, e.clientY);
+
+    const { clientX: x, clientY: y } = e;
+    if (!isLinux) {
+      api.contextMenu(x, y);
+      return;
+    }
+
+    api
+      .getContextMenu()
+      .then((items) => setMenu({ items, x, y }))
+      .catch(() => setMenu(null));
+  }, []);
+
+  const closeMenu = useCallback(() => setMenu(null), []);
+
+  const selectMenuItem = useCallback((id: string) => {
+    setMenu(null);
+    api.runMenuAction(id);
   }, []);
 
   const handleClickOS = useCallback(() => {
@@ -116,7 +138,7 @@ export const App = () => {
   }, [convert]);
 
   useEffect(() => {
-    // Windows has no menu bar, so Ctrl+O is handled here. On macOS
+    // Windows and Linux have no menu bar, so Ctrl+O is handled here. On macOS
     // the app menu handles Cmd+O.
     if (isDarwin) return;
 
@@ -156,6 +178,15 @@ export const App = () => {
           result={state.result}
           desktop={state.desktop}
           onClickBack={handleClickBack}
+        />
+      )}
+      {menu && (
+        <ContextMenu
+          items={menu.items}
+          x={menu.x}
+          y={menu.y}
+          onSelect={selectMenuItem}
+          onClose={closeMenu}
         />
       )}
     </main>

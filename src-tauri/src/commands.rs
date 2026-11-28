@@ -7,7 +7,7 @@ use tauri::{AppHandle, LogicalPosition, Manager, State, Window};
 
 use crate::convert::{convert_file, ConvertOptions, ConvertResult, IconKind};
 use crate::format;
-use crate::menu;
+use crate::menu::{self, MenuNode};
 use crate::AppState;
 
 /// Returns `None` for a supported image, or the error message to show.
@@ -103,6 +103,24 @@ pub fn show_context_menu(
     }
 
     Ok(())
+}
+
+/// The context menu for the window to draw on Linux.
+#[tauri::command]
+pub fn get_context_menu(state: State<'_, AppState>) -> Result<Vec<MenuNode>, String> {
+    let settings = state
+        .settings
+        .lock()
+        .map_err(|err| err.to_string())?
+        .clone();
+
+    Ok(menu::context_menu_model(&settings, &state.translator))
+}
+
+/// Runs an item chosen in the context menu drawn by the window.
+#[tauri::command]
+pub fn run_menu_action(app: AppHandle, id: String) {
+    menu::handle_event(&app, &id);
 }
 
 /// Marks the context menu as open until it is dropped.

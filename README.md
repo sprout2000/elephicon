@@ -8,6 +8,7 @@
 
 ## :green_book: Usage
 
+- Supported platforms: **Windows**, **macOS** and **Linux** _(Ubuntu on Wayland; WSL is not supported)_.
 - Supported input formats: **PNG**, **SVG**, **JPEG**, **WebP**, **BMP**, **GIF** _(the first frame)_ and **TIFF**.
 - The ideal input is an SVG file, or a PNG file with _1024x1024_ pixels and an alpha channel. Other sizes will also work.
 - SVG files are drawn directly at each icon size, so small icons stay sharp. Text in an SVG file uses the fonts installed on your system.
@@ -111,6 +112,7 @@ The installers are created in `src-tauri/target/release/bundle`, and the zip fil
 
 - Windows: `Elephicon_{version}_windows_x64.zip`, with `Elephicon.exe` that runs without installing _(it needs WebView2, which comes with Windows 10 and 11)_
 - macOS: `Elephicon_{version}_macos_aarch64.zip` _(or `x64`)_, with `Elephicon.app`
+- Linux: no zip file; use the `deb`, `rpm` or `AppImage` package
 
 To build only the installers, run `npm run tauri build`. To make the zip file again from the last build, run `npm run zip`.
 
@@ -135,6 +137,8 @@ npm run test:coverage
 # Run the Rust tests
 npm run test:rust
 ```
+
+On Linux, the window draws the context menu itself _(`src/web/ContextMenu.tsx`)_, because GTK cannot place a native context menu on Wayland.
 
 The frontend _(React)_ is in `src/web` and its tests are in `src/__tests__`. The Rust side _(conversion, menu and settings)_ is in `src-tauri/src`, with the tests next to the code.
 

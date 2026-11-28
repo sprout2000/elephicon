@@ -4,8 +4,8 @@ mod format;
 mod i18n;
 mod menu;
 mod settings;
-// Used only on Windows, but compiled everywhere so that its tests run
-#[cfg_attr(not(target_os = "windows"), allow(dead_code))]
+// Used only on Windows and Linux, but compiled everywhere so that its tests run
+#[cfg_attr(target_os = "macos", allow(dead_code))]
 mod window;
 
 use std::path::PathBuf;
@@ -35,7 +35,7 @@ pub fn run() {
     let builder = tauri::Builder::default();
 
     // Only one Elephicon runs at a time; macOS already does this for apps.
-    #[cfg(target_os = "windows")]
+    #[cfg(not(target_os = "macos"))]
     let builder = builder.plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
         if let Some(window) = app.get_webview_window("main") {
             let _ = window.unminimize();
@@ -66,8 +66,8 @@ pub fn run() {
             });
             menu::install(app.handle(), menu)?;
 
-            // The window starts hidden on Windows (tauri.conf.json)
-            #[cfg(target_os = "windows")]
+            // The window starts hidden on Windows and Linux (tauri.conf.json)
+            #[cfg(not(target_os = "macos"))]
             window::fit_and_show(app.handle())?;
 
             Ok(())
@@ -79,6 +79,8 @@ pub fn run() {
             commands::make_icns,
             commands::open_file_dialog,
             commands::show_context_menu,
+            commands::get_context_menu,
+            commands::run_menu_action,
         ])
         .run(tauri::generate_context!())
         .expect("error while running Elephicon");

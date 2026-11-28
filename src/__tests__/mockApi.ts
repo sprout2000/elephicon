@@ -1,6 +1,6 @@
 import { vi } from "vitest";
 
-import type { DragDropHandlers } from "../web/api";
+import type { DragDropHandlers, MenuNode } from "../web/api";
 
 /** The listeners App registered, so that tests can send events to it. */
 export const listeners: {
@@ -20,6 +20,8 @@ export const mockApi = {
   makeIcns: vi.fn<(path: string) => Promise<Result>>(),
   openDialog: vi.fn<() => Promise<string | null>>(),
   contextMenu: vi.fn<(x: number, y: number) => Promise<void>>(),
+  getContextMenu: vi.fn<() => Promise<MenuNode[]>>(),
+  runMenuAction: vi.fn<(id: string) => Promise<void>>(),
   onMenuOpen: vi.fn((listener: (path: string) => void) => {
     listeners.menuOpen = listener;
     return Promise.resolve(unlisten.menuOpen);
@@ -48,4 +50,6 @@ export const resetMockApi = () => {
   });
   mockApi.openDialog.mockResolvedValue(null);
   mockApi.contextMenu.mockResolvedValue(undefined);
+  mockApi.getContextMenu.mockResolvedValue([]);
+  mockApi.runMenuAction.mockResolvedValue(undefined);
 };

@@ -2,6 +2,7 @@
 // since the Tauri bundler does not make zip files:
 // - Windows: Elephicon.exe, which runs without installing (it needs WebView2)
 // - macOS: Elephicon.app, zipped with ditto to keep its signature and links
+// - Linux: nothing; the deb, rpm and AppImage packages of Tauri are used
 //
 // Run it after `tauri build` (`npm run release` does both).
 
@@ -73,6 +74,13 @@ const zipMacos = (zipPath) => {
 };
 
 const main = () => {
+  if (process.platform === "linux") {
+    console.log(
+      "No zip file is made on Linux; use the deb, rpm or AppImage package.",
+    );
+    return;
+  }
+
   const { version } = JSON.parse(
     fs.readFileSync(path.join(root, "package.json"), "utf8"),
   );

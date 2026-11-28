@@ -1,4 +1,4 @@
-//! Sizes the main window on Windows.
+//! Sizes the main window on Windows and Linux.
 
 use tauri::{AppHandle, LogicalSize, Manager, WebviewWindow};
 
